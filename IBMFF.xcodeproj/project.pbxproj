@@ -9,13 +9,65 @@
 /* Begin PBXBuildFile section */
 		0515C8C31F2A7807003B8594 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0515C8C11F2A7807003B8594 /* File.cpp */; };
 		0515C8C41F2A7807003B8594 /* File.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0515C8C21F2A7807003B8594 /* File.hpp */; };
+		05DA96061F2A7D5B005F46DB /* libIBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libIBMFF.a */; };
+		05DA96121F2A7DC3005F46DB /* GoogleMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A4111A1F2A7D2E002B1A79 /* GoogleMock.framework */; };
+		05DA96141F2A7DD4005F46DB /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DA96131F2A7DD4005F46DB /* File.cpp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		05A411191F2A7D2E002B1A79 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05818F861A685AEA0072A469;
+			remoteInfo = GoogleMock;
+		};
+		05A4111B1F2A7D2E002B1A79 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05E96ABD1A68600C00204102;
+			remoteInfo = gmock;
+		};
+		05A4111D1F2A7D2E002B1A79 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05E96B1F1A68634900204102;
+			remoteInfo = gtest;
+		};
+		05A4111F1F2A7D2E002B1A79 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05818F901A685AEA0072A469;
+			remoteInfo = GoogleMockTests;
+		};
+		05DA96071F2A7D5B005F46DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0515C8A71F2A71A8003B8594 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0515C8AE1F2A71A8003B8594;
+			remoteInfo = IBMFF;
+		};
+		05DA96101F2A7DBE005F46DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 05818F851A685AEA0072A469;
+			remoteInfo = GoogleMock;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0515C8AF1F2A71A8003B8594 /* libIBMFF.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIBMFF.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0515C8C01F2A77C4003B8594 /* IBMFF.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IBMFF.hpp; sourceTree = "<group>"; };
 		0515C8C11F2A7807003B8594 /* File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = File.cpp; sourceTree = "<group>"; };
 		0515C8C21F2A7807003B8594 /* File.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = File.hpp; sourceTree = "<group>"; };
+		05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GoogleMock.xcodeproj; path = "Submodules/gmock-xcode/GoogleMock.xcodeproj"; sourceTree = "<group>"; };
+		05DA96011F2A7D5B005F46DB /* IBMFF-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IBMFF-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		05DA96051F2A7D5B005F46DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05DA96131F2A7DD4005F46DB /* File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = File.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,13 +78,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05DA95FE1F2A7D5B005F46DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05DA96121F2A7DC3005F46DB /* GoogleMock.framework in Frameworks */,
+				05DA96061F2A7D5B005F46DB /* libIBMFF.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		0515C8A61F2A71A8003B8594 = {
 			isa = PBXGroup;
 			children = (
+				05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */,
 				0515C8B11F2A71A8003B8594 /* IBMFF */,
+				05DA96021F2A7D5B005F46DB /* IBMFF-Tests */,
 				0515C8B01F2A71A8003B8594 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				0515C8AF1F2A71A8003B8594 /* libIBMFF.a */,
+				05DA96011F2A7D5B005F46DB /* IBMFF-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,6 +143,26 @@
 			path = IBMFF;
 			sourceTree = "<group>";
 		};
+		05A411131F2A7D2E002B1A79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05A4111A1F2A7D2E002B1A79 /* GoogleMock.framework */,
+				05A4111C1F2A7D2E002B1A79 /* gmock.framework */,
+				05A4111E1F2A7D2E002B1A79 /* gtest.framework */,
+				05A411201F2A7D2E002B1A79 /* GoogleMockTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05DA96021F2A7D5B005F46DB /* IBMFF-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				05DA96051F2A7D5B005F46DB /* Info.plist */,
+				05DA96131F2A7DD4005F46DB /* File.cpp */,
+			);
+			path = "IBMFF-Tests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -110,6 +194,25 @@
 			productReference = 0515C8AF1F2A71A8003B8594 /* libIBMFF.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		05DA96001F2A7D5B005F46DB /* IBMFF-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05DA960F1F2A7D5B005F46DB /* Build configuration list for PBXNativeTarget "IBMFF-Tests" */;
+			buildPhases = (
+				05DA95FD1F2A7D5B005F46DB /* Sources */,
+				05DA95FE1F2A7D5B005F46DB /* Frameworks */,
+				05DA95FF1F2A7D5B005F46DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05DA96111F2A7DBE005F46DB /* PBXTargetDependency */,
+				05DA96081F2A7D5B005F46DB /* PBXTargetDependency */,
+			);
+			name = "IBMFF-Tests";
+			productName = "IBMFF-Tests";
+			productReference = 05DA96011F2A7D5B005F46DB /* IBMFF-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -120,6 +223,9 @@
 				ORGANIZATIONNAME = "XS-Labs";
 				TargetAttributes = {
 					0515C8AE1F2A71A8003B8594 = {
+						CreatedOnToolsVersion = 9.0;
+					};
+					05DA96001F2A7D5B005F46DB = {
 						CreatedOnToolsVersion = 9.0;
 					};
 				};
@@ -134,12 +240,60 @@
 			mainGroup = 0515C8A61F2A71A8003B8594;
 			productRefGroup = 0515C8B01F2A71A8003B8594 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 05A411131F2A7D2E002B1A79 /* Products */;
+					ProjectRef = 05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				0515C8AE1F2A71A8003B8594 /* IBMFF */,
+				05DA96001F2A7D5B005F46DB /* IBMFF-Tests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		05A4111A1F2A7D2E002B1A79 /* GoogleMock.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleMock.framework;
+			remoteRef = 05A411191F2A7D2E002B1A79 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		05A4111C1F2A7D2E002B1A79 /* gmock.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = gmock.framework;
+			remoteRef = 05A4111B1F2A7D2E002B1A79 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		05A4111E1F2A7D2E002B1A79 /* gtest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = gtest.framework;
+			remoteRef = 05A4111D1F2A7D2E002B1A79 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		05A411201F2A7D2E002B1A79 /* GoogleMockTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GoogleMockTests.xctest;
+			remoteRef = 05A4111F1F2A7D2E002B1A79 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		05DA95FF1F2A7D5B005F46DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0515C8AB1F2A71A8003B8594 /* Sources */ = {
@@ -150,7 +304,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05DA95FD1F2A7D5B005F46DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05DA96141F2A7DD4005F46DB /* File.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		05DA96081F2A7D5B005F46DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0515C8AE1F2A71A8003B8594 /* IBMFF */;
+			targetProxy = 05DA96071F2A7D5B005F46DB /* PBXContainerItemProxy */;
+		};
+		05DA96111F2A7DBE005F46DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GoogleMock;
+			targetProxy = 05DA96101F2A7DBE005F46DB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		0515C8B81F2A71A8003B8594 /* Debug */ = {
@@ -229,6 +404,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_NS_ASSERTIONS = YES;
@@ -368,6 +544,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -440,6 +617,26 @@
 			};
 			name = Release;
 		};
+		05DA96091F2A7D5B005F46DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "IBMFF-Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.IBMFF-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		05DA960A1F2A7D5B005F46DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "IBMFF-Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.IBMFF-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -457,6 +654,15 @@
 			buildConfigurations = (
 				0515C8BB1F2A71A8003B8594 /* Debug */,
 				0515C8BC1F2A71A8003B8594 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05DA960F1F2A7D5B005F46DB /* Build configuration list for PBXNativeTarget "IBMFF-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05DA96091F2A7D5B005F46DB /* Debug */,
+				05DA960A1F2A7D5B005F46DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

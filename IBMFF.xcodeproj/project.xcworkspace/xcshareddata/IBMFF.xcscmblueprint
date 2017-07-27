@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "61AA9713A3A3709F2007883528A1EAE56893592A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A59B79241FF48B87B8A2D6239F13C873F14163E3" : 9223372036854775807,
+    "61AA9713A3A3709F2007883528A1EAE56893592A" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CED860CF-8F49-4949-9FD5-54FCA086FD6A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A59B79241FF48B87B8A2D6239F13C873F14163E3" : "IBMFF\/Submodules\/gmock-xcode\/",
+    "61AA9713A3A3709F2007883528A1EAE56893592A" : "IBMFF\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "IBMFF",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "IBMFF.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:macmade\/IBMFF.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "61AA9713A3A3709F2007883528A1EAE56893592A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/macmade\/gmock-xcode",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A59B79241FF48B87B8A2D6239F13C873F14163E3"
+    }
+  ]
+}
