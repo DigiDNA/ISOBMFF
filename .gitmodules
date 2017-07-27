@@ -1,0 +1,3 @@
+[submodule "Submodules/PIMPL"]
+	path = Submodules/PIMPL
+	url = https://github.com/macmade/PIMPL.git
