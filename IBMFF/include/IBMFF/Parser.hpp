@@ -30,7 +30,6 @@
 #ifndef IBMFF_PARSER_HPP
 #define IBMFF_PARSER_HPP
 
-#include <string>
 #include <XS/PIMPL/Object.hpp>
 
 namespace IBMFF

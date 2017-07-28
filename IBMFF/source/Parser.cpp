@@ -35,7 +35,6 @@ class XS::PIMPL::Object< IBMFF::Parser >::IMPL
     public:
         
         IMPL( void );
-        IMPL( const std::string & path );
         IMPL( const IMPL & o );
         ~IMPL( void );
 };
