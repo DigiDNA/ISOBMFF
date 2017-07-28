@@ -63,6 +63,12 @@
             ReferencedContainer = "container:IBMFF.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "$(BUILT_PRODUCTS_DIR)/IMG.HEIC"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

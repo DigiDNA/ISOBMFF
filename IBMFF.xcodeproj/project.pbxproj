@@ -20,6 +20,7 @@
 		05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E71F2B5CEF00738744 /* Box.cpp */; };
 		05F471F21F2B5E6B00738744 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471F11F2B5E6B00738744 /* main.cpp */; };
 		05F471F81F2B5F0D00738744 /* libIBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libIBMFF.a */; };
+		05F471FA1F2B62E700738744 /* IMG.HEIC in CopyFiles */ = {isa = PBXBuildFile; fileRef = 05F471F91F2B620600738744 /* IMG.HEIC */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,12 +78,13 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		05F471ED1F2B5E6B00738744 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				05F471FA1F2B62E700738744 /* IMG.HEIC in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -103,6 +105,7 @@
 		05F471E71F2B5CEF00738744 /* Box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
 		05F471EF1F2B5E6B00738744 /* IBMFF-Example */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "IBMFF-Example"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05F471F11F2B5E6B00738744 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		05F471F91F2B620600738744 /* IMG.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG.HEIC; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +220,7 @@
 		05F471F01F2B5E6B00738744 /* IBMFF-Example */ = {
 			isa = PBXGroup;
 			children = (
+				05F471F91F2B620600738744 /* IMG.HEIC */,
 				05F471F11F2B5E6B00738744 /* main.cpp */,
 			);
 			path = "IBMFF-Example";
