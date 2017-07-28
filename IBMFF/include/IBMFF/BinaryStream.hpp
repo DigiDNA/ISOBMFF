@@ -23,37 +23,24 @@
  ******************************************************************************/
 
 /*!
- * @file        File.cpp
+ * @header      BinaryStream.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <IBMFF/File.hpp>
+#ifndef IBMFF_BINARY_STREAM_HPP
+#define IBMFF_BINARY_STREAM_HPP
 
-template<>
-class XS::PIMPL::Object< IBMFF::File >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const std::string & path );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-};
-
-#define XS_PIMPL_CLASS IBMFF::File
-#include <XS/PIMPL/Object-IMPL.hpp>
+#include <string>
+#include <XS/PIMPL/Object.hpp>
 
 namespace IBMFF
-{}
-
-XS::PIMPL::Object< IBMFF::File >::IMPL::IMPL( void )
-{}
-
-XS::PIMPL::Object< IBMFF::File >::IMPL::IMPL( const IMPL & o )
 {
-    ( void )o;
+    class BinaryStream: XS::PIMPL::Object< BinaryStream >
+    {
+        public:
+            
+            using XS::PIMPL::Object< BinaryStream >::impl;
+    };
 }
 
-XS::PIMPL::Object< IBMFF::File >::IMPL::~IMPL( void )
-{}
-
+#endif /* IBMFF_BINARY_STREAM_HPP */

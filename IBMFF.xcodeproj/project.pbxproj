@@ -11,7 +11,15 @@
 		0515C8C41F2A7807003B8594 /* File.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0515C8C21F2A7807003B8594 /* File.hpp */; };
 		05DA96061F2A7D5B005F46DB /* libIBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libIBMFF.a */; };
 		05DA96121F2A7DC3005F46DB /* GoogleMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A4111A1F2A7D2E002B1A79 /* GoogleMock.framework */; };
-		05DA96141F2A7DD4005F46DB /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DA96131F2A7DD4005F46DB /* File.cpp */; };
+		05DA96141F2A7DD4005F46DB /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DA96131F2A7DD4005F46DB /* Parser.cpp */; };
+		05F471E21F2B5CE500738744 /* Parser.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05F471DC1F2B5CE500738744 /* Parser.hpp */; };
+		05F471E31F2B5CE500738744 /* Box.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05F471DD1F2B5CE500738744 /* Box.hpp */; };
+		05F471E41F2B5CE500738744 /* BinaryStream.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05F471DE1F2B5CE500738744 /* BinaryStream.hpp */; };
+		05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E51F2B5CEE00738744 /* Parser.cpp */; };
+		05F471E91F2B5CEF00738744 /* BinaryStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E61F2B5CEF00738744 /* BinaryStream.cpp */; };
+		05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E71F2B5CEF00738744 /* Box.cpp */; };
+		05F471F21F2B5E6B00738744 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471F11F2B5E6B00738744 /* main.cpp */; };
+		05F471F81F2B5F0D00738744 /* libIBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libIBMFF.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +65,26 @@
 			remoteGlobalIDString = 05818F851A685AEA0072A469;
 			remoteInfo = GoogleMock;
 		};
+		05F471F61F2B5F0A00738744 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0515C8A71F2A71A8003B8594 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0515C8AE1F2A71A8003B8594;
+			remoteInfo = IBMFF;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		05F471ED1F2B5E6B00738744 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0515C8AF1F2A71A8003B8594 /* libIBMFF.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIBMFF.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,7 +94,15 @@
 		05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GoogleMock.xcodeproj; path = "Submodules/gmock-xcode/GoogleMock.xcodeproj"; sourceTree = "<group>"; };
 		05DA96011F2A7D5B005F46DB /* IBMFF-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IBMFF-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DA96051F2A7D5B005F46DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		05DA96131F2A7DD4005F46DB /* File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = File.cpp; sourceTree = "<group>"; };
+		05DA96131F2A7DD4005F46DB /* Parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
+		05F471DC1F2B5CE500738744 /* Parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Parser.hpp; sourceTree = "<group>"; };
+		05F471DD1F2B5CE500738744 /* Box.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box.hpp; sourceTree = "<group>"; };
+		05F471DE1F2B5CE500738744 /* BinaryStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BinaryStream.hpp; sourceTree = "<group>"; };
+		05F471E51F2B5CEE00738744 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
+		05F471E61F2B5CEF00738744 /* BinaryStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryStream.cpp; sourceTree = "<group>"; };
+		05F471E71F2B5CEF00738744 /* Box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
+		05F471EF1F2B5E6B00738744 /* IBMFF-Example */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "IBMFF-Example"; sourceTree = BUILT_PRODUCTS_DIR; };
+		05F471F11F2B5E6B00738744 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +122,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05F471EC1F2B5E6B00738744 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05F471F81F2B5F0D00738744 /* libIBMFF.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -96,6 +139,7 @@
 				05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */,
 				0515C8B11F2A71A8003B8594 /* IBMFF */,
 				05DA96021F2A7D5B005F46DB /* IBMFF-Tests */,
+				05F471F01F2B5E6B00738744 /* IBMFF-Example */,
 				0515C8B01F2A71A8003B8594 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,6 +149,7 @@
 			children = (
 				0515C8AF1F2A71A8003B8594 /* libIBMFF.a */,
 				05DA96011F2A7D5B005F46DB /* IBMFF-Tests.xctest */,
+				05F471EF1F2B5E6B00738744 /* IBMFF-Example */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,7 +174,10 @@
 		0515C8BE1F2A71E7003B8594 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				05F471E61F2B5CEF00738744 /* BinaryStream.cpp */,
+				05F471E71F2B5CEF00738744 /* Box.cpp */,
 				0515C8C11F2A7807003B8594 /* File.cpp */,
+				05F471E51F2B5CEE00738744 /* Parser.cpp */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -137,8 +185,11 @@
 		0515C8BF1F2A7775003B8594 /* IBMFF */ = {
 			isa = PBXGroup;
 			children = (
-				0515C8C01F2A77C4003B8594 /* IBMFF.hpp */,
+				05F471DE1F2B5CE500738744 /* BinaryStream.hpp */,
+				05F471DD1F2B5CE500738744 /* Box.hpp */,
 				0515C8C21F2A7807003B8594 /* File.hpp */,
+				0515C8C01F2A77C4003B8594 /* IBMFF.hpp */,
+				05F471DC1F2B5CE500738744 /* Parser.hpp */,
 			);
 			path = IBMFF;
 			sourceTree = "<group>";
@@ -158,9 +209,17 @@
 			isa = PBXGroup;
 			children = (
 				05DA96051F2A7D5B005F46DB /* Info.plist */,
-				05DA96131F2A7DD4005F46DB /* File.cpp */,
+				05DA96131F2A7DD4005F46DB /* Parser.cpp */,
 			);
 			path = "IBMFF-Tests";
+			sourceTree = "<group>";
+		};
+		05F471F01F2B5E6B00738744 /* IBMFF-Example */ = {
+			isa = PBXGroup;
+			children = (
+				05F471F11F2B5E6B00738744 /* main.cpp */,
+			);
+			path = "IBMFF-Example";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,7 +229,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05F471E31F2B5CE500738744 /* Box.hpp in Headers */,
 				0515C8C41F2A7807003B8594 /* File.hpp in Headers */,
+				05F471E21F2B5CE500738744 /* Parser.hpp in Headers */,
+				05F471E41F2B5CE500738744 /* BinaryStream.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +275,24 @@
 			productReference = 05DA96011F2A7D5B005F46DB /* IBMFF-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		05F471EE1F2B5E6B00738744 /* IBMFF-Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05F471F31F2B5E6B00738744 /* Build configuration list for PBXNativeTarget "IBMFF-Example" */;
+			buildPhases = (
+				05F471EB1F2B5E6B00738744 /* Sources */,
+				05F471EC1F2B5E6B00738744 /* Frameworks */,
+				05F471ED1F2B5E6B00738744 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05F471F71F2B5F0A00738744 /* PBXTargetDependency */,
+			);
+			name = "IBMFF-Example";
+			productName = IBMFF_Example;
+			productReference = 05F471EF1F2B5E6B00738744 /* IBMFF-Example */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -226,6 +306,9 @@
 						CreatedOnToolsVersion = 9.0;
 					};
 					05DA96001F2A7D5B005F46DB = {
+						CreatedOnToolsVersion = 9.0;
+					};
+					05F471EE1F2B5E6B00738744 = {
 						CreatedOnToolsVersion = 9.0;
 					};
 				};
@@ -250,6 +333,7 @@
 			targets = (
 				0515C8AE1F2A71A8003B8594 /* IBMFF */,
 				05DA96001F2A7D5B005F46DB /* IBMFF-Tests */,
+				05F471EE1F2B5E6B00738744 /* IBMFF-Example */,
 			);
 		};
 /* End PBXProject section */
@@ -300,6 +384,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */,
+				05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */,
+				05F471E91F2B5CEF00738744 /* BinaryStream.cpp in Sources */,
 				0515C8C31F2A7807003B8594 /* File.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,7 +395,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05DA96141F2A7DD4005F46DB /* File.cpp in Sources */,
+				05DA96141F2A7DD4005F46DB /* Parser.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05F471EB1F2B5E6B00738744 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05F471F21F2B5E6B00738744 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +419,11 @@
 			isa = PBXTargetDependency;
 			name = GoogleMock;
 			targetProxy = 05DA96101F2A7DBE005F46DB /* PBXContainerItemProxy */;
+		};
+		05F471F71F2B5F0A00738744 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0515C8AE1F2A71A8003B8594 /* IBMFF */;
+			targetProxy = 05F471F61F2B5F0A00738744 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -637,6 +737,20 @@
 			};
 			name = Release;
 		};
+		05F471F41F2B5E6B00738744 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		05F471F51F2B5E6B00738744 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -663,6 +777,15 @@
 			buildConfigurations = (
 				05DA96091F2A7D5B005F46DB /* Debug */,
 				05DA960A1F2A7D5B005F46DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05F471F31F2B5E6B00738744 /* Build configuration list for PBXNativeTarget "IBMFF-Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05F471F41F2B5E6B00738744 /* Debug */,
+				05F471F51F2B5E6B00738744 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

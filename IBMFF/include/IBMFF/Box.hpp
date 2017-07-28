@@ -23,14 +23,24 @@
  ******************************************************************************/
 
 /*!
- * @file        File.cpp
+ * @header      Box.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <IBMFF/IBMFF.hpp>
-#include <GoogleMock/GoogleMock.h>
+#ifndef IBMFF_BOX_HPP
+#define IBMFF_BOX_HPP
 
-using namespace testing;
+#include <string>
+#include <XS/PIMPL/Object.hpp>
 
-TEST( IBMFF_File, CTOR )
-{}
+namespace IBMFF
+{
+    class Box: XS::PIMPL::Object< Box >
+    {
+        public:
+            
+            using XS::PIMPL::Object< Box >::impl;
+    };
+}
+
+#endif /* IBMFF_BOX_HPP */

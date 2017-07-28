@@ -30,7 +30,10 @@
 #ifndef IBMFF_HPP
 #define IBMFF_HPP
 
+#include <IBMFF/BinaryStream.hpp>
+#include <IBMFF/Parser.hpp>
 #include <IBMFF/File.hpp>
+#include <IBMFF/Box.hpp>
 
 #endif /* IBMFF_HPP */
 

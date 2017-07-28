@@ -23,37 +23,18 @@
  ******************************************************************************/
 
 /*!
- * @file        File.cpp
+ * @file        main.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <IBMFF/File.hpp>
+#include <IBMFF/IBMFF.hpp>
 
-template<>
-class XS::PIMPL::Object< IBMFF::File >::IMPL
+int main( int argc, const char * argv[] )
 {
-    public:
-        
-        IMPL( void );
-        IMPL( const std::string & path );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-};
-
-#define XS_PIMPL_CLASS IBMFF::File
-#include <XS/PIMPL/Object-IMPL.hpp>
-
-namespace IBMFF
-{}
-
-XS::PIMPL::Object< IBMFF::File >::IMPL::IMPL( void )
-{}
-
-XS::PIMPL::Object< IBMFF::File >::IMPL::IMPL( const IMPL & o )
-{
-    ( void )o;
+    IBMFF::Parser parser;
+    
+    ( void )argc;
+    ( void )argv;
+    
+    return 0;
 }
-
-XS::PIMPL::Object< IBMFF::File >::IMPL::~IMPL( void )
-{}
-

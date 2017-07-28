@@ -40,8 +40,6 @@ namespace IBMFF
         public:
             
             using XS::PIMPL::Object< File >::impl;
-            
-            File( const std::string & path );
     };
 }
 

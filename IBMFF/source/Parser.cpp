@@ -23,14 +23,14 @@
  ******************************************************************************/
 
 /*!
- * @file        File.cpp
+ * @file        Parser.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <IBMFF/File.hpp>
+#include <IBMFF/Parser.hpp>
 
 template<>
-class XS::PIMPL::Object< IBMFF::File >::IMPL
+class XS::PIMPL::Object< IBMFF::Parser >::IMPL
 {
     public:
         
@@ -40,20 +40,19 @@ class XS::PIMPL::Object< IBMFF::File >::IMPL
         ~IMPL( void );
 };
 
-#define XS_PIMPL_CLASS IBMFF::File
+#define XS_PIMPL_CLASS IBMFF::Parser
 #include <XS/PIMPL/Object-IMPL.hpp>
 
 namespace IBMFF
 {}
 
-XS::PIMPL::Object< IBMFF::File >::IMPL::IMPL( void )
+XS::PIMPL::Object< IBMFF::Parser >::IMPL::IMPL( void )
 {}
 
-XS::PIMPL::Object< IBMFF::File >::IMPL::IMPL( const IMPL & o )
+XS::PIMPL::Object< IBMFF::Parser >::IMPL::IMPL( const IMPL & o )
 {
     ( void )o;
 }
 
-XS::PIMPL::Object< IBMFF::File >::IMPL::~IMPL( void )
+XS::PIMPL::Object< IBMFF::Parser >::IMPL::~IMPL( void )
 {}
-
