@@ -31,6 +31,8 @@
 #define IBMFF_BINARY_STREAM_HPP
 
 #include <string>
+#include <iostream>
+#include <cstdint>
 #include <XS/PIMPL/Object.hpp>
 
 namespace IBMFF
@@ -40,6 +42,60 @@ namespace IBMFF
         public:
             
             using XS::PIMPL::Object< BinaryStream >::impl;
+            
+            BinaryStream( void );
+            BinaryStream( std::string path );
+            
+            uint8_t ReadUnsignedChar( void );
+            int8_t  ReadSignedChar( void );
+            
+            uint16_t ReadUnsignedShort( void );
+            int16_t  ReadSignedShort( void );
+            uint16_t ReadBigEndianUnsignedShort( void );
+            uint16_t ReadLittleEndianUnsignedShort( void );
+            
+            uint32_t ReadUnsignedInteger( void );
+            int32_t  ReadSignedInteger( void );
+            uint32_t ReadBigEndianUnsignedInteger( void );
+            uint32_t ReadLittleEndianUnsignedInteger( void );
+            
+            uint64_t ReadUnsignedLong( void );
+            int64_t  ReadSignedLong( void );
+            uint64_t ReadBigEndianUnsignedLong( void );
+            uint64_t ReadLittleEndianUnsignedLong( void );
+            
+            float ReadBigEndianFixedPoint( unsigned int integerLength, unsigned int fractionalLength );
+            float ReadLittleEndianFixedPoint( unsigned int integerLength, unsigned int fractionalLength );
+            
+            std::string ReadNULLTerminatedString( void );
+            
+            bool IsGood( void ) const;
+            bool IsEOF( void ) const;
+            bool IsFail( void ) const;
+            bool IsBad( void ) const;
+            
+            int Peek( void );
+            int Get( void );
+            int Sync( void );
+            
+            std::streampos TellG( void );
+            
+            std::streamsize ReadSome( char * s, std::streamsize n );
+            std::streamsize GCount( void ) const;
+            
+            std::istream & Get( char & c );
+            std::istream & Get( char * s, std::streamsize n );
+            std::istream & Get( char * s, std::streamsize n, char delim );
+            std::istream & Get( std::streambuf & sb );
+            std::istream & Get( std::streambuf & sb, char delim );
+            std::istream & GetLine( char * s, std::streamsize n );
+            std::istream & GetLine( char * s, std::streamsize n, char delim );
+            std::istream & Ignore( std::streamsize n = 1, int delim = EOF );
+            std::istream & Read( char * s, std::streamsize n );
+            std::istream & PutBack( char c );
+            std::istream & Unget( void );
+            std::istream & SeekG( std::streampos pos );
+            std::istream & SeekG( std::streamoff off, std::ios_base::seekdir dir );
     };
 }
 
