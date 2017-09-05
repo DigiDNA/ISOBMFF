@@ -35,6 +35,8 @@
 		057280A41F5F038A00F02C27 /* ILOC-Item-Extent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280A31F5F038A00F02C27 /* ILOC-Item-Extent.cpp */; };
 		057280A71F5F210900F02C27 /* Container.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 057280A61F5F210700F02C27 /* Container.hpp */; };
 		057280A91F5F240700F02C27 /* Container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280A81F5F240700F02C27 /* Container.cpp */; };
+		057280AB1F5F449900F02C27 /* IROT.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 057280AA1F5F449600F02C27 /* IROT.hpp */; };
+		057280AD1F5F44A100F02C27 /* IROT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280AC1F5F44A000F02C27 /* IROT.cpp */; };
 		059605981F5DC43B0005F8C9 /* ContainerBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059605931F5DC4130005F8C9 /* ContainerBox.hpp */; };
 		059605991F5DC43B0005F8C9 /* FullBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059605971F5DC4300005F8C9 /* FullBox.hpp */; };
 		0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0515C8C01F2A77C4003B8594 /* IBMFF.hpp */; };
@@ -156,6 +158,8 @@
 		057280A31F5F038A00F02C27 /* ILOC-Item-Extent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ILOC-Item-Extent.cpp"; sourceTree = "<group>"; };
 		057280A61F5F210700F02C27 /* Container.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Container.hpp; sourceTree = "<group>"; };
 		057280A81F5F240700F02C27 /* Container.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Container.cpp; sourceTree = "<group>"; };
+		057280AA1F5F449600F02C27 /* IROT.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IROT.hpp; sourceTree = "<group>"; };
+		057280AC1F5F44A000F02C27 /* IROT.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IROT.cpp; sourceTree = "<group>"; };
 		059605931F5DC4130005F8C9 /* ContainerBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContainerBox.hpp; sourceTree = "<group>"; };
 		059605971F5DC4300005F8C9 /* FullBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FullBox.hpp; sourceTree = "<group>"; };
 		0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContainerBox.cpp; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 				057280841F5EDBCE00F02C27 /* ILOC.cpp */,
 				0572809F1F5EE19400F02C27 /* INFE.cpp */,
 				057280851F5EDBCF00F02C27 /* IREF.cpp */,
+				057280AC1F5F44A000F02C27 /* IROT.cpp */,
 				051F4D4B1F5E0DD800E6E12C /* Matrix.cpp */,
 				05A5A76B1F5EAFAE00D16AD9 /* META.cpp */,
 				051F4D481F5E0AD500E6E12C /* MVHD.cpp */,
@@ -290,6 +295,7 @@
 				0572807C1F5EDBC700F02C27 /* ILOC.hpp */,
 				0572809D1F5EE18B00F02C27 /* INFE.hpp */,
 				0572807E1F5EDBC700F02C27 /* IREF.hpp */,
+				057280AA1F5F449600F02C27 /* IROT.hpp */,
 				051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */,
 				05A5A7651F5EAF9A00D16AD9 /* META.hpp */,
 				051F4D461F5E0AC400E6E12C /* MVHD.hpp */,
@@ -352,6 +358,7 @@
 				05A5A76A1F5EAFA000D16AD9 /* META.hpp in Headers */,
 				0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */,
 				0572809E1F5EE18E00F02C27 /* INFE.hpp in Headers */,
+				057280AB1F5F449900F02C27 /* IROT.hpp in Headers */,
 				0515C8C41F2A7807003B8594 /* File.hpp in Headers */,
 				059605991F5DC43B0005F8C9 /* FullBox.hpp in Headers */,
 				05F471E21F2B5CE500738744 /* Parser.hpp in Headers */,
@@ -520,6 +527,7 @@
 				057280A41F5F038A00F02C27 /* ILOC-Item-Extent.cpp in Sources */,
 				057280A01F5EE19400F02C27 /* INFE.cpp in Sources */,
 				0572807A1F5ED9FF00F02C27 /* IINF.cpp in Sources */,
+				057280AD1F5F44A100F02C27 /* IROT.cpp in Sources */,
 				057280881F5EDBCF00F02C27 /* ILOC.cpp in Sources */,
 				0596059C1F5DC4CE0005F8C9 /* ContainerBox.cpp in Sources */,
 				057280A21F5EFC9600F02C27 /* ILOC-Item.cpp in Sources */,

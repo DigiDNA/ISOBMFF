@@ -23,33 +23,32 @@
  ******************************************************************************/
 
 /*!
- * @header      IBMFF.hpp
+ * @header      IROT.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef IBMFF_HPP
-#define IBMFF_HPP
+#ifndef IBMFF_IROT_HPP
+#define IBMFF_IROT_HPP
 
-#include <IBMFF/Parser.hpp>
-#include <IBMFF/BinaryStream.hpp>
-#include <IBMFF/Box.hpp>
+#include <XS/PIMPL/Object.hpp>
 #include <IBMFF/FullBox.hpp>
-#include <IBMFF/Container.hpp>
-#include <IBMFF/ContainerBox.hpp>
-#include <IBMFF/File.hpp>
-#include <IBMFF/Matrix.hpp>
-#include <IBMFF/FTYP.hpp>
-#include <IBMFF/MVHD.hpp>
-#include <IBMFF/META.hpp>
-#include <IBMFF/HDLR.hpp>
-#include <IBMFF/PITM.hpp>
-#include <IBMFF/IINF.hpp>
-#include <IBMFF/DREF.hpp>
-#include <IBMFF/IDAT.hpp>
-#include <IBMFF/ILOC.hpp>
-#include <IBMFF/IREF.hpp>
-#include <IBMFF/INFE.hpp>
-#include <IBMFF/IROT.hpp>
 
-#endif /* IBMFF_HPP */
+namespace IBMFF
+{
+    class IROT: public Box, public XS::PIMPL::Object< IROT >
+    {
+        public:
+            
+            using XS::PIMPL::Object< IROT >::impl;
+            
+            IROT( void );
+            
+            void ReadData( Parser & parser, BinaryStream & stream ) override;
+            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            
+            uint8_t GetAngle( void ) const;
+            void    SetAngle( uint8_t value ) const;
+    };
+}
 
+#endif /* IBMFF_IROT_HPP */

@@ -23,33 +23,74 @@
  ******************************************************************************/
 
 /*!
- * @header      IBMFF.hpp
+ * @file        IROT.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef IBMFF_HPP
-#define IBMFF_HPP
-
-#include <IBMFF/Parser.hpp>
-#include <IBMFF/BinaryStream.hpp>
-#include <IBMFF/Box.hpp>
-#include <IBMFF/FullBox.hpp>
-#include <IBMFF/Container.hpp>
-#include <IBMFF/ContainerBox.hpp>
-#include <IBMFF/File.hpp>
-#include <IBMFF/Matrix.hpp>
-#include <IBMFF/FTYP.hpp>
-#include <IBMFF/MVHD.hpp>
-#include <IBMFF/META.hpp>
-#include <IBMFF/HDLR.hpp>
-#include <IBMFF/PITM.hpp>
-#include <IBMFF/IINF.hpp>
-#include <IBMFF/DREF.hpp>
-#include <IBMFF/IDAT.hpp>
-#include <IBMFF/ILOC.hpp>
-#include <IBMFF/IREF.hpp>
-#include <IBMFF/INFE.hpp>
 #include <IBMFF/IROT.hpp>
+#include <IBMFF/Parser.hpp>
+#include <sstream>
+#include <iomanip>
 
-#endif /* IBMFF_HPP */
+template<>
+class XS::PIMPL::Object< IBMFF::IROT >::IMPL
+{
+    public:
+        
+        IMPL( void );
+        IMPL( const IMPL & o );
+        ~IMPL( void );
+        
+        uint8_t _angle;
+};
+
+#define XS_PIMPL_CLASS IBMFF::IROT
+#include <XS/PIMPL/Object-IMPL.hpp>
+
+namespace IBMFF
+{
+    IROT::IROT( void ): IBMFF::Box( "irot" )
+    {}
+    
+    void IROT::ReadData( Parser & parser, BinaryStream & stream )
+    {
+        uint8_t u8;
+        
+        ( void )parser;
+        
+        u8 = stream.ReadUnsignedChar();
+        
+        this->SetAngle( u8 & 0x3 );
+    }
+    
+    void IROT::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    {
+        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        
+        Box::WriteDescription( os, indentLevel );
+        
+        os << std::endl << i << "- Angle: " << static_cast< uint32_t >( this->GetAngle() ) * 90 << "°";
+    }
+    
+    uint8_t IROT::GetAngle( void ) const
+    {
+        return this->impl->_angle;
+    }
+    
+    void IROT::SetAngle( uint8_t value ) const
+    {
+        this->impl->_angle = value;
+    }
+}
+
+XS::PIMPL::Object< IBMFF::IROT >::IMPL::IMPL( void ):
+    _angle( 0 )
+{}
+
+XS::PIMPL::Object< IBMFF::IROT >::IMPL::IMPL( const IMPL & o ):
+    _angle( o._angle )
+{}
+
+XS::PIMPL::Object< IBMFF::IROT >::IMPL::~IMPL( void )
+{}
 
