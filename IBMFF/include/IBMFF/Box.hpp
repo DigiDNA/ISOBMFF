@@ -34,7 +34,6 @@
 #include <IBMFF/BinaryStream.hpp>
 #include <string>
 #include <ostream>
-#include <cstdint>
 
 namespace IBMFF
 {

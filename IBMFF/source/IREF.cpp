@@ -29,7 +29,6 @@
 
 #include <IBMFF/IREF.hpp>
 #include <IBMFF/Parser.hpp>
-#include <cstdint>
 
 template<>
 class XS::PIMPL::Object< IBMFF::IREF >::IMPL

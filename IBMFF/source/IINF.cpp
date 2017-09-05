@@ -29,7 +29,6 @@
 
 #include <IBMFF/IINF.hpp>
 #include <IBMFF/Parser.hpp>
-#include <cstdint>
 
 template<>
 class XS::PIMPL::Object< IBMFF::IINF >::IMPL
@@ -39,6 +38,8 @@ class XS::PIMPL::Object< IBMFF::IINF >::IMPL
         IMPL( void );
         IMPL( const IMPL & o );
         ~IMPL( void );
+        
+        std::vector< std::shared_ptr< IBMFF::INFE > > _entries;
 };
 
 #define XS_PIMPL_CLASS IBMFF::IINF
@@ -51,33 +52,80 @@ namespace IBMFF
     
     void IINF::ReadData( Parser & parser, BinaryStream & stream )
     {
+        ContainerBox container( "????" );
+        
         FullBox::ReadData( parser, stream );
         
         if( this->GetVersion() == 0 )
         {
-            
+            stream.ReadBigEndianUnsignedShort();
         }
         else
         {
-            
+            stream.ReadBigEndianUnsignedInteger();
+        }
+        
+        container.ReadData( parser, stream );
+        
+        this->impl->_entries.clear();
+        
+        for( const auto & box: container.GetBoxes() )
+        {
+            if( dynamic_cast< INFE * >( box.get() ) != nullptr )
+            {
+                this->AddEntry( std::dynamic_pointer_cast< INFE >( box ) );
+            }
         }
     }
     
     void IINF::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        std::vector< std::shared_ptr< INFE > > entries;
+        std::string                            i( indentLevel * 4, ' ' );
         
         FullBox::WriteDescription( os, indentLevel );
+        
+        entries = this->GetEntries();
+        
+        if( entries.size() > 0 )
+        {
+            os << std::endl
+               << i
+               << "{"
+               << std::endl;
+            
+            for( const auto & entry: entries )
+            {
+                entry->WriteDescription( os, indentLevel + 1 );
+                
+                os << std::endl;
+            }
+            
+            os << i
+               << "}";
+        }
+    }
+    
+    void IINF::AddEntry( std::shared_ptr< INFE > entry )
+    {
+        if( entry != nullptr )
+        {
+            this->impl->_entries.push_back( entry );
+        }
+    }
+    
+    std::vector< std::shared_ptr< INFE > > IINF::GetEntries( void ) const
+    {
+        return this->impl->_entries;
     }
 }
 
 XS::PIMPL::Object< IBMFF::IINF >::IMPL::IMPL( void )
 {}
 
-XS::PIMPL::Object< IBMFF::IINF >::IMPL::IMPL( const IMPL & o )
-{
-    ( void )o;
-}
+XS::PIMPL::Object< IBMFF::IINF >::IMPL::IMPL( const IMPL & o ):
+    _entries( o._entries )
+{}
 
 XS::PIMPL::Object< IBMFF::IINF >::IMPL::~IMPL( void )
 {}

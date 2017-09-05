@@ -23,15 +23,15 @@
  ******************************************************************************/
 
 /*!
- * @file        DREF.hpp
+ * @file        INFE.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#include <IBMFF/DREF.hpp>
+#include <IBMFF/INFE.hpp>
 #include <IBMFF/Parser.hpp>
 
 template<>
-class XS::PIMPL::Object< IBMFF::DREF >::IMPL
+class XS::PIMPL::Object< IBMFF::INFE >::IMPL
 {
     public:
         
@@ -40,20 +40,20 @@ class XS::PIMPL::Object< IBMFF::DREF >::IMPL
         ~IMPL( void );
 };
 
-#define XS_PIMPL_CLASS IBMFF::DREF
+#define XS_PIMPL_CLASS IBMFF::INFE
 #include <XS/PIMPL/Object-IMPL.hpp>
 
 namespace IBMFF
 {
-    DREF::DREF( void ): IBMFF::FullBox( "dref" )
+    INFE::INFE( void ): IBMFF::FullBox( "infe" )
     {}
     
-    void DREF::ReadData( Parser & parser, BinaryStream & stream )
+    void INFE::ReadData( Parser & parser, BinaryStream & stream )
     {
         FullBox::ReadData( parser, stream );
     }
     
-    void DREF::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    void INFE::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
         std::string i( ( indentLevel + 1 ) * 4, ' ' );
         
@@ -61,14 +61,14 @@ namespace IBMFF
     }
 }
 
-XS::PIMPL::Object< IBMFF::DREF >::IMPL::IMPL( void )
+XS::PIMPL::Object< IBMFF::INFE >::IMPL::IMPL( void )
 {}
 
-XS::PIMPL::Object< IBMFF::DREF >::IMPL::IMPL( const IMPL & o )
+XS::PIMPL::Object< IBMFF::INFE >::IMPL::IMPL( const IMPL & o )
 {
     ( void )o;
 }
 
-XS::PIMPL::Object< IBMFF::DREF >::IMPL::~IMPL( void )
+XS::PIMPL::Object< IBMFF::INFE >::IMPL::~IMPL( void )
 {}
 

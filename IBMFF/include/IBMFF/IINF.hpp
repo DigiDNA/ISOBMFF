@@ -32,8 +32,9 @@
 
 #include <XS/PIMPL/Object.hpp>
 #include <IBMFF/FullBox.hpp>
-#include <IBMFF/Matrix.hpp>
-#include <cstdint>
+#include <IBMFF/INFE.hpp>
+#include <vector>
+#include <memory>
 
 namespace IBMFF
 {
@@ -47,7 +48,9 @@ namespace IBMFF
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
-
+            
+            void                                   AddEntry( std::shared_ptr< INFE > entry );
+            std::vector< std::shared_ptr< INFE > > GetEntries( void ) const;
     };
 }
 

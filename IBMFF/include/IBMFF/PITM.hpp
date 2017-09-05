@@ -32,7 +32,6 @@
 
 #include <XS/PIMPL/Object.hpp>
 #include <IBMFF/FullBox.hpp>
-#include <IBMFF/Matrix.hpp>
 #include <cstdint>
 
 namespace IBMFF

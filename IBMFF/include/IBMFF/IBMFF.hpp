@@ -47,6 +47,7 @@
 #include <IBMFF/IDAT.hpp>
 #include <IBMFF/ILOC.hpp>
 #include <IBMFF/IREF.hpp>
+#include <IBMFF/INFE.hpp>
 
 #endif /* IBMFF_HPP */
 

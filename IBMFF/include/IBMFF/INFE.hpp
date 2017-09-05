@@ -23,52 +23,29 @@
  ******************************************************************************/
 
 /*!
- * @file        DREF.hpp
+ * @header      INFE.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#include <IBMFF/DREF.hpp>
-#include <IBMFF/Parser.hpp>
+#ifndef IBMFF_INFE_HPP
+#define IBMFF_INFE_HPP
 
-template<>
-class XS::PIMPL::Object< IBMFF::DREF >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-};
-
-#define XS_PIMPL_CLASS IBMFF::DREF
-#include <XS/PIMPL/Object-IMPL.hpp>
+#include <XS/PIMPL/Object.hpp>
+#include <IBMFF/FullBox.hpp>
 
 namespace IBMFF
 {
-    DREF::DREF( void ): IBMFF::FullBox( "dref" )
-    {}
-    
-    void DREF::ReadData( Parser & parser, BinaryStream & stream )
+    class INFE: public FullBox, public XS::PIMPL::Object< INFE >
     {
-        FullBox::ReadData( parser, stream );
-    }
-    
-    void DREF::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
-    {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
-        
-        FullBox::WriteDescription( os, indentLevel );
-    }
+        public:
+            
+            using XS::PIMPL::Object< INFE >::impl;
+            
+            INFE( void );
+            
+            void ReadData( Parser & parser, BinaryStream & stream ) override;
+            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+    };
 }
 
-XS::PIMPL::Object< IBMFF::DREF >::IMPL::IMPL( void )
-{}
-
-XS::PIMPL::Object< IBMFF::DREF >::IMPL::IMPL( const IMPL & o )
-{
-    ( void )o;
-}
-
-XS::PIMPL::Object< IBMFF::DREF >::IMPL::~IMPL( void )
-{}
-
+#endif /* IBMFF_INFE_HPP */

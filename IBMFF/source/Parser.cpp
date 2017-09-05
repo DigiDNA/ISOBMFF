@@ -40,6 +40,7 @@
 #include <IBMFF/IDAT.hpp>
 #include <IBMFF/ILOC.hpp>
 #include <IBMFF/IREF.hpp>
+#include <IBMFF/INFE.hpp>
 #include <map>
 #include <stdexcept>
 
@@ -194,4 +195,5 @@ void XS::PIMPL::Object< IBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterBox( "idat", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::IDAT >(); } );
     this->RegisterBox( "iloc", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::ILOC >(); } );
     this->RegisterBox( "iref", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::IREF >(); } );
+    this->RegisterBox( "infe", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::INFE >(); } );
 }

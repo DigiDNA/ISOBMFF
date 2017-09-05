@@ -72,7 +72,7 @@ namespace IBMFF
     
     void META::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string                           i( ( indentLevel ) * 4, ' ' );
+        std::string                           i( indentLevel * 4, ' ' );
         std::vector< std::shared_ptr< Box > > boxes;
         
         if( this->impl->_isFullBox )

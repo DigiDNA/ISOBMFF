@@ -32,8 +32,6 @@
 
 #include <XS/PIMPL/Object.hpp>
 #include <IBMFF/FullBox.hpp>
-#include <IBMFF/Matrix.hpp>
-#include <cstdint>
 
 namespace IBMFF
 {
@@ -47,7 +45,6 @@ namespace IBMFF
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
-
     };
 }
 
