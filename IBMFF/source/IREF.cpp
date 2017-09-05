@@ -51,15 +51,6 @@ namespace IBMFF
     void IREF::ReadData( Parser & parser, BinaryStream & stream )
     {
         FullBox::ReadData( parser, stream );
-        
-        if( this->GetVersion() == 0 )
-        {
-            
-        }
-        else
-        {
-            
-        }
     }
     
     void IREF::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
