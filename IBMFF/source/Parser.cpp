@@ -188,6 +188,9 @@ void XS::PIMPL::Object< IBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterContainerBox( "sinf" );
     this->RegisterContainerBox( "iprp" );
     this->RegisterContainerBox( "ipco" );
+    this->RegisterContainerBox( "fiin" );
+    this->RegisterContainerBox( "paen" );
+    this->RegisterContainerBox( "strk" );
     
     this->RegisterBox( "ftyp", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::FTYP >(); } );
     this->RegisterBox( "mvhd", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::MVHD >(); } );
