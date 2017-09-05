@@ -1,7 +1,7 @@
 /*******************************************************************************
  * The MIT License (MIT)
  * 
- * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com
+ * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com / www.imazing.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 
 /*!
  * @header      BinaryStream.hpp
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
+ * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
 #ifndef IBMFF_BINARY_STREAM_HPP
@@ -34,10 +34,11 @@
 #include <iostream>
 #include <cstdint>
 #include <XS/PIMPL/Object.hpp>
+#include <IBMFF/Matrix.hpp>
 
 namespace IBMFF
 {
-    class BinaryStream: XS::PIMPL::Object< BinaryStream >
+    class BinaryStream: public XS::PIMPL::Object< BinaryStream >
     {
         public:
             
@@ -45,6 +46,9 @@ namespace IBMFF
             
             BinaryStream( void );
             BinaryStream( std::string path );
+            BinaryStream( BinaryStream & stream, uint64_t length );
+            
+            bool HasBytesAvailable( void ) const;
             
             uint8_t ReadUnsignedChar( void );
             int8_t  ReadSignedChar( void );
@@ -67,35 +71,13 @@ namespace IBMFF
             float ReadBigEndianFixedPoint( unsigned int integerLength, unsigned int fractionalLength );
             float ReadLittleEndianFixedPoint( unsigned int integerLength, unsigned int fractionalLength );
             
+            std::string ReadString( uint64_t length );
             std::string ReadNULLTerminatedString( void );
             
-            bool IsGood( void ) const;
-            bool IsEOF( void ) const;
-            bool IsFail( void ) const;
-            bool IsBad( void ) const;
+            Matrix ReadMatrix( void );
             
-            int Peek( void );
-            int Get( void );
-            int Sync( void );
-            
-            std::streampos TellG( void );
-            
-            std::streamsize ReadSome( char * s, std::streamsize n );
-            std::streamsize GCount( void ) const;
-            
-            std::istream & Get( char & c );
-            std::istream & Get( char * s, std::streamsize n );
-            std::istream & Get( char * s, std::streamsize n, char delim );
-            std::istream & Get( std::streambuf & sb );
-            std::istream & Get( std::streambuf & sb, char delim );
-            std::istream & GetLine( char * s, std::streamsize n );
-            std::istream & GetLine( char * s, std::streamsize n, char delim );
-            std::istream & Ignore( std::streamsize n = 1, int delim = EOF );
-            std::istream & Read( char * s, std::streamsize n );
-            std::istream & PutBack( char c );
-            std::istream & Unget( void );
-            std::istream & SeekG( std::streampos pos );
-            std::istream & SeekG( std::streamoff off, std::ios_base::seekdir dir );
+            void Read( uint8_t * buf, uint64_t length );
+            void DeleteBytes( uint64_t length );
     };
 }
 

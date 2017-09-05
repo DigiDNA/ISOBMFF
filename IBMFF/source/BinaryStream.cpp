@@ -1,7 +1,7 @@
 /*******************************************************************************
  * The MIT License (MIT)
  * 
- * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com
+ * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com / www.imazing.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,12 +24,14 @@
 
 /*!
  * @file        BinaryStream.cpp
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
+ * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
 #include <IBMFF/BinaryStream.hpp>
 #include <fstream>
 #include <cmath>
+#include <vector>
+#include <cstdint>
 
 template<>
 class XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL
@@ -38,11 +40,11 @@ class XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL
         
         IMPL( void );
         IMPL( const std::string & path );
+        IMPL( IBMFF::BinaryStream & stream, uint64_t length );
         IMPL( const IMPL & o );
         ~IMPL( void );
         
-        std::ifstream _stream;
-        std::string   _path;
+        std::vector< uint8_t > _bytes;
 };
 
 #define XS_PIMPL_CLASS IBMFF::BinaryStream
@@ -56,13 +58,21 @@ namespace IBMFF
     BinaryStream::BinaryStream( std::string path ): XS::PIMPL::Object< BinaryStream >( path )
     {}
     
+    BinaryStream::BinaryStream( BinaryStream & stream, uint64_t length ): XS::PIMPL::Object< BinaryStream >( stream, length )
+    {}
+    
+    bool BinaryStream::HasBytesAvailable( void ) const
+    {
+        return this->impl->_bytes.size() > 0;
+    }
+    
     uint8_t BinaryStream::ReadUnsignedChar( void )
     {
         uint8_t n;
         
         n = 0;
         
-        this->Read( reinterpret_cast< char * >( &n ), 1 );
+        this->Read( reinterpret_cast< uint8_t * >( &n ), 1 );
         
         return n;
     }
@@ -73,7 +83,7 @@ namespace IBMFF
         
         n = 0;
         
-        this->Read( reinterpret_cast< char * >( &n ), 1 );
+        this->Read( reinterpret_cast< uint8_t * >( &n ), 1 );
         
         return n;
     }
@@ -84,7 +94,7 @@ namespace IBMFF
         
         n = 0;
         
-        this->Read( reinterpret_cast< char * >( &n ), 2 );
+        this->Read( reinterpret_cast< uint8_t * >( &n ), 2 );
         
         return n;
     }
@@ -95,7 +105,7 @@ namespace IBMFF
         
         n = 0;
         
-        this->Read( reinterpret_cast< char * >( &n ), 2 );
+        this->Read( reinterpret_cast< uint8_t * >( &n ), 2 );
         
         return n;
     }
@@ -110,7 +120,7 @@ namespace IBMFF
         c[ 0 ] = 0;
         c[ 1 ] = 0;
         
-        this->Read( reinterpret_cast< char * >( c ), 2 );
+        this->Read( reinterpret_cast< uint8_t * >( c ), 2 );
         
         n1 = static_cast< uint16_t >( c[ 0 ] );
         n2 = static_cast< uint16_t >( c[ 1 ] );
@@ -131,7 +141,7 @@ namespace IBMFF
         c[ 0 ] = 0;
         c[ 1 ] = 0;
         
-        this->Read( reinterpret_cast< char * >( c ), 2 );
+        this->Read( reinterpret_cast< uint8_t * >( c ), 2 );
         
         n1 = static_cast< uint16_t >( c[ 1 ] );
         n2 = static_cast< uint16_t >( c[ 0 ] );
@@ -148,7 +158,7 @@ namespace IBMFF
         
         n = 0;
         
-        this->Read( reinterpret_cast< char * >( &n ), 4 );
+        this->Read( reinterpret_cast< uint8_t * >( &n ), 4 );
         
         return n;
     }
@@ -159,7 +169,7 @@ namespace IBMFF
         
         n = 0;
         
-        this->Read( reinterpret_cast< char * >( &n ), 4 );
+        this->Read( reinterpret_cast< uint8_t * >( &n ), 4 );
         
         return n;
     }
@@ -178,7 +188,7 @@ namespace IBMFF
         c[ 2 ] = 0;
         c[ 3 ] = 0;
         
-        this->Read( reinterpret_cast< char * >( c ), 4 );
+        this->Read( reinterpret_cast< uint8_t * >( c ), 4 );
         
         n1 = static_cast< uint32_t >( c[ 0 ] );
         n2 = static_cast< uint32_t >( c[ 1 ] );
@@ -207,7 +217,7 @@ namespace IBMFF
         c[ 2 ] = 0;
         c[ 3 ] = 0;
         
-        this->Read( reinterpret_cast< char * >( c ), 4 );
+        this->Read( reinterpret_cast< uint8_t * >( c ), 4 );
         
         n1 = static_cast< uint32_t >( c[ 3 ] );
         n2 = static_cast< uint32_t >( c[ 2 ] );
@@ -228,7 +238,7 @@ namespace IBMFF
         
         n = 0;
         
-        this->Read( reinterpret_cast< char * >( &n ), 8 );
+        this->Read( reinterpret_cast< uint8_t * >( &n ), 8 );
         
         return n;
     }
@@ -239,7 +249,7 @@ namespace IBMFF
         
         n = 0;
         
-        this->Read( reinterpret_cast< char * >( &n ), 8 );
+        this->Read( reinterpret_cast< uint8_t * >( &n ), 8 );
         
         return n;
     }
@@ -266,7 +276,7 @@ namespace IBMFF
         c[ 6 ] = 0;
         c[ 7 ] = 0;
         
-        this->Read( reinterpret_cast< char * >( c ), 8 );
+        this->Read( reinterpret_cast< uint8_t * >( c ), 8 );
         
         n1 = static_cast< uint64_t >( c[ 0 ] );
         n2 = static_cast< uint64_t >( c[ 1 ] );
@@ -311,7 +321,7 @@ namespace IBMFF
         c[ 6 ] = 0;
         c[ 7 ] = 0;
         
-        this->Read( reinterpret_cast< char * >( c ), 8 );
+        this->Read( reinterpret_cast< uint8_t * >( c ), 8 );
         
         n1 = static_cast< uint64_t >( c[ 7 ] );
         n2 = static_cast< uint64_t >( c[ 6 ] );
@@ -380,6 +390,15 @@ namespace IBMFF
         return integer + fractional;
     }
     
+    std::string BinaryStream::ReadString( uint64_t length )
+    {
+        std::string s( reinterpret_cast< const char * >( &( this->impl->_bytes[ 0 ] ) ), length );
+        
+        this->DeleteBytes( length );
+        
+        return s;
+    }
+    
     std::string BinaryStream::ReadNULLTerminatedString( void )
     {
         char        c;
@@ -389,7 +408,7 @@ namespace IBMFF
         {
             c = 0;
             
-            this->Read( &c, 1 );
+            this->Read( reinterpret_cast< uint8_t * >( &c ), 1 );
             
             if( c == 0 )
             {
@@ -402,138 +421,65 @@ namespace IBMFF
         return s;
     }
     
-    bool BinaryStream::IsGood( void ) const
+    Matrix BinaryStream::ReadMatrix( void )
     {
-        return this->impl->_stream.good();
+        return Matrix
+        (
+            this->ReadBigEndianUnsignedInteger(),
+            this->ReadBigEndianUnsignedInteger(),
+            this->ReadBigEndianUnsignedInteger(),
+            this->ReadBigEndianUnsignedInteger(),
+            this->ReadBigEndianUnsignedInteger(),
+            this->ReadBigEndianUnsignedInteger(),
+            this->ReadBigEndianUnsignedInteger(),
+            this->ReadBigEndianUnsignedInteger(),
+            this->ReadBigEndianUnsignedInteger()
+        );
     }
     
-    bool BinaryStream::IsEOF( void ) const
+    void BinaryStream::Read( uint8_t * buf, uint64_t length )
     {
-        return this->impl->_stream.eof();
+        memcpy( static_cast< void * >( buf ), static_cast< const void * >( &( this->impl->_bytes[ 0 ] ) ), length );
+        this->DeleteBytes( length );
     }
     
-    bool BinaryStream::IsFail( void ) const
+    void BinaryStream::DeleteBytes( uint64_t length )
     {
-        return this->impl->_stream.fail();
-    }
-    
-    bool BinaryStream::IsBad( void ) const
-    {
-        return this->impl->_stream.bad();
-    }
-    
-    int BinaryStream::Peek( void )
-    {
-        return this->impl->_stream.peek();
-    }
-    
-    int BinaryStream::Get( void )
-    {
-        return this->impl->_stream.get();
-    }
-    
-    int BinaryStream::Sync( void )
-    {
-        return this->impl->_stream.sync();
-    }
-    
-    std::streampos BinaryStream::TellG( void )
-    {
-        return this->impl->_stream.tellg();
-    }
-    
-    std::streamsize BinaryStream::ReadSome( char * s, std::streamsize n )
-    {
-        return this->impl->_stream.readsome( s, n );
-    }
-    
-    std::streamsize BinaryStream::GCount( void ) const
-    {
-        return this->impl->_stream.gcount();
-    }
-    
-    std::istream & BinaryStream::Get( char & c )
-    {
-        return this->impl->_stream.get( c );
-    }
-    
-    std::istream & BinaryStream::Get( char * s, std::streamsize n )
-    {
-        return this->impl->_stream.get( s, n );
-    }
-    
-    std::istream & BinaryStream::Get( char * s, std::streamsize n, char delim )
-    {
-        return this->impl->_stream.get( s, n, delim );
-    }
-    
-    std::istream & BinaryStream::Get( std::streambuf & sb )
-    {
-        return this->impl->_stream.get( sb );
-    }
-    
-    std::istream & BinaryStream::Get( std::streambuf & sb, char delim )
-    {
-        return this->impl->_stream.get( sb, delim );
-    }
-    
-    std::istream & BinaryStream::GetLine( char * s, std::streamsize n )
-    {
-        return this->impl->_stream.getline( s, n );
-    }
-    
-    std::istream & BinaryStream::GetLine( char * s, std::streamsize n, char delim )
-    {
-        return this->impl->_stream.getline( s, n, delim );
-    }
-    
-    std::istream & BinaryStream::Ignore( std::streamsize n, int delim )
-    {
-        return this->impl->_stream.ignore( n, delim );
-    }
-    
-    std::istream & BinaryStream::Read( char * s, std::streamsize n )
-    {
-        return this->impl->_stream.read( s, n );
-    }
-    
-    std::istream & BinaryStream::PutBack( char c )
-    {
-        return this->impl->_stream.putback( c );
-    }
-    
-    std::istream & BinaryStream::Unget( void )
-    {
-        return this->impl->_stream.unget();
-    }
-    
-    std::istream & BinaryStream::SeekG( std::streampos pos )
-    {
-        return this->impl->_stream.seekg( pos );
-    }
-    
-    std::istream & BinaryStream::SeekG( std::streamoff off, std::ios_base::seekdir dir )
-    {
-        return this->impl->_stream.seekg( off, dir );
+        std::vector< uint8_t >( this->impl->_bytes.begin() + static_cast< std::vector< uint8_t >::difference_type >( length ), this->impl->_bytes.end() ).swap( this->impl->_bytes );
     }
 }
 
 XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( void )
 {}
 
-XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const std::string & path ):
-    _path( path )
+XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const std::string & path )
 {
-    this->_stream.open( this->_path, std::ios::binary | std::ios::in );
+    std::ifstream           stream;
+    std::ifstream::pos_type length;
+    
+    stream.open( path, std::ios::binary | std::ios::ate );
+    
+    if( stream.good() == false )
+    {
+        return;
+    }
+    
+    length       = stream.tellg();
+    this->_bytes = std::vector< uint8_t >( static_cast< std::size_t >( length ) );
+    
+    stream.seekg( 0, std::ios::beg );
+    stream.read( reinterpret_cast< char * >( &( this->_bytes[ 0 ] ) ), length );
 }
 
-XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const IMPL & o ): IMPL( o._path )
+XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( IBMFF::BinaryStream & stream, uint64_t length ):
+    _bytes( length )
+{
+    stream.Read( &( this->_bytes[ 0 ] ), length );
+}
+
+XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const IMPL & o ):
+    _bytes( o._bytes )
 {}
 
 XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::~IMPL( void )
-{
-    if( this->_stream.is_open() )
-    {
-        this->_stream.close();
-    }
-}
+{}
