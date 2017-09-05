@@ -9,14 +9,25 @@
 /* Begin PBXBuildFile section */
 		0515C8C31F2A7807003B8594 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0515C8C11F2A7807003B8594 /* File.cpp */; };
 		0515C8C41F2A7807003B8594 /* File.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0515C8C21F2A7807003B8594 /* File.hpp */; };
+		051F4D391F5DDCF800E6E12C /* BinaryStream.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 051F4D381F5DDCF800E6E12C /* BinaryStream.hpp */; };
+		051F4D3B1F5DDCFE00E6E12C /* BinaryStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D3A1F5DDCFE00E6E12C /* BinaryStream.cpp */; };
+		051F4D411F5DF98800E6E12C /* MOV.MOV in CopyFiles */ = {isa = PBXBuildFile; fileRef = 051F4D401F5DF97900E6E12C /* MOV.MOV */; };
+		051F4D431F5E01C200E6E12C /* FTYP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D421F5E01C200E6E12C /* FTYP.cpp */; };
+		051F4D451F5E01C800E6E12C /* FTYP.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 051F4D441F5E01C800E6E12C /* FTYP.hpp */; };
+		051F4D471F5E0AC800E6E12C /* MVHD.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 051F4D461F5E0AC400E6E12C /* MVHD.hpp */; };
+		051F4D491F5E0AD500E6E12C /* MVHD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D481F5E0AD500E6E12C /* MVHD.cpp */; };
+		051F4D4C1F5E0DD800E6E12C /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D4B1F5E0DD800E6E12C /* Matrix.cpp */; };
+		059605981F5DC43B0005F8C9 /* ContainerBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059605931F5DC4130005F8C9 /* ContainerBox.hpp */; };
+		059605991F5DC43B0005F8C9 /* FullBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059605971F5DC4300005F8C9 /* FullBox.hpp */; };
+		0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0515C8C01F2A77C4003B8594 /* IBMFF.hpp */; };
+		0596059C1F5DC4CE0005F8C9 /* ContainerBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */; };
+		0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059D1F5DC4D50005F8C9 /* FullBox.cpp */; };
 		05DA96061F2A7D5B005F46DB /* libIBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libIBMFF.a */; };
 		05DA96121F2A7DC3005F46DB /* GoogleMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A4111A1F2A7D2E002B1A79 /* GoogleMock.framework */; };
 		05DA96141F2A7DD4005F46DB /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DA96131F2A7DD4005F46DB /* Parser.cpp */; };
 		05F471E21F2B5CE500738744 /* Parser.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05F471DC1F2B5CE500738744 /* Parser.hpp */; };
 		05F471E31F2B5CE500738744 /* Box.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05F471DD1F2B5CE500738744 /* Box.hpp */; };
-		05F471E41F2B5CE500738744 /* BinaryStream.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05F471DE1F2B5CE500738744 /* BinaryStream.hpp */; };
 		05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E51F2B5CEE00738744 /* Parser.cpp */; };
-		05F471E91F2B5CEF00738744 /* BinaryStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E61F2B5CEF00738744 /* BinaryStream.cpp */; };
 		05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E71F2B5CEF00738744 /* Box.cpp */; };
 		05F471F21F2B5E6B00738744 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471F11F2B5E6B00738744 /* main.cpp */; };
 		05F471F81F2B5F0D00738744 /* libIBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libIBMFF.a */; };
@@ -83,6 +94,7 @@
 			dstSubfolderSpec = 16;
 			files = (
 				05F471FA1F2B62E700738744 /* IMG.HEIC in CopyFiles */,
+				051F4D411F5DF98800E6E12C /* MOV.MOV in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,15 +105,27 @@
 		0515C8C01F2A77C4003B8594 /* IBMFF.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IBMFF.hpp; sourceTree = "<group>"; };
 		0515C8C11F2A7807003B8594 /* File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = File.cpp; sourceTree = "<group>"; };
 		0515C8C21F2A7807003B8594 /* File.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = File.hpp; sourceTree = "<group>"; };
+		051F4D1A1F5DD03700E6E12C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		051F4D381F5DDCF800E6E12C /* BinaryStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BinaryStream.hpp; sourceTree = "<group>"; };
+		051F4D3A1F5DDCFE00E6E12C /* BinaryStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryStream.cpp; sourceTree = "<group>"; };
+		051F4D401F5DF97900E6E12C /* MOV.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = MOV.MOV; sourceTree = "<group>"; };
+		051F4D421F5E01C200E6E12C /* FTYP.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FTYP.cpp; sourceTree = "<group>"; };
+		051F4D441F5E01C800E6E12C /* FTYP.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FTYP.hpp; sourceTree = "<group>"; };
+		051F4D461F5E0AC400E6E12C /* MVHD.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MVHD.hpp; sourceTree = "<group>"; };
+		051F4D481F5E0AD500E6E12C /* MVHD.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MVHD.cpp; sourceTree = "<group>"; };
+		051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
+		051F4D4B1F5E0DD800E6E12C /* Matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
+		059605931F5DC4130005F8C9 /* ContainerBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContainerBox.hpp; sourceTree = "<group>"; };
+		059605971F5DC4300005F8C9 /* FullBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FullBox.hpp; sourceTree = "<group>"; };
+		0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContainerBox.cpp; sourceTree = "<group>"; };
+		0596059D1F5DC4D50005F8C9 /* FullBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FullBox.cpp; sourceTree = "<group>"; };
 		05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GoogleMock.xcodeproj; path = "Submodules/gmock-xcode/GoogleMock.xcodeproj"; sourceTree = "<group>"; };
 		05DA96011F2A7D5B005F46DB /* IBMFF-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IBMFF-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DA96051F2A7D5B005F46DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05DA96131F2A7DD4005F46DB /* Parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
 		05F471DC1F2B5CE500738744 /* Parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Parser.hpp; sourceTree = "<group>"; };
 		05F471DD1F2B5CE500738744 /* Box.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box.hpp; sourceTree = "<group>"; };
-		05F471DE1F2B5CE500738744 /* BinaryStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BinaryStream.hpp; sourceTree = "<group>"; };
 		05F471E51F2B5CEE00738744 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
-		05F471E61F2B5CEF00738744 /* BinaryStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryStream.cpp; sourceTree = "<group>"; };
 		05F471E71F2B5CEF00738744 /* Box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
 		05F471EF1F2B5E6B00738744 /* IBMFF-Example */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "IBMFF-Example"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05F471F11F2B5E6B00738744 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -140,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */,
+				051F4D1A1F5DD03700E6E12C /* README.md */,
 				0515C8B11F2A71A8003B8594 /* IBMFF */,
 				05DA96021F2A7D5B005F46DB /* IBMFF-Tests */,
 				05F471F01F2B5E6B00738744 /* IBMFF-Example */,
@@ -177,9 +202,14 @@
 		0515C8BE1F2A71E7003B8594 /* source */ = {
 			isa = PBXGroup;
 			children = (
-				05F471E61F2B5CEF00738744 /* BinaryStream.cpp */,
 				05F471E71F2B5CEF00738744 /* Box.cpp */,
+				0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */,
+				051F4D3A1F5DDCFE00E6E12C /* BinaryStream.cpp */,
 				0515C8C11F2A7807003B8594 /* File.cpp */,
+				051F4D421F5E01C200E6E12C /* FTYP.cpp */,
+				0596059D1F5DC4D50005F8C9 /* FullBox.cpp */,
+				051F4D4B1F5E0DD800E6E12C /* Matrix.cpp */,
+				051F4D481F5E0AD500E6E12C /* MVHD.cpp */,
 				05F471E51F2B5CEE00738744 /* Parser.cpp */,
 			);
 			path = source;
@@ -188,10 +218,15 @@
 		0515C8BF1F2A7775003B8594 /* IBMFF */ = {
 			isa = PBXGroup;
 			children = (
-				05F471DE1F2B5CE500738744 /* BinaryStream.hpp */,
+				051F4D381F5DDCF800E6E12C /* BinaryStream.hpp */,
 				05F471DD1F2B5CE500738744 /* Box.hpp */,
+				059605931F5DC4130005F8C9 /* ContainerBox.hpp */,
 				0515C8C21F2A7807003B8594 /* File.hpp */,
+				051F4D441F5E01C800E6E12C /* FTYP.hpp */,
+				059605971F5DC4300005F8C9 /* FullBox.hpp */,
 				0515C8C01F2A77C4003B8594 /* IBMFF.hpp */,
+				051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */,
+				051F4D461F5E0AC400E6E12C /* MVHD.hpp */,
 				05F471DC1F2B5CE500738744 /* Parser.hpp */,
 			);
 			path = IBMFF;
@@ -221,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				05F471F91F2B620600738744 /* IMG.HEIC */,
+				051F4D401F5DF97900E6E12C /* MOV.MOV */,
 				05F471F11F2B5E6B00738744 /* main.cpp */,
 			);
 			path = "IBMFF-Example";
@@ -234,9 +270,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				05F471E31F2B5CE500738744 /* Box.hpp in Headers */,
+				051F4D451F5E01C800E6E12C /* FTYP.hpp in Headers */,
+				059605981F5DC43B0005F8C9 /* ContainerBox.hpp in Headers */,
+				051F4D391F5DDCF800E6E12C /* BinaryStream.hpp in Headers */,
+				051F4D471F5E0AC800E6E12C /* MVHD.hpp in Headers */,
+				0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */,
 				0515C8C41F2A7807003B8594 /* File.hpp in Headers */,
+				059605991F5DC43B0005F8C9 /* FullBox.hpp in Headers */,
 				05F471E21F2B5CE500738744 /* Parser.hpp in Headers */,
-				05F471E41F2B5CE500738744 /* BinaryStream.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,9 +429,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				051F4D491F5E0AD500E6E12C /* MVHD.cpp in Sources */,
+				0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */,
 				05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */,
+				051F4D4C1F5E0DD800E6E12C /* Matrix.cpp in Sources */,
+				0596059C1F5DC4CE0005F8C9 /* ContainerBox.cpp in Sources */,
 				05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */,
-				05F471E91F2B5CEF00738744 /* BinaryStream.cpp in Sources */,
+				051F4D431F5E01C200E6E12C /* FTYP.cpp in Sources */,
+				051F4D3B1F5DDCFE00E6E12C /* BinaryStream.cpp in Sources */,
 				0515C8C31F2A7807003B8594 /* File.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,7 +510,7 @@
 				CLANG_ANALYZER_SECURITY_KEYCHAIN_API = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_CODE_COVERAGE = YES;
+				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_MODULE_DEBUGGING = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -519,8 +565,8 @@
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
-				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (

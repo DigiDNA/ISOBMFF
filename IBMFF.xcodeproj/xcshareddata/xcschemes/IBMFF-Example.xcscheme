@@ -68,6 +68,10 @@
             argument = "$(BUILT_PRODUCTS_DIR)/IMG.HEIC"
             isEnabled = "YES">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "$(BUILT_PRODUCTS_DIR)/MOV.MOV"
+            isEnabled = "YES">
+         </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
