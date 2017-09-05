@@ -78,7 +78,7 @@ int main( int argc, const char * argv[] )
                    ftyp == nullptr
                 || meta == nullptr
                 || mdat == nullptr
-                || ftyp->GetMajorBrand() == "heic"
+                || ftyp->GetMajorBrand() != "heic"
             )
             {
                 continue;
