@@ -65,11 +65,11 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "$(BUILT_PRODUCTS_DIR)/IMG.HEIC"
+            argument = "$(BUILT_PRODUCTS_DIR)/MOV.MOV"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "$(BUILT_PRODUCTS_DIR)/MOV.MOV"
+            argument = "$(BUILT_PRODUCTS_DIR)/IMG.HEIC"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
