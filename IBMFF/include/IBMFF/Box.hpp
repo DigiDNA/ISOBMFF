@@ -1,7 +1,7 @@
 /*******************************************************************************
  * The MIT License (MIT)
  * 
- * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com
+ * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com / www.imazing.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,21 +24,36 @@
 
 /*!
  * @header      Box.hpp
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
+ * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
 #ifndef IBMFF_BOX_HPP
 #define IBMFF_BOX_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <IBMFF/BinaryStream.hpp>
+#include <string>
+#include <ostream>
+#include <cstdint>
 
 namespace IBMFF
 {
-    class Box: XS::PIMPL::Object< Box >
+    class Parser;
+    
+    class Box: public XS::PIMPL::Object< Box >
     {
         public:
             
             using XS::PIMPL::Object< Box >::impl;
+            
+            Box( const std::string & name );
+            
+            std::string GetName( void ) const;
+            
+            virtual void ReadData( const Parser & parser, BinaryStream & stream );
+            virtual void WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
+            
+            friend std::ostream & operator << ( std::ostream & os, const Box & box );
     };
 }
 
