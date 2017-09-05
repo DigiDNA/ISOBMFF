@@ -1,7 +1,7 @@
 /*******************************************************************************
  * The MIT License (MIT)
  * 
- * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com
+ * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com / www.imazing.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,16 +24,21 @@
 
 /*!
  * @header      IBMFF.hpp
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
+ * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
 #ifndef IBMFF_HPP
 #define IBMFF_HPP
 
-#include <IBMFF/BinaryStream.hpp>
 #include <IBMFF/Parser.hpp>
-#include <IBMFF/File.hpp>
+#include <IBMFF/BinaryStream.hpp>
 #include <IBMFF/Box.hpp>
+#include <IBMFF/FullBox.hpp>
+#include <IBMFF/ContainerBox.hpp>
+#include <IBMFF/File.hpp>
+#include <IBMFF/Matrix.hpp>
+#include <IBMFF/FTYP.hpp>
+#include <IBMFF/MVHD.hpp>
 
 #endif /* IBMFF_HPP */
 
