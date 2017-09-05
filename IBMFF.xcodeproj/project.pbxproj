@@ -22,6 +22,9 @@
 		0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0515C8C01F2A77C4003B8594 /* IBMFF.hpp */; };
 		0596059C1F5DC4CE0005F8C9 /* ContainerBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */; };
 		0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059D1F5DC4D50005F8C9 /* FullBox.cpp */; };
+		05A5A7691F5EAFA000D16AD9 /* Matrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */; };
+		05A5A76A1F5EAFA000D16AD9 /* META.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05A5A7651F5EAF9A00D16AD9 /* META.hpp */; };
+		05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05A5A76B1F5EAFAE00D16AD9 /* META.cpp */; };
 		05DA96061F2A7D5B005F46DB /* libIBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libIBMFF.a */; };
 		05DA96121F2A7DC3005F46DB /* GoogleMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A4111A1F2A7D2E002B1A79 /* GoogleMock.framework */; };
 		05DA96141F2A7DD4005F46DB /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DA96131F2A7DD4005F46DB /* Parser.cpp */; };
@@ -120,6 +123,8 @@
 		0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContainerBox.cpp; sourceTree = "<group>"; };
 		0596059D1F5DC4D50005F8C9 /* FullBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FullBox.cpp; sourceTree = "<group>"; };
 		05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GoogleMock.xcodeproj; path = "Submodules/gmock-xcode/GoogleMock.xcodeproj"; sourceTree = "<group>"; };
+		05A5A7651F5EAF9A00D16AD9 /* META.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = META.hpp; sourceTree = "<group>"; };
+		05A5A76B1F5EAFAE00D16AD9 /* META.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = META.cpp; sourceTree = "<group>"; };
 		05DA96011F2A7D5B005F46DB /* IBMFF-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IBMFF-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DA96051F2A7D5B005F46DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05DA96131F2A7DD4005F46DB /* Parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
@@ -209,6 +214,7 @@
 				051F4D421F5E01C200E6E12C /* FTYP.cpp */,
 				0596059D1F5DC4D50005F8C9 /* FullBox.cpp */,
 				051F4D4B1F5E0DD800E6E12C /* Matrix.cpp */,
+				05A5A76B1F5EAFAE00D16AD9 /* META.cpp */,
 				051F4D481F5E0AD500E6E12C /* MVHD.cpp */,
 				05F471E51F2B5CEE00738744 /* Parser.cpp */,
 			);
@@ -226,6 +232,7 @@
 				059605971F5DC4300005F8C9 /* FullBox.hpp */,
 				0515C8C01F2A77C4003B8594 /* IBMFF.hpp */,
 				051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */,
+				05A5A7651F5EAF9A00D16AD9 /* META.hpp */,
 				051F4D461F5E0AC400E6E12C /* MVHD.hpp */,
 				05F471DC1F2B5CE500738744 /* Parser.hpp */,
 			);
@@ -274,10 +281,12 @@
 				059605981F5DC43B0005F8C9 /* ContainerBox.hpp in Headers */,
 				051F4D391F5DDCF800E6E12C /* BinaryStream.hpp in Headers */,
 				051F4D471F5E0AC800E6E12C /* MVHD.hpp in Headers */,
+				05A5A76A1F5EAFA000D16AD9 /* META.hpp in Headers */,
 				0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */,
 				0515C8C41F2A7807003B8594 /* File.hpp in Headers */,
 				059605991F5DC43B0005F8C9 /* FullBox.hpp in Headers */,
 				05F471E21F2B5CE500738744 /* Parser.hpp in Headers */,
+				05A5A7691F5EAFA000D16AD9 /* Matrix.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +442,7 @@
 				0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */,
 				05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */,
 				051F4D4C1F5E0DD800E6E12C /* Matrix.cpp in Sources */,
+				05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */,
 				0596059C1F5DC4CE0005F8C9 /* ContainerBox.cpp in Sources */,
 				05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */,
 				051F4D431F5E01C200E6E12C /* FTYP.cpp in Sources */,

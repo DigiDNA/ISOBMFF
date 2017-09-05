@@ -443,6 +443,11 @@ namespace IBMFF
         this->DeleteBytes( length );
     }
     
+    void BinaryStream::Get( uint8_t * buf, uint64_t pos, uint64_t length )
+    {
+        memcpy( static_cast< void * >( buf ), static_cast< const void * >( &( this->impl->_bytes[ pos ] ) ), length );
+    }
+    
     void BinaryStream::DeleteBytes( uint64_t length )
     {
         std::vector< uint8_t >( this->impl->_bytes.begin() + static_cast< std::vector< uint8_t >::difference_type >( length ), this->impl->_bytes.end() ).swap( this->impl->_bytes );

@@ -23,27 +23,27 @@
  ******************************************************************************/
 
 /*!
- * @header      ContainerBox.hpp
+ * @header      META.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef IBMFF_CONTAINER_BOX_HPP
-#define IBMFF_CONTAINER_BOX_HPP
+#ifndef IBMFF_META_HPP
+#define IBMFF_META_HPP
 
 #include <XS/PIMPL/Object.hpp>
-#include <IBMFF/Box.hpp>
+#include <IBMFF/FullBox.hpp>
 #include <vector>
 #include <memory>
-#include <ostream>
 
 namespace IBMFF
 {
-    class ContainerBox: public Box, public XS::PIMPL::Object< ContainerBox >
+    class META: public FullBox, public XS::PIMPL::Object< META >
     {
         public:
             
-            using XS::PIMPL::Object< ContainerBox >::impl;
-            using Box::Box;
+            using XS::PIMPL::Object< META >::impl;
+            
+            META( void );
             
             void ReadData( const Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
@@ -53,4 +53,4 @@ namespace IBMFF
     };
 }
 
-#endif /* IBMFF_CONTAINER_BOX_HPP */
+#endif /* IBMFF_META_HPP */

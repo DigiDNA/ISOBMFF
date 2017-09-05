@@ -32,6 +32,7 @@
 #include <IBMFF/BinaryStream.hpp>
 #include <IBMFF/FTYP.hpp>
 #include <IBMFF/MVHD.hpp>
+#include <IBMFF/META.hpp>
 #include <map>
 #include <stdexcept>
 
@@ -164,4 +165,5 @@ void XS::PIMPL::Object< IBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     
     this->RegisterBox( "ftyp", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::FTYP >(); } );
     this->RegisterBox( "mvhd", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::MVHD >(); } );
+    this->RegisterBox( "meta", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::META >(); } );
 }

@@ -77,6 +77,7 @@ namespace IBMFF
             Matrix ReadMatrix( void );
             
             void Read( uint8_t * buf, uint64_t length );
+            void Get( uint8_t * buf, uint64_t pos, uint64_t length );
             void DeleteBytes( uint64_t length );
     };
 }
