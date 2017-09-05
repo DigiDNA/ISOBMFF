@@ -23,30 +23,62 @@
  ******************************************************************************/
 
 /*!
- * @header      IBMFF.hpp
+ * @file        ILOC.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef IBMFF_HPP
-#define IBMFF_HPP
-
-#include <IBMFF/Parser.hpp>
-#include <IBMFF/BinaryStream.hpp>
-#include <IBMFF/Box.hpp>
-#include <IBMFF/FullBox.hpp>
-#include <IBMFF/ContainerBox.hpp>
-#include <IBMFF/File.hpp>
-#include <IBMFF/Matrix.hpp>
-#include <IBMFF/FTYP.hpp>
-#include <IBMFF/MVHD.hpp>
-#include <IBMFF/META.hpp>
-#include <IBMFF/HDLR.hpp>
-#include <IBMFF/PITM.hpp>
-#include <IBMFF/IINF.hpp>
-#include <IBMFF/DREF.hpp>
-#include <IBMFF/IDAT.hpp>
 #include <IBMFF/ILOC.hpp>
-#include <IBMFF/IREF.hpp>
+#include <IBMFF/Parser.hpp>
+#include <cstdint>
 
-#endif /* IBMFF_HPP */
+template<>
+class XS::PIMPL::Object< IBMFF::ILOC >::IMPL
+{
+    public:
+        
+        IMPL( void );
+        IMPL( const IMPL & o );
+        ~IMPL( void );
+};
+
+#define XS_PIMPL_CLASS IBMFF::ILOC
+#include <XS/PIMPL/Object-IMPL.hpp>
+
+namespace IBMFF
+{
+    ILOC::ILOC( void ): IBMFF::FullBox( "iloc" )
+    {}
+    
+    void ILOC::ReadData( Parser & parser, BinaryStream & stream )
+    {
+        FullBox::ReadData( parser, stream );
+        
+        if( this->GetVersion() == 0 )
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
+    
+    void ILOC::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    {
+        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        
+        FullBox::WriteDescription( os, indentLevel );
+    }
+}
+
+XS::PIMPL::Object< IBMFF::ILOC >::IMPL::IMPL( void )
+{}
+
+XS::PIMPL::Object< IBMFF::ILOC >::IMPL::IMPL( const IMPL & o )
+{
+    ( void )o;
+}
+
+XS::PIMPL::Object< IBMFF::ILOC >::IMPL::~IMPL( void )
+{}
 

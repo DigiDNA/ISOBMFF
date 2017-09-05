@@ -35,6 +35,11 @@
 #include <IBMFF/META.hpp>
 #include <IBMFF/HDLR.hpp>
 #include <IBMFF/PITM.hpp>
+#include <IBMFF/IINF.hpp>
+#include <IBMFF/DREF.hpp>
+#include <IBMFF/IDAT.hpp>
+#include <IBMFF/ILOC.hpp>
+#include <IBMFF/IREF.hpp>
 #include <map>
 #include <stdexcept>
 
@@ -177,10 +182,16 @@ void XS::PIMPL::Object< IBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterContainerBox( "skip" );
     this->RegisterContainerBox( "meco" );
     this->RegisterContainerBox( "mere" );
+    this->RegisterContainerBox( "dinf" );
     
     this->RegisterBox( "ftyp", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::FTYP >(); } );
     this->RegisterBox( "mvhd", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::MVHD >(); } );
     this->RegisterBox( "meta", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::META >(); } );
     this->RegisterBox( "hdlr", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::HDLR >(); } );
     this->RegisterBox( "pitm", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::PITM >(); } );
+    this->RegisterBox( "iinf", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::IINF >(); } );
+    this->RegisterBox( "dref", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::DREF >(); } );
+    this->RegisterBox( "idat", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::IDAT >(); } );
+    this->RegisterBox( "iloc", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::ILOC >(); } );
+    this->RegisterBox( "iref", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::IREF >(); } );
 }

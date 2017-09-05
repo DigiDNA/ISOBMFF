@@ -19,6 +19,16 @@
 		051F4D4C1F5E0DD800E6E12C /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D4B1F5E0DD800E6E12C /* Matrix.cpp */; };
 		057280741F5ED7C500F02C27 /* PITM.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 057280701F5ED7C200F02C27 /* PITM.hpp */; };
 		057280761F5ED7CE00F02C27 /* PITM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280751F5ED7CE00F02C27 /* PITM.cpp */; };
+		057280781F5ED9E800F02C27 /* IINF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 057280771F5ED9E500F02C27 /* IINF.hpp */; };
+		0572807A1F5ED9FF00F02C27 /* IINF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280791F5ED9FE00F02C27 /* IINF.cpp */; };
+		0572807F1F5EDBC700F02C27 /* IDAT.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0572807B1F5EDBC700F02C27 /* IDAT.hpp */; };
+		057280801F5EDBC700F02C27 /* ILOC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0572807C1F5EDBC700F02C27 /* ILOC.hpp */; };
+		057280811F5EDBC700F02C27 /* DREF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0572807D1F5EDBC700F02C27 /* DREF.hpp */; };
+		057280821F5EDBC700F02C27 /* IREF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0572807E1F5EDBC700F02C27 /* IREF.hpp */; };
+		057280871F5EDBCF00F02C27 /* IDAT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280831F5EDBCE00F02C27 /* IDAT.cpp */; };
+		057280881F5EDBCF00F02C27 /* ILOC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280841F5EDBCE00F02C27 /* ILOC.cpp */; };
+		057280891F5EDBCF00F02C27 /* IREF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280851F5EDBCF00F02C27 /* IREF.cpp */; };
+		0572808A1F5EDBCF00F02C27 /* DREF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280861F5EDBCF00F02C27 /* DREF.cpp */; };
 		059605981F5DC43B0005F8C9 /* ContainerBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059605931F5DC4130005F8C9 /* ContainerBox.hpp */; };
 		059605991F5DC43B0005F8C9 /* FullBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059605971F5DC4300005F8C9 /* FullBox.hpp */; };
 		0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0515C8C01F2A77C4003B8594 /* IBMFF.hpp */; };
@@ -124,6 +134,16 @@
 		051F4D4B1F5E0DD800E6E12C /* Matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
 		057280701F5ED7C200F02C27 /* PITM.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PITM.hpp; sourceTree = "<group>"; };
 		057280751F5ED7CE00F02C27 /* PITM.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PITM.cpp; sourceTree = "<group>"; };
+		057280771F5ED9E500F02C27 /* IINF.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IINF.hpp; sourceTree = "<group>"; };
+		057280791F5ED9FE00F02C27 /* IINF.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IINF.cpp; sourceTree = "<group>"; };
+		0572807B1F5EDBC700F02C27 /* IDAT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IDAT.hpp; sourceTree = "<group>"; };
+		0572807C1F5EDBC700F02C27 /* ILOC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ILOC.hpp; sourceTree = "<group>"; };
+		0572807D1F5EDBC700F02C27 /* DREF.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DREF.hpp; sourceTree = "<group>"; };
+		0572807E1F5EDBC700F02C27 /* IREF.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IREF.hpp; sourceTree = "<group>"; };
+		057280831F5EDBCE00F02C27 /* IDAT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IDAT.cpp; sourceTree = "<group>"; };
+		057280841F5EDBCE00F02C27 /* ILOC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ILOC.cpp; sourceTree = "<group>"; };
+		057280851F5EDBCF00F02C27 /* IREF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IREF.cpp; sourceTree = "<group>"; };
+		057280861F5EDBCF00F02C27 /* DREF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DREF.cpp; sourceTree = "<group>"; };
 		059605931F5DC4130005F8C9 /* ContainerBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContainerBox.hpp; sourceTree = "<group>"; };
 		059605971F5DC4300005F8C9 /* FullBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FullBox.hpp; sourceTree = "<group>"; };
 		0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContainerBox.cpp; sourceTree = "<group>"; };
@@ -215,13 +235,18 @@
 		0515C8BE1F2A71E7003B8594 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				051F4D3A1F5DDCFE00E6E12C /* BinaryStream.cpp */,
 				05F471E71F2B5CEF00738744 /* Box.cpp */,
 				0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */,
-				051F4D3A1F5DDCFE00E6E12C /* BinaryStream.cpp */,
+				057280861F5EDBCF00F02C27 /* DREF.cpp */,
 				0515C8C11F2A7807003B8594 /* File.cpp */,
 				051F4D421F5E01C200E6E12C /* FTYP.cpp */,
 				0596059D1F5DC4D50005F8C9 /* FullBox.cpp */,
 				059DBACE1F5EBC1000B7A940 /* HDLR.cpp */,
+				057280831F5EDBCE00F02C27 /* IDAT.cpp */,
+				057280791F5ED9FE00F02C27 /* IINF.cpp */,
+				057280841F5EDBCE00F02C27 /* ILOC.cpp */,
+				057280851F5EDBCF00F02C27 /* IREF.cpp */,
 				051F4D4B1F5E0DD800E6E12C /* Matrix.cpp */,
 				05A5A76B1F5EAFAE00D16AD9 /* META.cpp */,
 				051F4D481F5E0AD500E6E12C /* MVHD.cpp */,
@@ -237,11 +262,16 @@
 				051F4D381F5DDCF800E6E12C /* BinaryStream.hpp */,
 				05F471DD1F2B5CE500738744 /* Box.hpp */,
 				059605931F5DC4130005F8C9 /* ContainerBox.hpp */,
+				0572807D1F5EDBC700F02C27 /* DREF.hpp */,
 				0515C8C21F2A7807003B8594 /* File.hpp */,
 				051F4D441F5E01C800E6E12C /* FTYP.hpp */,
 				059605971F5DC4300005F8C9 /* FullBox.hpp */,
 				059DBAD31F5EBC2000B7A940 /* HDLR.hpp */,
 				0515C8C01F2A77C4003B8594 /* IBMFF.hpp */,
+				0572807B1F5EDBC700F02C27 /* IDAT.hpp */,
+				057280771F5ED9E500F02C27 /* IINF.hpp */,
+				0572807C1F5EDBC700F02C27 /* ILOC.hpp */,
+				0572807E1F5EDBC700F02C27 /* IREF.hpp */,
 				051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */,
 				05A5A7651F5EAF9A00D16AD9 /* META.hpp */,
 				051F4D461F5E0AC400E6E12C /* MVHD.hpp */,
@@ -292,8 +322,13 @@
 				051F4D451F5E01C800E6E12C /* FTYP.hpp in Headers */,
 				059605981F5DC43B0005F8C9 /* ContainerBox.hpp in Headers */,
 				057280741F5ED7C500F02C27 /* PITM.hpp in Headers */,
+				057280821F5EDBC700F02C27 /* IREF.hpp in Headers */,
+				0572807F1F5EDBC700F02C27 /* IDAT.hpp in Headers */,
+				057280801F5EDBC700F02C27 /* ILOC.hpp in Headers */,
+				057280811F5EDBC700F02C27 /* DREF.hpp in Headers */,
 				051F4D391F5DDCF800E6E12C /* BinaryStream.hpp in Headers */,
 				059DBAD41F5EBC2300B7A940 /* HDLR.hpp in Headers */,
+				057280781F5ED9E800F02C27 /* IINF.hpp in Headers */,
 				051F4D471F5E0AC800E6E12C /* MVHD.hpp in Headers */,
 				05A5A76A1F5EAFA000D16AD9 /* META.hpp in Headers */,
 				0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */,
@@ -452,6 +487,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0572808A1F5EDBCF00F02C27 /* DREF.cpp in Sources */,
 				059DBAD21F5EBC1000B7A940 /* HDLR.cpp in Sources */,
 				051F4D491F5E0AD500E6E12C /* MVHD.cpp in Sources */,
 				0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */,
@@ -459,11 +495,15 @@
 				05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */,
 				051F4D4C1F5E0DD800E6E12C /* Matrix.cpp in Sources */,
 				05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */,
+				057280871F5EDBCF00F02C27 /* IDAT.cpp in Sources */,
+				0572807A1F5ED9FF00F02C27 /* IINF.cpp in Sources */,
+				057280881F5EDBCF00F02C27 /* ILOC.cpp in Sources */,
 				0596059C1F5DC4CE0005F8C9 /* ContainerBox.cpp in Sources */,
 				05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */,
 				051F4D431F5E01C200E6E12C /* FTYP.cpp in Sources */,
 				051F4D3B1F5DDCFE00E6E12C /* BinaryStream.cpp in Sources */,
 				0515C8C31F2A7807003B8594 /* File.cpp in Sources */,
+				057280891F5EDBCF00F02C27 /* IREF.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
