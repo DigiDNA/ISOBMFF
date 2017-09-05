@@ -22,6 +22,8 @@
 		0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0515C8C01F2A77C4003B8594 /* IBMFF.hpp */; };
 		0596059C1F5DC4CE0005F8C9 /* ContainerBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */; };
 		0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059D1F5DC4D50005F8C9 /* FullBox.cpp */; };
+		059DBAD21F5EBC1000B7A940 /* HDLR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 059DBACE1F5EBC1000B7A940 /* HDLR.cpp */; };
+		059DBAD41F5EBC2300B7A940 /* HDLR.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059DBAD31F5EBC2000B7A940 /* HDLR.hpp */; };
 		05A5A7691F5EAFA000D16AD9 /* Matrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */; };
 		05A5A76A1F5EAFA000D16AD9 /* META.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05A5A7651F5EAF9A00D16AD9 /* META.hpp */; };
 		05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05A5A76B1F5EAFAE00D16AD9 /* META.cpp */; };
@@ -122,6 +124,8 @@
 		059605971F5DC4300005F8C9 /* FullBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FullBox.hpp; sourceTree = "<group>"; };
 		0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContainerBox.cpp; sourceTree = "<group>"; };
 		0596059D1F5DC4D50005F8C9 /* FullBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FullBox.cpp; sourceTree = "<group>"; };
+		059DBACE1F5EBC1000B7A940 /* HDLR.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HDLR.cpp; sourceTree = "<group>"; };
+		059DBAD31F5EBC2000B7A940 /* HDLR.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HDLR.hpp; sourceTree = "<group>"; };
 		05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GoogleMock.xcodeproj; path = "Submodules/gmock-xcode/GoogleMock.xcodeproj"; sourceTree = "<group>"; };
 		05A5A7651F5EAF9A00D16AD9 /* META.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = META.hpp; sourceTree = "<group>"; };
 		05A5A76B1F5EAFAE00D16AD9 /* META.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = META.cpp; sourceTree = "<group>"; };
@@ -213,6 +217,7 @@
 				0515C8C11F2A7807003B8594 /* File.cpp */,
 				051F4D421F5E01C200E6E12C /* FTYP.cpp */,
 				0596059D1F5DC4D50005F8C9 /* FullBox.cpp */,
+				059DBACE1F5EBC1000B7A940 /* HDLR.cpp */,
 				051F4D4B1F5E0DD800E6E12C /* Matrix.cpp */,
 				05A5A76B1F5EAFAE00D16AD9 /* META.cpp */,
 				051F4D481F5E0AD500E6E12C /* MVHD.cpp */,
@@ -230,6 +235,7 @@
 				0515C8C21F2A7807003B8594 /* File.hpp */,
 				051F4D441F5E01C800E6E12C /* FTYP.hpp */,
 				059605971F5DC4300005F8C9 /* FullBox.hpp */,
+				059DBAD31F5EBC2000B7A940 /* HDLR.hpp */,
 				0515C8C01F2A77C4003B8594 /* IBMFF.hpp */,
 				051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */,
 				05A5A7651F5EAF9A00D16AD9 /* META.hpp */,
@@ -280,6 +286,7 @@
 				051F4D451F5E01C800E6E12C /* FTYP.hpp in Headers */,
 				059605981F5DC43B0005F8C9 /* ContainerBox.hpp in Headers */,
 				051F4D391F5DDCF800E6E12C /* BinaryStream.hpp in Headers */,
+				059DBAD41F5EBC2300B7A940 /* HDLR.hpp in Headers */,
 				051F4D471F5E0AC800E6E12C /* MVHD.hpp in Headers */,
 				05A5A76A1F5EAFA000D16AD9 /* META.hpp in Headers */,
 				0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */,
@@ -438,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				059DBAD21F5EBC1000B7A940 /* HDLR.cpp in Sources */,
 				051F4D491F5E0AD500E6E12C /* MVHD.cpp in Sources */,
 				0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */,
 				05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */,
