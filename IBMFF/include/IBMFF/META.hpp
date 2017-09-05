@@ -45,7 +45,7 @@ namespace IBMFF
             
             META( void );
             
-            void ReadData( const Parser & parser, BinaryStream & stream ) override;
+            void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
             void                                  AddBox( std::shared_ptr< Box > box );

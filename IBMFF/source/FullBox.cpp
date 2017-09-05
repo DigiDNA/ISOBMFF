@@ -47,7 +47,7 @@ class XS::PIMPL::Object< IBMFF::FullBox >::IMPL
 
 namespace IBMFF
 {
-    void FullBox::ReadData( const Parser & parser, BinaryStream & stream )
+    void FullBox::ReadData( Parser & parser, BinaryStream & stream )
     {
         uint32_t vf;
         

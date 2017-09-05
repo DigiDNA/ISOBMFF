@@ -50,7 +50,7 @@ namespace IBMFF
             
             std::string GetName( void ) const;
             
-            virtual void ReadData( const Parser & parser, BinaryStream & stream );
+            virtual void ReadData( Parser & parser, BinaryStream & stream );
             virtual void WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
             
             friend std::ostream & operator << ( std::ostream & os, const Box & box );

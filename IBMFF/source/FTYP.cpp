@@ -28,6 +28,7 @@
  */
 
 #include <IBMFF/FTYP.hpp>
+#include <IBMFF/Parser.hpp>
 
 template<>
 class XS::PIMPL::Object< IBMFF::FTYP >::IMPL
@@ -53,16 +54,23 @@ namespace IBMFF
         XS::PIMPL::Object< FTYP >()
     {}
     
-    void FTYP::ReadData( const Parser & parser, BinaryStream & stream )
+    void FTYP::ReadData( Parser & parser, BinaryStream & stream )
     {
-        ( void )parser;
-        
         this->SetMajorBrand( stream.ReadFourCC() );
         this->SetMinorVersion( stream.ReadBigEndianUnsignedInteger() );
         
         while( stream.HasBytesAvailable() )
         {
             this->AddCompatibleBrand( stream.ReadFourCC() );
+        }
+        
+        if( this->GetMajorBrand() == "qt  " )
+        {
+            parser.SetPreferredStringType( Parser::StringType::Pascal );
+        }
+        else
+        {
+            parser.SetPreferredStringType( Parser::StringType::NULLTerminated );
         }
     }
     

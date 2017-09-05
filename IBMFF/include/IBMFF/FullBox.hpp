@@ -42,7 +42,7 @@ namespace IBMFF
             using XS::PIMPL::Object< FullBox >::impl;
             using Box::Box;
             
-            void ReadData( const Parser & parser, BinaryStream & stream ) override;
+            void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
             uint8_t  GetVersion( void ) const;

@@ -44,7 +44,7 @@ namespace IBMFF
             
             MVHD( void );
             
-            void ReadData( const Parser & parser, BinaryStream & stream ) override;
+            void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
             uint64_t GetCreationTime( void )     const;

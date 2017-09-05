@@ -47,7 +47,7 @@ class XS::PIMPL::Object< IBMFF::ContainerBox >::IMPL
 
 namespace IBMFF
 {
-    void ContainerBox::ReadData( const Parser & parser, BinaryStream & stream )
+    void ContainerBox::ReadData( Parser & parser, BinaryStream & stream )
     {
         uint64_t               length;
         std::string            name;

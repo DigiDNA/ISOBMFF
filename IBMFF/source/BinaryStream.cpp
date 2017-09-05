@@ -44,8 +44,7 @@ class XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL
         IMPL( const IMPL & o );
         ~IMPL( void );
         
-        std::vector< uint8_t >          _bytes;
-        IBMFF::BinaryStream::StringType _stringType;
+        std::vector< uint8_t > _bytes;
 };
 
 #define XS_PIMPL_CLASS IBMFF::BinaryStream
@@ -391,16 +390,6 @@ namespace IBMFF
         return integer + fractional;
     }
     
-    BinaryStream::StringType BinaryStream::GetDefaultStringType( void ) const
-    {
-        return this->impl->_stringType;
-    }
-    
-    void BinaryStream::SetDefaultStringType( StringType value )
-    {
-        this->impl->_stringType = value;
-    }
-    
     std::string BinaryStream::ReadFourCC( void )
     {
         std::string s( reinterpret_cast< const char * >( &( this->impl->_bytes[ 0 ] ) ), 4 );
@@ -408,16 +397,6 @@ namespace IBMFF
         this->DeleteBytes( 4 );
         
         return s;
-    }
-    
-    std::string BinaryStream::ReadString( void )
-    {
-        if( this->impl->_stringType == StringType::Pascal )
-        {
-            return this->ReadPascalString();
-        }
-        
-        return this->ReadNULLTerminatedString();
     }
     
     std::string BinaryStream::ReadNULLTerminatedString( void )
@@ -496,12 +475,10 @@ namespace IBMFF
     }
 }
 
-XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( void ):
-    _stringType( IBMFF::BinaryStream::StringType::NULLTerminated )
+XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( void )
 {}
 
-XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const std::string & path ):
-    _stringType( IBMFF::BinaryStream::StringType::NULLTerminated )
+XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const std::string & path )
 {
     std::ifstream           stream;
     std::ifstream::pos_type length;
@@ -521,15 +498,13 @@ XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const std::string & path )
 }
 
 XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( IBMFF::BinaryStream & stream, uint64_t length ):
-    _bytes( length ),
-    _stringType( IBMFF::BinaryStream::StringType::NULLTerminated )
+    _bytes( length )
 {
     stream.Read( &( this->_bytes[ 0 ] ), length );
 }
 
 XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const IMPL & o ):
-    _bytes( o._bytes ),
-    _stringType( o._stringType )
+    _bytes( o._bytes )
 {}
 
 XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::~IMPL( void )

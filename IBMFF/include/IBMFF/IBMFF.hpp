@@ -39,6 +39,8 @@
 #include <IBMFF/Matrix.hpp>
 #include <IBMFF/FTYP.hpp>
 #include <IBMFF/MVHD.hpp>
+#include <IBMFF/META.hpp>
+#include <IBMFF/HDLR.hpp>
 
 #endif /* IBMFF_HPP */
 

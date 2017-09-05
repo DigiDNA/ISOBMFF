@@ -45,6 +45,12 @@ namespace IBMFF
             
             using XS::PIMPL::Object< Parser >::impl;
             
+            enum class StringType: int
+            {
+                NULLTerminated,
+                Pascal
+            };
+            
             Parser( void );
             Parser( const std::string & path );
             
@@ -56,6 +62,10 @@ namespace IBMFF
             void Parse( const std::string & path );
             
             std::shared_ptr< File > GetFile( void ) const;
+            
+            StringType GetPreferredStringType( void ) const;
+            void       SetPreferredStringType( StringType value );
+            
     };
 }
 

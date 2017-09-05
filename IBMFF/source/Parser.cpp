@@ -33,6 +33,7 @@
 #include <IBMFF/FTYP.hpp>
 #include <IBMFF/MVHD.hpp>
 #include <IBMFF/META.hpp>
+#include <IBMFF/HDLR.hpp>
 #include <map>
 #include <stdexcept>
 
@@ -52,6 +53,7 @@ class XS::PIMPL::Object< IBMFF::Parser >::IMPL
         std::shared_ptr< IBMFF::File >                                                  _file;
         std::string                                                                     _path;
         std::map< std::string, std::function< std::shared_ptr< IBMFF::Box >( void ) > > _types;
+        IBMFF::Parser::StringType                                                       _stringType;
 };
 
 #define XS_PIMPL_CLASS IBMFF::Parser
@@ -107,9 +109,20 @@ namespace IBMFF
     {
         return this->impl->_file;
     }
+    
+    Parser::StringType Parser::GetPreferredStringType( void ) const
+    {
+        return this->impl->_stringType;
+    }
+    
+    void Parser::SetPreferredStringType( StringType value )
+    {
+        this->impl->_stringType = value;
+    }
 }
 
-XS::PIMPL::Object< IBMFF::Parser >::IMPL::IMPL( void )
+XS::PIMPL::Object< IBMFF::Parser >::IMPL::IMPL( void ):
+    _stringType( IBMFF::Parser::StringType::NULLTerminated )
 {
     this->RegisterDefaultBoxes();
 }
@@ -117,7 +130,8 @@ XS::PIMPL::Object< IBMFF::Parser >::IMPL::IMPL( void )
 XS::PIMPL::Object< IBMFF::Parser >::IMPL::IMPL( const IMPL & o ):
     _file( o._file ),
     _path( o._path ),
-    _types( o._types )
+    _types( o._types ),
+    _stringType( o._stringType )
 {
     this->RegisterDefaultBoxes();
 }
@@ -166,4 +180,5 @@ void XS::PIMPL::Object< IBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterBox( "ftyp", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::FTYP >(); } );
     this->RegisterBox( "mvhd", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::MVHD >(); } );
     this->RegisterBox( "meta", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::META >(); } );
+    this->RegisterBox( "hdlr", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::HDLR >(); } );
 }

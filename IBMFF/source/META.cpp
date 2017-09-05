@@ -51,7 +51,7 @@ namespace IBMFF
     META::META( void ): IBMFF::FullBox( "meta" )
     {}
     
-    void META::ReadData( const Parser & parser, BinaryStream & stream )
+    void META::ReadData( Parser & parser, BinaryStream & stream )
     {
         char         n[ 4 ];
         ContainerBox container( "????" );

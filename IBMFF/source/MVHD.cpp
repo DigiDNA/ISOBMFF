@@ -59,7 +59,7 @@ namespace IBMFF
     MVHD::MVHD( void ): IBMFF::FullBox( "mvhd" )
     {}
     
-    void MVHD::ReadData( const Parser & parser, BinaryStream & stream )
+    void MVHD::ReadData( Parser & parser, BinaryStream & stream )
     {
         FullBox::ReadData( parser, stream );
         

@@ -54,7 +54,7 @@ namespace IBMFF
         return this->impl->_name;
     }
     
-    void Box::ReadData( const Parser & parser, BinaryStream & stream )
+    void Box::ReadData( Parser & parser, BinaryStream & stream )
     {
         ( void )parser;
         ( void )stream;
