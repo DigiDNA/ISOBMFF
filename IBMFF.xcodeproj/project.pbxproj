@@ -33,6 +33,8 @@
 		057280A01F5EE19400F02C27 /* INFE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0572809F1F5EE19400F02C27 /* INFE.cpp */; };
 		057280A21F5EFC9600F02C27 /* ILOC-Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280A11F5EFC9600F02C27 /* ILOC-Item.cpp */; };
 		057280A41F5F038A00F02C27 /* ILOC-Item-Extent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280A31F5F038A00F02C27 /* ILOC-Item-Extent.cpp */; };
+		057280A71F5F210900F02C27 /* Container.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 057280A61F5F210700F02C27 /* Container.hpp */; };
+		057280A91F5F240700F02C27 /* Container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280A81F5F240700F02C27 /* Container.cpp */; };
 		059605981F5DC43B0005F8C9 /* ContainerBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059605931F5DC4130005F8C9 /* ContainerBox.hpp */; };
 		059605991F5DC43B0005F8C9 /* FullBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059605971F5DC4300005F8C9 /* FullBox.hpp */; };
 		0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0515C8C01F2A77C4003B8594 /* IBMFF.hpp */; };
@@ -152,6 +154,8 @@
 		0572809F1F5EE19400F02C27 /* INFE.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = INFE.cpp; sourceTree = "<group>"; };
 		057280A11F5EFC9600F02C27 /* ILOC-Item.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ILOC-Item.cpp"; sourceTree = "<group>"; };
 		057280A31F5F038A00F02C27 /* ILOC-Item-Extent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ILOC-Item-Extent.cpp"; sourceTree = "<group>"; };
+		057280A61F5F210700F02C27 /* Container.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Container.hpp; sourceTree = "<group>"; };
+		057280A81F5F240700F02C27 /* Container.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Container.cpp; sourceTree = "<group>"; };
 		059605931F5DC4130005F8C9 /* ContainerBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContainerBox.hpp; sourceTree = "<group>"; };
 		059605971F5DC4300005F8C9 /* FullBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FullBox.hpp; sourceTree = "<group>"; };
 		0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContainerBox.cpp; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 			children = (
 				051F4D3A1F5DDCFE00E6E12C /* BinaryStream.cpp */,
 				05F471E71F2B5CEF00738744 /* Box.cpp */,
+				057280A81F5F240700F02C27 /* Container.cpp */,
 				0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */,
 				057280861F5EDBCF00F02C27 /* DREF.cpp */,
 				0515C8C11F2A7807003B8594 /* File.cpp */,
@@ -272,6 +277,7 @@
 			children = (
 				051F4D381F5DDCF800E6E12C /* BinaryStream.hpp */,
 				05F471DD1F2B5CE500738744 /* Box.hpp */,
+				057280A61F5F210700F02C27 /* Container.hpp */,
 				059605931F5DC4130005F8C9 /* ContainerBox.hpp */,
 				0572807D1F5EDBC700F02C27 /* DREF.hpp */,
 				0515C8C21F2A7807003B8594 /* File.hpp */,
@@ -340,6 +346,7 @@
 				057280811F5EDBC700F02C27 /* DREF.hpp in Headers */,
 				051F4D391F5DDCF800E6E12C /* BinaryStream.hpp in Headers */,
 				059DBAD41F5EBC2300B7A940 /* HDLR.hpp in Headers */,
+				057280A71F5F210900F02C27 /* Container.hpp in Headers */,
 				057280781F5ED9E800F02C27 /* IINF.hpp in Headers */,
 				051F4D471F5E0AC800E6E12C /* MVHD.hpp in Headers */,
 				05A5A76A1F5EAFA000D16AD9 /* META.hpp in Headers */,
@@ -506,6 +513,7 @@
 				0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */,
 				057280761F5ED7CE00F02C27 /* PITM.cpp in Sources */,
 				05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */,
+				057280A91F5F240700F02C27 /* Container.cpp in Sources */,
 				051F4D4C1F5E0DD800E6E12C /* Matrix.cpp in Sources */,
 				05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */,
 				057280871F5EDBCF00F02C27 /* IDAT.cpp in Sources */,

@@ -69,8 +69,8 @@ int main( int argc, const char * argv[] )
             std::shared_ptr< IBMFF::ILOC > iloc;
             std::shared_ptr< IBMFF::Box  > mdat;
             
-            ftyp = file->GetBox< IBMFF::FTYP >( "ftyp" );
-            meta = file->GetBox< IBMFF::META >( "meta" );
+            ftyp = file->GetTypedBox< IBMFF::FTYP >( "ftyp" );
+            meta = file->GetTypedBox< IBMFF::META >( "meta" );
             mdat = file->GetBox( "mdat" );
             
             if
@@ -81,7 +81,14 @@ int main( int argc, const char * argv[] )
                 || ftyp->GetMajorBrand() == "heic"
             )
             {
+                continue;
+            }
+            
+            iloc = meta->GetTypedBox< IBMFF::ILOC >( "iloc" );
                 
+            if( iloc == nullptr )
+            {
+                continue;
             }
         }
     }

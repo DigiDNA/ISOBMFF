@@ -34,6 +34,7 @@
 #include <IBMFF/BinaryStream.hpp>
 #include <IBMFF/Box.hpp>
 #include <IBMFF/FullBox.hpp>
+#include <IBMFF/Container.hpp>
 #include <IBMFF/ContainerBox.hpp>
 #include <IBMFF/File.hpp>
 #include <IBMFF/Matrix.hpp>

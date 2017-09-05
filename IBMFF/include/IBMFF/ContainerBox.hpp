@@ -32,13 +32,14 @@
 
 #include <XS/PIMPL/Object.hpp>
 #include <IBMFF/Box.hpp>
+#include <IBMFF/Container.hpp>
 #include <vector>
 #include <memory>
 #include <ostream>
 
 namespace IBMFF
 {
-    class ContainerBox: public Box, public XS::PIMPL::Object< ContainerBox >
+    class ContainerBox: public Box, public Container, public XS::PIMPL::Object< ContainerBox >
     {
         public:
             
@@ -48,16 +49,8 @@ namespace IBMFF
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
-            void                                  AddBox( std::shared_ptr< Box > box );
-            std::vector< std::shared_ptr< Box > > GetBoxes( void )                     const;
-            std::vector< std::shared_ptr< Box > > GetBoxes( const std::string & name ) const;
-            std::shared_ptr< Box >                GetBox( const std::string & name )   const;
-            
-            template< class _T_ >
-            std::shared_ptr< _T_ > GetBox( const std::string & name ) const
-            {
-                return std::dynamic_pointer_cast< _T_ >( this->GetBox( name ) );
-            }
+            void                                  AddBox( std::shared_ptr< Box > box ) override;
+            std::vector< std::shared_ptr< Box > > GetBoxes( void ) const override;
     };
 }
 

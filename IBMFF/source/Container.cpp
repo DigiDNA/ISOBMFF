@@ -23,35 +23,43 @@
  ******************************************************************************/
 
 /*!
- * @header      META.hpp
+ * @file        Container.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef IBMFF_META_HPP
-#define IBMFF_META_HPP
-
-#include <XS/PIMPL/Object.hpp>
-#include <IBMFF/FullBox.hpp>
 #include <IBMFF/Container.hpp>
-#include <vector>
-#include <memory>
 
 namespace IBMFF
 {
-    class META: public FullBox, public Container, public XS::PIMPL::Object< META >
+    Container::~Container( void )
+    {}
+    
+    std::vector< std::shared_ptr< Box > > Container::GetBoxes( const std::string & name ) const
     {
-        public:
-            
-            using XS::PIMPL::Object< META >::impl;
-            
-            META( void );
-            
-            void ReadData( Parser & parser, BinaryStream & stream ) override;
-            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
-            
-            void                                  AddBox( std::shared_ptr< Box > box ) override;
-            std::vector< std::shared_ptr< Box > > GetBoxes( void ) const override;
-    };
+        std::vector< std::shared_ptr< Box > > boxes;
+        
+        for( const auto & box: this->GetBoxes() )
+        {
+            if( box->GetName() == name )
+            {
+                boxes.push_back( box );
+            }
+        }
+        
+        return boxes;
+    }
+    
+    std::shared_ptr< Box > Container::GetBox( const std::string & name ) const
+    {
+        for( const auto & box: this->GetBoxes() )
+        {
+            if( box->GetName() == name )
+            {
+                return box;
+            }
+        }
+        
+        return nullptr;
+    }
 }
 
-#endif /* IBMFF_META_HPP */

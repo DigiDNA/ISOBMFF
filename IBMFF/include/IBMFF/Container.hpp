@@ -23,35 +23,37 @@
  ******************************************************************************/
 
 /*!
- * @header      META.hpp
+ * @header      Container.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef IBMFF_META_HPP
-#define IBMFF_META_HPP
+#ifndef IBMFF_CONTAINER_HPP
+#define IBMFF_CONTAINER_HPP
 
-#include <XS/PIMPL/Object.hpp>
-#include <IBMFF/FullBox.hpp>
-#include <IBMFF/Container.hpp>
+#include <IBMFF/Box.hpp>
 #include <vector>
 #include <memory>
 
 namespace IBMFF
 {
-    class META: public FullBox, public Container, public XS::PIMPL::Object< META >
+    class Container
     {
         public:
             
-            using XS::PIMPL::Object< META >::impl;
+            virtual ~Container();
             
-            META( void );
+            virtual void                                  AddBox( std::shared_ptr< Box > box )       = 0;
+            virtual std::vector< std::shared_ptr< Box > > GetBoxes( void )                     const = 0;
             
-            void ReadData( Parser & parser, BinaryStream & stream ) override;
-            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            std::vector< std::shared_ptr< Box > > GetBoxes( const std::string & name ) const;
+            std::shared_ptr< Box > GetBox( const std::string & name )                  const;
             
-            void                                  AddBox( std::shared_ptr< Box > box ) override;
-            std::vector< std::shared_ptr< Box > > GetBoxes( void ) const override;
+            template< class _T_ >
+            std::shared_ptr< _T_ > GetTypedBox( const std::string & name ) const
+            {
+                return std::dynamic_pointer_cast< _T_ >( this->GetBox( name ) );
+            }
     };
 }
 
-#endif /* IBMFF_META_HPP */
+#endif /* IBMFF_CONTAINER_HPP */

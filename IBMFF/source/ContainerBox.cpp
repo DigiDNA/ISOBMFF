@@ -96,34 +96,6 @@ namespace IBMFF
         return this->impl->_boxes;
     }
     
-    std::vector< std::shared_ptr< Box > > ContainerBox::GetBoxes( const std::string & name ) const
-    {
-        std::vector< std::shared_ptr< Box > > boxes;
-        
-        for( const auto & box: this->GetBoxes() )
-        {
-            if( box->GetName() == name )
-            {
-                boxes.push_back( box );
-            }
-        }
-        
-        return boxes;
-    }
-    
-    std::shared_ptr< Box > ContainerBox::GetBox( const std::string & name ) const
-    {
-        for( const auto & box: this->GetBoxes() )
-        {
-            if( box->GetName() == name )
-            {
-                return box;
-            }
-        }
-        
-        return nullptr;
-    }
-    
     void ContainerBox::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
         std::string                           i( indentLevel * 4, ' ' );
