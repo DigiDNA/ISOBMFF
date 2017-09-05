@@ -11,7 +11,6 @@
 		0515C8C41F2A7807003B8594 /* File.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0515C8C21F2A7807003B8594 /* File.hpp */; };
 		051F4D391F5DDCF800E6E12C /* BinaryStream.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 051F4D381F5DDCF800E6E12C /* BinaryStream.hpp */; };
 		051F4D3B1F5DDCFE00E6E12C /* BinaryStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D3A1F5DDCFE00E6E12C /* BinaryStream.cpp */; };
-		051F4D411F5DF98800E6E12C /* MOV.MOV in CopyFiles */ = {isa = PBXBuildFile; fileRef = 051F4D401F5DF97900E6E12C /* MOV.MOV */; };
 		051F4D431F5E01C200E6E12C /* FTYP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D421F5E01C200E6E12C /* FTYP.cpp */; };
 		051F4D451F5E01C800E6E12C /* FTYP.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 051F4D441F5E01C800E6E12C /* FTYP.hpp */; };
 		051F4D471F5E0AC800E6E12C /* MVHD.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 051F4D461F5E0AC400E6E12C /* MVHD.hpp */; };
@@ -37,6 +36,9 @@
 		057280A91F5F240700F02C27 /* Container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280A81F5F240700F02C27 /* Container.cpp */; };
 		057280AB1F5F449900F02C27 /* IROT.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 057280AA1F5F449600F02C27 /* IROT.hpp */; };
 		057280AD1F5F44A100F02C27 /* IROT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280AC1F5F44A000F02C27 /* IROT.cpp */; };
+		057280C71F5F5B5B00F02C27 /* IMG1.HEIC in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C41F5F5B4E00F02C27 /* IMG1.HEIC */; };
+		057280C81F5F5B5D00F02C27 /* IMG2.HEIC in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C61F5F5B4E00F02C27 /* IMG2.HEIC */; };
+		057280C91F5F5B5F00F02C27 /* MOV1.MOV in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C51F5F5B4E00F02C27 /* MOV1.MOV */; };
 		059605981F5DC43B0005F8C9 /* ContainerBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059605931F5DC4130005F8C9 /* ContainerBox.hpp */; };
 		059605991F5DC43B0005F8C9 /* FullBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059605971F5DC4300005F8C9 /* FullBox.hpp */; };
 		0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0515C8C01F2A77C4003B8594 /* IBMFF.hpp */; };
@@ -56,7 +58,6 @@
 		05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E71F2B5CEF00738744 /* Box.cpp */; };
 		05F471F21F2B5E6B00738744 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471F11F2B5E6B00738744 /* main.cpp */; };
 		05F471F81F2B5F0D00738744 /* libIBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libIBMFF.a */; };
-		05F471FA1F2B62E700738744 /* IMG.HEIC in CopyFiles */ = {isa = PBXBuildFile; fileRef = 05F471F91F2B620600738744 /* IMG.HEIC */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,8 +119,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				05F471FA1F2B62E700738744 /* IMG.HEIC in CopyFiles */,
-				051F4D411F5DF98800E6E12C /* MOV.MOV in CopyFiles */,
+				057280C71F5F5B5B00F02C27 /* IMG1.HEIC in CopyFiles */,
+				057280C81F5F5B5D00F02C27 /* IMG2.HEIC in CopyFiles */,
+				057280C91F5F5B5F00F02C27 /* MOV1.MOV in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +135,6 @@
 		051F4D1A1F5DD03700E6E12C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		051F4D381F5DDCF800E6E12C /* BinaryStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BinaryStream.hpp; sourceTree = "<group>"; };
 		051F4D3A1F5DDCFE00E6E12C /* BinaryStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryStream.cpp; sourceTree = "<group>"; };
-		051F4D401F5DF97900E6E12C /* MOV.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = MOV.MOV; sourceTree = "<group>"; };
 		051F4D421F5E01C200E6E12C /* FTYP.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FTYP.cpp; sourceTree = "<group>"; };
 		051F4D441F5E01C800E6E12C /* FTYP.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FTYP.hpp; sourceTree = "<group>"; };
 		051F4D461F5E0AC400E6E12C /* MVHD.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MVHD.hpp; sourceTree = "<group>"; };
@@ -160,6 +161,9 @@
 		057280A81F5F240700F02C27 /* Container.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Container.cpp; sourceTree = "<group>"; };
 		057280AA1F5F449600F02C27 /* IROT.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IROT.hpp; sourceTree = "<group>"; };
 		057280AC1F5F44A000F02C27 /* IROT.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IROT.cpp; sourceTree = "<group>"; };
+		057280C41F5F5B4E00F02C27 /* IMG1.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG1.HEIC; sourceTree = "<group>"; };
+		057280C51F5F5B4E00F02C27 /* MOV1.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = MOV1.MOV; sourceTree = "<group>"; };
+		057280C61F5F5B4E00F02C27 /* IMG2.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG2.HEIC; sourceTree = "<group>"; };
 		059605931F5DC4130005F8C9 /* ContainerBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContainerBox.hpp; sourceTree = "<group>"; };
 		059605971F5DC4300005F8C9 /* FullBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FullBox.hpp; sourceTree = "<group>"; };
 		0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContainerBox.cpp; sourceTree = "<group>"; };
@@ -178,7 +182,6 @@
 		05F471E71F2B5CEF00738744 /* Box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
 		05F471EF1F2B5E6B00738744 /* IBMFF-Example */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "IBMFF-Example"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05F471F11F2B5E6B00738744 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		05F471F91F2B620600738744 /* IMG.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG.HEIC; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,8 +331,9 @@
 		05F471F01F2B5E6B00738744 /* IBMFF-Example */ = {
 			isa = PBXGroup;
 			children = (
-				05F471F91F2B620600738744 /* IMG.HEIC */,
-				051F4D401F5DF97900E6E12C /* MOV.MOV */,
+				057280C41F5F5B4E00F02C27 /* IMG1.HEIC */,
+				057280C61F5F5B4E00F02C27 /* IMG2.HEIC */,
+				057280C51F5F5B4E00F02C27 /* MOV1.MOV */,
 				05F471F11F2B5E6B00738744 /* main.cpp */,
 			);
 			path = "IBMFF-Example";
