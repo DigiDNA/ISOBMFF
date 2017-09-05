@@ -34,6 +34,7 @@
 #include <IBMFF/BinaryStream.hpp>
 #include <string>
 #include <ostream>
+#include <vector>
 
 namespace IBMFF
 {
@@ -49,8 +50,9 @@ namespace IBMFF
             
             std::string GetName( void ) const;
             
-            virtual void ReadData( Parser & parser, BinaryStream & stream );
-            virtual void WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
+            virtual void                   ReadData( Parser & parser, BinaryStream & stream );
+            virtual std::vector< uint8_t > GetData( void )                                                const;
+            virtual void                   WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
             
             friend std::ostream & operator << ( std::ostream & os, const Box & box );
     };

@@ -29,6 +29,8 @@
 
 #include <IBMFF/IDAT.hpp>
 #include <IBMFF/Parser.hpp>
+#include <sstream>
+#include <iomanip>
 
 template<>
 class XS::PIMPL::Object< IBMFF::IDAT >::IMPL
@@ -55,9 +57,32 @@ namespace IBMFF
     
     void IDAT::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        std::string            i( ( indentLevel + 1 ) * 4, ' ' );
+        std::vector< uint8_t > data;
         
         Box::WriteDescription( os, indentLevel );
+        
+        data = this->GetData();
+        
+        if( data.size() > 0 )
+        {
+            os << std::endl
+               << i << "- Bytes:";
+            
+            for( auto byte: data )
+            {
+                {
+                    std::stringstream ss;
+                    
+                    ss << std::hex
+                       << std::uppercase
+                       << std::setfill( '0' )
+                       << std::setw( 2 )
+                       << static_cast< uint32_t >( byte );
+                    os << " " << ss.str();
+                }
+            }
+        }
     }
 }
 

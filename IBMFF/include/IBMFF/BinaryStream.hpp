@@ -33,6 +33,7 @@
 #include <string>
 #include <iostream>
 #include <cstdint>
+#include <vector>
 #include <XS/PIMPL/Object.hpp>
 #include <IBMFF/Matrix.hpp>
 
@@ -76,6 +77,8 @@ namespace IBMFF
             std::string ReadPascalString( void );
             
             Matrix ReadMatrix( void );
+            
+            std::vector< uint8_t > ReadAllData( void );
             
             void Read( uint8_t * buf, uint64_t length );
             void Get( uint8_t * buf, uint64_t pos, uint64_t length );

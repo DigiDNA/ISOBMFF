@@ -30,7 +30,6 @@
 #include <IBMFF/BinaryStream.hpp>
 #include <fstream>
 #include <cmath>
-#include <vector>
 #include <cstdint>
 
 template<>
@@ -456,6 +455,15 @@ namespace IBMFF
             this->ReadBigEndianUnsignedInteger(),
             this->ReadBigEndianUnsignedInteger()
         );
+    }
+    
+    std::vector< uint8_t > BinaryStream::ReadAllData( void )
+    {
+        std::vector< uint8_t > v;
+        
+        swap( v, this->impl->_bytes );
+        
+        return v;
     }
     
     void BinaryStream::Read( uint8_t * buf, uint64_t length )

@@ -38,7 +38,9 @@ class XS::PIMPL::Object< IBMFF::Box >::IMPL
         IMPL( const IMPL & o );
         ~IMPL( void );
         
-        std::string _name;
+        std::string            _name;
+        std::vector< uint8_t > _data;
+        bool                   _hasData;
 };
 
 #define XS_PIMPL_CLASS IBMFF::Box
@@ -57,7 +59,14 @@ namespace IBMFF
     void Box::ReadData( Parser & parser, BinaryStream & stream )
     {
         ( void )parser;
-        ( void )stream;
+        
+        this->impl->_data    = stream.ReadAllData();
+        this->impl->_hasData = true;
+    }
+    
+    std::vector< uint8_t > Box::GetData( void ) const
+    {
+        return this->impl->_data;
     }
     
     void Box::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
@@ -65,6 +74,11 @@ namespace IBMFF
         std::string i( indentLevel * 4, ' ' );
         
         os << i << "[ " << this->GetName() << " ]";
+        
+        if( this->impl->_hasData )
+        {
+            os << " ( " << this->impl->_data.size() << " bytes )";
+        }
     }
     
     std::ostream & operator << ( std::ostream & os, const Box & box )
@@ -76,11 +90,14 @@ namespace IBMFF
 }
 
 XS::PIMPL::Object< IBMFF::Box >::IMPL::IMPL( const std::string & name ):
-    _name( name )
+    _name( name ),
+    _hasData( false )
 {}
 
 XS::PIMPL::Object< IBMFF::Box >::IMPL::IMPL( const IMPL & o ):
-    _name( o._name )
+    _name( o._name ),
+    _data( o._data ),
+    _hasData( o._hasData )
 {}
 
 XS::PIMPL::Object< IBMFF::Box >::IMPL::~IMPL( void )
