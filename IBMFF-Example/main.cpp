@@ -97,7 +97,6 @@ int main( int argc, const char * argv[] )
             std::shared_ptr< IBMFF::IINF > iinf;
             std::shared_ptr< IBMFF::ILOC > iloc;
             IBMFF::ILOC::Item::Extent      exif;
-            IBMFF::ILOC::Item::Extent      hvc1;
             std::vector< uint8_t >         data;
             
             ftyp = file->GetTypedBox< IBMFF::FTYP >( "ftyp" );
@@ -155,21 +154,6 @@ int main( int argc, const char * argv[] )
                         }
                     }
                 }
-                else if( entry->GetItemType() == "hvc1" )
-                {
-                    for( const auto & item: iloc->GetItems() )
-                    {
-                        if
-                        (
-                               item.GetItemID()                   == entry->GetItemID()
-                            && item.GetExtents().size()           != 0
-                            && item.GetExtents()[ 0 ].GetLength() >  hvc1.GetLength()
-                        )
-                        {
-                            hvc1 = item.GetExtents()[ 0 ];
-                        }
-                    }
-                }
             }
             
             if( exif.GetLength() > 0 )
@@ -178,16 +162,6 @@ int main( int argc, const char * argv[] )
                 std::cout << std::endl;
                 
                 PrintData( data, exif );
-                
-                std::cout << std::endl;
-            }
-            
-            if( hvc1.GetLength() > 0 )
-            {
-                std::cout << "Found HVC1 data ( index = " << hvc1.GetIndex() << ", offset = " << hvc1.GetOffset() << ", length = " << hvc1.GetLength() << " ):" << std::endl;
-                std::cout << std::endl;
-                
-                PrintData( data, hvc1 );
                 
                 std::cout << std::endl;
             }
