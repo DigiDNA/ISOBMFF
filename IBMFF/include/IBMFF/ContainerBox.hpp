@@ -49,7 +49,9 @@ namespace IBMFF
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
             void                                  AddBox( std::shared_ptr< Box > box );
-            std::vector< std::shared_ptr< Box > > GetBoxes( void ) const;
+            std::vector< std::shared_ptr< Box > > GetBoxes( void )                     const;
+            std::vector< std::shared_ptr< Box > > GetBoxes( const std::string & name ) const;
+            std::shared_ptr< Box >                GetBox( const std::string & name )   const;
     };
 }
 
