@@ -38,6 +38,28 @@
 void PrintData( const std::vector< uint8_t > & bytes, IBMFF::ILOC::Item::Extent & extent );
 void PrintDataLine( const std::vector< uint8_t > & bytes, uint64_t length );
 
+template< typename _T_ >
+std::vector< _T_ > Slice( const std::vector< _T_ > & v, uint64_t start, uint64_t length )
+{
+    std::vector< uint8_t >::difference_type s;
+    std::vector< uint8_t >::difference_type l;
+    
+    s = static_cast< decltype( s ) >( start );
+    l = static_cast< decltype( l ) >( length );
+    
+    if( v.begin() + s > v.end() )
+    {
+        return {};
+    }
+    
+    if( v.begin() + s + l > v.end() )
+    {
+        return std::vector< uint8_t >( v.begin() + s, v.end() );
+    }
+    
+    return std::vector< uint8_t >( v.begin() + s, v.begin() + s + l );
+}
+
 int main( int argc, const char * argv[] )
 {
     IBMFF::Parser                  parser;
@@ -173,28 +195,6 @@ int main( int argc, const char * argv[] )
     }
     
     return EXIT_SUCCESS;
-}
-
-template< typename _T_ >
-std::vector< _T_ > Slice( const std::vector< _T_ > & v, uint64_t start, uint64_t length )
-{
-    std::vector< uint8_t >::difference_type s;
-    std::vector< uint8_t >::difference_type l;
-    
-    s = static_cast< decltype( s ) >( start );
-    l = static_cast< decltype( l ) >( length );
-    
-    if( v.begin() + s > v.end() )
-    {
-        return {};
-    }
-    
-    if( v.begin() + s + l > v.end() )
-    {
-        return std::vector< uint8_t >( v.begin() + s, v.end() );
-    }
-    
-    return std::vector< uint8_t >( v.begin() + s, v.begin() + s + l );
 }
 
 void PrintData( const std::vector< uint8_t > & bytes, IBMFF::ILOC::Item::Extent & extent )
