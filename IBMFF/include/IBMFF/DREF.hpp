@@ -32,10 +32,12 @@
 
 #include <XS/PIMPL/Object.hpp>
 #include <IBMFF/FullBox.hpp>
+#include <IBMFF/Container.hpp>
+#include <vector>
 
 namespace IBMFF
 {
-    class DREF: public FullBox, public XS::PIMPL::Object< DREF >
+    class DREF: public FullBox, public Container, public XS::PIMPL::Object< DREF >
     {
         public:
             
@@ -45,6 +47,9 @@ namespace IBMFF
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            
+            void                                  AddBox( std::shared_ptr< Box > box ) override;
+            std::vector< std::shared_ptr< Box > > GetBoxes( void ) const override;
     };
 }
 
