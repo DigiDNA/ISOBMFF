@@ -1,7 +1,7 @@
 /*******************************************************************************
  * The MIT License (MIT)
  * 
- * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com
+ * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com / www.imazing.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,17 +24,42 @@
 
 /*!
  * @file        main.cpp
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
+ * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
 #include <IBMFF/IBMFF.hpp>
+#include <cstdlib>
+#include <iostream>
+#include <string>
 
 int main( int argc, const char * argv[] )
 {
     IBMFF::Parser parser;
+    std::string   file;
+    int           i;
     
-    ( void )argc;
-    ( void )argv;
+    if( argc < 2 )
+    {
+        std::cerr << "Error: no input file provided" << std::endl;
+        
+        return EXIT_FAILURE;
+    }
     
-    return 0;
+    for( i = 1; i < argc; i++ )
+    {
+        file = argv[ i ];
+        
+        if( file.length() == 0 )
+        {
+            std::cerr << "Error: no input file provided" << std::endl;
+            
+            return EXIT_FAILURE;
+        }
+        
+        parser.Parse( file );
+        
+        std::cout << *( parser.GetFile() ) << std::endl << std::endl;
+    }
+    
+    return EXIT_SUCCESS;
 }
