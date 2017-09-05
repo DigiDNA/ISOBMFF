@@ -38,6 +38,14 @@ class XS::PIMPL::Object< IBMFF::INFE >::IMPL
         IMPL( void );
         IMPL( const IMPL & o );
         ~IMPL( void );
+        
+        uint32_t    _itemID;
+        uint16_t    _itemProtectionIndex;
+        std::string _itemType;
+        std::string _itemName;
+        std::string _contentType;
+        std::string _contentEncoding;
+        std::string _itemURIType;
 };
 
 #define XS_PIMPL_CLASS IBMFF::INFE
@@ -51,6 +59,90 @@ namespace IBMFF
     void INFE::ReadData( Parser & parser, BinaryStream & stream )
     {
         FullBox::ReadData( parser, stream );
+        
+        if( this->GetVersion() == 0 || this->GetVersion() == 1 )
+        {
+            this->SetItemID( stream.ReadBigEndianUnsignedShort() );
+            this->SetItemProtectionIndex( stream.ReadBigEndianUnsignedShort() );
+            
+            if( parser.GetPreferredStringType() == Parser::StringType::Pascal )
+            {
+                this->SetItemName( stream.ReadPascalString() );
+                this->SetContentType( stream.ReadPascalString() );
+                this->SetContentEncoding( stream.ReadPascalString() );
+            }
+            else
+            {
+                this->SetItemName( stream.ReadNULLTerminatedString() );
+                this->SetContentType( stream.ReadNULLTerminatedString() );
+                this->SetContentEncoding( stream.ReadNULLTerminatedString() );
+            }
+        }
+        
+        /*
+        if( version == 1 )
+        {
+            unsigned int( 32 ) extension_type;   // optional
+            ItemInfoExtension( extension_type ); // optional
+        }
+        
+        aligned( 8 ) class ItemInfoExtension( unsigned int( 32 ) extension_type )
+        {}
+        
+        aligned( 8 ) class FDItemInfoExtension() extends ItemInfoExtension ( 'fdel' )
+        {
+            string             content_location;
+            string             content_MD5;
+            unsigned int( 64 ) content_length;
+            unsigned int( 64 ) transfer_length;
+            unsigned int( 8 )  entry_count;
+            
+            for( i = 1; i <= entry_count; i++ )
+            {
+                unsigned int( 32 ) group_id;
+            }
+        }
+        */
+        
+        if( this->GetVersion() >= 2 )
+        {
+            if( this->GetVersion() == 2 )
+            {
+                this->SetItemID( stream.ReadBigEndianUnsignedShort() );
+            }
+            else if( this->GetVersion() == 3 )
+            {
+                this->SetItemID( stream.ReadBigEndianUnsignedInteger() );
+            }
+            
+            this->SetItemProtectionIndex( stream.ReadBigEndianUnsignedShort() );
+            this->SetItemType( stream.ReadFourCC() );
+            
+            if( parser.GetPreferredStringType() == Parser::StringType::Pascal )
+            {
+                if( this->GetItemType() == "mime" )
+                {
+                    this->SetContentType( stream.ReadPascalString() );
+                    this->SetContentEncoding( stream.ReadPascalString() );
+                }
+                else if( this->GetItemType() == "uri " )
+                {
+                    this->SetItemURIType( stream.ReadPascalString() );
+                }
+            }
+            else
+            {
+                if( this->GetItemType() == "mime" )
+                {
+                    this->SetContentType( stream.ReadNULLTerminatedString() );
+                    this->SetContentEncoding( stream.ReadNULLTerminatedString() );
+                }
+                else if( this->GetItemType() == "uri " )
+                {
+                    this->SetItemURIType( stream.ReadNULLTerminatedString() );
+                }
+            }
+        }
     }
     
     void INFE::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
@@ -58,16 +150,102 @@ namespace IBMFF
         std::string i( ( indentLevel + 1 ) * 4, ' ' );
         
         FullBox::WriteDescription( os, indentLevel );
+        
+        os << std::endl
+           << i << "- Item ID:               " << this->GetItemID() << std::endl
+           << i << "- Item protection index: " << this->GetItemProtectionIndex() << std::endl
+           << i << "- Item type:             " << this->GetItemType() << std::endl
+           << i << "- Item name:             " << this->GetItemName() << std::endl
+           << i << "- Content type:          " << this->GetContentType() << std::endl
+           << i << "- Content encoding:      " << this->GetContentEncoding() << std::endl
+           << i << "- Item URI type:         " << this->GetItemURIType();
+    }
+    
+    uint32_t INFE::GetItemID( void ) const
+    {
+        return this->impl->_itemID;
+    }
+    
+    uint16_t INFE::GetItemProtectionIndex( void ) const
+    {
+        return this->impl->_itemProtectionIndex;
+    }
+    
+    std::string INFE::GetItemType( void ) const
+    {
+        return this->impl->_itemType;
+    }
+    
+    std::string INFE::GetItemName( void ) const
+    {
+        return this->impl->_itemName;
+    }
+    
+    std::string INFE::GetContentType( void ) const
+    {
+        return this->impl->_contentType;
+    }
+    
+    std::string INFE::GetContentEncoding( void ) const
+    {
+        return this->impl->_contentEncoding;
+    }
+    
+    std::string INFE::GetItemURIType( void ) const
+    {
+        return this->impl->_itemURIType;
+    }
+    
+    void INFE::SetItemID( uint32_t value )
+    {
+        this->impl->_itemID = value;
+    }
+    
+    void INFE::SetItemProtectionIndex( uint16_t value )
+    {
+        this->impl->_itemProtectionIndex = value;
+    }
+    
+    void INFE::SetItemType( const std::string & value )
+    {
+        this->impl->_itemType = value;
+    }
+    
+    void INFE::SetItemName( const std::string & value )
+    {
+        this->impl->_itemName = value;
+    }
+    
+    void INFE::SetContentType( const std::string & value )
+    {
+        this->impl->_contentType = value;
+    }
+    
+    void INFE::SetContentEncoding( const std::string & value )
+    {
+        this->impl->_contentEncoding = value;
+    }
+    
+    void INFE::SetItemURIType( const std::string & value )
+    {
+        this->impl->_itemURIType = value;
     }
 }
 
-XS::PIMPL::Object< IBMFF::INFE >::IMPL::IMPL( void )
+XS::PIMPL::Object< IBMFF::INFE >::IMPL::IMPL( void ):
+    _itemID( 0 ),
+    _itemProtectionIndex( 0 )
 {}
 
-XS::PIMPL::Object< IBMFF::INFE >::IMPL::IMPL( const IMPL & o )
-{
-    ( void )o;
-}
+XS::PIMPL::Object< IBMFF::INFE >::IMPL::IMPL( const IMPL & o ):
+    _itemID( o._itemID ),
+    _itemProtectionIndex( o._itemProtectionIndex ),
+    _itemType( o._itemType ),
+    _itemName( o._itemName ),
+    _contentType( o._contentType ),
+    _contentEncoding( o._contentEncoding ),
+    _itemURIType( o._itemURIType )
+{}
 
 XS::PIMPL::Object< IBMFF::INFE >::IMPL::~IMPL( void )
 {}

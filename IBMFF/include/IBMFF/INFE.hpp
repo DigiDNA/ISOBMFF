@@ -32,6 +32,8 @@
 
 #include <XS/PIMPL/Object.hpp>
 #include <IBMFF/FullBox.hpp>
+#include <string>
+#include <cstdint>
 
 namespace IBMFF
 {
@@ -45,6 +47,22 @@ namespace IBMFF
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            
+            uint32_t    GetItemID( void )              const;
+            uint16_t    GetItemProtectionIndex( void ) const;
+            std::string GetItemType( void )            const;
+            std::string GetItemName( void )            const;
+            std::string GetContentType( void )         const;
+            std::string GetContentEncoding( void )     const;
+            std::string GetItemURIType( void )         const;
+            
+            void SetItemID( uint32_t value );
+            void SetItemProtectionIndex( uint16_t value );
+            void SetItemType( const std::string & value );
+            void SetItemName( const std::string & value );
+            void SetContentType( const std::string & value );
+            void SetContentEncoding( const std::string & value );
+            void SetItemURIType( const std::string & value );
     };
 }
 
