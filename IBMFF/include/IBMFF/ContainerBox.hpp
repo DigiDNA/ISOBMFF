@@ -52,6 +52,12 @@ namespace IBMFF
             std::vector< std::shared_ptr< Box > > GetBoxes( void )                     const;
             std::vector< std::shared_ptr< Box > > GetBoxes( const std::string & name ) const;
             std::shared_ptr< Box >                GetBox( const std::string & name )   const;
+            
+            template< class _T_ >
+            std::shared_ptr< _T_ > GetBox( const std::string & name ) const
+            {
+                return std::dynamic_pointer_cast< _T_ >( this->GetBox( name ) );
+            }
     };
 }
 

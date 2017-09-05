@@ -34,9 +34,10 @@
 
 int main( int argc, const char * argv[] )
 {
-    IBMFF::Parser parser;
-    std::string   file;
-    int           i;
+    IBMFF::Parser                  parser;
+    std::shared_ptr< IBMFF::File > file;
+    std::string                    path;
+    int                            i;
     
     if( argc < 2 )
     {
@@ -47,18 +48,42 @@ int main( int argc, const char * argv[] )
     
     for( i = 1; i < argc; i++ )
     {
-        file = argv[ i ];
+        path = argv[ i ];
         
-        if( file.length() == 0 )
+        if( path.length() == 0 )
         {
             std::cerr << "Error: no input file provided" << std::endl;
             
             return EXIT_FAILURE;
         }
         
-        parser.Parse( file );
+        parser.Parse( path );
         
-        std::cout << *( parser.GetFile() ) << std::endl << std::endl;
+        file = parser.GetFile();
+        
+        std::cout << *( file ) << std::endl << std::endl;
+        
+        {
+            std::shared_ptr< IBMFF::FTYP > ftyp;
+            std::shared_ptr< IBMFF::META > meta;
+            std::shared_ptr< IBMFF::ILOC > iloc;
+            std::shared_ptr< IBMFF::Box  > mdat;
+            
+            ftyp = file->GetBox< IBMFF::FTYP >( "ftyp" );
+            meta = file->GetBox< IBMFF::META >( "meta" );
+            mdat = file->GetBox( "mdat" );
+            
+            if
+            (
+                   ftyp == nullptr
+                || meta == nullptr
+                || mdat == nullptr
+                || ftyp->GetMajorBrand() == "heic"
+            )
+            {
+                
+            }
+        }
     }
     
     return EXIT_SUCCESS;
