@@ -1,7 +1,7 @@
 /*******************************************************************************
  * The MIT License (MIT)
  * 
- * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com
+ * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com / www.imazing.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,10 +24,16 @@
 
 /*!
  * @file        Parser.cpp
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
+ * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
 #include <IBMFF/Parser.hpp>
+#include <IBMFF/ContainerBox.hpp>
+#include <IBMFF/BinaryStream.hpp>
+#include <IBMFF/FTYP.hpp>
+#include <IBMFF/MVHD.hpp>
+#include <map>
+#include <stdexcept>
 
 template<>
 class XS::PIMPL::Object< IBMFF::Parser >::IMPL
@@ -37,21 +43,125 @@ class XS::PIMPL::Object< IBMFF::Parser >::IMPL
         IMPL( void );
         IMPL( const IMPL & o );
         ~IMPL( void );
+        
+        void RegisterBox( const std::string & type, const std::function< std::shared_ptr< IBMFF::Box >( void ) > & createBox );
+        void RegisterContainerBox( const std::string & type );
+        void RegisterDefaultBoxes( void );
+        
+        std::shared_ptr< IBMFF::File >                                                  _file;
+        std::string                                                                     _path;
+        std::map< std::string, std::function< std::shared_ptr< IBMFF::Box >( void ) > > _types;
 };
 
 #define XS_PIMPL_CLASS IBMFF::Parser
 #include <XS/PIMPL/Object-IMPL.hpp>
 
 namespace IBMFF
-{}
+{
+    Parser::Parser( void ): XS::PIMPL::Object< Parser >()
+    {}
+    
+    Parser::Parser( const std::string & path ): XS::PIMPL::Object< Parser >()
+    {
+        this->Parse( path );
+    }
+    
+    void Parser::RegisterContainerBox( const std::string & type )
+    {
+        this->impl->RegisterContainerBox( type );
+    }
+    
+    void Parser::RegisterBox( const std::string & type, const std::function< std::shared_ptr< Box >( void ) > & createBox )
+    {
+        this->impl->RegisterBox( type, createBox );
+    }
+    
+    std::shared_ptr< Box > Parser::CreateBox( const std::string & type ) const
+    {
+        for( const auto & p: this->impl->_types )
+        {
+            if( p.first == type && p.second != nullptr )
+            {
+                return p.second();
+            }
+        }
+        
+        return std::make_shared< Box >( type );
+    }
+    
+    void Parser::Parse( const std::string & path )
+    {
+        BinaryStream stream( path );
+        
+        this->impl->_path = path;
+        this->impl->_file = std::make_shared< File >();
+        
+        if( stream.HasBytesAvailable() )
+        {
+            this->impl->_file->ReadData( *( this ), stream );
+        }
+    }
+    
+    std::shared_ptr< File > Parser::GetFile( void ) const
+    {
+        return this->impl->_file;
+    }
+}
 
 XS::PIMPL::Object< IBMFF::Parser >::IMPL::IMPL( void )
-{}
-
-XS::PIMPL::Object< IBMFF::Parser >::IMPL::IMPL( const IMPL & o )
 {
-    ( void )o;
+    this->RegisterDefaultBoxes();
+}
+
+XS::PIMPL::Object< IBMFF::Parser >::IMPL::IMPL( const IMPL & o ):
+    _file( o._file ),
+    _path( o._path ),
+    _types( o._types )
+{
+    this->RegisterDefaultBoxes();
 }
 
 XS::PIMPL::Object< IBMFF::Parser >::IMPL::~IMPL( void )
 {}
+
+void XS::PIMPL::Object< IBMFF::Parser >::IMPL::RegisterBox( const std::string & type, const std::function< std::shared_ptr< IBMFF::Box >( void ) > & createBox )
+{
+    if( type.size() != 4 )
+    {
+        throw std::runtime_error( "Box name should be 4 characters long" );
+    }
+    
+    this->_types[ type ] = createBox;
+}
+
+void XS::PIMPL::Object< IBMFF::Parser >::IMPL::RegisterContainerBox( const std::string & type )
+{
+    return this->RegisterBox
+    (
+        type,
+        [ = ]( void ) -> std::shared_ptr< IBMFF::Box >
+        {
+            return std::make_shared< IBMFF::ContainerBox >( type );
+        }
+    );
+}
+
+void XS::PIMPL::Object< IBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
+{
+    this->RegisterContainerBox( "moov" );
+    this->RegisterContainerBox( "trak" );
+    this->RegisterContainerBox( "edts" );
+    this->RegisterContainerBox( "mdia" );
+    this->RegisterContainerBox( "minf" );
+    this->RegisterContainerBox( "stbl" );
+    this->RegisterContainerBox( "mvex" );
+    this->RegisterContainerBox( "moof" );
+    this->RegisterContainerBox( "traf" );
+    this->RegisterContainerBox( "mfra" );
+    this->RegisterContainerBox( "skip" );
+    this->RegisterContainerBox( "meco" );
+    this->RegisterContainerBox( "mere" );
+    
+    this->RegisterBox( "ftyp", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::FTYP >(); } );
+    this->RegisterBox( "mvhd", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::MVHD >(); } );
+}

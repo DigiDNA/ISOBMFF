@@ -1,7 +1,7 @@
 /*******************************************************************************
  * The MIT License (MIT)
  * 
- * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com
+ * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com / www.imazing.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,21 +24,38 @@
 
 /*!
  * @header      Parser.hpp
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
+ * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
 #ifndef IBMFF_PARSER_HPP
 #define IBMFF_PARSER_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <string>
+#include <functional>
+#include <memory>
+#include <IBMFF/Box.hpp>
+#include <IBMFF/File.hpp>
 
 namespace IBMFF
 {
-    class Parser: XS::PIMPL::Object< Parser >
+    class Parser: public XS::PIMPL::Object< Parser >
     {
         public:
             
             using XS::PIMPL::Object< Parser >::impl;
+            
+            Parser( void );
+            Parser( const std::string & path );
+            
+            void RegisterBox( const std::string & type, const std::function< std::shared_ptr< Box >( void ) > & createBox );
+            void RegisterContainerBox( const std::string & type );
+            
+            std::shared_ptr< Box > CreateBox( const std::string & type ) const;
+            
+            void Parse( const std::string & path );
+            
+            std::shared_ptr< File > GetFile( void ) const;
     };
 }
 
