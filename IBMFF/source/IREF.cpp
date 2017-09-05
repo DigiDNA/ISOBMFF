@@ -38,6 +38,8 @@ class XS::PIMPL::Object< IBMFF::IREF >::IMPL
         IMPL( void );
         IMPL( const IMPL & o );
         ~IMPL( void );
+        
+        std::vector< std::shared_ptr< IBMFF::Box > > _boxes;
 };
 
 #define XS_PIMPL_CLASS IBMFF::IREF
@@ -50,24 +52,62 @@ namespace IBMFF
     
     void IREF::ReadData( Parser & parser, BinaryStream & stream )
     {
+        ContainerBox container( "????" );
+        
         FullBox::ReadData( parser, stream );
+        container.ReadData( parser, stream );
+        
+        this->impl->_boxes = container.GetBoxes();
     }
     
     void IREF::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        std::string                           i( indentLevel * 4, ' ' );
+        std::vector< std::shared_ptr< Box > > boxes;
         
         FullBox::WriteDescription( os, indentLevel );
+        
+        boxes = this->GetBoxes();
+        
+        if( boxes.size() > 0 )
+        {
+            os << std::endl
+               << i
+               << "{"
+               << std::endl;
+            
+            for( const auto & box: boxes )
+            {
+                box->WriteDescription( os, indentLevel + 1 );
+                
+                os << std::endl;
+            }
+            
+            os << i
+               << "}";
+        }
+    }
+    
+    void IREF::AddBox( std::shared_ptr< Box > box )
+    {
+        if( box != nullptr )
+        {
+            this->impl->_boxes.push_back( box );
+        }
+    }
+    
+    std::vector< std::shared_ptr< Box > > IREF::GetBoxes( void ) const
+    {
+        return this->impl->_boxes;
     }
 }
 
 XS::PIMPL::Object< IBMFF::IREF >::IMPL::IMPL( void )
 {}
 
-XS::PIMPL::Object< IBMFF::IREF >::IMPL::IMPL( const IMPL & o )
-{
-    ( void )o;
-}
+XS::PIMPL::Object< IBMFF::IREF >::IMPL::IMPL( const IMPL & o ):
+    _boxes( o._boxes )
+{}
 
 XS::PIMPL::Object< IBMFF::IREF >::IMPL::~IMPL( void )
 {}

@@ -31,11 +31,12 @@
 #define IBMFF_IREF_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <IBMFF/Container.hpp>
 #include <IBMFF/FullBox.hpp>
 
 namespace IBMFF
 {
-    class IREF: public FullBox, public XS::PIMPL::Object< IREF >
+    class IREF: public FullBox, public Container, public XS::PIMPL::Object< IREF >
     {
         public:
             
@@ -45,6 +46,9 @@ namespace IBMFF
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            
+            void                                  AddBox( std::shared_ptr< Box > box ) override;
+            std::vector< std::shared_ptr< Box > > GetBoxes( void ) const override;
     };
 }
 
