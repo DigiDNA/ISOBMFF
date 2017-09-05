@@ -58,11 +58,11 @@ namespace IBMFF
         
         if( this->GetVersion() == 0 )
         {
-            stream.ReadBigEndianUnsignedShort();
+            stream.ReadBigEndianUInt16();
         }
         else
         {
-            stream.ReadBigEndianUnsignedInteger();
+            stream.ReadBigEndianUInt32();
         }
         
         container.ReadData( parser, stream );

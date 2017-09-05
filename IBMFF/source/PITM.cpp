@@ -56,11 +56,11 @@ namespace IBMFF
         
         if( this->GetVersion() == 0 )
         {
-            this->SetItemID( stream.ReadBigEndianUnsignedShort() );
+            this->SetItemID( stream.ReadBigEndianUInt16() );
         }
         else
         {
-            this->SetItemID( stream.ReadBigEndianUnsignedInteger() );
+            this->SetItemID( stream.ReadBigEndianUInt32() );
         }
     }
     

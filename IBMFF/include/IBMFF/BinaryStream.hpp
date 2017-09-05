@@ -51,23 +51,23 @@ namespace IBMFF
             
             bool HasBytesAvailable( void ) const;
             
-            uint8_t ReadUnsignedChar( void );
-            int8_t  ReadSignedChar( void );
+            uint8_t ReadUInt8( void );
+            int8_t  ReadInt8( void );
             
-            uint16_t ReadUnsignedShort( void );
-            int16_t  ReadSignedShort( void );
-            uint16_t ReadBigEndianUnsignedShort( void );
-            uint16_t ReadLittleEndianUnsignedShort( void );
+            uint16_t ReadUInt16( void );
+            int16_t  ReadInt16( void );
+            uint16_t ReadBigEndianUInt16( void );
+            uint16_t ReadLittleEndianUInt16( void );
             
-            uint32_t ReadUnsignedInteger( void );
-            int32_t  ReadSignedInteger( void );
-            uint32_t ReadBigEndianUnsignedInteger( void );
-            uint32_t ReadLittleEndianUnsignedInteger( void );
+            uint32_t ReadUInt32( void );
+            int32_t  ReadInt32( void );
+            uint32_t ReadBigEndianUInt32( void );
+            uint32_t ReadLittleEndianUInt32( void );
             
-            uint64_t ReadUnsignedLong( void );
-            int64_t  ReadSignedLong( void );
-            uint64_t ReadBigEndianUnsignedLong( void );
-            uint64_t ReadLittleEndianUnsignedLong( void );
+            uint64_t ReadUInt64( void );
+            int64_t  ReadInt64( void );
+            uint64_t ReadBigEndianUInt64( void );
+            uint64_t ReadLittleEndianUInt64( void );
             
             float ReadBigEndianFixedPoint( unsigned int integerLength, unsigned int fractionalLength );
             float ReadLittleEndianFixedPoint( unsigned int integerLength, unsigned int fractionalLength );

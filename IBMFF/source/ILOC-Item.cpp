@@ -63,34 +63,34 @@ namespace IBMFF
         
         if( iloc.GetVersion() < 2 )
         {
-            this->SetItemID( stream.ReadBigEndianUnsignedShort() );
+            this->SetItemID( stream.ReadBigEndianUInt16() );
         }
         else if( iloc.GetVersion() == 2 )
         {
-            this->SetItemID( stream.ReadBigEndianUnsignedInteger() );
+            this->SetItemID( stream.ReadBigEndianUInt32() );
         }
         
         if( iloc.GetVersion() == 1 || iloc.GetVersion() == 2 )
         {
-            this->SetConstructionMethod( static_cast< uint8_t >( stream.ReadBigEndianUnsignedShort() & 0xFF ) );
+            this->SetConstructionMethod( static_cast< uint8_t >( stream.ReadBigEndianUInt16() & 0xFF ) );
         }
         
-        this->SetDataReferenceIndex( stream.ReadBigEndianUnsignedShort() );
+        this->SetDataReferenceIndex( stream.ReadBigEndianUInt16() );
         
         if( iloc.GetBaseOffsetSize() == 2 )
         {
-            this->SetBaseOffset( stream.ReadBigEndianUnsignedShort() );
+            this->SetBaseOffset( stream.ReadBigEndianUInt16() );
         }
         else if( iloc.GetBaseOffsetSize() == 4 )
         {
-            this->SetBaseOffset( stream.ReadBigEndianUnsignedInteger() );
+            this->SetBaseOffset( stream.ReadBigEndianUInt32() );
         }
         else if( iloc.GetBaseOffsetSize() == 8 )
         {
-            this->SetBaseOffset( stream.ReadBigEndianUnsignedLong() );
+            this->SetBaseOffset( stream.ReadBigEndianUInt64() );
         }
         
-        count = stream.ReadBigEndianUnsignedShort();
+        count = stream.ReadBigEndianUInt16();
         
         this->impl->_extents.clear();
         

@@ -53,7 +53,7 @@ namespace IBMFF
         
         ( void )parser;
         
-        vf = stream.ReadBigEndianUnsignedInteger();
+        vf = stream.ReadBigEndianUInt32();
         
         this->SetVersion( ( uint8_t )( vf >> 24 ) );
         this->SetFlags( vf & 0x00FFFFFF );

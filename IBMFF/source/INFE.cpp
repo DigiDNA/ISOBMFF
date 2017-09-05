@@ -62,8 +62,8 @@ namespace IBMFF
         
         if( this->GetVersion() == 0 || this->GetVersion() == 1 )
         {
-            this->SetItemID( stream.ReadBigEndianUnsignedShort() );
-            this->SetItemProtectionIndex( stream.ReadBigEndianUnsignedShort() );
+            this->SetItemID( stream.ReadBigEndianUInt16() );
+            this->SetItemProtectionIndex( stream.ReadBigEndianUInt16() );
             
             if( parser.GetPreferredStringType() == Parser::StringType::Pascal )
             {
@@ -108,14 +108,14 @@ namespace IBMFF
         {
             if( this->GetVersion() == 2 )
             {
-                this->SetItemID( stream.ReadBigEndianUnsignedShort() );
+                this->SetItemID( stream.ReadBigEndianUInt16() );
             }
             else if( this->GetVersion() == 3 )
             {
-                this->SetItemID( stream.ReadBigEndianUnsignedInteger() );
+                this->SetItemID( stream.ReadBigEndianUInt32() );
             }
             
-            this->SetItemProtectionIndex( stream.ReadBigEndianUnsignedShort() );
+            this->SetItemProtectionIndex( stream.ReadBigEndianUInt16() );
             this->SetItemType( stream.ReadFourCC() );
             
             if( parser.GetPreferredStringType() == Parser::StringType::Pascal )

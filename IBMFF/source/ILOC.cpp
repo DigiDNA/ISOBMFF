@@ -62,23 +62,23 @@ namespace IBMFF
         
         FullBox::ReadData( parser, stream );
         
-        u8 = stream.ReadUnsignedChar();
+        u8 = stream.ReadUInt8();
         
         this->SetOffsetSize( u8 >> 4 );
         this->SetLengthSize( u8 & 0xF );
         
-        u8 = stream.ReadUnsignedChar();
+        u8 = stream.ReadUInt8();
         
         this->SetBaseOffsetSize( u8 >> 4 );
         this->SetIndexSize( u8 & 0xF );
         
         if( this->GetVersion() < 2 )
         {
-            count = stream.ReadBigEndianUnsignedShort();
+            count = stream.ReadBigEndianUInt16();
         }
         else
         {
-            count = stream.ReadBigEndianUnsignedInteger();
+            count = stream.ReadBigEndianUInt32();
         }
         
         this->impl->_items.clear();

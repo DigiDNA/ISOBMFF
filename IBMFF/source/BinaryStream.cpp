@@ -65,7 +65,7 @@ namespace IBMFF
         return this->impl->_bytes.size() > 0;
     }
     
-    uint8_t BinaryStream::ReadUnsignedChar( void )
+    uint8_t BinaryStream::ReadUInt8( void )
     {
         uint8_t n;
         
@@ -76,7 +76,7 @@ namespace IBMFF
         return n;
     }
     
-    int8_t BinaryStream::ReadSignedChar( void )
+    int8_t BinaryStream::ReadInt8( void )
     {
         int8_t n;
         
@@ -87,7 +87,7 @@ namespace IBMFF
         return n;
     }
     
-    uint16_t BinaryStream::ReadUnsignedShort( void )
+    uint16_t BinaryStream::ReadUInt16( void )
     {
         uint16_t n;
         
@@ -98,7 +98,7 @@ namespace IBMFF
         return n;
     }
     
-    int16_t BinaryStream::ReadSignedShort( void )
+    int16_t BinaryStream::ReadInt16( void )
     {
         int16_t n;
         
@@ -109,7 +109,7 @@ namespace IBMFF
         return n;
     }
     
-    uint16_t BinaryStream::ReadBigEndianUnsignedShort( void )
+    uint16_t BinaryStream::ReadBigEndianUInt16( void )
     {
         uint8_t  c[ 2 ];
         uint16_t n;
@@ -130,7 +130,7 @@ namespace IBMFF
         return n;
     }
     
-    uint16_t BinaryStream::ReadLittleEndianUnsignedShort( void )
+    uint16_t BinaryStream::ReadLittleEndianUInt16( void )
     {
         uint8_t  c[ 2 ];
         uint16_t n;
@@ -151,7 +151,7 @@ namespace IBMFF
         return n;
     }
     
-    uint32_t BinaryStream::ReadUnsignedInteger( void )
+    uint32_t BinaryStream::ReadUInt32( void )
     {
         uint32_t n;
         
@@ -162,7 +162,7 @@ namespace IBMFF
         return n;
     }
     
-    int32_t BinaryStream::ReadSignedInteger( void )
+    int32_t BinaryStream::ReadInt32( void )
     {
         int32_t n;
         
@@ -173,7 +173,7 @@ namespace IBMFF
         return n;
     }
     
-    uint32_t BinaryStream::ReadBigEndianUnsignedInteger( void )
+    uint32_t BinaryStream::ReadBigEndianUInt32( void )
     {
         uint8_t  c[ 4 ];
         uint32_t n;
@@ -202,7 +202,7 @@ namespace IBMFF
         return n;
     }
     
-    uint32_t BinaryStream::ReadLittleEndianUnsignedInteger( void )
+    uint32_t BinaryStream::ReadLittleEndianUInt32( void )
     {
         uint8_t  c[ 4 ];
         uint32_t n;
@@ -231,7 +231,7 @@ namespace IBMFF
         return n;
     }
     
-    uint64_t BinaryStream::ReadUnsignedLong( void )
+    uint64_t BinaryStream::ReadUInt64( void )
     {
         uint64_t n;
         
@@ -242,7 +242,7 @@ namespace IBMFF
         return n;
     }
     
-    int64_t BinaryStream::ReadSignedLong( void )
+    int64_t BinaryStream::ReadInt64( void )
     {
         int64_t n;
         
@@ -253,7 +253,7 @@ namespace IBMFF
         return n;
     }
     
-    uint64_t BinaryStream::ReadBigEndianUnsignedLong( void )
+    uint64_t BinaryStream::ReadBigEndianUInt64( void )
     {
         uint8_t  c[ 8 ];
         uint64_t n;
@@ -298,7 +298,7 @@ namespace IBMFF
         return n;
     }
     
-    uint64_t BinaryStream::ReadLittleEndianUnsignedLong( void )
+    uint64_t BinaryStream::ReadLittleEndianUInt64( void )
     {
         uint8_t  c[ 8 ];
         uint64_t n;
@@ -352,11 +352,11 @@ namespace IBMFF
         
         if( integerLength + fractionalLength == 16 )
         {
-            n = this->ReadBigEndianUnsignedShort();
+            n = this->ReadBigEndianUInt16();
         }
         else
         {
-            n = this->ReadBigEndianUnsignedInteger();
+            n = this->ReadBigEndianUInt32();
         }
         
         integer        = n >> fractionalLength;
@@ -375,11 +375,11 @@ namespace IBMFF
         
         if( integerLength + fractionalLength == 16 )
         {
-            n = this->ReadLittleEndianUnsignedShort();
+            n = this->ReadLittleEndianUInt16();
         }
         else
         {
-            n = this->ReadLittleEndianUnsignedInteger();
+            n = this->ReadLittleEndianUInt32();
         }
         
         integer        = n >> fractionalLength;
@@ -427,7 +427,7 @@ namespace IBMFF
         uint8_t     length;
         std::string ret;
         
-        length = this->ReadUnsignedChar();
+        length = this->ReadUInt8();
         
         if( length == 0 )
         {
@@ -445,15 +445,15 @@ namespace IBMFF
     {
         return Matrix
         (
-            this->ReadBigEndianUnsignedInteger(),
-            this->ReadBigEndianUnsignedInteger(),
-            this->ReadBigEndianUnsignedInteger(),
-            this->ReadBigEndianUnsignedInteger(),
-            this->ReadBigEndianUnsignedInteger(),
-            this->ReadBigEndianUnsignedInteger(),
-            this->ReadBigEndianUnsignedInteger(),
-            this->ReadBigEndianUnsignedInteger(),
-            this->ReadBigEndianUnsignedInteger()
+            this->ReadBigEndianUInt32(),
+            this->ReadBigEndianUInt32(),
+            this->ReadBigEndianUInt32(),
+            this->ReadBigEndianUInt32(),
+            this->ReadBigEndianUInt32(),
+            this->ReadBigEndianUInt32(),
+            this->ReadBigEndianUInt32(),
+            this->ReadBigEndianUInt32(),
+            this->ReadBigEndianUInt32()
         );
     }
     

@@ -55,7 +55,7 @@ namespace IBMFF
         ContainerBox container( "????" );
         
         FullBox::ReadData( parser, stream );
-        stream.ReadBigEndianUnsignedInteger();
+        stream.ReadBigEndianUInt32();
         container.ReadData( parser, stream );
         
         this->impl->_boxes = container.GetBoxes();

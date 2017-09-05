@@ -58,7 +58,7 @@ namespace IBMFF
         
         ( void )parser;
         
-        u8 = stream.ReadUnsignedChar();
+        u8 = stream.ReadUInt8();
         
         this->SetAngle( u8 & 0x3 );
     }

@@ -58,13 +58,13 @@ namespace IBMFF
     {
         FullBox::ReadData( parser, stream );
         
-        this->impl->_predefined = stream.ReadBigEndianUnsignedInteger();
+        this->impl->_predefined = stream.ReadBigEndianUInt32();
         
         this->SetHandlerType( stream.ReadFourCC() );
         
-        this->impl->_reserved[ 0 ] = stream.ReadBigEndianUnsignedInteger();
-        this->impl->_reserved[ 1 ] = stream.ReadBigEndianUnsignedInteger();
-        this->impl->_reserved[ 2 ] = stream.ReadBigEndianUnsignedInteger();
+        this->impl->_reserved[ 0 ] = stream.ReadBigEndianUInt32();
+        this->impl->_reserved[ 1 ] = stream.ReadBigEndianUInt32();
+        this->impl->_reserved[ 2 ] = stream.ReadBigEndianUInt32();
         
         if( parser.GetPreferredStringType() == Parser::StringType::Pascal )
         {

@@ -57,7 +57,7 @@ namespace IBMFF
     void FTYP::ReadData( Parser & parser, BinaryStream & stream )
     {
         this->SetMajorBrand( stream.ReadFourCC() );
-        this->SetMinorVersion( stream.ReadBigEndianUnsignedInteger() );
+        this->SetMinorVersion( stream.ReadBigEndianUInt32() );
         
         while( stream.HasBytesAvailable() )
         {

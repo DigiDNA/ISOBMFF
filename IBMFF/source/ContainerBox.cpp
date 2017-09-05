@@ -60,12 +60,12 @@ namespace IBMFF
         {
             ( void )parser;
             
-            length   = stream.ReadBigEndianUnsignedInteger();
+            length   = stream.ReadBigEndianUInt32();
             name     = stream.ReadFourCC();
             
             if( length == 1 )
             {
-                length  = stream.ReadBigEndianUnsignedLong();
+                length  = stream.ReadBigEndianUInt64();
                 content = BinaryStream( stream, length - 16 );
             }
             else

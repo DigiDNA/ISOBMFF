@@ -65,36 +65,36 @@ namespace IBMFF
         
         if( this->GetVersion() == 1 )
         {
-            this->SetCreationTime( stream.ReadBigEndianUnsignedLong() );
-            this->SetModificationTime( stream.ReadBigEndianUnsignedLong() );
-            this->SetTimescale( stream.ReadBigEndianUnsignedInteger() );
-            this->SetDuration( stream.ReadBigEndianUnsignedLong() );
+            this->SetCreationTime( stream.ReadBigEndianUInt64() );
+            this->SetModificationTime( stream.ReadBigEndianUInt64() );
+            this->SetTimescale( stream.ReadBigEndianUInt32() );
+            this->SetDuration( stream.ReadBigEndianUInt64() );
         }
         else
         {
-            this->SetCreationTime( stream.ReadBigEndianUnsignedInteger() );
-            this->SetModificationTime( stream.ReadBigEndianUnsignedInteger() );
-            this->SetTimescale( stream.ReadBigEndianUnsignedInteger() );
-            this->SetDuration( stream.ReadBigEndianUnsignedInteger() );
+            this->SetCreationTime( stream.ReadBigEndianUInt32() );
+            this->SetModificationTime( stream.ReadBigEndianUInt32() );
+            this->SetTimescale( stream.ReadBigEndianUInt32() );
+            this->SetDuration( stream.ReadBigEndianUInt32() );
         }
         
-        this->SetRate( stream.ReadBigEndianUnsignedInteger() );
-        this->SetVolume( stream.ReadBigEndianUnsignedShort() );
+        this->SetRate( stream.ReadBigEndianUInt32() );
+        this->SetVolume( stream.ReadBigEndianUInt16() );
         
-        this->impl->_reserved1      = stream.ReadBigEndianUnsignedShort();
-        this->impl->_reserved2[ 0 ] = stream.ReadBigEndianUnsignedInteger();
-        this->impl->_reserved2[ 1 ] = stream.ReadBigEndianUnsignedInteger();
+        this->impl->_reserved1      = stream.ReadBigEndianUInt16();
+        this->impl->_reserved2[ 0 ] = stream.ReadBigEndianUInt32();
+        this->impl->_reserved2[ 1 ] = stream.ReadBigEndianUInt32();
         
         this->SetMatrix( stream.ReadMatrix() );
         
-        this->impl->_predefined[ 0 ] = stream.ReadBigEndianUnsignedInteger();
-        this->impl->_predefined[ 1 ] = stream.ReadBigEndianUnsignedInteger();
-        this->impl->_predefined[ 2 ] = stream.ReadBigEndianUnsignedInteger();
-        this->impl->_predefined[ 3 ] = stream.ReadBigEndianUnsignedInteger();
-        this->impl->_predefined[ 4 ] = stream.ReadBigEndianUnsignedInteger();
-        this->impl->_predefined[ 5 ] = stream.ReadBigEndianUnsignedInteger();
+        this->impl->_predefined[ 0 ] = stream.ReadBigEndianUInt32();
+        this->impl->_predefined[ 1 ] = stream.ReadBigEndianUInt32();
+        this->impl->_predefined[ 2 ] = stream.ReadBigEndianUInt32();
+        this->impl->_predefined[ 3 ] = stream.ReadBigEndianUInt32();
+        this->impl->_predefined[ 4 ] = stream.ReadBigEndianUInt32();
+        this->impl->_predefined[ 5 ] = stream.ReadBigEndianUInt32();
         
-        this->SetNextTrackID( stream.ReadBigEndianUnsignedInteger() );
+        this->SetNextTrackID( stream.ReadBigEndianUInt32() );
     }
     
     void MVHD::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
