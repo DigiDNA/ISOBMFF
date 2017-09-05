@@ -33,9 +33,10 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include <fstream>
 
-void PrintData( const IBMFF::Box & mdat, IBMFF::ILOC::Item::Extent & extent );
-void PrintDataLine( const std::vector< uint8_t > & data, uint64_t length );
+void PrintData( const std::vector< uint8_t > & bytes, IBMFF::ILOC::Item::Extent & extent );
+void PrintDataLine( const std::vector< uint8_t > & bytes, uint64_t length );
 
 int main( int argc, const char * argv[] )
 {
@@ -71,21 +72,19 @@ int main( int argc, const char * argv[] )
         {
             std::shared_ptr< IBMFF::FTYP > ftyp;
             std::shared_ptr< IBMFF::META > meta;
-            std::shared_ptr< IBMFF::Box  > mdat;
             std::shared_ptr< IBMFF::IINF > iinf;
             std::shared_ptr< IBMFF::ILOC > iloc;
             IBMFF::ILOC::Item::Extent      exif;
             IBMFF::ILOC::Item::Extent      hvc1;
+            std::vector< uint8_t >         data;
             
             ftyp = file->GetTypedBox< IBMFF::FTYP >( "ftyp" );
             meta = file->GetTypedBox< IBMFF::META >( "meta" );
-            mdat = file->GetBox( "mdat" );
             
             if
             (
                    ftyp                  == nullptr
                 || meta                  == nullptr
-                || mdat                  == nullptr
                 || ftyp->GetMajorBrand() != "heic"
             )
             {
@@ -98,6 +97,24 @@ int main( int argc, const char * argv[] )
             if( iloc == nullptr || iinf == nullptr )
             {
                 continue;
+            }
+            
+            {
+                std::ifstream           stream;
+                std::ifstream::pos_type length;
+                
+                stream.open( path, std::ios::binary | std::ios::ate );
+                
+                if( stream.good() == false )
+                {
+                    continue;
+                }
+                
+                length = stream.tellg();
+                data   = std::vector< uint8_t >( static_cast< std::size_t >( length ) );
+                
+                stream.seekg( 0, std::ios::beg );
+                stream.read( reinterpret_cast< char * >( &( data[ 0 ] ) ), length );
             }
             
             for( const auto & entry: iinf->GetEntries()  )
@@ -138,7 +155,7 @@ int main( int argc, const char * argv[] )
                 std::cout << "Found EXIF data ( index = " << exif.GetIndex() << ", offset = " << exif.GetOffset() << ", length = " << exif.GetLength() << " ):" << std::endl;
                 std::cout << std::endl;
                 
-                PrintData( *( mdat ), exif );
+                PrintData( data, exif );
                 
                 std::cout << std::endl;
             }
@@ -148,7 +165,7 @@ int main( int argc, const char * argv[] )
                 std::cout << "Found HVC1 data ( index = " << hvc1.GetIndex() << ", offset = " << hvc1.GetOffset() << ", length = " << hvc1.GetLength() << " ):" << std::endl;
                 std::cout << std::endl;
                 
-                PrintData( *( mdat ), hvc1 );
+                PrintData( data, hvc1 );
                 
                 std::cout << std::endl;
             }
@@ -180,13 +197,13 @@ std::vector< _T_ > Slice( const std::vector< _T_ > & v, uint64_t start, uint64_t
     return std::vector< uint8_t >( v.begin() + s, v.begin() + s + l );
 }
 
-void PrintData( const IBMFF::Box & mdat, IBMFF::ILOC::Item::Extent & extent )
+void PrintData( const std::vector< uint8_t > & bytes, IBMFF::ILOC::Item::Extent & extent )
 {
     std::vector< uint8_t > data;
     std::vector< uint8_t > part;
     uint64_t               i;
     
-    data = Slice( mdat.GetData(), extent.GetOffset(), extent.GetLength() );
+    data = Slice( bytes, extent.GetOffset(), extent.GetLength() );
     
     if( data.size() )
     {
@@ -208,11 +225,11 @@ void PrintData( const IBMFF::Box & mdat, IBMFF::ILOC::Item::Extent & extent )
     }
 }
 
-void PrintDataLine( const std::vector< uint8_t > & data, uint64_t length )
+void PrintDataLine( const std::vector< uint8_t > & bytes, uint64_t length )
 {
     uint64_t i;
     
-    for( auto byte: data )
+    for( auto byte: bytes )
     {
         {
             std::stringstream ss;
@@ -227,9 +244,9 @@ void PrintDataLine( const std::vector< uint8_t > & data, uint64_t length )
         }
     }
     
-    if( data.size() < length )
+    if( bytes.size() < length )
     {
-        for( i = 0; i < length - data.size(); i++ )
+        for( i = 0; i < length - bytes.size(); i++ )
         {
             std::cout << "   ";
         }
@@ -237,7 +254,7 @@ void PrintDataLine( const std::vector< uint8_t > & data, uint64_t length )
     
     std::cout << "| ";
     
-    for( auto byte: data )
+    for( auto byte: bytes )
     {
         if( isprint( byte ) && !isspace( byte ) )
         {
