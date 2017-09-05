@@ -1,7 +1,7 @@
 /*******************************************************************************
  * The MIT License (MIT)
  * 
- * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com
+ * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com / www.imazing.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 
 /*!
  * @file        File.cpp
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
+ * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
 #include <IBMFF/File.hpp>
@@ -43,7 +43,40 @@ class XS::PIMPL::Object< IBMFF::File >::IMPL
 #include <XS/PIMPL/Object-IMPL.hpp>
 
 namespace IBMFF
-{}
+{
+    File::File( void ):
+        IBMFF::ContainerBox( "????" ),
+        XS::PIMPL::Object< File >()
+    {}
+    
+    void File::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    {
+        std::string                           i( indentLevel * 4, ' ' );
+        std::vector< std::shared_ptr< Box > > boxes;
+        
+        os << "<IBMFF::File>";
+        
+        boxes = this->GetBoxes();
+        
+        if( boxes.size() > 0 )
+        {
+            os << std::endl
+               << i
+               << "{"
+               << std::endl;
+            
+            for( const auto & box: boxes )
+            {
+                box->WriteDescription( os, indentLevel + 1 );
+                
+                os << std::endl;
+            }
+            
+            os << i
+               << "}";
+        }
+    }
+}
 
 XS::PIMPL::Object< IBMFF::File >::IMPL::IMPL( void )
 {}

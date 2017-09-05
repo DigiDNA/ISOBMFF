@@ -1,7 +1,7 @@
 /*******************************************************************************
  * The MIT License (MIT)
  * 
- * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com
+ * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com / www.imazing.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,21 +24,27 @@
 
 /*!
  * @header      File.hpp
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
+ * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
 #ifndef IBMFF_FILE_HPP
 #define IBMFF_FILE_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <IBMFF/ContainerBox.hpp>
+#include <ostream>
 
 namespace IBMFF
 {
-    class File: XS::PIMPL::Object< File >
+    class File: public ContainerBox, public XS::PIMPL::Object< File >
     {
         public:
             
             using XS::PIMPL::Object< File >::impl;
+            
+            File( void );
+            
+            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
     };
 }
 
