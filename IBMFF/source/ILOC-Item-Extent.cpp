@@ -1,0 +1,157 @@
+/*******************************************************************************
+ * The MIT License (MIT)
+ * 
+ * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com / www.imazing.com
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ ******************************************************************************/
+
+/*!
+ * @file        ILOC-Item-Extent.hpp
+ * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
+ */
+
+#include <IBMFF/ILOC.hpp>
+#include <IBMFF/Parser.hpp>
+
+template<>
+class XS::PIMPL::Object< IBMFF::ILOC::Item::Extent >::IMPL
+{
+    public:
+        
+        IMPL( void );
+        IMPL( const IMPL & o );
+        ~IMPL( void );
+        
+        uint64_t _index;
+        uint64_t _offset;
+        uint64_t _length;
+};
+
+#define XS_PIMPL_CLASS IBMFF::ILOC::Item::Extent
+#include <XS/PIMPL/Object-IMPL.hpp>
+
+namespace IBMFF
+{
+    ILOC::Item::Extent::Extent( void ):
+        XS::PIMPL::Object< Extent >()
+    {}
+    
+    ILOC::Item::Extent::Extent( BinaryStream & stream, const ILOC & iloc ):
+        XS::PIMPL::Object< Extent >()
+    {
+        if( iloc.GetVersion() == 1 || iloc.GetVersion() == 2 )
+        {
+            if( iloc.GetIndexSize() == 2 )
+            {
+                this->SetIndex( stream.ReadBigEndianUnsignedShort() );
+            }
+            else if( iloc.GetIndexSize() == 4 )
+            {
+                this->SetIndex( stream.ReadBigEndianUnsignedInteger() );
+            }
+            else if( iloc.GetIndexSize() == 8 )
+            {
+                this->SetIndex( stream.ReadBigEndianUnsignedLong() );
+            }
+            
+            if( iloc.GetOffsetSize() == 2 )
+            {
+                this->SetOffset( stream.ReadBigEndianUnsignedShort() );
+            }
+            else if( iloc.GetOffsetSize() == 4 )
+            {
+                this->SetOffset( stream.ReadBigEndianUnsignedInteger() );
+            }
+            else if( iloc.GetOffsetSize() == 8 )
+            {
+                this->SetOffset( stream.ReadBigEndianUnsignedLong() );
+            }
+            
+            if( iloc.GetLengthSize() == 2 )
+            {
+                this->SetLength( stream.ReadBigEndianUnsignedShort() );
+            }
+            else if( iloc.GetLengthSize() == 4 )
+            {
+                this->SetLength( stream.ReadBigEndianUnsignedInteger() );
+            }
+            else if( iloc.GetLengthSize() == 8 )
+            {
+                this->SetLength( stream.ReadBigEndianUnsignedLong() );
+            }
+        }
+    }
+    
+    uint64_t ILOC::Item::Extent::GetIndex( void ) const
+    {
+        return this->impl->_index;
+    }
+    
+    uint64_t ILOC::Item::Extent::GetOffset( void ) const
+    {
+        return this->impl->_offset;
+    }
+    
+    uint64_t ILOC::Item::Extent::GetLength( void ) const
+    {
+        return this->impl->_length;
+    }
+    
+    void ILOC::Item::Extent::SetIndex( uint64_t value )
+    {
+        this->impl->_index = value;
+    }
+    
+    void ILOC::Item::Extent::SetOffset( uint64_t value )
+    {
+        this->impl->_offset = value;
+    }
+    
+    void ILOC::Item::Extent::SetLength( uint64_t value )
+    {
+        this->impl->_length = value;
+    }
+    
+    std::ostream & operator << ( std::ostream & os, const ILOC::Item::Extent & extent )
+    {
+        os << "{ index = " << extent.GetIndex()
+           << ", offset = " << extent.GetOffset()
+           << ", length = " << extent.GetLength()
+           << " }";
+        
+        return os;
+    }
+}
+
+XS::PIMPL::Object< IBMFF::ILOC::Item::Extent >::IMPL::IMPL( void ):
+    _index( 0 ),
+    _offset( 0 ),
+    _length( 0 )
+{}
+
+XS::PIMPL::Object< IBMFF::ILOC::Item::Extent >::IMPL::IMPL( const IMPL & o ):
+    _index( o._index ),
+    _offset( o._offset ),
+    _length( o._length )
+{}
+
+XS::PIMPL::Object< IBMFF::ILOC::Item::Extent >::IMPL::~IMPL( void )
+{}
+
