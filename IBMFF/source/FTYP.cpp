@@ -57,12 +57,12 @@ namespace IBMFF
     {
         ( void )parser;
         
-        this->SetMajorBrand( stream.ReadString( 4 ) );
+        this->SetMajorBrand( stream.ReadFourCC() );
         this->SetMinorVersion( stream.ReadBigEndianUnsignedInteger() );
         
         while( stream.HasBytesAvailable() )
         {
-            this->AddCompatibleBrand( stream.ReadString( 4 ) );
+            this->AddCompatibleBrand( stream.ReadFourCC() );
         }
     }
     

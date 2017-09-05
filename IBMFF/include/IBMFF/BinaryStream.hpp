@@ -44,6 +44,12 @@ namespace IBMFF
             
             using XS::PIMPL::Object< BinaryStream >::impl;
             
+            enum class StringType: int
+            {
+                NULLTerminated,
+                Pascal
+            };
+            
             BinaryStream( void );
             BinaryStream( std::string path );
             BinaryStream( BinaryStream & stream, uint64_t length );
@@ -71,8 +77,13 @@ namespace IBMFF
             float ReadBigEndianFixedPoint( unsigned int integerLength, unsigned int fractionalLength );
             float ReadLittleEndianFixedPoint( unsigned int integerLength, unsigned int fractionalLength );
             
-            std::string ReadString( uint64_t length );
+            StringType GetDefaultStringType( void ) const;
+            void       SetDefaultStringType( StringType value );
+            
+            std::string ReadFourCC( void );
+            std::string ReadString( void );
             std::string ReadNULLTerminatedString( void );
+            std::string ReadPascalString( void );
             
             Matrix ReadMatrix( void );
             

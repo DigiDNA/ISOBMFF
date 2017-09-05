@@ -61,7 +61,7 @@ namespace IBMFF
             ( void )parser;
             
             length   = stream.ReadBigEndianUnsignedInteger();
-            name     = stream.ReadString( 4 );
+            name     = stream.ReadFourCC();
             
             if( length == 1 )
             {

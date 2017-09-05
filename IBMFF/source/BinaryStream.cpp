@@ -44,7 +44,8 @@ class XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL
         IMPL( const IMPL & o );
         ~IMPL( void );
         
-        std::vector< uint8_t > _bytes;
+        std::vector< uint8_t >          _bytes;
+        IBMFF::BinaryStream::StringType _stringType;
 };
 
 #define XS_PIMPL_CLASS IBMFF::BinaryStream
@@ -390,35 +391,76 @@ namespace IBMFF
         return integer + fractional;
     }
     
-    std::string BinaryStream::ReadString( uint64_t length )
+    BinaryStream::StringType BinaryStream::GetDefaultStringType( void ) const
     {
-        std::string s( reinterpret_cast< const char * >( &( this->impl->_bytes[ 0 ] ) ), length );
+        return this->impl->_stringType;
+    }
+    
+    void BinaryStream::SetDefaultStringType( StringType value )
+    {
+        this->impl->_stringType = value;
+    }
+    
+    std::string BinaryStream::ReadFourCC( void )
+    {
+        std::string s( reinterpret_cast< const char * >( &( this->impl->_bytes[ 0 ] ) ), 4 );
         
-        this->DeleteBytes( length );
+        this->DeleteBytes( 4 );
         
         return s;
     }
     
+    std::string BinaryStream::ReadString( void )
+    {
+        if( this->impl->_stringType == StringType::Pascal )
+        {
+            return this->ReadPascalString();
+        }
+        
+        return this->ReadNULLTerminatedString();
+    }
+    
     std::string BinaryStream::ReadNULLTerminatedString( void )
     {
-        char        c;
-        std::string s;
+        uint64_t    length;
+        std::string ret;
         
-        while( 1 )
+        length = 0;
+        
+        for( const auto b: this->impl->_bytes )
         {
-            c = 0;
+            length++;
             
-            this->Read( reinterpret_cast< uint8_t * >( &c ), 1 );
-            
-            if( c == 0 )
+            if( b == 0 )
             {
                 break;
             }
-            
-            s.append( 1, c );
         }
         
-        return s;
+        ret = std::string( length, ' ' );
+        
+        this->Read( reinterpret_cast< uint8_t * >( &( ret[ 0 ] ) ), length );
+        
+        return ret;
+    }
+    
+    std::string BinaryStream::ReadPascalString( void )
+    {
+        uint8_t     length;
+        std::string ret;
+        
+        length = this->ReadUnsignedChar();
+        
+        if( length == 0 )
+        {
+            return "";
+        }
+        
+        ret = std::string( length, ' ' );
+        
+        this->Read( reinterpret_cast< uint8_t * >( &( ret[ 0 ] ) ), length );
+        
+        return ret;
     }
     
     Matrix BinaryStream::ReadMatrix( void )
@@ -454,10 +496,12 @@ namespace IBMFF
     }
 }
 
-XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( void )
+XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( void ):
+    _stringType( IBMFF::BinaryStream::StringType::NULLTerminated )
 {}
 
-XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const std::string & path )
+XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const std::string & path ):
+    _stringType( IBMFF::BinaryStream::StringType::NULLTerminated )
 {
     std::ifstream           stream;
     std::ifstream::pos_type length;
@@ -477,13 +521,15 @@ XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const std::string & path )
 }
 
 XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( IBMFF::BinaryStream & stream, uint64_t length ):
-    _bytes( length )
+    _bytes( length ),
+    _stringType( IBMFF::BinaryStream::StringType::NULLTerminated )
 {
     stream.Read( &( this->_bytes[ 0 ] ), length );
 }
 
 XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const IMPL & o ):
-    _bytes( o._bytes )
+    _bytes( o._bytes ),
+    _stringType( o._stringType )
 {}
 
 XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::~IMPL( void )
