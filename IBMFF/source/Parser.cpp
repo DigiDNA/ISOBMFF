@@ -42,6 +42,7 @@
 #include <IBMFF/IREF.hpp>
 #include <IBMFF/INFE.hpp>
 #include <IBMFF/IROT.hpp>
+#include <IBMFF/HVCC.hpp>
 #include <map>
 #include <stdexcept>
 
@@ -205,4 +206,5 @@ void XS::PIMPL::Object< IBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterBox( "iref", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::IREF >(); } );
     this->RegisterBox( "infe", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::INFE >(); } );
     this->RegisterBox( "irot", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::IROT >(); } );
+    this->RegisterBox( "hvcC", [ = ]( void ) -> std::shared_ptr< IBMFF::Box > { return std::make_shared< IBMFF::HVCC >(); } );
 }

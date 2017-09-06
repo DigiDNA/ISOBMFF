@@ -28,7 +28,6 @@
  */
 
 #include <IBMFF/ILOC.hpp>
-#include <IBMFF/Parser.hpp>
 
 template<>
 class XS::PIMPL::Object< IBMFF::ILOC >::IMPL

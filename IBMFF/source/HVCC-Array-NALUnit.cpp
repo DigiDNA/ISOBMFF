@@ -23,51 +23,71 @@
  ******************************************************************************/
 
 /*!
- * @file        IDAT.hpp
+ * @file        HVCC-Array-NALUnit.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#include <IBMFF/IDAT.hpp>
+#include <IBMFF/HVCC.hpp>
 #include <sstream>
 #include <iomanip>
 
 template<>
-class XS::PIMPL::Object< IBMFF::IDAT >::IMPL
+class XS::PIMPL::Object< IBMFF::HVCC::Array::NALUnit >::IMPL
 {
     public:
         
         IMPL( void );
         IMPL( const IMPL & o );
         ~IMPL( void );
+        
+        std::vector< uint8_t > _data;
 };
 
-#define XS_PIMPL_CLASS IBMFF::IDAT
+#define XS_PIMPL_CLASS IBMFF::HVCC::Array::NALUnit
 #include <XS/PIMPL/Object-IMPL.hpp>
 
 namespace IBMFF
 {
-    IDAT::IDAT( void ): IBMFF::Box( "idat" )
+    HVCC::HVCC::Array::NALUnit::NALUnit( void )
     {}
     
-    void IDAT::ReadData( Parser & parser, BinaryStream & stream )
+    HVCC::HVCC::Array::NALUnit::NALUnit( BinaryStream & stream )
     {
-        Box::ReadData( parser, stream );
+        std::vector< uint8_t > data;
+        uint16_t               size;
+        
+        size = stream.ReadBigEndianUInt16();
+        
+        if( size > 0 )
+        {
+            data = std::vector< uint8_t >( size );
+            
+            stream.Read( &( data[ 0 ] ), size );
+        }
+        
+        this->SetData( data );
     }
     
-    void IDAT::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    std::vector< uint8_t > HVCC::HVCC::Array::NALUnit::GetData( void ) const
     {
-        std::string            i( ( indentLevel + 1 ) * 4, ' ' );
+        return this->impl->_data;
+    }
+    
+    void HVCC::HVCC::Array::NALUnit::SetData( const std::vector< uint8_t > & value )
+    {
+        this->impl->_data = value;
+    }
+    
+    std::ostream & operator << ( std::ostream & os, const HVCC::HVCC::Array::NALUnit & unit )
+    {
         std::vector< uint8_t > data;
         
-        Box::WriteDescription( os, indentLevel );
+        data = unit.GetData();
         
-        data = this->GetData();
+        os << "{";
         
         if( data.size() > 0 )
         {
-            os << std::endl
-               << i << "- Bytes:";
-            
             for( auto byte: data )
             {
                 {
@@ -81,18 +101,23 @@ namespace IBMFF
                     os << " " << ss.str();
                 }
             }
+            
+            os << " ";
         }
+        
+        os << "}";
+        
+        return os;
     }
 }
 
-XS::PIMPL::Object< IBMFF::IDAT >::IMPL::IMPL( void )
+XS::PIMPL::Object< IBMFF::HVCC::Array::NALUnit >::IMPL::IMPL( void )
 {}
 
-XS::PIMPL::Object< IBMFF::IDAT >::IMPL::IMPL( const IMPL & o )
-{
-    ( void )o;
-}
+XS::PIMPL::Object< IBMFF::HVCC::Array::NALUnit >::IMPL::IMPL( const IMPL & o ):
+    _data( o._data )
+{}
 
-XS::PIMPL::Object< IBMFF::IDAT >::IMPL::~IMPL( void )
+XS::PIMPL::Object< IBMFF::HVCC::Array::NALUnit >::IMPL::~IMPL( void )
 {}
 

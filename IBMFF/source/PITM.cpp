@@ -28,7 +28,6 @@
  */
 
 #include <IBMFF/PITM.hpp>
-#include <IBMFF/Parser.hpp>
 
 template<>
 class XS::PIMPL::Object< IBMFF::PITM >::IMPL

@@ -28,7 +28,7 @@
  */
 
 #include <IBMFF/IINF.hpp>
-#include <IBMFF/Parser.hpp>
+#include <IBMFF/ContainerBox.hpp>
 
 template<>
 class XS::PIMPL::Object< IBMFF::IINF >::IMPL

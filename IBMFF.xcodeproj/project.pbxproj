@@ -8,52 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		0515C8C31F2A7807003B8594 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0515C8C11F2A7807003B8594 /* File.cpp */; };
-		0515C8C41F2A7807003B8594 /* File.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0515C8C21F2A7807003B8594 /* File.hpp */; };
-		051F4D391F5DDCF800E6E12C /* BinaryStream.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 051F4D381F5DDCF800E6E12C /* BinaryStream.hpp */; };
 		051F4D3B1F5DDCFE00E6E12C /* BinaryStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D3A1F5DDCFE00E6E12C /* BinaryStream.cpp */; };
 		051F4D431F5E01C200E6E12C /* FTYP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D421F5E01C200E6E12C /* FTYP.cpp */; };
-		051F4D451F5E01C800E6E12C /* FTYP.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 051F4D441F5E01C800E6E12C /* FTYP.hpp */; };
-		051F4D471F5E0AC800E6E12C /* MVHD.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 051F4D461F5E0AC400E6E12C /* MVHD.hpp */; };
 		051F4D491F5E0AD500E6E12C /* MVHD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D481F5E0AD500E6E12C /* MVHD.cpp */; };
 		051F4D4C1F5E0DD800E6E12C /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D4B1F5E0DD800E6E12C /* Matrix.cpp */; };
-		057280741F5ED7C500F02C27 /* PITM.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 057280701F5ED7C200F02C27 /* PITM.hpp */; };
+		0531FB081F5FF42A00BCD30D /* IDAT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0531FB071F5FF42A00BCD30D /* IDAT.cpp */; };
+		0531FB0A1F5FF45700BCD30D /* HVCC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0531FB091F5FF45700BCD30D /* HVCC.cpp */; };
+		054480521F6007E1008CCDBA /* HVCC-Array.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 054480501F6006B1008CCDBA /* HVCC-Array.cpp */; };
+		054480781F60174A008CCDBA /* HVCC-Array-NALUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 054480771F601749008CCDBA /* HVCC-Array-NALUnit.cpp */; };
 		057280761F5ED7CE00F02C27 /* PITM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280751F5ED7CE00F02C27 /* PITM.cpp */; };
-		057280781F5ED9E800F02C27 /* IINF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 057280771F5ED9E500F02C27 /* IINF.hpp */; };
 		0572807A1F5ED9FF00F02C27 /* IINF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280791F5ED9FE00F02C27 /* IINF.cpp */; };
-		0572807F1F5EDBC700F02C27 /* IDAT.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0572807B1F5EDBC700F02C27 /* IDAT.hpp */; };
-		057280801F5EDBC700F02C27 /* ILOC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0572807C1F5EDBC700F02C27 /* ILOC.hpp */; };
-		057280811F5EDBC700F02C27 /* DREF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0572807D1F5EDBC700F02C27 /* DREF.hpp */; };
-		057280821F5EDBC700F02C27 /* IREF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0572807E1F5EDBC700F02C27 /* IREF.hpp */; };
-		057280871F5EDBCF00F02C27 /* IDAT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280831F5EDBCE00F02C27 /* IDAT.cpp */; };
 		057280881F5EDBCF00F02C27 /* ILOC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280841F5EDBCE00F02C27 /* ILOC.cpp */; };
 		057280891F5EDBCF00F02C27 /* IREF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280851F5EDBCF00F02C27 /* IREF.cpp */; };
 		0572808A1F5EDBCF00F02C27 /* DREF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280861F5EDBCF00F02C27 /* DREF.cpp */; };
-		0572809E1F5EE18E00F02C27 /* INFE.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0572809D1F5EE18B00F02C27 /* INFE.hpp */; };
 		057280A01F5EE19400F02C27 /* INFE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0572809F1F5EE19400F02C27 /* INFE.cpp */; };
 		057280A21F5EFC9600F02C27 /* ILOC-Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280A11F5EFC9600F02C27 /* ILOC-Item.cpp */; };
 		057280A41F5F038A00F02C27 /* ILOC-Item-Extent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280A31F5F038A00F02C27 /* ILOC-Item-Extent.cpp */; };
-		057280A71F5F210900F02C27 /* Container.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 057280A61F5F210700F02C27 /* Container.hpp */; };
 		057280A91F5F240700F02C27 /* Container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280A81F5F240700F02C27 /* Container.cpp */; };
-		057280AB1F5F449900F02C27 /* IROT.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 057280AA1F5F449600F02C27 /* IROT.hpp */; };
 		057280AD1F5F44A100F02C27 /* IROT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280AC1F5F44A000F02C27 /* IROT.cpp */; };
 		057280C71F5F5B5B00F02C27 /* IMG1.HEIC in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C41F5F5B4E00F02C27 /* IMG1.HEIC */; };
 		057280C81F5F5B5D00F02C27 /* IMG2.HEIC in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C61F5F5B4E00F02C27 /* IMG2.HEIC */; };
 		057280C91F5F5B5F00F02C27 /* MOV1.MOV in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C51F5F5B4E00F02C27 /* MOV1.MOV */; };
-		059605981F5DC43B0005F8C9 /* ContainerBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059605931F5DC4130005F8C9 /* ContainerBox.hpp */; };
-		059605991F5DC43B0005F8C9 /* FullBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059605971F5DC4300005F8C9 /* FullBox.hpp */; };
-		0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0515C8C01F2A77C4003B8594 /* IBMFF.hpp */; };
 		0596059C1F5DC4CE0005F8C9 /* ContainerBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */; };
 		0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059D1F5DC4D50005F8C9 /* FullBox.cpp */; };
 		059DBAD21F5EBC1000B7A940 /* HDLR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 059DBACE1F5EBC1000B7A940 /* HDLR.cpp */; };
-		059DBAD41F5EBC2300B7A940 /* HDLR.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 059DBAD31F5EBC2000B7A940 /* HDLR.hpp */; };
-		05A5A7691F5EAFA000D16AD9 /* Matrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */; };
-		05A5A76A1F5EAFA000D16AD9 /* META.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05A5A7651F5EAF9A00D16AD9 /* META.hpp */; };
 		05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05A5A76B1F5EAFAE00D16AD9 /* META.cpp */; };
 		05DA96061F2A7D5B005F46DB /* libIBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libIBMFF.a */; };
 		05DA96121F2A7DC3005F46DB /* GoogleMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A4111A1F2A7D2E002B1A79 /* GoogleMock.framework */; };
 		05DA96141F2A7DD4005F46DB /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DA96131F2A7DD4005F46DB /* Parser.cpp */; };
-		05F471E21F2B5CE500738744 /* Parser.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05F471DC1F2B5CE500738744 /* Parser.hpp */; };
-		05F471E31F2B5CE500738744 /* Box.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05F471DD1F2B5CE500738744 /* Box.hpp */; };
 		05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E51F2B5CEE00738744 /* Parser.cpp */; };
 		05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E71F2B5CEF00738744 /* Box.cpp */; };
 		05F471F21F2B5E6B00738744 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471F11F2B5E6B00738744 /* main.cpp */; };
@@ -141,6 +123,11 @@
 		051F4D481F5E0AD500E6E12C /* MVHD.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MVHD.cpp; sourceTree = "<group>"; };
 		051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
 		051F4D4B1F5E0DD800E6E12C /* Matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
+		0531FB021F5FF41B00BCD30D /* HVCC.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HVCC.hpp; sourceTree = "<group>"; };
+		0531FB071F5FF42A00BCD30D /* IDAT.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IDAT.cpp; sourceTree = "<group>"; };
+		0531FB091F5FF45700BCD30D /* HVCC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HVCC.cpp; sourceTree = "<group>"; };
+		054480501F6006B1008CCDBA /* HVCC-Array.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "HVCC-Array.cpp"; sourceTree = "<group>"; };
+		054480771F601749008CCDBA /* HVCC-Array-NALUnit.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "HVCC-Array-NALUnit.cpp"; sourceTree = "<group>"; };
 		057280701F5ED7C200F02C27 /* PITM.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PITM.hpp; sourceTree = "<group>"; };
 		057280751F5ED7CE00F02C27 /* PITM.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PITM.cpp; sourceTree = "<group>"; };
 		057280771F5ED9E500F02C27 /* IINF.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IINF.hpp; sourceTree = "<group>"; };
@@ -263,7 +250,11 @@
 				051F4D421F5E01C200E6E12C /* FTYP.cpp */,
 				0596059D1F5DC4D50005F8C9 /* FullBox.cpp */,
 				059DBACE1F5EBC1000B7A940 /* HDLR.cpp */,
+				054480771F601749008CCDBA /* HVCC-Array-NALUnit.cpp */,
+				054480501F6006B1008CCDBA /* HVCC-Array.cpp */,
+				0531FB091F5FF45700BCD30D /* HVCC.cpp */,
 				057280831F5EDBCE00F02C27 /* IDAT.cpp */,
+				0531FB071F5FF42A00BCD30D /* IDAT.cpp */,
 				057280791F5ED9FE00F02C27 /* IINF.cpp */,
 				057280A31F5F038A00F02C27 /* ILOC-Item-Extent.cpp */,
 				057280A11F5EFC9600F02C27 /* ILOC-Item.cpp */,
@@ -292,6 +283,7 @@
 				051F4D441F5E01C800E6E12C /* FTYP.hpp */,
 				059605971F5DC4300005F8C9 /* FullBox.hpp */,
 				059DBAD31F5EBC2000B7A940 /* HDLR.hpp */,
+				0531FB021F5FF41B00BCD30D /* HVCC.hpp */,
 				0515C8C01F2A77C4003B8594 /* IBMFF.hpp */,
 				0572807B1F5EDBC700F02C27 /* IDAT.hpp */,
 				057280771F5ED9E500F02C27 /* IINF.hpp */,
@@ -346,27 +338,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05F471E31F2B5CE500738744 /* Box.hpp in Headers */,
-				051F4D451F5E01C800E6E12C /* FTYP.hpp in Headers */,
-				059605981F5DC43B0005F8C9 /* ContainerBox.hpp in Headers */,
-				057280741F5ED7C500F02C27 /* PITM.hpp in Headers */,
-				057280821F5EDBC700F02C27 /* IREF.hpp in Headers */,
-				0572807F1F5EDBC700F02C27 /* IDAT.hpp in Headers */,
-				057280801F5EDBC700F02C27 /* ILOC.hpp in Headers */,
-				057280811F5EDBC700F02C27 /* DREF.hpp in Headers */,
-				051F4D391F5DDCF800E6E12C /* BinaryStream.hpp in Headers */,
-				059DBAD41F5EBC2300B7A940 /* HDLR.hpp in Headers */,
-				057280A71F5F210900F02C27 /* Container.hpp in Headers */,
-				057280781F5ED9E800F02C27 /* IINF.hpp in Headers */,
-				051F4D471F5E0AC800E6E12C /* MVHD.hpp in Headers */,
-				05A5A76A1F5EAFA000D16AD9 /* META.hpp in Headers */,
-				0596059A1F5DC43B0005F8C9 /* IBMFF.hpp in Headers */,
-				0572809E1F5EE18E00F02C27 /* INFE.hpp in Headers */,
-				057280AB1F5F449900F02C27 /* IROT.hpp in Headers */,
-				0515C8C41F2A7807003B8594 /* File.hpp in Headers */,
-				059605991F5DC43B0005F8C9 /* FullBox.hpp in Headers */,
-				05F471E21F2B5CE500738744 /* Parser.hpp in Headers */,
-				05A5A7691F5EAFA000D16AD9 /* Matrix.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,13 +494,15 @@
 				051F4D491F5E0AD500E6E12C /* MVHD.cpp in Sources */,
 				0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */,
 				057280761F5ED7CE00F02C27 /* PITM.cpp in Sources */,
+				0531FB081F5FF42A00BCD30D /* IDAT.cpp in Sources */,
 				05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */,
+				054480521F6007E1008CCDBA /* HVCC-Array.cpp in Sources */,
 				057280A91F5F240700F02C27 /* Container.cpp in Sources */,
 				051F4D4C1F5E0DD800E6E12C /* Matrix.cpp in Sources */,
 				05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */,
-				057280871F5EDBCF00F02C27 /* IDAT.cpp in Sources */,
 				057280A41F5F038A00F02C27 /* ILOC-Item-Extent.cpp in Sources */,
 				057280A01F5EE19400F02C27 /* INFE.cpp in Sources */,
+				054480781F60174A008CCDBA /* HVCC-Array-NALUnit.cpp in Sources */,
 				0572807A1F5ED9FF00F02C27 /* IINF.cpp in Sources */,
 				057280AD1F5F44A100F02C27 /* IROT.cpp in Sources */,
 				057280881F5EDBCF00F02C27 /* ILOC.cpp in Sources */,
@@ -538,6 +511,7 @@
 				05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */,
 				051F4D431F5E01C200E6E12C /* FTYP.cpp in Sources */,
 				051F4D3B1F5DDCFE00E6E12C /* BinaryStream.cpp in Sources */,
+				0531FB0A1F5FF45700BCD30D /* HVCC.cpp in Sources */,
 				0515C8C31F2A7807003B8594 /* File.cpp in Sources */,
 				057280891F5EDBCF00F02C27 /* IREF.cpp in Sources */,
 			);

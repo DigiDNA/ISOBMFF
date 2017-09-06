@@ -50,6 +50,7 @@
 #include <IBMFF/IREF.hpp>
 #include <IBMFF/INFE.hpp>
 #include <IBMFF/IROT.hpp>
+#include <IBMFF/HVCC.hpp>
 
 #endif /* IBMFF_HPP */
 

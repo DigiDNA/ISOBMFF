@@ -28,9 +28,6 @@
  */
 
 #include <IBMFF/IROT.hpp>
-#include <IBMFF/Parser.hpp>
-#include <sstream>
-#include <iomanip>
 
 template<>
 class XS::PIMPL::Object< IBMFF::IROT >::IMPL
