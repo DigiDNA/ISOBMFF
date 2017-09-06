@@ -39,6 +39,7 @@ class XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL
         
         IMPL( void );
         IMPL( const std::string & path );
+        IMPL( const std::vector< uint8_t > & bytes );
         IMPL( IBMFF::BinaryStream & stream, uint64_t length );
         IMPL( const IMPL & o );
         ~IMPL( void );
@@ -54,8 +55,11 @@ namespace IBMFF
     BinaryStream::BinaryStream( void ): XS::PIMPL::Object< BinaryStream >()
     {}
     
-    BinaryStream::BinaryStream( std::string path ): XS::PIMPL::Object< BinaryStream >( path )
+	BinaryStream::BinaryStream( const std::string & path ): XS::PIMPL::Object< BinaryStream >( path )
     {}
+    
+	BinaryStream::BinaryStream( const std::vector< uint8_t > & bytes ): XS::PIMPL::Object< BinaryStream >( bytes )
+	{}
     
     BinaryStream::BinaryStream( BinaryStream & stream, uint64_t length ): XS::PIMPL::Object< BinaryStream >( stream, length )
     {}
@@ -510,6 +514,10 @@ XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( IBMFF::BinaryStream & stre
 {
     stream.Read( &( this->_bytes[ 0 ] ), length );
 }
+
+XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const std::vector< uint8_t > & bytes ):
+    _bytes( bytes )
+{}
 
 XS::PIMPL::Object< IBMFF::BinaryStream >::IMPL::IMPL( const IMPL & o ):
     _bytes( o._bytes )

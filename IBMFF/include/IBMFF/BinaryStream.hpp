@@ -46,7 +46,8 @@ namespace IBMFF
             using XS::PIMPL::Object< BinaryStream >::impl;
             
             BinaryStream( void );
-            BinaryStream( std::string path );
+            BinaryStream( const std::string & path );
+            BinaryStream( const std::vector< uint8_t > & bytes );
             BinaryStream( BinaryStream & stream, uint64_t length );
             
             bool HasBytesAvailable( void ) const;

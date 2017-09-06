@@ -35,7 +35,8 @@
 #include <iomanip>
 #include <fstream>
 
-void PrintData( const std::vector< uint8_t > & bytes, IBMFF::ILOC::Item::Extent & extent );
+void SaveData( const std::vector< uint8_t > & bytes, uint64_t offset, uint64_t length, const std::string & file );
+void PrintData( const std::vector< uint8_t > & bytes, uint64_t offset, uint64_t length );
 void PrintDataLine( const std::vector< uint8_t > & bytes, uint64_t length );
 
 template< typename _T_ >
@@ -94,18 +95,22 @@ int main( int argc, const char * argv[] )
         {
             std::shared_ptr< IBMFF::FTYP > ftyp;
             std::shared_ptr< IBMFF::META > meta;
+            std::shared_ptr< IBMFF::Box  > mdat;
             std::shared_ptr< IBMFF::IINF > iinf;
             std::shared_ptr< IBMFF::ILOC > iloc;
-            IBMFF::ILOC::Item::Extent      exif;
+            std::shared_ptr< IBMFF::IDAT > idat;
+            std::shared_ptr< IBMFF::PITM > pitm;
             std::vector< uint8_t >         data;
             
             ftyp = file->GetTypedBox< IBMFF::FTYP >( "ftyp" );
             meta = file->GetTypedBox< IBMFF::META >( "meta" );
+            mdat = file->GetBox( "mdat" );
             
             if
             (
                    ftyp                  == nullptr
                 || meta                  == nullptr
+                || mdat                  == nullptr
                 || ftyp->GetMajorBrand() != "heic"
             )
             {
@@ -114,8 +119,10 @@ int main( int argc, const char * argv[] )
             
             iinf = meta->GetTypedBox< IBMFF::IINF >( "iinf" );
             iloc = meta->GetTypedBox< IBMFF::ILOC >( "iloc" );
-                
-            if( iloc == nullptr || iinf == nullptr )
+            idat = meta->GetTypedBox< IBMFF::IDAT >( "idat" );
+            pitm = meta->GetTypedBox< IBMFF::PITM >( "pitm" );
+            
+            if( iloc == nullptr || iinf == nullptr || idat == nullptr || pitm == nullptr )
             {
                 continue;
             }
@@ -140,30 +147,110 @@ int main( int argc, const char * argv[] )
             
             for( const auto & entry: iinf->GetEntries()  )
             {
-                if( entry->GetItemType() == "Exif" )
+                if( entry->GetItemID() == pitm->GetItemID() )
                 {
-                    for( const auto & item: iloc->GetItems() )
                     {
-                        if
-                        (
-                               item.GetItemID()         == entry->GetItemID()
-                            && item.GetExtents().size() != 0
-                        )
+                        IBMFF::ILOC::Item::Extent extent;
+                        std::vector< uint8_t >    itemData;
+                        IBMFF::BinaryStream       stream;
+                        
+                        for( const auto & item: iloc->GetItems() )
                         {
-                            exif = item.GetExtents()[ 0 ];
+                            if
+                            (
+                                   item.GetItemID()         != entry->GetItemID()
+                                || item.GetExtents().size() == 0
+                            )
+                            {
+                                continue;
+                            }
+                            
+                            std::cout << "Primary item info: " << std::endl << *( entry ) << std::endl << std::endl;
+                            std::cout << "Primary item:      " << std::endl << item       << std::endl << std::endl;
+                            
+                            extent = item.GetExtents()[ 0 ];
+                            
+                            if( item.GetConstructionMethod() == 0 )
+                            {
+                                itemData = Slice( data, extent.GetOffset(), extent.GetLength() );
+                                stream   = IBMFF::BinaryStream( itemData );
+                            }
+                            else if( item.GetConstructionMethod() == 1 )
+                            {
+                                itemData = Slice( idat->GetData(), extent.GetOffset(), extent.GetLength() );
+                                stream   = IBMFF::BinaryStream( itemData );
+                            }
+                            else if( item.GetConstructionMethod() == 2 )
+                            {
+                                /* ... */
+                            }
+                            
+                            if( entry->GetItemType() == "hvc1" )
+                            {
+                                /* ... */
+                            }
+                            else if( entry->GetItemType() == "grid" )
+                            {
+                                /* ... */
+                            }
                         }
                     }
                 }
-            }
-            
-            if( exif.GetLength() > 0 )
-            {
-                std::cout << "Found EXIF data ( index = " << exif.GetIndex() << ", offset = " << exif.GetOffset() << ", length = " << exif.GetLength() << " ):" << std::endl;
-                std::cout << std::endl;
+                else if( entry->GetItemType() == "Exif" )
+                {
+                    {
+                        IBMFF::ILOC::Item::Extent exif;
+                        
+                        for( const auto & item: iloc->GetItems() )
+                        {
+                            if
+                            (
+                                   item.GetItemID()         != entry->GetItemID()
+                                || item.GetExtents().size() == 0
+                            )
+                            {
+                                continue;
+                            }
+                            
+                            exif = item.GetExtents()[ 0 ];
+                            
+                            if( exif.GetLength() > 0 )
+                            {
+                                std::cout << "Found EXIF data ( index = " << exif.GetIndex() << ", offset = " << exif.GetOffset() << ", length = " << exif.GetLength() << " ):" << std::endl;
+                                std::cout << std::endl;
+                                
+                                PrintData( data, exif.GetOffset(), exif.GetLength() );
+                                
+                                std::cout << std::endl;
+                            }
+                        }
+                    }
+                }
                 
-                PrintData( data, exif );
-                
-                std::cout << std::endl;
+                /*
+                else if( entry->GetItemType() == "hvc1" )
+                {
+                    {
+                        IBMFF::ILOC::Item::Extent hvc1;
+                        
+                        for( const auto & item: iloc->GetItems() )
+                        {
+                            if
+                            (
+                                   item.GetItemID()         == entry->GetItemID()
+                                && item.GetExtents().size() != 0
+                            )
+                            {
+                                hvc1 = item.GetExtents()[ 0 ];
+                                
+                                SaveData( data, hvc1.GetOffset(), hvc1.GetLength(), std::string( "/Users/macmade/Desktop/HVC1/" ) + std::to_string( item.GetItemID() ) + ".bin" );
+                                
+                                break;
+                            }
+                        }
+                    }
+                }
+                */
             }
         }
     }
@@ -171,13 +258,27 @@ int main( int argc, const char * argv[] )
     return EXIT_SUCCESS;
 }
 
-void PrintData( const std::vector< uint8_t > & bytes, IBMFF::ILOC::Item::Extent & extent )
+void SaveData( const std::vector< uint8_t > & bytes, uint64_t offset, uint64_t length, const std::string & file )
+{
+    std::vector< uint8_t > data;
+    std::ofstream          out( file, std::ios::out | std::ios::binary );
+    
+    data = Slice( bytes, offset, length );
+    
+    if( data.size() && out.good() )
+    {
+        out.write( reinterpret_cast< const char * >( &data[ 0 ] ), static_cast< std::streamsize >( data.size() ) );
+        out.close();
+    }
+}
+
+void PrintData( const std::vector< uint8_t > & bytes, uint64_t offset, uint64_t length )
 {
     std::vector< uint8_t > data;
     std::vector< uint8_t > part;
     uint64_t               i;
     
-    data = Slice( bytes, extent.GetOffset(), extent.GetLength() );
+    data = Slice( bytes, offset, length );
     
     if( data.size() )
     {
