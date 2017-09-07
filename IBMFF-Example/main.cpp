@@ -166,7 +166,7 @@ int main( int argc, const char * argv[] )
                             }
                             
                             std::cout << "Primary item info: " << std::endl << *( entry ) << std::endl << std::endl;
-                            std::cout << "Primary item:      " << std::endl << item       << std::endl << std::endl;
+                            std::cout << "Primary item: " << std::endl << item       << std::endl << std::endl;
                             
                             extent = item.GetExtents()[ 0 ];
                             
@@ -191,7 +191,11 @@ int main( int argc, const char * argv[] )
                             }
                             else if( entry->GetItemType() == "grid" )
                             {
-                                /* ... */
+                                {
+                                    IBMFF::ImageGrid grid( stream );
+                                    
+                                    std::cout << "Image grid: " << std::endl << grid << std::endl << std::endl;
+                                }
                             }
                         }
                     }

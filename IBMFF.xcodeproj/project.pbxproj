@@ -32,6 +32,8 @@
 		0596059C1F5DC4CE0005F8C9 /* ContainerBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */; };
 		0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059D1F5DC4D50005F8C9 /* FullBox.cpp */; };
 		059DBAD21F5EBC1000B7A940 /* HDLR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 059DBACE1F5EBC1000B7A940 /* HDLR.cpp */; };
+		05A50AB51F604C3000EE8C08 /* ImageGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05A50AB41F604C2F00EE8C08 /* ImageGrid.cpp */; };
+		05A50AB71F604C3800EE8C08 /* ImageGrid.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05A50AB61F604C3800EE8C08 /* ImageGrid.hpp */; };
 		05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05A5A76B1F5EAFAE00D16AD9 /* META.cpp */; };
 		05DA96061F2A7D5B005F46DB /* libIBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libIBMFF.a */; };
 		05DA96121F2A7DC3005F46DB /* GoogleMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A4111A1F2A7D2E002B1A79 /* GoogleMock.framework */; };
@@ -158,6 +160,8 @@
 		059DBACE1F5EBC1000B7A940 /* HDLR.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HDLR.cpp; sourceTree = "<group>"; };
 		059DBAD31F5EBC2000B7A940 /* HDLR.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HDLR.hpp; sourceTree = "<group>"; };
 		05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GoogleMock.xcodeproj; path = "Submodules/gmock-xcode/GoogleMock.xcodeproj"; sourceTree = "<group>"; };
+		05A50AB41F604C2F00EE8C08 /* ImageGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageGrid.cpp; sourceTree = "<group>"; };
+		05A50AB61F604C3800EE8C08 /* ImageGrid.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageGrid.hpp; sourceTree = "<group>"; };
 		05A5A7651F5EAF9A00D16AD9 /* META.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = META.hpp; sourceTree = "<group>"; };
 		05A5A76B1F5EAFAE00D16AD9 /* META.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = META.cpp; sourceTree = "<group>"; };
 		05DA96011F2A7D5B005F46DB /* IBMFF-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IBMFF-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -254,11 +258,11 @@
 				054480501F6006B1008CCDBA /* HVCC-Array.cpp */,
 				0531FB091F5FF45700BCD30D /* HVCC.cpp */,
 				057280831F5EDBCE00F02C27 /* IDAT.cpp */,
-				0531FB071F5FF42A00BCD30D /* IDAT.cpp */,
 				057280791F5ED9FE00F02C27 /* IINF.cpp */,
 				057280A31F5F038A00F02C27 /* ILOC-Item-Extent.cpp */,
 				057280A11F5EFC9600F02C27 /* ILOC-Item.cpp */,
 				057280841F5EDBCE00F02C27 /* ILOC.cpp */,
+				05A50AB41F604C2F00EE8C08 /* ImageGrid.cpp */,
 				0572809F1F5EE19400F02C27 /* INFE.cpp */,
 				057280851F5EDBCF00F02C27 /* IREF.cpp */,
 				057280AC1F5F44A000F02C27 /* IROT.cpp */,
@@ -267,6 +271,7 @@
 				051F4D481F5E0AD500E6E12C /* MVHD.cpp */,
 				05F471E51F2B5CEE00738744 /* Parser.cpp */,
 				057280751F5ED7CE00F02C27 /* PITM.cpp */,
+				0531FB071F5FF42A00BCD30D /* IDAT.cpp */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				0572807B1F5EDBC700F02C27 /* IDAT.hpp */,
 				057280771F5ED9E500F02C27 /* IINF.hpp */,
 				0572807C1F5EDBC700F02C27 /* ILOC.hpp */,
+				05A50AB61F604C3800EE8C08 /* ImageGrid.hpp */,
 				0572809D1F5EE18B00F02C27 /* INFE.hpp */,
 				0572807E1F5EDBC700F02C27 /* IREF.hpp */,
 				057280AA1F5F449600F02C27 /* IROT.hpp */,
@@ -338,6 +344,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05A50AB71F604C3800EE8C08 /* ImageGrid.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +507,7 @@
 				057280A91F5F240700F02C27 /* Container.cpp in Sources */,
 				051F4D4C1F5E0DD800E6E12C /* Matrix.cpp in Sources */,
 				05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */,
+				05A50AB51F604C3000EE8C08 /* ImageGrid.cpp in Sources */,
 				057280A41F5F038A00F02C27 /* ILOC-Item-Extent.cpp in Sources */,
 				057280A01F5EE19400F02C27 /* INFE.cpp in Sources */,
 				054480781F60174A008CCDBA /* HVCC-Array-NALUnit.cpp in Sources */,

@@ -23,35 +23,47 @@
  ******************************************************************************/
 
 /*!
- * @header      IBMFF.hpp
+ * @header      ImageGrid.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef IBMFF_HPP
-#define IBMFF_HPP
+#ifndef IBMFF_IMAGE_GRID_HPP
+#define IBMFF_IMAGE_GRID_HPP
 
-#include <IBMFF/Parser.hpp>
+#include <XS/PIMPL/Object.hpp>
 #include <IBMFF/BinaryStream.hpp>
-#include <IBMFF/Box.hpp>
-#include <IBMFF/FullBox.hpp>
-#include <IBMFF/Container.hpp>
-#include <IBMFF/ContainerBox.hpp>
-#include <IBMFF/File.hpp>
-#include <IBMFF/Matrix.hpp>
-#include <IBMFF/FTYP.hpp>
-#include <IBMFF/MVHD.hpp>
-#include <IBMFF/META.hpp>
-#include <IBMFF/HDLR.hpp>
-#include <IBMFF/PITM.hpp>
-#include <IBMFF/IINF.hpp>
-#include <IBMFF/DREF.hpp>
-#include <IBMFF/IDAT.hpp>
-#include <IBMFF/ILOC.hpp>
-#include <IBMFF/IREF.hpp>
-#include <IBMFF/INFE.hpp>
-#include <IBMFF/IROT.hpp>
-#include <IBMFF/HVCC.hpp>
-#include <IBMFF/ImageGrid.hpp>
+#include <cstdint>
+#include <ostream>
 
-#endif /* IBMFF_HPP */
+namespace IBMFF
+{
+    class ImageGrid: public XS::PIMPL::Object< ImageGrid >
+    {
+        public:
+            
+            using XS::PIMPL::Object< ImageGrid >::impl;
+            
+            ImageGrid( void );
+            ImageGrid( BinaryStream & stream );
+            
+            uint8_t  GetVersion( void )      const;
+            uint8_t  GetFlags( void )        const;
+            uint8_t  GetRows( void )         const;
+            uint8_t  GetColumns( void )      const;
+            uint64_t GetOutputWidth( void )  const;
+            uint64_t GetOutputHeight( void ) const;
+            
+            void SetVersion( uint8_t value );
+            void SetFlags( uint8_t value );
+            void SetRows( uint8_t value );
+            void SetColumns( uint8_t value );
+            void SetOutputWidth( uint64_t value );
+            void SetOutputHeight( uint64_t value );
+            
+            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
+            
+            friend std::ostream & operator << ( std::ostream & os, const ImageGrid & grid );
+    };
+}
 
+#endif /* IBMFF_IMAGE_GRID_HPP */
