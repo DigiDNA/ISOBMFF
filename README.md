@@ -1,9 +1,9 @@
-IBMFF
-=====
+ISOBMFF
+=======
 
-[![Build Status](https://img.shields.io/travis/macmade/IBMFF.svg?branch=master&style=flat)](https://travis-ci.org/macmade/IBMFF)
-[![Coverage Status](https://img.shields.io/coveralls/macmade/IBMFF.svg?branch=master&style=flat)](https://coveralls.io/r/macmade/IBMFF?branch=master)
-[![Issues](http://img.shields.io/github/issues/macmade/IBMFF.svg?style=flat)](https://github.com/macmade/IBMFF/issues)
+[![Build Status](https://img.shields.io/travis/macmade/ISOBMFF.svg?branch=master&style=flat)](https://travis-ci.org/macmade/ISOBMFF)
+[![Coverage Status](https://img.shields.io/coveralls/macmade/ISOBMFF.svg?branch=master&style=flat)](https://coveralls.io/r/macmade/ISOBMFF?branch=master)
+[![Issues](http://img.shields.io/github/issues/macmade/ISOBMFF.svg?style=flat)](https://github.com/macmade/ISOBMFF/issues)
 ![Status](https://img.shields.io/badge/status-active-brightgreen.svg?style=flat)
 ![License](https://img.shields.io/badge/license-boost-brightgreen.svg?style=flat)
 [![Contact](https://img.shields.io/badge/contact-@macmade-blue.svg?style=flat)](https://twitter.com/macmade)  
@@ -16,7 +16,7 @@ IBMFF
 License
 -------
 
-IBMFF is released under the terms of the MIT License.
+ISOBMFF is released under the terms of the MIT License.
 
 Repository Infos
 ----------------
