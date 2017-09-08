@@ -23,41 +23,51 @@
  ******************************************************************************/
 
 /*!
- * @header      ISOBMFF.hpp
+ * @file        URN.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef ISOBMFF_HPP
-#define ISOBMFF_HPP
-
-#include <ISOBMFF/Parser.hpp>
-#include <ISOBMFF/BinaryStream.hpp>
-#include <ISOBMFF/Box.hpp>
-#include <ISOBMFF/FullBox.hpp>
-#include <ISOBMFF/Container.hpp>
-#include <ISOBMFF/ContainerBox.hpp>
-#include <ISOBMFF/File.hpp>
-#include <ISOBMFF/Matrix.hpp>
-#include <ISOBMFF/FTYP.hpp>
-#include <ISOBMFF/MVHD.hpp>
-#include <ISOBMFF/META.hpp>
-#include <ISOBMFF/HDLR.hpp>
-#include <ISOBMFF/PITM.hpp>
-#include <ISOBMFF/IINF.hpp>
-#include <ISOBMFF/DREF.hpp>
-#include <ISOBMFF/URL.hpp>
 #include <ISOBMFF/URN.hpp>
-#include <ISOBMFF/IDAT.hpp>
-#include <ISOBMFF/ILOC.hpp>
-#include <ISOBMFF/IREF.hpp>
-#include <ISOBMFF/INFE.hpp>
-#include <ISOBMFF/IROT.hpp>
-#include <ISOBMFF/HVCC.hpp>
-#include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
-#include <ISOBMFF/DIMG.hpp>
-#include <ISOBMFF/THMB.hpp>
-#include <ISOBMFF/CDSC.hpp>
-#include <ISOBMFF/ImageGrid.hpp>
 
-#endif /* ISOBMFF_HPP */
+template<>
+class XS::PIMPL::Object< ISOBMFF::URN >::IMPL
+{
+    public:
+        
+        IMPL( void );
+        IMPL( const IMPL & o );
+        ~IMPL( void );
+};
+
+#define XS_PIMPL_CLASS ISOBMFF::URN
+#include <XS/PIMPL/Object-IMPL.hpp>
+
+namespace ISOBMFF
+{
+    URN::URN( void ): FullBox( "urn " )
+    {}
+    
+    void URN::ReadData( Parser & parser, BinaryStream & stream )
+    {
+        FullBox::ReadData( parser, stream );
+    }
+    
+    void URN::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    {
+        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        
+        FullBox::WriteDescription( os, indentLevel );
+    }
+}
+
+XS::PIMPL::Object< ISOBMFF::URN >::IMPL::IMPL( void )
+{}
+
+XS::PIMPL::Object< ISOBMFF::URN >::IMPL::IMPL( const IMPL & o )
+{
+    ( void )o;
+}
+
+XS::PIMPL::Object< ISOBMFF::URN >::IMPL::~IMPL( void )
+{}
 

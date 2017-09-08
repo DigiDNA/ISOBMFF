@@ -23,41 +23,29 @@
  ******************************************************************************/
 
 /*!
- * @header      ISOBMFF.hpp
+ * @header      URL.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef ISOBMFF_HPP
-#define ISOBMFF_HPP
+#ifndef ISOBMFF_URL_HPP
+#define ISOBMFF_URL_HPP
 
-#include <ISOBMFF/Parser.hpp>
-#include <ISOBMFF/BinaryStream.hpp>
-#include <ISOBMFF/Box.hpp>
+#include <XS/PIMPL/Object.hpp>
 #include <ISOBMFF/FullBox.hpp>
-#include <ISOBMFF/Container.hpp>
-#include <ISOBMFF/ContainerBox.hpp>
-#include <ISOBMFF/File.hpp>
-#include <ISOBMFF/Matrix.hpp>
-#include <ISOBMFF/FTYP.hpp>
-#include <ISOBMFF/MVHD.hpp>
-#include <ISOBMFF/META.hpp>
-#include <ISOBMFF/HDLR.hpp>
-#include <ISOBMFF/PITM.hpp>
-#include <ISOBMFF/IINF.hpp>
-#include <ISOBMFF/DREF.hpp>
-#include <ISOBMFF/URL.hpp>
-#include <ISOBMFF/URN.hpp>
-#include <ISOBMFF/IDAT.hpp>
-#include <ISOBMFF/ILOC.hpp>
-#include <ISOBMFF/IREF.hpp>
-#include <ISOBMFF/INFE.hpp>
-#include <ISOBMFF/IROT.hpp>
-#include <ISOBMFF/HVCC.hpp>
-#include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
-#include <ISOBMFF/DIMG.hpp>
-#include <ISOBMFF/THMB.hpp>
-#include <ISOBMFF/CDSC.hpp>
-#include <ISOBMFF/ImageGrid.hpp>
 
-#endif /* ISOBMFF_HPP */
+namespace ISOBMFF
+{
+    class URL: public FullBox, public XS::PIMPL::Object< URL >
+    {
+        public:
+            
+            using XS::PIMPL::Object< URL >::impl;
+            
+            URL( void );
+            
+            void ReadData( Parser & parser, BinaryStream & stream ) override;
+            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+    };
+}
 
+#endif /* ISOBMFF_URL_HPP */

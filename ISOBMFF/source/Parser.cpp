@@ -37,6 +37,8 @@
 #include <ISOBMFF/PITM.hpp>
 #include <ISOBMFF/IINF.hpp>
 #include <ISOBMFF/DREF.hpp>
+#include <ISOBMFF/URL.hpp>
+#include <ISOBMFF/URN.hpp>
 #include <ISOBMFF/IDAT.hpp>
 #include <ISOBMFF/ILOC.hpp>
 #include <ISOBMFF/IREF.hpp>
@@ -228,6 +230,8 @@ void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterBox( "pitm", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::PITM >(); } );
     this->RegisterBox( "iinf", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IINF >(); } );
     this->RegisterBox( "dref", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::DREF >(); } );
+    this->RegisterBox( "url ", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::URL >(); } );
+    this->RegisterBox( "urn ", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::URN >(); } );
     this->RegisterBox( "idat", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IDAT >(); } );
     this->RegisterBox( "iloc", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::ILOC >(); } );
     this->RegisterBox( "iref", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IREF >(); } );
