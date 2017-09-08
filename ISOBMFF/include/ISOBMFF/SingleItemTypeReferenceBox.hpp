@@ -32,6 +32,7 @@
 
 #include <XS/PIMPL/Object.hpp>
 #include <ISOBMFF/Box.hpp>
+#include <cstdint>
 
 namespace ISOBMFF
 {
@@ -41,6 +42,15 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< SingleItemTypeReferenceBox >::impl;
             using Box::Box;
+            
+            void ReadData( Parser & parser, BinaryStream & stream ) override;
+            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            
+            uint32_t                GetFromItemID( void ) const;
+            std::vector< uint32_t > GetToItemIDs( void )  const;
+            
+            void SetFromItemID( uint32_t value );
+            void AddToItemID( uint32_t value );
     };
 }
 
