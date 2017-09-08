@@ -60,9 +60,10 @@ class XS::PIMPL::Object< ISOBMFF::Parser >::IMPL
         void RegisterDefaultBoxes( void );
         
         std::shared_ptr< ISOBMFF::File >                                                  _file;
-        std::string                                                                     _path;
+        std::string                                                                       _path;
         std::map< std::string, std::function< std::shared_ptr< ISOBMFF::Box >( void ) > > _types;
         ISOBMFF::Parser::StringType                                                       _stringType;
+        std::map< std::string, void * >                                                   _info;
 };
 
 #define XS_PIMPL_CLASS ISOBMFF::Parser
@@ -128,6 +129,28 @@ namespace ISOBMFF
     {
         this->impl->_stringType = value;
     }
+    
+    const void * Parser::GetInfo( const std::string & key )
+    {
+        if( this->impl->_info.find( key ) == this->impl->_info.end() )
+        {
+            return nullptr;
+        }
+        
+        return this->impl->_info[ key ];
+    }
+    
+    void Parser::SetInfo( const std::string & key, void * value )
+    {
+        if( value == nullptr )
+        {
+            this->impl->_info.erase( key );
+        }
+        else
+        {
+            this->impl->_info[ key ] = value;
+        }
+    }
 }
 
 XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::IMPL( void ):
@@ -140,7 +163,8 @@ XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::IMPL( const IMPL & o ):
     _file( o._file ),
     _path( o._path ),
     _types( o._types ),
-    _stringType( o._stringType )
+    _stringType( o._stringType ),
+    _info( o._info )
 {
     this->RegisterDefaultBoxes();
 }

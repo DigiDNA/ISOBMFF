@@ -51,6 +51,7 @@
 #include <ISOBMFF/INFE.hpp>
 #include <ISOBMFF/IROT.hpp>
 #include <ISOBMFF/HVCC.hpp>
+#include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
 #include <ISOBMFF/ImageGrid.hpp>
 
 #endif /* ISOBMFF_HPP */

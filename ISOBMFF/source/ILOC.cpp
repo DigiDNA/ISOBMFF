@@ -38,10 +38,10 @@ class XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL
         IMPL( const IMPL & o );
         ~IMPL( void );
         
-        uint8_t                          _offsetSize;
-        uint8_t                          _lengthSize;
-        uint8_t                          _baseOffsetSize;
-        uint8_t                          _indexSize;
+        uint8_t                            _offsetSize;
+        uint8_t                            _lengthSize;
+        uint8_t                            _baseOffsetSize;
+        uint8_t                            _indexSize;
         std::vector< ISOBMFF::ILOC::Item > _items;
 };
 

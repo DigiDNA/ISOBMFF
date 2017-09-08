@@ -23,52 +23,24 @@
  ******************************************************************************/
 
 /*!
- * @header      Parser.hpp
+ * @header      SingleItemTypeReferenceBox.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef ISOBMFF_PARSER_HPP
-#define ISOBMFF_PARSER_HPP
+#ifndef ISOBMFF_SINGLE_ITEM_TYPE_REFERENCE_BOX_HPP
+#define ISOBMFF_SINGLE_ITEM_TYPE_REFERENCE_BOX_HPP
 
 #include <XS/PIMPL/Object.hpp>
-#include <string>
-#include <functional>
-#include <memory>
 #include <ISOBMFF/Box.hpp>
-#include <ISOBMFF/File.hpp>
 
 namespace ISOBMFF
 {
-    class Parser: public XS::PIMPL::Object< Parser >
+    class SingleItemTypeReferenceBox: public Box, public XS::PIMPL::Object< SingleItemTypeReferenceBox >
     {
         public:
             
-            using XS::PIMPL::Object< Parser >::impl;
-            
-            enum class StringType: int
-            {
-                NULLTerminated,
-                Pascal
-            };
-            
-            Parser( void );
-            Parser( const std::string & path );
-            
-            void RegisterBox( const std::string & type, const std::function< std::shared_ptr< Box >( void ) > & createBox );
-            void RegisterContainerBox( const std::string & type );
-            
-            std::shared_ptr< Box > CreateBox( const std::string & type ) const;
-            
-            void Parse( const std::string & path );
-            
-            std::shared_ptr< File > GetFile( void ) const;
-            
-            StringType GetPreferredStringType( void ) const;
-            void       SetPreferredStringType( StringType value );
-            
-            const void * GetInfo( const std::string & key );
-            void         SetInfo( const std::string & key, void * value );
+            using XS::PIMPL::Object< SingleItemTypeReferenceBox >::impl;
     };
 }
 
-#endif /* ISOBMFF_PARSER_HPP */
+#endif /* ISOBMFF_SINGLE_ITEM_TYPE_REFERENCE_BOX_HPP */

@@ -39,7 +39,7 @@ class XS::PIMPL::Object< ISOBMFF::META >::IMPL
         IMPL( const IMPL & o );
         ~IMPL( void );
         
-        bool                                         _isFullBox;
+        bool                                           _isFullBox;
         std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
 };
 

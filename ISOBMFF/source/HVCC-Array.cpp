@@ -38,8 +38,8 @@ class XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL
         IMPL( const IMPL & o );
         ~IMPL( void );
         
-        bool                                       _arrayCompleteness;
-        uint8_t                                    _nalUnitType;
+        bool                                         _arrayCompleteness;
+        uint8_t                                      _nalUnitType;
         std::vector< ISOBMFF::HVCC::Array::NALUnit > _nalUnits;
 };
 

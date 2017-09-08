@@ -29,6 +29,7 @@
 
 #include <ISOBMFF/IREF.hpp>
 #include <ISOBMFF/ContainerBox.hpp>
+#include <ISOBMFF/Parser.hpp>
 
 template<>
 class XS::PIMPL::Object< ISOBMFF::IREF >::IMPL
@@ -55,7 +56,9 @@ namespace ISOBMFF
         ContainerBox container( "????" );
         
         FullBox::ReadData( parser, stream );
+        parser.SetInfo( "iref", this );
         container.ReadData( parser, stream );
+        parser.SetInfo( "iref", nullptr );
         
         this->impl->_boxes = container.GetBoxes();
     }

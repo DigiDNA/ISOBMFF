@@ -31,7 +31,7 @@
 #define ISOBMFF_IDAT_HPP
 
 #include <XS/PIMPL/Object.hpp>
-#include <ISOBMFF/FullBox.hpp>
+#include <ISOBMFF/Box.hpp>
 
 namespace ISOBMFF
 {
