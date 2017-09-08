@@ -46,7 +46,7 @@ class XS::PIMPL::Object< ISOBMFF::PITM >::IMPL
 
 namespace ISOBMFF
 {
-    PITM::PITM( void ): ISOBMFF::FullBox( "pitm" )
+    PITM::PITM( void ): FullBox( "pitm" )
     {}
     
     void PITM::ReadData( Parser & parser, BinaryStream & stream )

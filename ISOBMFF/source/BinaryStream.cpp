@@ -52,7 +52,7 @@ class XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL
 
 namespace ISOBMFF
 {
-    BinaryStream::BinaryStream( void ): XS::PIMPL::Object< BinaryStream >()
+    BinaryStream::BinaryStream( void )
     {}
     
 	BinaryStream::BinaryStream( const std::string & path ): XS::PIMPL::Object< BinaryStream >( path )

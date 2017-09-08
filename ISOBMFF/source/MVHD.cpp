@@ -56,7 +56,7 @@ class XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL
 
 namespace ISOBMFF
 {
-    MVHD::MVHD( void ): ISOBMFF::FullBox( "mvhd" )
+    MVHD::MVHD( void ): FullBox( "mvhd" )
     {}
     
     void MVHD::ReadData( Parser & parser, BinaryStream & stream )

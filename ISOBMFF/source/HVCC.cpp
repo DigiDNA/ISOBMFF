@@ -63,7 +63,7 @@ class XS::PIMPL::Object< ISOBMFF::HVCC >::IMPL
 
 namespace ISOBMFF
 {
-    HVCC::HVCC( void ): ISOBMFF::Box( "hvcC" )
+    HVCC::HVCC( void ): Box( "hvcC" )
     {}
     
     void HVCC::ReadData( Parser & parser, BinaryStream & stream )

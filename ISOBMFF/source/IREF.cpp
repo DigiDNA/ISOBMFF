@@ -48,7 +48,7 @@ class XS::PIMPL::Object< ISOBMFF::IREF >::IMPL
 
 namespace ISOBMFF
 {
-    IREF::IREF( void ): ISOBMFF::FullBox( "iref" )
+    IREF::IREF( void ): FullBox( "iref" )
     {}
     
     void IREF::ReadData( Parser & parser, BinaryStream & stream )

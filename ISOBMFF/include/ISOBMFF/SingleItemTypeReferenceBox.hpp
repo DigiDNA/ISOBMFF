@@ -40,6 +40,7 @@ namespace ISOBMFF
         public:
             
             using XS::PIMPL::Object< SingleItemTypeReferenceBox >::impl;
+            using Box::Box;
     };
 }
 

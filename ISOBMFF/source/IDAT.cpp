@@ -46,7 +46,7 @@ class XS::PIMPL::Object< ISOBMFF::IDAT >::IMPL
 
 namespace ISOBMFF
 {
-    IDAT::IDAT( void ): ISOBMFF::Box( "idat" )
+    IDAT::IDAT( void ): Box( "idat" )
     {}
     
     void IDAT::ReadData( Parser & parser, BinaryStream & stream )

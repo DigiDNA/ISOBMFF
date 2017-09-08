@@ -51,7 +51,7 @@ class XS::PIMPL::Object< ISOBMFF::HDLR >::IMPL
 
 namespace ISOBMFF
 {
-    HDLR::HDLR( void ): ISOBMFF::FullBox( "hdlr" )
+    HDLR::HDLR( void ): FullBox( "hdlr" )
     {}
     
     void HDLR::ReadData( Parser & parser, BinaryStream & stream )

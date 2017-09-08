@@ -53,7 +53,7 @@ class XS::PIMPL::Object< ISOBMFF::INFE >::IMPL
 
 namespace ISOBMFF
 {
-    INFE::INFE( void ): ISOBMFF::FullBox( "infe" )
+    INFE::INFE( void ): FullBox( "infe" )
     {}
     
     void INFE::ReadData( Parser & parser, BinaryStream & stream )

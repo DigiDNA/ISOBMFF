@@ -47,7 +47,7 @@ class XS::PIMPL::Object< ISOBMFF::IINF >::IMPL
 
 namespace ISOBMFF
 {
-    IINF::IINF( void ): ISOBMFF::FullBox( "iinf" )
+    IINF::IINF( void ): FullBox( "iinf" )
     {}
     
     void IINF::ReadData( Parser & parser, BinaryStream & stream )

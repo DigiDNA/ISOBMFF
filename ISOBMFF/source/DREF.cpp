@@ -47,7 +47,7 @@ class XS::PIMPL::Object< ISOBMFF::DREF >::IMPL
 
 namespace ISOBMFF
 {
-    DREF::DREF( void ): ISOBMFF::FullBox( "dref" )
+    DREF::DREF( void ): FullBox( "dref" )
     {}
     
     void DREF::ReadData( Parser & parser, BinaryStream & stream )

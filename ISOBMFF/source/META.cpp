@@ -48,7 +48,7 @@ class XS::PIMPL::Object< ISOBMFF::META >::IMPL
 
 namespace ISOBMFF
 {
-    META::META( void ): ISOBMFF::FullBox( "meta" )
+    META::META( void ): FullBox( "meta" )
     {}
     
     void META::ReadData( Parser & parser, BinaryStream & stream )

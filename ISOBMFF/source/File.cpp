@@ -44,9 +44,7 @@ class XS::PIMPL::Object< ISOBMFF::File >::IMPL
 
 namespace ISOBMFF
 {
-    File::File( void ):
-        ISOBMFF::ContainerBox( "????" ),
-        XS::PIMPL::Object< File >()
+    File::File( void ): ContainerBox( "????" )
     {}
     
     void File::WriteDescription( std::ostream & os, std::size_t indentLevel ) const

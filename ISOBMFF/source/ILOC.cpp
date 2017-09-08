@@ -50,7 +50,7 @@ class XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL
 
 namespace ISOBMFF
 {
-    ILOC::ILOC( void ): ISOBMFF::FullBox( "iloc" )
+    ILOC::ILOC( void ): FullBox( "iloc" )
     {}
     
     void ILOC::ReadData( Parser & parser, BinaryStream & stream )

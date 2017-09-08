@@ -43,6 +43,9 @@
 #include <ISOBMFF/INFE.hpp>
 #include <ISOBMFF/IROT.hpp>
 #include <ISOBMFF/HVCC.hpp>
+#include <ISOBMFF/DIMG.hpp>
+#include <ISOBMFF/THMB.hpp>
+#include <ISOBMFF/CDSC.hpp>
 #include <map>
 #include <stdexcept>
 
@@ -231,4 +234,7 @@ void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterBox( "infe", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::INFE >(); } );
     this->RegisterBox( "irot", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IROT >(); } );
     this->RegisterBox( "hvcC", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::HVCC >(); } );
+    this->RegisterBox( "dimg", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::DIMG >(); } );
+    this->RegisterBox( "thmb", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::THMB >(); } );
+    this->RegisterBox( "cdsc", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::CDSC >(); } );
 }

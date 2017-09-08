@@ -49,9 +49,7 @@ class XS::PIMPL::Object< ISOBMFF::FTYP >::IMPL
 
 namespace ISOBMFF
 {
-    FTYP::FTYP( void ):
-        Box( "ftyp" ),
-        XS::PIMPL::Object< FTYP >()
+    FTYP::FTYP( void ): Box( "ftyp" )
     {}
     
     void FTYP::ReadData( Parser & parser, BinaryStream & stream )

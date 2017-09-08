@@ -46,7 +46,7 @@ class XS::PIMPL::Object< ISOBMFF::IROT >::IMPL
 
 namespace ISOBMFF
 {
-    IROT::IROT( void ): ISOBMFF::Box( "irot" )
+    IROT::IROT( void ): Box( "irot" )
     {}
     
     void IROT::ReadData( Parser & parser, BinaryStream & stream )
