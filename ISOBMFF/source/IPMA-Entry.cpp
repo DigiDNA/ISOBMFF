@@ -52,6 +52,21 @@ namespace ISOBMFF
         ( void )stream;
         ( void )ipma;
     }
+    
+    void IPMA::Entry::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    {
+        std::string i( ( indentLevel ) * 4, ' ' );
+        
+        os << i << "{" << std::endl
+           << i << "}";
+    }
+    
+    std::ostream & operator << ( std::ostream & os, const IPMA::Entry & entry )
+    {
+        entry.WriteDescription( os, 0 );
+        
+        return os;
+    }
 }
 
 XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::IMPL( void )

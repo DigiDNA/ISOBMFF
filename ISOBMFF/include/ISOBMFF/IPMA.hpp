@@ -55,6 +55,10 @@ namespace ISOBMFF
                     
                     Entry( void );
                     Entry( BinaryStream & stream, const IPMA & ipma );
+                    
+                    void WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
+                    
+                    friend std::ostream & operator << ( std::ostream & os, const Entry & entry );
             };
             
             std::vector< Entry > GetEntries( void ) const;

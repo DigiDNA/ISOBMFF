@@ -52,17 +52,44 @@ namespace ISOBMFF
     void IPMA::ReadData( Parser & parser, BinaryStream & stream )
     {
         uint32_t count;
+        uint32_t i;
         
         FullBox::ReadData( parser, stream );
         
         count = stream.ReadBigEndianUInt32();
+        
+        for( i = 0; i < count; i++ )
+        {
+            this->AddEntry( Entry( stream, *( this ) ) );
+        }
     }
     
     void IPMA::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        std::string          i( ( indentLevel + 1 ) * 4, ' ' );
+        std::vector< Entry > entries;
         
         FullBox::WriteDescription( os, indentLevel );
+        
+        entries = this->GetEntries();
+        
+        if( entries.size() > 0 )
+        {
+            os << std::endl
+               << i
+               << "{"
+               << std::endl;
+            
+            for( const auto & entry: entries )
+            {
+                entry.WriteDescription( os, indentLevel + 2 );
+                
+                os << std::endl;
+            }
+            
+            os << i
+               << "}";
+        }
     }
     
     std::vector< IPMA::Entry > IPMA::GetEntries( void ) const
