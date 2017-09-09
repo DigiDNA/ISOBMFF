@@ -47,6 +47,11 @@
 		05BFED0F1F63870F00A6909E /* IPMA.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05BFED0E1F63870F00A6909E /* IPMA.hpp */; };
 		05BFED111F63894100A6909E /* IPMA-Entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED101F63894100A6909E /* IPMA-Entry.cpp */; };
 		05BFED131F638E4B00A6909E /* IPMA-Entry-Association.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED121F638E4A00A6909E /* IPMA-Entry-Association.cpp */; };
+		05BFED1A1F63952E00A6909E /* libISOBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libISOBMFF.a */; };
+		05BFED1C1F63952E00A6909E /* IMG1.HEIC in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C41F5F5B4E00F02C27 /* IMG1.HEIC */; };
+		05BFED1D1F63952E00A6909E /* IMG2.HEIC in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C61F5F5B4E00F02C27 /* IMG2.HEIC */; };
+		05BFED1E1F63952E00A6909E /* MOV1.MOV in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C51F5F5B4E00F02C27 /* MOV1.MOV */; };
+		05BFED251F6397D400A6909E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED241F63956C00A6909E /* main.cpp */; };
 		05DA96061F2A7D5B005F46DB /* libISOBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libISOBMFF.a */; };
 		05DA96121F2A7DC3005F46DB /* GoogleMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A4111A1F2A7D2E002B1A79 /* GoogleMock.framework */; };
 		05DA96141F2A7DD4005F46DB /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DA96131F2A7DD4005F46DB /* Parser.cpp */; };
@@ -85,6 +90,13 @@
 			remoteGlobalIDString = 05818F901A685AEA0072A469;
 			remoteInfo = GoogleMockTests;
 		};
+		05BFED161F63952E00A6909E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0515C8A71F2A71A8003B8594 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0515C8AE1F2A71A8003B8594;
+			remoteInfo = IBMFF;
+		};
 		05DA96071F2A7D5B005F46DB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0515C8A71F2A71A8003B8594 /* Project object */;
@@ -109,6 +121,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		05BFED1B1F63952E00A6909E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				05BFED1C1F63952E00A6909E /* IMG1.HEIC in CopyFiles */,
+				05BFED1D1F63952E00A6909E /* IMG2.HEIC in CopyFiles */,
+				05BFED1E1F63952E00A6909E /* MOV1.MOV in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		05F471ED1F2B5E6B00738744 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -195,6 +219,8 @@
 		05BFED0E1F63870F00A6909E /* IPMA.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IPMA.hpp; sourceTree = "<group>"; };
 		05BFED101F63894100A6909E /* IPMA-Entry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "IPMA-Entry.cpp"; sourceTree = "<group>"; };
 		05BFED121F638E4A00A6909E /* IPMA-Entry-Association.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "IPMA-Entry-Association.cpp"; sourceTree = "<group>"; };
+		05BFED221F63952E00A6909E /* ISOBMFF-Dump */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "ISOBMFF-Dump"; sourceTree = BUILT_PRODUCTS_DIR; };
+		05BFED241F63956C00A6909E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		05DA96011F2A7D5B005F46DB /* ISOBMFF-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ISOBMFF-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DA96051F2A7D5B005F46DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05DA96131F2A7DD4005F46DB /* Parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
@@ -211,6 +237,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05BFED191F63952E00A6909E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05BFED1A1F63952E00A6909E /* libISOBMFF.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,8 +274,9 @@
 				05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */,
 				051F4D1A1F5DD03700E6E12C /* README.md */,
 				0515C8B11F2A71A8003B8594 /* ISOBMFF */,
-				05DA96021F2A7D5B005F46DB /* ISOBMFF-Tests */,
+				05BFED231F63956C00A6909E /* ISOBMFF-Dump */,
 				05F471F01F2B5E6B00738744 /* ISOBMFF-Example */,
+				05DA96021F2A7D5B005F46DB /* ISOBMFF-Tests */,
 				0515C8B01F2A71A8003B8594 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -252,6 +287,7 @@
 				0515C8AF1F2A71A8003B8594 /* libISOBMFF.a */,
 				05DA96011F2A7D5B005F46DB /* ISOBMFF-Tests.xctest */,
 				05F471EF1F2B5E6B00738744 /* ISOBMFF-Example */,
+				05BFED221F63952E00A6909E /* ISOBMFF-Dump */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -367,6 +403,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		05BFED231F63956C00A6909E /* ISOBMFF-Dump */ = {
+			isa = PBXGroup;
+			children = (
+				05BFED241F63956C00A6909E /* main.cpp */,
+			);
+			path = "ISOBMFF-Dump";
+			sourceTree = "<group>";
+		};
 		05DA96021F2A7D5B005F46DB /* ISOBMFF-Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,6 +462,24 @@
 			productName = IBMFF;
 			productReference = 0515C8AF1F2A71A8003B8594 /* libISOBMFF.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		05BFED141F63952E00A6909E /* ISOBMFF-Dump */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05BFED1F1F63952E00A6909E /* Build configuration list for PBXNativeTarget "ISOBMFF-Dump" */;
+			buildPhases = (
+				05BFED171F63952E00A6909E /* Sources */,
+				05BFED191F63952E00A6909E /* Frameworks */,
+				05BFED1B1F63952E00A6909E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05BFED151F63952E00A6909E /* PBXTargetDependency */,
+			);
+			name = "ISOBMFF-Dump";
+			productName = IBMFF_Example;
+			productReference = 05BFED221F63952E00A6909E /* ISOBMFF-Dump */;
+			productType = "com.apple.product-type.tool";
 		};
 		05DA96001F2A7D5B005F46DB /* ISOBMFF-Tests */ = {
 			isa = PBXNativeTarget;
@@ -497,6 +559,7 @@
 				0515C8AE1F2A71A8003B8594 /* ISOBMFF */,
 				05DA96001F2A7D5B005F46DB /* ISOBMFF-Tests */,
 				05F471EE1F2B5E6B00738744 /* ISOBMFF-Example */,
+				05BFED141F63952E00A6909E /* ISOBMFF-Dump */,
 			);
 		};
 /* End PBXProject section */
@@ -587,6 +650,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05BFED171F63952E00A6909E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05BFED251F6397D400A6909E /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		05DA95FD1F2A7D5B005F46DB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -606,6 +677,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		05BFED151F63952E00A6909E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0515C8AE1F2A71A8003B8594 /* ISOBMFF */;
+			targetProxy = 05BFED161F63952E00A6909E /* PBXContainerItemProxy */;
+		};
 		05DA96081F2A7D5B005F46DB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0515C8AE1F2A71A8003B8594 /* ISOBMFF */;
@@ -913,6 +989,20 @@
 			};
 			name = Release;
 		};
+		05BFED201F63952E00A6909E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		05BFED211F63952E00A6909E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		05DA96091F2A7D5B005F46DB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -964,6 +1054,15 @@
 			buildConfigurations = (
 				0515C8BB1F2A71A8003B8594 /* Debug */,
 				0515C8BC1F2A71A8003B8594 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05BFED1F1F63952E00A6909E /* Build configuration list for PBXNativeTarget "ISOBMFF-Dump" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05BFED201F63952E00A6909E /* Debug */,
+				05BFED211F63952E00A6909E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
