@@ -59,7 +59,7 @@ namespace ISOBMFF
             
             std::shared_ptr< Box > CreateBox( const std::string & type ) const;
             
-            void Parse( const std::string & path );
+            void Parse( const std::string & path ) noexcept( false );
             
             std::shared_ptr< File > GetFile( void ) const;
             

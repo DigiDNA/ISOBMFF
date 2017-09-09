@@ -58,29 +58,18 @@ int main( int argc, const char * argv[] )
             return EXIT_FAILURE;
         }
         
+        stream.close();
+        
         try
         {
-            char name[ 4 ];
-            
-            stream.seekg( 4 );
-            stream.read( name, 4 );
-            
-            if( strncmp( name, "ftyp", 4 ) != 0 )
-            {
-                std::cerr << "Input file is not an ISO media file: '" << path << "'" << std::endl;
-                
-                return EXIT_FAILURE;
-            }
+            parser.Parse( path );
         }
-        catch( ... )
+        catch( const std::runtime_error & e )
         {
-            std::cerr << "Error reading input file: '" << path << "'" << std::endl;
+            std::cerr << e.what() << std::endl;
             
             return EXIT_FAILURE;
         }
-        
-        stream.close();
-        parser.Parse( path );
         
         std::cout << *( parser.GetFile() ) << std::endl << std::endl;
     }

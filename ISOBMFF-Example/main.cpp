@@ -86,7 +86,16 @@ int main( int argc, const char * argv[] )
             return EXIT_FAILURE;
         }
         
-        parser.Parse( path );
+        try
+        {
+            parser.Parse( path );
+        }
+        catch( const std::runtime_error & e )
+        {
+            std::cerr << e.what() << std::endl;
+            
+            return EXIT_FAILURE;
+        }
         
         file = parser.GetFile();
         

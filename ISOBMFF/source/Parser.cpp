@@ -110,9 +110,27 @@ namespace ISOBMFF
         return std::make_shared< Box >( type );
     }
     
-    void Parser::Parse( const std::string & path )
+    void Parser::Parse( const std::string & path ) noexcept( false )
     {
+        char         n[ 4 ] = { 0, 0, 0, 0 };
         BinaryStream stream( path );
+        
+        if( stream.HasBytesAvailable() == false )
+        {
+            throw std::runtime_error( std::string( "Cannot read file: " ) + path );
+        }
+        
+        try
+        {
+            stream.Get( reinterpret_cast< uint8_t * >( n ), 4, 4 );
+        }
+        catch( ... )
+        {}
+        
+        if( strncmp( n, "ftyp", 4 ) != 0 )
+        {
+            throw std::runtime_error( std::string( "File is not an ISO media file: " ) + path );
+        }
         
         this->impl->_path = path;
         this->impl->_file = std::make_shared< File >();
