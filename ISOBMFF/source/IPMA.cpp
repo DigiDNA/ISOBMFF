@@ -23,44 +23,66 @@
  ******************************************************************************/
 
 /*!
- * @header      ISOBMFF.hpp
+ * @file        IPMA.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef ISOBMFF_HPP
-#define ISOBMFF_HPP
-
-#include <ISOBMFF/Parser.hpp>
-#include <ISOBMFF/BinaryStream.hpp>
-#include <ISOBMFF/Box.hpp>
-#include <ISOBMFF/FullBox.hpp>
-#include <ISOBMFF/Container.hpp>
-#include <ISOBMFF/ContainerBox.hpp>
-#include <ISOBMFF/File.hpp>
-#include <ISOBMFF/Matrix.hpp>
-#include <ISOBMFF/FTYP.hpp>
-#include <ISOBMFF/MVHD.hpp>
-#include <ISOBMFF/META.hpp>
-#include <ISOBMFF/HDLR.hpp>
-#include <ISOBMFF/PITM.hpp>
-#include <ISOBMFF/IINF.hpp>
-#include <ISOBMFF/DREF.hpp>
-#include <ISOBMFF/URL.hpp>
-#include <ISOBMFF/URN.hpp>
-#include <ISOBMFF/IDAT.hpp>
-#include <ISOBMFF/ILOC.hpp>
-#include <ISOBMFF/IREF.hpp>
-#include <ISOBMFF/INFE.hpp>
-#include <ISOBMFF/IROT.hpp>
-#include <ISOBMFF/HVCC.hpp>
-#include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
-#include <ISOBMFF/DIMG.hpp>
-#include <ISOBMFF/THMB.hpp>
-#include <ISOBMFF/CDSC.hpp>
-#include <ISOBMFF/COLR.hpp>
-#include <ISOBMFF/ISPE.hpp>
 #include <ISOBMFF/IPMA.hpp>
-#include <ISOBMFF/ImageGrid.hpp>
 
-#endif /* ISOBMFF_HPP */
+template<>
+class XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL
+{
+    public:
+        
+        IMPL( void );
+        IMPL( const IMPL & o );
+        ~IMPL( void );
+        
+        std::vector< ISOBMFF::IPMA::Entry > _entries;
+};
+
+#define XS_PIMPL_CLASS ISOBMFF::IPMA
+#include <XS/PIMPL/Object-IMPL.hpp>
+
+namespace ISOBMFF
+{
+    IPMA::IPMA( void ): FullBox( "ipma" )
+    {}
+    
+    void IPMA::ReadData( Parser & parser, BinaryStream & stream )
+    {
+        uint32_t count;
+        
+        FullBox::ReadData( parser, stream );
+        
+        count = stream.ReadBigEndianUInt32();
+    }
+    
+    void IPMA::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    {
+        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        
+        FullBox::WriteDescription( os, indentLevel );
+    }
+    
+    std::vector< IPMA::Entry > IPMA::GetEntries( void ) const
+    {
+        return this->impl->_entries;
+    }
+    
+    void IPMA::AddEntry( const Entry & entry )
+    {
+        this->impl->_entries.push_back( entry );
+    }
+}
+
+XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::IMPL( void )
+{}
+
+XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::IMPL( const IMPL & o ):
+    _entries( o._entries )
+{}
+
+XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::~IMPL( void )
+{}
 

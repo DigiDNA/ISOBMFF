@@ -23,44 +23,45 @@
  ******************************************************************************/
 
 /*!
- * @header      ISOBMFF.hpp
+ * @file        IPMA-Entry.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef ISOBMFF_HPP
-#define ISOBMFF_HPP
-
-#include <ISOBMFF/Parser.hpp>
-#include <ISOBMFF/BinaryStream.hpp>
-#include <ISOBMFF/Box.hpp>
-#include <ISOBMFF/FullBox.hpp>
-#include <ISOBMFF/Container.hpp>
-#include <ISOBMFF/ContainerBox.hpp>
-#include <ISOBMFF/File.hpp>
-#include <ISOBMFF/Matrix.hpp>
-#include <ISOBMFF/FTYP.hpp>
-#include <ISOBMFF/MVHD.hpp>
-#include <ISOBMFF/META.hpp>
-#include <ISOBMFF/HDLR.hpp>
-#include <ISOBMFF/PITM.hpp>
-#include <ISOBMFF/IINF.hpp>
-#include <ISOBMFF/DREF.hpp>
-#include <ISOBMFF/URL.hpp>
-#include <ISOBMFF/URN.hpp>
-#include <ISOBMFF/IDAT.hpp>
-#include <ISOBMFF/ILOC.hpp>
-#include <ISOBMFF/IREF.hpp>
-#include <ISOBMFF/INFE.hpp>
-#include <ISOBMFF/IROT.hpp>
-#include <ISOBMFF/HVCC.hpp>
-#include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
-#include <ISOBMFF/DIMG.hpp>
-#include <ISOBMFF/THMB.hpp>
-#include <ISOBMFF/CDSC.hpp>
-#include <ISOBMFF/COLR.hpp>
-#include <ISOBMFF/ISPE.hpp>
 #include <ISOBMFF/IPMA.hpp>
-#include <ISOBMFF/ImageGrid.hpp>
 
-#endif /* ISOBMFF_HPP */
+template<>
+class XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL
+{
+    public:
+        
+        IMPL( void );
+        IMPL( const IMPL & o );
+        ~IMPL( void );
+};
+
+#define XS_PIMPL_CLASS ISOBMFF::IPMA::Entry
+#include <XS/PIMPL/Object-IMPL.hpp>
+
+namespace ISOBMFF
+{
+    IPMA::Entry::Entry( void )
+    {}
+    
+    IPMA::Entry::Entry( BinaryStream & stream, const IPMA & ipma )
+    {
+        ( void )stream;
+        ( void )ipma;
+    }
+}
+
+XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::IMPL( void )
+{}
+
+XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::IMPL( const IMPL & o )
+{
+    ( void )o;
+}
+
+XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::~IMPL( void )
+{}
 
