@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @file        IREF.hpp
+ * @file        IREF.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 

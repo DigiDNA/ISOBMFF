@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @file        MVHD.hpp
+ * @file        MVHD.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 

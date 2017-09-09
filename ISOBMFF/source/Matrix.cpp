@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @file        Matrix.hpp
+ * @file        Matrix.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 

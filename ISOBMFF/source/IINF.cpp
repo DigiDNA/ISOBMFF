@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @file        IINF.hpp
+ * @file        IINF.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 

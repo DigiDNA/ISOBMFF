@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @file        HVCC-Array-NALUnit.hpp
+ * @file        HVCC-Array-NALUnit.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 

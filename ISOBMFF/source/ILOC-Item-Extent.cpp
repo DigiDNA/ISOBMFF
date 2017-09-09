@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @file        ILOC-Item-Extent.hpp
+ * @file        ILOC-Item-Extent.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 

@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @file        ISPE.hpp
+ * @file        ISPE.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
