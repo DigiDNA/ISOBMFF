@@ -40,6 +40,9 @@
 		05BFECE71F62F04D00A6909E /* THMB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFECE41F62F04D00A6909E /* THMB.cpp */; };
 		05BFED011F62F7F300A6909E /* URL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED001F62F7F200A6909E /* URL.cpp */; };
 		05BFED041F62F88700A6909E /* URN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED031F62F88700A6909E /* URN.cpp */; };
+		05BFED061F63192000A6909E /* COLR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED051F63191F00A6909E /* COLR.cpp */; };
+		05BFED091F637E7E00A6909E /* ISPE.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05BFED081F637E7E00A6909E /* ISPE.hpp */; };
+		05BFED0B1F637E8500A6909E /* ISPE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED0A1F637E8500A6909E /* ISPE.cpp */; };
 		05DA96061F2A7D5B005F46DB /* libISOBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libISOBMFF.a */; };
 		05DA96121F2A7DC3005F46DB /* GoogleMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A4111A1F2A7D2E002B1A79 /* GoogleMock.framework */; };
 		05DA96141F2A7DD4005F46DB /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DA96131F2A7DD4005F46DB /* Parser.cpp */; };
@@ -180,6 +183,10 @@
 		05BFED001F62F7F200A6909E /* URL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = URL.cpp; sourceTree = "<group>"; };
 		05BFED021F62F88100A6909E /* URN.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = URN.hpp; sourceTree = "<group>"; };
 		05BFED031F62F88700A6909E /* URN.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = URN.cpp; sourceTree = "<group>"; };
+		05BFED051F63191F00A6909E /* COLR.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = COLR.cpp; sourceTree = "<group>"; };
+		05BFED071F63192A00A6909E /* COLR.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = COLR.hpp; sourceTree = "<group>"; };
+		05BFED081F637E7E00A6909E /* ISPE.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ISPE.hpp; sourceTree = "<group>"; };
+		05BFED0A1F637E8500A6909E /* ISPE.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ISPE.cpp; sourceTree = "<group>"; };
 		05DA96011F2A7D5B005F46DB /* ISOBMFF-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ISOBMFF-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DA96051F2A7D5B005F46DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05DA96131F2A7DD4005F46DB /* Parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
@@ -263,8 +270,11 @@
 			children = (
 				051F4D3A1F5DDCFE00E6E12C /* BinaryStream.cpp */,
 				05F471E71F2B5CEF00738744 /* Box.cpp */,
+				05BFECE21F62F04D00A6909E /* CDSC.cpp */,
+				05BFED051F63191F00A6909E /* COLR.cpp */,
 				057280A81F5F240700F02C27 /* Container.cpp */,
 				0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */,
+				05BFECE31F62F04D00A6909E /* DIMG.cpp */,
 				057280861F5EDBCF00F02C27 /* DREF.cpp */,
 				0515C8C11F2A7807003B8594 /* File.cpp */,
 				051F4D421F5E01C200E6E12C /* FTYP.cpp */,
@@ -282,14 +292,13 @@
 				0572809F1F5EE19400F02C27 /* INFE.cpp */,
 				057280851F5EDBCF00F02C27 /* IREF.cpp */,
 				057280AC1F5F44A000F02C27 /* IROT.cpp */,
+				05BFED0A1F637E8500A6909E /* ISPE.cpp */,
 				051F4D4B1F5E0DD800E6E12C /* Matrix.cpp */,
 				05A5A76B1F5EAFAE00D16AD9 /* META.cpp */,
 				051F4D481F5E0AD500E6E12C /* MVHD.cpp */,
 				05F471E51F2B5CEE00738744 /* Parser.cpp */,
 				057280751F5ED7CE00F02C27 /* PITM.cpp */,
 				05BFECD41F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp */,
-				05BFECE21F62F04D00A6909E /* CDSC.cpp */,
-				05BFECE31F62F04D00A6909E /* DIMG.cpp */,
 				05BFECE41F62F04D00A6909E /* THMB.cpp */,
 				05BFED001F62F7F200A6909E /* URL.cpp */,
 				05BFED031F62F88700A6909E /* URN.cpp */,
@@ -302,8 +311,11 @@
 			children = (
 				051F4D381F5DDCF800E6E12C /* BinaryStream.hpp */,
 				05F471DD1F2B5CE500738744 /* Box.hpp */,
+				05BFECDD1F62EFDB00A6909E /* CDSC.hpp */,
+				05BFED071F63192A00A6909E /* COLR.hpp */,
 				057280A61F5F210700F02C27 /* Container.hpp */,
 				059605931F5DC4130005F8C9 /* ContainerBox.hpp */,
+				05BFECDC1F62EFDB00A6909E /* DIMG.hpp */,
 				0572807D1F5EDBC700F02C27 /* DREF.hpp */,
 				0515C8C21F2A7807003B8594 /* File.hpp */,
 				051F4D441F5E01C800E6E12C /* FTYP.hpp */,
@@ -318,14 +330,13 @@
 				0572807E1F5EDBC700F02C27 /* IREF.hpp */,
 				057280AA1F5F449600F02C27 /* IROT.hpp */,
 				0515C8C01F2A77C4003B8594 /* ISOBMFF.hpp */,
+				05BFED081F637E7E00A6909E /* ISPE.hpp */,
 				051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */,
 				05A5A7651F5EAF9A00D16AD9 /* META.hpp */,
 				051F4D461F5E0AC400E6E12C /* MVHD.hpp */,
 				05F471DC1F2B5CE500738744 /* Parser.hpp */,
 				057280701F5ED7C200F02C27 /* PITM.hpp */,
 				05BFECD91F62EE2F00A6909E /* SingleItemTypeReferenceBox.hpp */,
-				05BFECDD1F62EFDB00A6909E /* CDSC.hpp */,
-				05BFECDC1F62EFDB00A6909E /* DIMG.hpp */,
 				05BFECDB1F62EFDB00A6909E /* THMB.hpp */,
 				05BFECE81F62F7E200A6909E /* URL.hpp */,
 				05BFED021F62F88100A6909E /* URN.hpp */,
@@ -371,6 +382,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05BFED091F637E7E00A6909E /* ISPE.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,9 +546,11 @@
 				057280A91F5F240700F02C27 /* Container.cpp in Sources */,
 				051F4D4C1F5E0DD800E6E12C /* Matrix.cpp in Sources */,
 				05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */,
+				05BFED0B1F637E8500A6909E /* ISPE.cpp in Sources */,
 				05BFECE61F62F04D00A6909E /* DIMG.cpp in Sources */,
 				05BFED041F62F88700A6909E /* URN.cpp in Sources */,
 				05A50AB51F604C3000EE8C08 /* ImageGrid.cpp in Sources */,
+				05BFED061F63192000A6909E /* COLR.cpp in Sources */,
 				057280A41F5F038A00F02C27 /* ILOC-Item-Extent.cpp in Sources */,
 				057280A01F5EE19400F02C27 /* INFE.cpp in Sources */,
 				054480781F60174A008CCDBA /* HVCC-Array-NALUnit.cpp in Sources */,

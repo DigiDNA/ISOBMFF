@@ -48,6 +48,8 @@
 #include <ISOBMFF/DIMG.hpp>
 #include <ISOBMFF/THMB.hpp>
 #include <ISOBMFF/CDSC.hpp>
+#include <ISOBMFF/COLR.hpp>
+#include <ISOBMFF/ISPE.hpp>
 #include <map>
 #include <stdexcept>
 
@@ -241,4 +243,6 @@ void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterBox( "dimg", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::DIMG >(); } );
     this->RegisterBox( "thmb", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::THMB >(); } );
     this->RegisterBox( "cdsc", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::CDSC >(); } );
+    this->RegisterBox( "colr", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::COLR >(); } );
+    this->RegisterBox( "ispe", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::ISPE >(); } );
 }
