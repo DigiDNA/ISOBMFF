@@ -73,6 +73,9 @@ namespace ISOBMFF
         
         entries = this->GetEntries();
         
+        os << std::endl
+           << i << "- Entries: " << entries.size();
+           
         if( entries.size() > 0 )
         {
             os << std::endl

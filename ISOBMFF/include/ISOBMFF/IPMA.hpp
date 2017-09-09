@@ -33,6 +33,7 @@
 #include <XS/PIMPL/Object.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <vector>
+#include <cstdint>
 
 namespace ISOBMFF
 {
@@ -56,9 +57,35 @@ namespace ISOBMFF
                     Entry( void );
                     Entry( BinaryStream & stream, const IPMA & ipma );
                     
+                    uint32_t GetItemID( void ) const;
+                    void     SetItemID( uint32_t value );
+                    
                     void WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
                     
                     friend std::ostream & operator << ( std::ostream & os, const Entry & entry );
+                    
+                    class Association: public XS::PIMPL::Object< Association >
+                    {
+                        public:
+                            
+                            using XS::PIMPL::Object< Association >::impl;
+                            
+                            Association( void );
+                            Association( BinaryStream & stream, const IPMA & ipma );
+                            
+                            bool     GetEssential( void )     const;
+                            uint16_t GetPropertyIndex( void ) const;
+                            
+                            void SetEssential( bool value );
+                            void SetPropertyIndex( uint16_t value );
+                            
+                            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
+                            
+                            friend std::ostream & operator << ( std::ostream & os, const Association & association );
+                    };
+                    
+                    std::vector< Association > GetAssociations( void ) const;
+                    void                       AddAssociation( const Association & association );
             };
             
             std::vector< Entry > GetEntries( void ) const;
