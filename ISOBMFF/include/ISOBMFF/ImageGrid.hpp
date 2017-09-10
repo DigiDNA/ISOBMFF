@@ -47,6 +47,8 @@ namespace ISOBMFF
             ImageGrid( void );
             ImageGrid( BinaryStream & stream );
             
+            std::string GetName( void ) const override;
+            
             uint8_t  GetVersion( void )      const;
             uint8_t  GetFlags( void )        const;
             uint8_t  GetRows( void )         const;

@@ -40,6 +40,8 @@ namespace ISOBMFF
         size_t      length;
         auto        props( this->GetDisplayableProperties() );
         
+        os << i << "[ " << this->GetName() << " ]";
+        
         length = 0;
         
         for( const auto & p: props )
@@ -49,7 +51,7 @@ namespace ISOBMFF
         
         if( props.size() )
         {
-            os << i << "{";
+            os << std::endl << i << "{";
         }
         
         for( const auto & p: props )

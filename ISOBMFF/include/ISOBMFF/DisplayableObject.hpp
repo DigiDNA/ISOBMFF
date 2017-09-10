@@ -46,6 +46,7 @@ namespace ISOBMFF
             virtual ~DisplayableObject( void );
             
             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const = 0;
+            virtual std::string                                          GetName( void )                  const = 0;
             
             virtual void        WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
             virtual std::string ToString( void )                                               const;

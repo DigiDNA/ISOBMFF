@@ -174,8 +174,8 @@ int main( int argc, const char * argv[] )
                                 continue;
                             }
                             
-                            std::cout << "Primary item info: " << std::endl << *( entry ) << std::endl << std::endl;
-                            std::cout << "Primary item: "      << std::endl << *( item )  << std::endl << std::endl;
+                            std::cout << "Primary item info: " << *( entry ) << std::endl << std::endl;
+                            std::cout << "Primary item: "      << *( item )  << std::endl << std::endl;
                             
                             extent = item->GetExtents()[ 0 ];
                             
@@ -203,7 +203,7 @@ int main( int argc, const char * argv[] )
                                 {
                                     ISOBMFF::ImageGrid grid( stream );
                                     
-                                    std::cout << "Image grid: " << std::endl << grid << std::endl << std::endl;
+                                    std::cout << "Image grid: " << grid << std::endl << std::endl;
                                 }
                             }
                         }

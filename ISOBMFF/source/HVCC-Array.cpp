@@ -70,6 +70,11 @@ namespace ISOBMFF
         }
     }
     
+    std::string HVCC::Array::GetName( void ) const
+    {
+        return "Array";
+    }
+    
     bool HVCC::Array::GetArrayCompleteness( void ) const
     {
         return this->impl->_arrayCompleteness;

@@ -45,6 +45,8 @@ namespace ISOBMFF
             Matrix( void );
             Matrix( uint32_t a, uint32_t b, uint32_t u, uint32_t c, uint32_t d, uint32_t v, uint32_t x, uint32_t y, uint32_t w );
             
+            std::string GetName( void ) const override;
+            
             uint32_t GetA( void ) const;
             uint32_t GetB( void ) const;
             uint32_t GetU( void ) const;

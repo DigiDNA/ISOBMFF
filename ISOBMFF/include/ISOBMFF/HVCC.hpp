@@ -98,6 +98,8 @@ namespace ISOBMFF
                     Array( void );
                     Array( BinaryStream & stream );
                     
+                    std::string GetName( void ) const override;
+                    
                     bool    GetArrayCompleteness( void ) const;
                     uint8_t GetNALUnitType( void )       const;
                     
@@ -118,10 +120,11 @@ namespace ISOBMFF
                             NALUnit( void );
                             NALUnit( BinaryStream & stream );
                             
+                            std::string GetName( void ) const override;
+                            
                             std::vector< uint8_t > GetData( void ) const;
                             void                   SetData( const std::vector< uint8_t > & value );
                             
-                            void                                                         WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
                             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void )                               const override;
                     };
                     

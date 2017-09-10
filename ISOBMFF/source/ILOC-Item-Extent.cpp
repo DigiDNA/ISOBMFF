@@ -98,6 +98,11 @@ namespace ISOBMFF
         }
     }
     
+    std::string ILOC::Item::Extent::GetName( void ) const
+    {
+        return "Extent";
+    }
+    
     uint64_t ILOC::Item::Extent::GetIndex( void ) const
     {
         return this->impl->_index;

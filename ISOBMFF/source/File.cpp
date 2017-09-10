@@ -47,13 +47,9 @@ namespace ISOBMFF
     File::File( void ): ContainerBox( "????" )
     {}
     
-    void File::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    std::string File::GetName( void ) const
     {
-        std::string i( indentLevel * 4, ' ' );
-        
-        os << i << "<ISOBMFF::File>";
-        
-        Container::WriteBoxes( os, indentLevel );
+        return "ISOBMFF::File";
     }
 }
 

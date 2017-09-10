@@ -62,6 +62,8 @@ namespace ISOBMFF
                     Entry( void );
                     Entry( BinaryStream & stream, const IPMA & ipma );
                     
+                    std::string GetName( void ) const override;
+                    
                     uint32_t GetItemID( void ) const;
                     void     SetItemID( uint32_t value );
                     
@@ -78,6 +80,8 @@ namespace ISOBMFF
                             
                             Association( void );
                             Association( BinaryStream & stream, const IPMA & ipma );
+                            
+                            std::string GetName( void ) const override;
                             
                             bool     GetEssential( void )     const;
                             uint16_t GetPropertyIndex( void ) const;

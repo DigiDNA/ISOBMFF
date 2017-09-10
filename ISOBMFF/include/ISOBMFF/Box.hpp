@@ -50,9 +50,8 @@ namespace ISOBMFF
             
             Box( const std::string & name );
             
-            std::string GetName( void ) const;
+            std::string GetName( void ) const override;
             
-            virtual void                                                 WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void )                               const override;
             
             virtual void                   ReadData( Parser & parser, BinaryStream & stream );

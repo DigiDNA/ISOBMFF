@@ -44,7 +44,7 @@ namespace ISOBMFF
             
             File( void );
             
-            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            std::string GetName( void ) const override;
     };
 }
 

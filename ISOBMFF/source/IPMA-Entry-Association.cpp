@@ -76,6 +76,11 @@ namespace ISOBMFF
         }
     }
     
+    std::string IPMA::Entry::Association::GetName( void ) const
+    {
+        return "Association";
+    }
+    
     std::vector< std::pair< std::string, std::string > > IPMA::Entry::Association::GetDisplayableProperties( void ) const
     {
         return

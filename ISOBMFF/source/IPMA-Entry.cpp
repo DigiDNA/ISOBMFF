@@ -72,6 +72,11 @@ namespace ISOBMFF
         }
     }
     
+    std::string IPMA::Entry::GetName( void ) const
+    {
+        return "Entry";
+    }
+    
     void IPMA::Entry::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
         DisplayableObject::WriteDescription( os, indentLevel );

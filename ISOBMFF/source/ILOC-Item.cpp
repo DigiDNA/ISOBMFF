@@ -99,6 +99,11 @@ namespace ISOBMFF
         }
     }
     
+    std::string ILOC::Item::GetName( void ) const
+    {
+        return "Item";
+    }
+    
     uint32_t ILOC::Item::GetItemID( void ) const
     {
         return this->impl->_itemID;

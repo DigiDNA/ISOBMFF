@@ -71,6 +71,8 @@ namespace ISOBMFF
                     Item( void );
                     Item( BinaryStream & stream, const ILOC & iloc );
                     
+                    std::string GetName( void ) const override;
+                    
                     uint32_t GetItemID( void )             const;
                     uint8_t  GetConstructionMethod( void ) const;
                     uint16_t GetDataReferenceIndex( void ) const;
@@ -94,6 +96,8 @@ namespace ISOBMFF
                             
                             Extent( void );
                             Extent( BinaryStream & stream, const ILOC & iloc );
+                            
+                            std::string GetName( void ) const override;
                             
                             uint64_t GetIndex( void )  const;
                             uint64_t GetOffset( void ) const;

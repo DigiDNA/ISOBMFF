@@ -87,6 +87,11 @@ namespace ISOBMFF
         }
     }
     
+    std::string ImageGrid::GetName( void ) const
+    {
+        return "ImageGrid";
+    }
+    
     uint8_t ImageGrid::GetVersion( void ) const
     {
         return this->impl->_version;

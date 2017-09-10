@@ -63,6 +63,11 @@ namespace ISOBMFF
         XS::PIMPL::Object< Matrix >( a, b, u, c, d, v, x, y, w )
     {}
     
+    std::string Matrix::GetName( void ) const
+    {
+        return "Matrix";
+    }
+    
     uint32_t Matrix::GetA( void ) const
     {
         return this->impl->_a;

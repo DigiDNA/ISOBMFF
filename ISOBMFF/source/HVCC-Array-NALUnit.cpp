@@ -68,6 +68,11 @@ namespace ISOBMFF
         this->SetData( data );
     }
     
+    std::string HVCC::Array::NALUnit::GetName( void ) const
+    {
+        return "NALUnit";
+    }
+    
     std::vector< uint8_t > HVCC::HVCC::Array::NALUnit::GetData( void ) const
     {
         return this->impl->_data;
@@ -76,21 +81,6 @@ namespace ISOBMFF
     void HVCC::HVCC::Array::NALUnit::SetData( const std::vector< uint8_t > & value )
     {
         this->impl->_data = value;
-    }
-    
-    void HVCC::HVCC::Array::NALUnit::WriteDescription( std::ostream & os, std::size_t indentLevel ) const 
-    {
-        auto        props( this->GetDisplayableProperties() );
-        std::string i( indentLevel * 4, ' ' );
-        
-        os << i << "{";
-        
-        if( props.size() > 0 && props[ 0 ].second.length() )
-        {
-            os << " " << props[ 0 ].second << " ";
-        }
-        
-        os << "}";
     }
     
     std::vector< std::pair< std::string, std::string > > HVCC::HVCC::Array::NALUnit::GetDisplayableProperties( void ) const
