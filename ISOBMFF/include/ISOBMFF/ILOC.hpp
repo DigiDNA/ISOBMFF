@@ -81,7 +81,7 @@ namespace ISOBMFF
                     
                     friend std::ostream & operator << ( std::ostream & os, const Item & item );
                     
-                    class Extent: public XS::PIMPL::Object< Extent >
+                    class Extent: public XS::PIMPL::Object< Extent >, public DisplayableObject
                     {
                         public:
                             
@@ -98,7 +98,7 @@ namespace ISOBMFF
                             void SetOffset( uint64_t value );
                             void SetLength( uint64_t value );
                             
-                            friend std::ostream & operator << ( std::ostream & os, const Extent & extent );
+                            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
                     };
                     
                     std::vector< Extent > GetExtents( void ) const;

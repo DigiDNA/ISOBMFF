@@ -81,7 +81,7 @@ namespace ISOBMFF
             Box::WriteDescription( os, indentLevel );
         }
         
-        Container::WriteBoxes( os, indentLevel + 1 );
+        Container::WriteBoxes( os, indentLevel );
     }
     
     void META::AddBox( std::shared_ptr< Box > box )

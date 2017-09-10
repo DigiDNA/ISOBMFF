@@ -38,17 +38,28 @@ namespace ISOBMFF
     {
         std::string i( indentLevel * 4, ' ' );
         size_t      length;
+        auto        props( this->GetDisplayableProperties() );
         
         length = 0;
         
-        for( const auto & p: this->GetDisplayableProperties() )
+        for( const auto & p: props )
         {
             length = ( p.first.size() > length ) ? p.first.size() : length;
         }
         
-        for( const auto & p: this->GetDisplayableProperties() )
+        if( props.size() )
+        {
+            os << i << "{";
+        }
+        
+        for( const auto & p: props )
         {
             os << std::endl << i << "    - " << Utils::Pad( p.first + ": ", length + 2 ) << p.second;
+        }
+        
+        if( props.size() )
+        {
+            os << std::endl << i << "}";
         }
     }
     
@@ -59,6 +70,11 @@ namespace ISOBMFF
         this->WriteDescription( ss, 0 );
         
         return ss.str();
+    }
+    
+    std::vector< std::pair< std::string, std::string > > DisplayableObject::GetDisplayableProperties( void ) const
+    {
+        return {};
     }
     
     std::ostream & operator << ( std::ostream & os, const DisplayableObject & o )

@@ -81,6 +81,11 @@ namespace ISOBMFF
             os << " ( " << this->impl->_data.size() << " bytes )";
         }
         
+        if( this->GetDisplayableProperties().size() )
+        {
+            os << std::endl;
+        }
+        
         DisplayableObject::WriteDescription( os, indentLevel );
     }
     

@@ -163,20 +163,14 @@ namespace ISOBMFF
            << i << "    Base offset:          " << this->GetBaseOffset() << std::endl
            << i << "    Extent count:         " << extents.size();
         
-        if( extents.size() > 0 )
+        if( extents.size() )
         {
-            os << std::endl
-               << i
-               << "    {"
-               << std::endl;
-            
-            for( const auto & extent: extents )
-            {
-                os << i << "        " << extent << std::endl;
-            }
-            
-            os << i
-               << "    }";
+            os << std::endl;
+        }
+        
+        for( const auto & extent: extents )
+        {
+            extent.WriteDescription( os, indentLevel + 1 );
         }
         
         os << std::endl << i << "}";

@@ -103,7 +103,7 @@ namespace ISOBMFF
                     
                     friend std::ostream & operator << ( std::ostream & os, const Array & array );
                     
-                    class NALUnit: public XS::PIMPL::Object< NALUnit >
+                    class NALUnit: public XS::PIMPL::Object< NALUnit >, public DisplayableObject
                     {
                         public:
                             
@@ -115,7 +115,8 @@ namespace ISOBMFF
                             std::vector< uint8_t > GetData( void ) const;
                             void                   SetData( const std::vector< uint8_t > & value );
                             
-                            friend std::ostream & operator << ( std::ostream & os, const NALUnit & unit );
+                            void                                                         WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+                            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void )                               const override;
                     };
                     
                     std::vector< NALUnit > GetNALUnits( void ) const;

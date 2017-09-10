@@ -64,7 +64,7 @@ namespace ISOBMFF
     void DREF::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
         FullBox::WriteDescription( os, indentLevel );
-        Container::WriteBoxes( os, indentLevel + 1 );
+        Container::WriteBoxes( os, indentLevel );
     }
     
     void DREF::AddBox( std::shared_ptr< Box > box )

@@ -78,36 +78,46 @@ namespace ISOBMFF
         this->impl->_data = value;
     }
     
-    std::ostream & operator << ( std::ostream & os, const HVCC::HVCC::Array::NALUnit & unit )
+    void HVCC::HVCC::Array::NALUnit::WriteDescription( std::ostream & os, std::size_t indentLevel ) const 
+    {
+        auto        props( this->GetDisplayableProperties() );
+        std::string i( indentLevel * 4, ' ' );
+        
+        os << i << "{";
+        
+        if( props.size() > 0 && props[ 0 ].second.length() )
+        {
+            os << " " << props[ 0 ].second << " ";
+        }
+        
+        os << "}";
+    }
+    
+    std::vector< std::pair< std::string, std::string > > HVCC::HVCC::Array::NALUnit::GetDisplayableProperties( void ) const
     {
         std::vector< uint8_t > data;
+        std::stringstream      ss;
+        std::string            s;
         
-        data = unit.GetData();
-        
-        os << "{";
+        data = this->GetData();
         
         if( data.size() > 0 )
         {
             for( auto byte: data )
             {
-                {
-                    std::stringstream ss;
-                    
-                    ss << std::hex
-                       << std::uppercase
-                       << std::setfill( '0' )
-                       << std::setw( 2 )
-                       << static_cast< uint32_t >( byte );
-                    os << " " << ss.str();
-                }
+                ss << std::hex
+                   << std::uppercase
+                   << std::setfill( '0' )
+                   << std::setw( 2 )
+                   << static_cast< uint32_t >( byte )
+                   << " ";
             }
             
-            os << " ";
+            s = ss.str();
+            s = s.substr( 0, s.length() - 1 );
         }
         
-        os << "}";
-        
-        return os;
+        return { { "Data", s } };
     }
 }
 

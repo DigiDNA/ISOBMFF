@@ -81,7 +81,7 @@ namespace ISOBMFF
     void IINF::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
         FullBox::WriteDescription( os, indentLevel );
-        Container::WriteBoxes( os, indentLevel + 1 );
+        Container::WriteBoxes( os, indentLevel );
     }
     
     void IINF::AddEntry( std::shared_ptr< INFE > entry )

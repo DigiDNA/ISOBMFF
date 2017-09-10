@@ -128,14 +128,14 @@ namespace ISOBMFF
         this->impl->_length = value;
     }
     
-    std::ostream & operator << ( std::ostream & os, const ILOC::Item::Extent & extent )
+    std::vector< std::pair< std::string, std::string > > ILOC::Item::Extent::GetDisplayableProperties( void ) const
     {
-        os << "{ index = " << extent.GetIndex()
-           << ", offset = " << extent.GetOffset()
-           << ", length = " << extent.GetLength()
-           << " }";
-        
-        return os;
+        return
+        {
+            { "Index",  std::to_string( this->GetIndex() ) },
+            { "Offset", std::to_string( this->GetOffset() ) },
+            { "Length", std::to_string( this->GetLength() ) }
+        };
     }
 }
 
