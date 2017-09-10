@@ -73,7 +73,6 @@ namespace ISOBMFF
     void Box::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
         std::string i( indentLevel * 4, ' ' );
-        size_t      length;
         
         os << i << "[ " << this->GetName() << " ]";
         
@@ -82,17 +81,7 @@ namespace ISOBMFF
             os << " ( " << this->impl->_data.size() << " bytes )";
         }
         
-        length = 0;
-        
-        for( const auto & p: this->GetDisplayableProperties() )
-        {
-            length = ( p.first.size() > length ) ? p.first.size() : length;
-        }
-        
-        for( const auto & p: this->GetDisplayableProperties() )
-        {
-            os << std::endl << i << "    - " << Utils::Pad( p.first + ": ", length + 2 ) << p.second;
-        }
+        DisplayableObject::WriteDescription( os, indentLevel );
     }
     
     std::vector< std::pair< std::string, std::string > > Box::GetDisplayableProperties( void ) const

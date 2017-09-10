@@ -65,7 +65,8 @@ namespace ISOBMFF
             void SetY( uint32_t value );
             void SetW( uint32_t value );
             
-            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            void                                                         WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void )                               const override;
     };
 }
 

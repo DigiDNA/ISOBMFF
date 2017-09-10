@@ -147,25 +147,17 @@ namespace ISOBMFF
         this->impl->_outputHeight = value;
     }
     
-    void ImageGrid::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    std::vector< std::pair< std::string, std::string > > ImageGrid::GetDisplayableProperties( void ) const
     {
-        std::string i( ( indentLevel ) * 4, ' ' );
-        
-        os << i << "{" << std::endl
-           << i << "    Version:       " << static_cast< uint32_t >( this->GetVersion() ) << std::endl
-           << i << "    Flags:         " << static_cast< uint32_t >( this->GetFlags() ) << std::endl
-           << i << "    Rows:          " << static_cast< uint32_t >( this->GetRows() ) << std::endl
-           << i << "    Columns:       " << static_cast< uint32_t >( this->GetColumns() ) << std::endl
-           << i << "    Output width:  " << this->GetOutputWidth() << std::endl
-           << i << "    Output height: " << this->GetOutputHeight() << std::endl
-           << i << "}";;
-    }
-    
-    std::ostream & operator << ( std::ostream & os, const ImageGrid & grid )
-    {
-        grid.WriteDescription( os, 0 );
-        
-        return os;
+        return
+        {
+            { "Version",       std::to_string( this->GetVersion() ) },
+            { "Flags",         std::to_string( this->GetFlags() ) },
+            { "Rows",          std::to_string( this->GetRows() ) },
+            { "Columns",       std::to_string( this->GetColumns() ) },
+            { "Output width",  std::to_string( this->GetOutputWidth() ) },
+            { "Output height", std::to_string( this->GetOutputHeight() ) },
+        };
     }
 }
 

@@ -52,12 +52,11 @@ namespace ISOBMFF
             
             std::string GetName( void ) const;
             
-            virtual void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            virtual void                                                 WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void )                               const override;
             
-            virtual void ReadData( Parser & parser, BinaryStream & stream );
-            
-            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const;
-            virtual std::vector< uint8_t >                               GetData( void )                  const;
+            virtual void                   ReadData( Parser & parser, BinaryStream & stream );
+            virtual std::vector< uint8_t > GetData( void ) const;
     };
 }
 

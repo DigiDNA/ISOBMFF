@@ -30,8 +30,12 @@
 #ifndef ISOBMFF_DISPLAYABLE_OBJECT_HPP
 #define ISOBMFF_DISPLAYABLE_OBJECT_HPP
 
+#include <ISOBMFF/Utils.hpp>
 #include <ostream>
 #include <sstream>
+#include <vector>
+#include <utility>
+#include <string>
 
 namespace ISOBMFF
 {
@@ -42,7 +46,25 @@ namespace ISOBMFF
             
             virtual ~DisplayableObject( void ) = default;
             
-            virtual void WriteDescription( std::ostream & os, std::size_t indentLevel ) const = 0;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const = 0;
+            
+            virtual void WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+            {
+                std::string i( indentLevel * 4, ' ' );
+                size_t      length;
+                
+                length = 0;
+                
+                for( const auto & p: this->GetDisplayableProperties() )
+                {
+                    length = ( p.first.size() > length ) ? p.first.size() : length;
+                }
+                
+                for( const auto & p: this->GetDisplayableProperties() )
+                {
+                    os << std::endl << i << "    - " << Utils::Pad( p.first + ": ", length + 2 ) << p.second;
+                }
+            }
             
             std::string ToString( void ) const
             {

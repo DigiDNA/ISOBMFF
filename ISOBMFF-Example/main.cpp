@@ -107,7 +107,7 @@ int main( int argc, const char * argv[] )
             std::shared_ptr< ISOBMFF::Box  > mdat;
             std::shared_ptr< ISOBMFF::IINF > iinf;
             std::shared_ptr< ISOBMFF::ILOC > iloc;
-            std::shared_ptr< ISOBMFF::IDAT > idat;
+            std::shared_ptr< ISOBMFF::Box  > idat;
             std::shared_ptr< ISOBMFF::PITM > pitm;
             std::vector< uint8_t >         data;
             
@@ -128,7 +128,7 @@ int main( int argc, const char * argv[] )
             
             iinf = meta->GetTypedBox< ISOBMFF::IINF >( "iinf" );
             iloc = meta->GetTypedBox< ISOBMFF::ILOC >( "iloc" );
-            idat = meta->GetTypedBox< ISOBMFF::IDAT >( "idat" );
+            idat = meta->GetBox( "idat" );
             pitm = meta->GetTypedBox< ISOBMFF::PITM >( "pitm" );
             
             if( iloc == nullptr || iinf == nullptr || idat == nullptr || pitm == nullptr )

@@ -169,6 +169,21 @@ namespace ISOBMFF
            << ", w = " << this->GetW()
            << " }";
     }
+    
+    std::vector< std::pair< std::string, std::string > > Matrix::GetDisplayableProperties( void ) const
+    {
+        return {
+            { "a", std::to_string( this->GetA() ) },
+            { "b", std::to_string( this->GetB() ) },
+            { "u", std::to_string( this->GetU() ) },
+            { "c", std::to_string( this->GetC() ) },
+            { "d", std::to_string( this->GetD() ) },
+            { "v", std::to_string( this->GetV() ) },
+            { "x", std::to_string( this->GetX() ) },
+            { "y", std::to_string( this->GetY() ) },
+            { "w", std::to_string( this->GetW() ) },
+        };
+    }
 }
 
 XS::PIMPL::Object< ISOBMFF::Matrix >::IMPL::IMPL( void ):

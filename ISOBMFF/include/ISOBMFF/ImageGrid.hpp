@@ -32,12 +32,13 @@
 
 #include <XS/PIMPL/Object.hpp>
 #include <ISOBMFF/BinaryStream.hpp>
+#include <ISOBMFF/DisplayableObject.hpp>
 #include <cstdint>
 #include <ostream>
 
 namespace ISOBMFF
 {
-    class ImageGrid: public XS::PIMPL::Object< ImageGrid >
+    class ImageGrid: public XS::PIMPL::Object< ImageGrid >, public DisplayableObject< ImageGrid >
     {
         public:
             
@@ -60,9 +61,7 @@ namespace ISOBMFF
             void SetOutputWidth( uint64_t value );
             void SetOutputHeight( uint64_t value );
             
-            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
-            
-            friend std::ostream & operator << ( std::ostream & os, const ImageGrid & grid );
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
     };
 }
 
