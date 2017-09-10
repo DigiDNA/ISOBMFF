@@ -63,14 +63,13 @@ namespace ISOBMFF
         }
     }
     
-    void PITM::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    std::vector< std::pair< std::string, std::string > > PITM::GetDisplayableProperties( void ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        auto props( FullBox::GetDisplayableProperties() );
         
-        FullBox::WriteDescription( os, indentLevel );
+        props.push_back( { "Item ID", std::to_string( this->GetItemID() ) } );
         
-        os << std::endl
-           << i << "- Item ID: " << this->GetItemID();
+        return props;
     }
     
     uint32_t PITM::GetItemID( void ) const

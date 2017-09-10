@@ -145,20 +145,19 @@ namespace ISOBMFF
         }
     }
     
-    void INFE::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+	std::vector< std::pair< std::string, std::string > > INFE::GetDisplayableProperties( void ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        auto props( FullBox::GetDisplayableProperties() );
         
-        FullBox::WriteDescription( os, indentLevel );
+        props.push_back( { "Item ID",               std::to_string( this->GetItemID() ) } );
+        props.push_back( { "Item protection index", std::to_string( this->GetItemProtectionIndex() ) } );
+        props.push_back( { "Item type",             this->GetItemType() } );
+        props.push_back( { "Item name",             this->GetItemName() } );
+        props.push_back( { "Content type",          this->GetContentType() } );
+        props.push_back( { "Content encoding",      this->GetContentEncoding() } );
+        props.push_back( { "Item URI type",         this->GetItemURIType() } );
         
-        os << std::endl
-           << i << "- Item ID:               " << this->GetItemID() << std::endl
-           << i << "- Item protection index: " << this->GetItemProtectionIndex() << std::endl
-           << i << "- Item type:             " << this->GetItemType() << std::endl
-           << i << "- Item name:             " << this->GetItemName() << std::endl
-           << i << "- Content type:          " << this->GetContentType() << std::endl
-           << i << "- Content encoding:      " << this->GetContentEncoding() << std::endl
-           << i << "- Item URI type:         " << this->GetItemURIType();
+        return props;
     }
     
     uint32_t INFE::GetItemID( void ) const

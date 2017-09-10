@@ -44,8 +44,8 @@ namespace ISOBMFF
             
             HDLR( void );
             
-            void ReadData( Parser & parser, BinaryStream & stream ) override;
-            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
             
             std::string GetHandlerType( void ) const;
             std::string GetHandlerName( void ) const;

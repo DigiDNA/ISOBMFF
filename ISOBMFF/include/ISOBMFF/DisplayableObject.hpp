@@ -23,29 +23,45 @@
  ******************************************************************************/
 
 /*!
- * @header      IDAT.hpp
+ * @header      DisplayableObject.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef ISOBMFF_IDAT_HPP
-#define ISOBMFF_IDAT_HPP
+#ifndef ISOBMFF_DISPLAYABLE_OBJECT_HPP
+#define ISOBMFF_DISPLAYABLE_OBJECT_HPP
 
-#include <XS/PIMPL/Object.hpp>
-#include <ISOBMFF/Box.hpp>
+#include <ostream>
+#include <sstream>
 
 namespace ISOBMFF
 {
-    class IDAT: public Box, public XS::PIMPL::Object< IDAT >
+    template< class _T_ >
+    class DisplayableObject
     {
         public:
             
-            using XS::PIMPL::Object< IDAT >::impl;
+            virtual ~DisplayableObject( void ) = default;
             
-            IDAT( void );
+            virtual void WriteDescription( std::ostream & os, std::size_t indentLevel ) const = 0;
             
-            void ReadData( Parser & parser, BinaryStream & stream ) override;
-            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            std::string ToString( void ) const
+            {
+                std::stringstream ss;
+                
+                this->WriteDescription( ss, 0 );
+                
+                return ss.str();
+            }
+            
+            friend std::ostream & operator << ( std::ostream & os, const _T_ & o )
+            {
+                o.WriteDescription( os, 0 );
+                
+                return os;
+            }
     };
 }
 
-#endif /* ISOBMFF_IDAT_HPP */
+#endif /* ISOBMFF_DISPLAYABLE_OBJECT_HPP */
+
+

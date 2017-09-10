@@ -30,6 +30,7 @@
 #include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
 #include <ISOBMFF/IREF.hpp>
 #include <ISOBMFF/Parser.hpp>
+#include <ISOBMFF/Utils.hpp>
 
 template<>
 class XS::PIMPL::Object< ISOBMFF::SingleItemTypeReferenceBox >::IMPL
@@ -88,30 +89,14 @@ namespace ISOBMFF
         }
     }
     
-    void SingleItemTypeReferenceBox::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    std::vector< std::pair< std::string, std::string > > SingleItemTypeReferenceBox::GetDisplayableProperties( void ) const
     {
-        std::string             i( ( indentLevel + 1 ) * 4, ' ' );
-        std::vector< uint32_t > to;
+        auto props( Box::GetDisplayableProperties() );
         
-        Box::WriteDescription( os, indentLevel );
+        props.push_back( { "From item ID", std::to_string( this->GetFromItemID() ) } );
+        props.push_back( { "To item IDs",  Utils::ToString( this->GetToItemIDs() ) } );
         
-        to = this->GetToItemIDs();
-        
-        os << std::endl
-           << i << "- From item ID: " << this->GetFromItemID() << std::endl
-           << i << "- To item IDs:  {";
-       
-       if( to.size() > 0 )
-       {
-           os << " ";
-           
-           for( auto u: to )
-           {
-               os << u << " ";
-           }
-       }
-       
-       os << "}";
+        return props;
     }
     
     uint32_t SingleItemTypeReferenceBox::GetFromItemID( void ) const

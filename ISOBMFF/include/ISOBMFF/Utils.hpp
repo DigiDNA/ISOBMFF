@@ -23,45 +23,37 @@
  ******************************************************************************/
 
 /*!
- * @header      ISOBMFF.hpp
+ * @header      Utils.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef ISOBMFF_HPP
-#define ISOBMFF_HPP
+#ifndef ISOBMFF_UTILS_HPP
+#define ISOBMFF_UTILS_HPP
 
-#include <ISOBMFF/Utils.hpp>
-#include <ISOBMFF/Parser.hpp>
-#include <ISOBMFF/BinaryStream.hpp>
-#include <ISOBMFF/DisplayableObject.hpp>
-#include <ISOBMFF/Box.hpp>
-#include <ISOBMFF/FullBox.hpp>
-#include <ISOBMFF/Container.hpp>
-#include <ISOBMFF/ContainerBox.hpp>
-#include <ISOBMFF/File.hpp>
-#include <ISOBMFF/Matrix.hpp>
-#include <ISOBMFF/FTYP.hpp>
-#include <ISOBMFF/MVHD.hpp>
-#include <ISOBMFF/META.hpp>
-#include <ISOBMFF/HDLR.hpp>
-#include <ISOBMFF/PITM.hpp>
-#include <ISOBMFF/IINF.hpp>
-#include <ISOBMFF/DREF.hpp>
-#include <ISOBMFF/URL.hpp>
-#include <ISOBMFF/URN.hpp>
-#include <ISOBMFF/ILOC.hpp>
-#include <ISOBMFF/IREF.hpp>
-#include <ISOBMFF/INFE.hpp>
-#include <ISOBMFF/IROT.hpp>
-#include <ISOBMFF/HVCC.hpp>
-#include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
-#include <ISOBMFF/DIMG.hpp>
-#include <ISOBMFF/THMB.hpp>
-#include <ISOBMFF/CDSC.hpp>
-#include <ISOBMFF/COLR.hpp>
-#include <ISOBMFF/ISPE.hpp>
-#include <ISOBMFF/IPMA.hpp>
-#include <ISOBMFF/ImageGrid.hpp>
+#include <vector>
+#include <string>
+#include <cstdint>
 
-#endif /* ISOBMFF_HPP */
+namespace ISOBMFF
+{
+    namespace Utils
+    {
+        std::string Pad( const std::string & s, size_t length );
+        std::string ToString( const std::vector< std::string > & v );
+        
+        template< typename _T_ >
+        std::string ToString( const std::vector< _T_ > & v )
+        {
+            std::vector< std::string > s;
+            
+            for( const auto & i: v )
+            {
+                s.push_back( std::to_string( i ) );
+            }
+            
+            return ToString( s );
+        }
+    }
+}
 
+#endif /* ISOBMFF_UTILS_HPP */

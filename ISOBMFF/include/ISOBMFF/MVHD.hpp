@@ -44,8 +44,8 @@ namespace ISOBMFF
             
             MVHD( void );
             
-            void ReadData( Parser & parser, BinaryStream & stream ) override;
-            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
             
             uint64_t GetCreationTime( void )     const;
             uint64_t GetModificationTime( void ) const;

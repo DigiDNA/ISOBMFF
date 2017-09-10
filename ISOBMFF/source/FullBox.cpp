@@ -59,15 +59,14 @@ namespace ISOBMFF
         this->SetFlags( vf & 0x00FFFFFF );
     }
     
-    void FullBox::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    std::vector< std::pair< std::string, std::string > > FullBox::GetDisplayableProperties( void ) const
     {
-        Box::WriteDescription( os , indentLevel );
+        auto props( Box::GetDisplayableProperties() );
         
-        os << " { version = "
-           << static_cast< uint32_t >( this->GetVersion() )
-           << ", flags = "
-           << this->GetFlags()
-           << " }";
+        props.push_back( { "Version", std::to_string( this->GetVersion() ) } );
+        props.push_back( { "Flags",   std::to_string( this->GetFlags() ) } );
+        
+        return props;
     }
     
     uint8_t FullBox::GetVersion( void ) const

@@ -153,20 +153,21 @@ namespace ISOBMFF
         this->impl->_w = value;
     }
     
-    std::ostream & operator << ( std::ostream & os, const Matrix & matrix )
+    void Matrix::WriteDescription( std::ostream & os, std::size_t indentLevel ) const 
     {
-        os << "{ a = " << matrix.GetA()
-           << ", b = " << matrix.GetB()
-           << ", u = " << matrix.GetU()
-           << ", c = " << matrix.GetC()
-           << ", d = " << matrix.GetD()
-           << ", v = " << matrix.GetV()
-           << ", x = " << matrix.GetX()
-           << ", y = " << matrix.GetY()
-           << ", w = " << matrix.GetW()
+        std::string i( indentLevel * 4, ' ' );
+        
+        os << i
+           << "{ a = " << this->GetA()
+           << ", b = " << this->GetB()
+           << ", u = " << this->GetU()
+           << ", c = " << this->GetC()
+           << ", d = " << this->GetD()
+           << ", v = " << this->GetV()
+           << ", x = " << this->GetX()
+           << ", y = " << this->GetY()
+           << ", w = " << this->GetW()
            << " }";
-       
-        return os;
     }
 }
 

@@ -46,18 +46,6 @@ namespace ISOBMFF
 {
     URN::URN( void ): FullBox( "urn " )
     {}
-    
-    void URN::ReadData( Parser & parser, BinaryStream & stream )
-    {
-        FullBox::ReadData( parser, stream );
-    }
-    
-    void URN::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
-    {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
-        
-        FullBox::WriteDescription( os, indentLevel );
-    }
 }
 
 XS::PIMPL::Object< ISOBMFF::URN >::IMPL::IMPL( void )

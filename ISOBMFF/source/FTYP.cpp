@@ -29,6 +29,7 @@
 
 #include <ISOBMFF/FTYP.hpp>
 #include <ISOBMFF/Parser.hpp>
+#include <ISOBMFF/Utils.hpp>
 
 template<>
 class XS::PIMPL::Object< ISOBMFF::FTYP >::IMPL
@@ -72,26 +73,15 @@ namespace ISOBMFF
         }
     }
     
-    void FTYP::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    std::vector< std::pair< std::string, std::string > > FTYP::GetDisplayableProperties( void ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        auto props( Box::GetDisplayableProperties() );
         
-        Box::WriteDescription( os, indentLevel );
+        props.push_back( { "Major brand",       this->GetMajorBrand() } );
+        props.push_back( { "Minor version",     std::to_string( this->GetMinorVersion() ) } );
+        props.push_back( { "Compatible brands", Utils::ToString( this->GetCompatibleBrands() ) } );
         
-        os << std::endl
-           << i << "- Major brand:       " << this->GetMajorBrand() << std::endl
-           << i << "- Minor version:     " << this->GetMinorVersion();
-           
-        if( this->GetCompatibleBrands().size() > 0 )
-        {
-            os << std::endl
-               << i << "- Compatible brands:";
-               
-           for( const auto & s: this->GetCompatibleBrands() )
-           {
-               os << " " << s;
-           }
-        }
+        return props;
     }
     
     std::string FTYP::GetMajorBrand( void ) const

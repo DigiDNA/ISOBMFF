@@ -42,9 +42,6 @@ namespace ISOBMFF
             using XS::PIMPL::Object< URN >::impl;
             
             URN( void );
-            
-            void ReadData( Parser & parser, BinaryStream & stream ) override;
-            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
     };
 }
 

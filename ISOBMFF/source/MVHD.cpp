@@ -97,21 +97,20 @@ namespace ISOBMFF
         this->SetNextTrackID( stream.ReadBigEndianUInt32() );
     }
     
-    void MVHD::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    std::vector< std::pair< std::string, std::string > > MVHD::GetDisplayableProperties( void ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        auto props( FullBox::GetDisplayableProperties() );
         
-        FullBox::WriteDescription( os, indentLevel );
+        props.push_back( { "Creation time",     std::to_string( this->GetCreationTime() ) } );
+        props.push_back( { "Modification time", std::to_string( this->GetModificationTime() ) } );
+        props.push_back( { "Timescale",         std::to_string( this->GetTimescale() ) } );
+        props.push_back( { "Duration",          std::to_string( this->GetDuration() ) } );
+        props.push_back( { "Rate",              std::to_string( this->GetRate() ) } );
+        props.push_back( { "Volume",            std::to_string( this->GetVolume() ) } );
+        props.push_back( { "Matrix",            this->GetMatrix().ToString() } );
+        props.push_back( { "Next track ID",     std::to_string( this->GetNextTrackID() ) } );
         
-        os << std::endl
-           << i << "- Creation time:     " << this->GetCreationTime() << std::endl
-           << i << "- Modification time: " << this->GetModificationTime() << std::endl
-           << i << "- Timescale:         " << this->GetTimescale() << std::endl
-           << i << "- Duration:          " << this->GetDuration() << std::endl
-           << i << "- Rate:              " << this->GetRate() << std::endl
-           << i << "- Volume:            " << this->GetVolume() << std::endl
-           << i << "- Matrix:            " << this->GetMatrix() << std::endl
-           << i << "- Next track ID:     " << this->GetNextTrackID();
+        return props;
     }
     
     uint64_t MVHD::GetCreationTime( void ) const

@@ -1,18 +1,18 @@
 /*******************************************************************************
  * The MIT License (MIT)
- * 
+ *
  * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com / www.imazing.com
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,76 +23,41 @@
  ******************************************************************************/
 
 /*!
- * @file        IDAT.cpp
+ * @file        Utils.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#include <ISOBMFF/IDAT.hpp>
-#include <sstream>
-#include <iomanip>
-
-template<>
-class XS::PIMPL::Object< ISOBMFF::IDAT >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::IDAT
-#include <XS/PIMPL/Object-IMPL.hpp>
+#include <ISOBMFF/Utils.hpp>
 
 namespace ISOBMFF
 {
-    IDAT::IDAT( void ): Box( "idat" )
-    {}
-    
-    void IDAT::ReadData( Parser & parser, BinaryStream & stream )
+    namespace Utils
     {
-        Box::ReadData( parser, stream );
-    }
-    
-    void IDAT::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
-    {
-        std::string            i( ( indentLevel + 1 ) * 4, ' ' );
-        std::vector< uint8_t > data;
-        
-        Box::WriteDescription( os, indentLevel );
-        
-        data = this->GetData();
-        
-        if( data.size() > 0 )
+        std::string Pad( const std::string & s, size_t length )
         {
-            os << std::endl
-               << i << "- Bytes:";
-            
-            for( auto byte: data )
+            if( length <= s.size() )
             {
-                {
-                    std::stringstream ss;
-                    
-                    ss << std::hex
-                       << std::uppercase
-                       << std::setfill( '0' )
-                       << std::setw( 2 )
-                       << static_cast< uint32_t >( byte );
-                    os << " " << ss.str();
-                }
+                return s;
             }
+            
+            return s + std::string( length - s.size(), ' ' );
+        }
+        
+        std::string ToString( const std::vector< std::string > & v )
+        {
+            std::string s;
+            
+            for( const auto & i: v )
+            {
+                s += i + ", ";
+            }
+            
+            if( s.length() )
+            {
+                s = s.substr( 0, s.length() - 2 );
+            }
+            
+            return s;
         }
     }
 }
-
-XS::PIMPL::Object< ISOBMFF::IDAT >::IMPL::IMPL( void )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IDAT >::IMPL::IMPL( const IMPL & o )
-{
-    ( void )o;
-}
-
-XS::PIMPL::Object< ISOBMFF::IDAT >::IMPL::~IMPL( void )
-{}
-

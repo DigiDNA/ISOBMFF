@@ -58,15 +58,14 @@ namespace ISOBMFF
         this->SetDisplayHeight( stream.ReadBigEndianUInt32() );
     }
     
-    void ISPE::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+	std::vector< std::pair< std::string, std::string > > ISPE::GetDisplayableProperties( void ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        auto props( FullBox::GetDisplayableProperties() );
         
-        Box::WriteDescription( os, indentLevel );
+        props.push_back( { "Display width",  std::to_string( this->GetDisplayWidth() ) } );
+        props.push_back( { "Display height", std::to_string( this->GetDisplayHeight() ) } );
         
-        os << std::endl
-           << i << "- Display width:  " << this->GetDisplayWidth() << std::endl
-           << i << "- Display height: " << this->GetDisplayHeight();
+        return props;
     }
     
     uint32_t ISPE::GetDisplayWidth( void ) const

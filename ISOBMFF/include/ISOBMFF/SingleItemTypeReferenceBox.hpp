@@ -43,8 +43,8 @@ namespace ISOBMFF
             using XS::PIMPL::Object< SingleItemTypeReferenceBox >::impl;
             using Box::Box;
             
-            void ReadData( Parser & parser, BinaryStream & stream ) override;
-            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
             
             uint32_t                GetFromItemID( void ) const;
             std::vector< uint32_t > GetToItemIDs( void )  const;

@@ -56,13 +56,13 @@ namespace ISOBMFF
         Box::ReadData( parser, stream );
     }
     
-    void COLR::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    std::vector< std::pair< std::string, std::string > > COLR::GetDisplayableProperties( void ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        auto props( Box::GetDisplayableProperties() );
         
-        Box::WriteDescription( os, indentLevel );
+        props.push_back( { "Colour type", this->GetColourType() } );
         
-        os << std::endl << i << "- Colour type: " << this->GetColourType();
+        return props;
     }
     
     std::string COLR::GetColourType( void ) const

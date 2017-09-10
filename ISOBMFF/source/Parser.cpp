@@ -39,7 +39,6 @@
 #include <ISOBMFF/DREF.hpp>
 #include <ISOBMFF/URL.hpp>
 #include <ISOBMFF/URN.hpp>
-#include <ISOBMFF/IDAT.hpp>
 #include <ISOBMFF/ILOC.hpp>
 #include <ISOBMFF/IREF.hpp>
 #include <ISOBMFF/INFE.hpp>
@@ -253,7 +252,6 @@ void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterBox( "dref", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::DREF >(); } );
     this->RegisterBox( "url ", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::URL >(); } );
     this->RegisterBox( "urn ", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::URN >(); } );
-    this->RegisterBox( "idat", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IDAT >(); } );
     this->RegisterBox( "iloc", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::ILOC >(); } );
     this->RegisterBox( "iref", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IREF >(); } );
     this->RegisterBox( "infe", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::INFE >(); } );

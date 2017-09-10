@@ -46,18 +46,6 @@ namespace ISOBMFF
 {
     URL::URL( void ): FullBox( "url " )
     {}
-    
-    void URL::ReadData( Parser & parser, BinaryStream & stream )
-    {
-        FullBox::ReadData( parser, stream );
-    }
-    
-    void URL::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
-    {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
-        
-        FullBox::WriteDescription( os, indentLevel );
-    }
 }
 
 XS::PIMPL::Object< ISOBMFF::URL >::IMPL::IMPL( void )

@@ -60,13 +60,13 @@ namespace ISOBMFF
         this->SetAngle( u8 & 0x3 );
     }
     
-    void IROT::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+	std::vector< std::pair< std::string, std::string > > IROT::GetDisplayableProperties( void ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        auto props( Box::GetDisplayableProperties() );
         
-        Box::WriteDescription( os, indentLevel );
+        props.push_back( { "Angle", std::to_string( this->GetAngle() ) } );
         
-        os << std::endl << i << "- Angle: " << static_cast< uint32_t >( this->GetAngle() ) * 90 << "°";
+        return props;
     }
     
     uint8_t IROT::GetAngle( void ) const

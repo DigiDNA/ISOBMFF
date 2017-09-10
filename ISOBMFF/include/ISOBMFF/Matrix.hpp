@@ -31,12 +31,12 @@
 #define ISOBMFF_MATRIX_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/DisplayableObject.hpp>
 #include <cstdint>
-#include <ostream>
 
 namespace ISOBMFF
 {
-    class Matrix: public XS::PIMPL::Object< Matrix >
+    class Matrix: public XS::PIMPL::Object< Matrix >, public DisplayableObject< Matrix >
     {
         public:
             
@@ -65,7 +65,7 @@ namespace ISOBMFF
             void SetY( uint32_t value );
             void SetW( uint32_t value );
             
-            friend std::ostream & operator << ( std::ostream & os, const Matrix & matrix );
+            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
     };
 }
 

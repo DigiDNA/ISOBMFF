@@ -34,7 +34,6 @@
 		05A50AB51F604C3000EE8C08 /* ImageGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05A50AB41F604C2F00EE8C08 /* ImageGrid.cpp */; };
 		05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05A5A76B1F5EAFAE00D16AD9 /* META.cpp */; };
 		05BFECD81F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFECD41F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp */; };
-		05BFECE11F62F04400A6909E /* IDAT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280831F5EDBCE00F02C27 /* IDAT.cpp */; };
 		05BFECE51F62F04D00A6909E /* CDSC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFECE21F62F04D00A6909E /* CDSC.cpp */; };
 		05BFECE61F62F04D00A6909E /* DIMG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFECE31F62F04D00A6909E /* DIMG.cpp */; };
 		05BFECE71F62F04D00A6909E /* THMB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFECE41F62F04D00A6909E /* THMB.cpp */; };
@@ -55,6 +54,7 @@
 		05DA96061F2A7D5B005F46DB /* libISOBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libISOBMFF.a */; };
 		05DA96121F2A7DC3005F46DB /* GoogleMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A4111A1F2A7D2E002B1A79 /* GoogleMock.framework */; };
 		05DA96141F2A7DD4005F46DB /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DA96131F2A7DD4005F46DB /* Parser.cpp */; };
+		05EAD3901F65B346003CCB9B /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05EAD38F1F65B345003CCB9B /* Utils.cpp */; };
 		05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E51F2B5CEE00738744 /* Parser.cpp */; };
 		05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E71F2B5CEF00738744 /* Box.cpp */; };
 		05F471F21F2B5E6B00738744 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471F11F2B5E6B00738744 /* main.cpp */; };
@@ -165,15 +165,14 @@
 		0531FB091F5FF45700BCD30D /* HVCC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HVCC.cpp; sourceTree = "<group>"; };
 		054480501F6006B1008CCDBA /* HVCC-Array.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "HVCC-Array.cpp"; sourceTree = "<group>"; };
 		054480771F601749008CCDBA /* HVCC-Array-NALUnit.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "HVCC-Array-NALUnit.cpp"; sourceTree = "<group>"; };
+		0563BFA51F64768C0064F26B /* DisplayableObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DisplayableObject.hpp; sourceTree = "<group>"; };
 		057280701F5ED7C200F02C27 /* PITM.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PITM.hpp; sourceTree = "<group>"; };
 		057280751F5ED7CE00F02C27 /* PITM.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PITM.cpp; sourceTree = "<group>"; };
 		057280771F5ED9E500F02C27 /* IINF.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IINF.hpp; sourceTree = "<group>"; };
 		057280791F5ED9FE00F02C27 /* IINF.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IINF.cpp; sourceTree = "<group>"; };
-		0572807B1F5EDBC700F02C27 /* IDAT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IDAT.hpp; sourceTree = "<group>"; };
 		0572807C1F5EDBC700F02C27 /* ILOC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ILOC.hpp; sourceTree = "<group>"; };
 		0572807D1F5EDBC700F02C27 /* DREF.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DREF.hpp; sourceTree = "<group>"; };
 		0572807E1F5EDBC700F02C27 /* IREF.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IREF.hpp; sourceTree = "<group>"; };
-		057280831F5EDBCE00F02C27 /* IDAT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IDAT.cpp; sourceTree = "<group>"; };
 		057280841F5EDBCE00F02C27 /* ILOC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ILOC.cpp; sourceTree = "<group>"; };
 		057280851F5EDBCF00F02C27 /* IREF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IREF.cpp; sourceTree = "<group>"; };
 		057280861F5EDBCF00F02C27 /* DREF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DREF.cpp; sourceTree = "<group>"; };
@@ -224,6 +223,8 @@
 		05DA96011F2A7D5B005F46DB /* ISOBMFF-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ISOBMFF-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DA96051F2A7D5B005F46DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05DA96131F2A7DD4005F46DB /* Parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
+		05EAD38B1F65B33C003CCB9B /* Utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
+		05EAD38F1F65B345003CCB9B /* Utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		05F471DC1F2B5CE500738744 /* Parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Parser.hpp; sourceTree = "<group>"; };
 		05F471DD1F2B5CE500738744 /* Box.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box.hpp; sourceTree = "<group>"; };
 		05F471E51F2B5CEE00738744 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
@@ -327,7 +328,6 @@
 				054480771F601749008CCDBA /* HVCC-Array-NALUnit.cpp */,
 				054480501F6006B1008CCDBA /* HVCC-Array.cpp */,
 				0531FB091F5FF45700BCD30D /* HVCC.cpp */,
-				057280831F5EDBCE00F02C27 /* IDAT.cpp */,
 				057280791F5ED9FE00F02C27 /* IINF.cpp */,
 				057280A31F5F038A00F02C27 /* ILOC-Item-Extent.cpp */,
 				057280A11F5EFC9600F02C27 /* ILOC-Item.cpp */,
@@ -349,6 +349,7 @@
 				05BFECE41F62F04D00A6909E /* THMB.cpp */,
 				05BFED001F62F7F200A6909E /* URL.cpp */,
 				05BFED031F62F88700A6909E /* URN.cpp */,
+				05EAD38F1F65B345003CCB9B /* Utils.cpp */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -363,13 +364,13 @@
 				057280A61F5F210700F02C27 /* Container.hpp */,
 				059605931F5DC4130005F8C9 /* ContainerBox.hpp */,
 				05BFECDC1F62EFDB00A6909E /* DIMG.hpp */,
+				0563BFA51F64768C0064F26B /* DisplayableObject.hpp */,
 				0572807D1F5EDBC700F02C27 /* DREF.hpp */,
 				0515C8C21F2A7807003B8594 /* File.hpp */,
 				051F4D441F5E01C800E6E12C /* FTYP.hpp */,
 				059605971F5DC4300005F8C9 /* FullBox.hpp */,
 				059DBAD31F5EBC2000B7A940 /* HDLR.hpp */,
 				0531FB021F5FF41B00BCD30D /* HVCC.hpp */,
-				0572807B1F5EDBC700F02C27 /* IDAT.hpp */,
 				057280771F5ED9E500F02C27 /* IINF.hpp */,
 				0572807C1F5EDBC700F02C27 /* ILOC.hpp */,
 				05A50AB61F604C3800EE8C08 /* ImageGrid.hpp */,
@@ -388,6 +389,7 @@
 				05BFECDB1F62EFDB00A6909E /* THMB.hpp */,
 				05BFECE81F62F7E200A6909E /* URL.hpp */,
 				05BFED021F62F88100A6909E /* URN.hpp */,
+				05EAD38B1F65B33C003CCB9B /* Utils.hpp */,
 			);
 			path = ISOBMFF;
 			sourceTree = "<group>";
@@ -610,7 +612,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05BFECE11F62F04400A6909E /* IDAT.cpp in Sources */,
 				0572808A1F5EDBCF00F02C27 /* DREF.cpp in Sources */,
 				059DBAD21F5EBC1000B7A940 /* HDLR.cpp in Sources */,
 				051F4D491F5E0AD500E6E12C /* MVHD.cpp in Sources */,
@@ -629,6 +630,7 @@
 				05BFED061F63192000A6909E /* COLR.cpp in Sources */,
 				057280A41F5F038A00F02C27 /* ILOC-Item-Extent.cpp in Sources */,
 				057280A01F5EE19400F02C27 /* INFE.cpp in Sources */,
+				05EAD3901F65B346003CCB9B /* Utils.cpp in Sources */,
 				054480781F60174A008CCDBA /* HVCC-Array-NALUnit.cpp in Sources */,
 				0572807A1F5ED9FF00F02C27 /* IINF.cpp in Sources */,
 				057280AD1F5F44A100F02C27 /* IROT.cpp in Sources */,

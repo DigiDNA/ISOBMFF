@@ -76,15 +76,14 @@ namespace ISOBMFF
         }
     }
     
-    void HDLR::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    std::vector< std::pair< std::string, std::string > > HDLR::GetDisplayableProperties( void ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        auto props( FullBox::GetDisplayableProperties() );
         
-        FullBox::WriteDescription( os, indentLevel );
+        props.push_back( { "Handler type", this->GetHandlerType() } );
+        props.push_back( { "Handler name", this->GetHandlerName() } );
         
-        os << std::endl
-           << i << "- Handler type: " << this->GetHandlerType() << std::endl
-           << i << "- Handler name: " << this->GetHandlerName();
+        return props;
     }
     
     std::string HDLR::GetHandlerType( void ) const

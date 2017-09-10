@@ -32,15 +32,17 @@
 
 #include <XS/PIMPL/Object.hpp>
 #include <ISOBMFF/BinaryStream.hpp>
+#include <ISOBMFF/DisplayableObject.hpp>
 #include <string>
 #include <ostream>
 #include <vector>
+#include <utility>
 
 namespace ISOBMFF
 {
     class Parser;
     
-    class Box: public XS::PIMPL::Object< Box >
+    class Box: public XS::PIMPL::Object< Box >, public DisplayableObject< Box >
     {
         public:
             
@@ -50,11 +52,12 @@ namespace ISOBMFF
             
             std::string GetName( void ) const;
             
-            virtual void                   ReadData( Parser & parser, BinaryStream & stream );
-            virtual std::vector< uint8_t > GetData( void )                                                const;
-            virtual void                   WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
+            virtual void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
-            friend std::ostream & operator << ( std::ostream & os, const Box & box );
+            virtual void ReadData( Parser & parser, BinaryStream & stream );
+            
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const;
+            virtual std::vector< uint8_t >                               GetData( void )                  const;
     };
 }
 
