@@ -39,48 +39,18 @@
 
 namespace ISOBMFF
 {
-    template< class _T_ >
     class DisplayableObject
     {
         public:
             
-            virtual ~DisplayableObject( void ) = default;
+            virtual ~DisplayableObject( void );
             
             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const = 0;
             
-            virtual void WriteDescription( std::ostream & os, std::size_t indentLevel ) const
-            {
-                std::string i( indentLevel * 4, ' ' );
-                size_t      length;
-                
-                length = 0;
-                
-                for( const auto & p: this->GetDisplayableProperties() )
-                {
-                    length = ( p.first.size() > length ) ? p.first.size() : length;
-                }
-                
-                for( const auto & p: this->GetDisplayableProperties() )
-                {
-                    os << std::endl << i << "    - " << Utils::Pad( p.first + ": ", length + 2 ) << p.second;
-                }
-            }
+            virtual void        WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
+            virtual std::string ToString( void )                                               const;
             
-            std::string ToString( void ) const
-            {
-                std::stringstream ss;
-                
-                this->WriteDescription( ss, 0 );
-                
-                return ss.str();
-            }
-            
-            friend std::ostream & operator << ( std::ostream & os, const _T_ & o )
-            {
-                o.WriteDescription( os, 0 );
-                
-                return os;
-            }
+            friend std::ostream & operator << ( std::ostream & os, const DisplayableObject & o );
     };
 }
 

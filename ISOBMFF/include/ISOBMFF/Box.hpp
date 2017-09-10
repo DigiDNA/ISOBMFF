@@ -42,7 +42,7 @@ namespace ISOBMFF
 {
     class Parser;
     
-    class Box: public XS::PIMPL::Object< Box >, public DisplayableObject< Box >
+    class Box: public XS::PIMPL::Object< Box >, public DisplayableObject
     {
         public:
             

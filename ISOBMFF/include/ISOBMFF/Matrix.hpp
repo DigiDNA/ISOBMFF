@@ -36,7 +36,7 @@
 
 namespace ISOBMFF
 {
-    class Matrix: public XS::PIMPL::Object< Matrix >, public DisplayableObject< Matrix >
+    class Matrix: public XS::PIMPL::Object< Matrix >, public DisplayableObject
     {
         public:
             

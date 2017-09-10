@@ -23,46 +23,48 @@
  ******************************************************************************/
 
 /*!
- * @header      ImageGrid.hpp
+ * @file        DisplayableObject.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef ISOBMFF_IMAGE_GRID_HPP
-#define ISOBMFF_IMAGE_GRID_HPP
-
-#include <XS/PIMPL/Object.hpp>
-#include <ISOBMFF/BinaryStream.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
-#include <cstdint>
-#include <ostream>
 
 namespace ISOBMFF
 {
-    class ImageGrid: public XS::PIMPL::Object< ImageGrid >, public DisplayableObject
+    DisplayableObject::~DisplayableObject( void )
+    {}
+    
+    void DisplayableObject::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        public:
-            
-            using XS::PIMPL::Object< ImageGrid >::impl;
-            
-            ImageGrid( void );
-            ImageGrid( BinaryStream & stream );
-            
-            uint8_t  GetVersion( void )      const;
-            uint8_t  GetFlags( void )        const;
-            uint8_t  GetRows( void )         const;
-            uint8_t  GetColumns( void )      const;
-            uint64_t GetOutputWidth( void )  const;
-            uint64_t GetOutputHeight( void ) const;
-            
-            void SetVersion( uint8_t value );
-            void SetFlags( uint8_t value );
-            void SetRows( uint8_t value );
-            void SetColumns( uint8_t value );
-            void SetOutputWidth( uint64_t value );
-            void SetOutputHeight( uint64_t value );
-            
-            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
-    };
+        std::string i( indentLevel * 4, ' ' );
+        size_t      length;
+        
+        length = 0;
+        
+        for( const auto & p: this->GetDisplayableProperties() )
+        {
+            length = ( p.first.size() > length ) ? p.first.size() : length;
+        }
+        
+        for( const auto & p: this->GetDisplayableProperties() )
+        {
+            os << std::endl << i << "    - " << Utils::Pad( p.first + ": ", length + 2 ) << p.second;
+        }
+    }
+    
+    std::string DisplayableObject::ToString( void ) const
+    {
+        std::stringstream ss;
+        
+        this->WriteDescription( ss, 0 );
+        
+        return ss.str();
+    }
+    
+    std::ostream & operator << ( std::ostream & os, const DisplayableObject & o )
+    {
+        o.WriteDescription( os, 0 );
+        
+        return os;
+    }
 }
-
-#endif /* ISOBMFF_IMAGE_GRID_HPP */
