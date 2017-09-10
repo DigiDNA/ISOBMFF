@@ -43,6 +43,7 @@
 #include <ISOBMFF/Matrix.hpp>
 #include <ISOBMFF/FTYP.hpp>
 #include <ISOBMFF/MVHD.hpp>
+#include <ISOBMFF/TKHD.hpp>
 #include <ISOBMFF/META.hpp>
 #include <ISOBMFF/HDLR.hpp>
 #include <ISOBMFF/PITM.hpp>

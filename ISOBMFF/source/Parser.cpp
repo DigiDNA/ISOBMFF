@@ -32,6 +32,7 @@
 #include <ISOBMFF/BinaryStream.hpp>
 #include <ISOBMFF/FTYP.hpp>
 #include <ISOBMFF/MVHD.hpp>
+#include <ISOBMFF/TKHD.hpp>
 #include <ISOBMFF/META.hpp>
 #include <ISOBMFF/HDLR.hpp>
 #include <ISOBMFF/PITM.hpp>
@@ -245,6 +246,7 @@ void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     
     this->RegisterBox( "ftyp", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::FTYP >(); } );
     this->RegisterBox( "mvhd", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::MVHD >(); } );
+    this->RegisterBox( "tkhd", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::TKHD >(); } );
     this->RegisterBox( "meta", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::META >(); } );
     this->RegisterBox( "hdlr", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::HDLR >(); } );
     this->RegisterBox( "pitm", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::PITM >(); } );

@@ -57,6 +57,7 @@
 		05EAD3901F65B346003CCB9B /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05EAD38F1F65B345003CCB9B /* Utils.cpp */; };
 		05EAD3941F65CD84003CCB9B /* DisplayableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05EAD3931F65CD83003CCB9B /* DisplayableObject.cpp */; };
 		05EAD3981F65E215003CCB9B /* DisplayableObjectContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05EAD3971F65E215003CCB9B /* DisplayableObjectContainer.cpp */; };
+		05EAD3AD1F65FEFE003CCB9B /* TKHD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05EAD3AC1F65FEFE003CCB9B /* TKHD.cpp */; };
 		05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E51F2B5CEE00738744 /* Parser.cpp */; };
 		05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E71F2B5CEF00738744 /* Box.cpp */; };
 		05F471F21F2B5E6B00738744 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471F11F2B5E6B00738744 /* main.cpp */; };
@@ -230,6 +231,8 @@
 		05EAD3931F65CD83003CCB9B /* DisplayableObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayableObject.cpp; sourceTree = "<group>"; };
 		05EAD3961F65DC12003CCB9B /* DisplayableObjectContainer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DisplayableObjectContainer.hpp; sourceTree = "<group>"; };
 		05EAD3971F65E215003CCB9B /* DisplayableObjectContainer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayableObjectContainer.cpp; sourceTree = "<group>"; };
+		05EAD3AB1F65FE15003CCB9B /* TKHD.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TKHD.hpp; sourceTree = "<group>"; };
+		05EAD3AC1F65FEFE003CCB9B /* TKHD.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TKHD.cpp; sourceTree = "<group>"; };
 		05F471DC1F2B5CE500738744 /* Parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Parser.hpp; sourceTree = "<group>"; };
 		05F471DD1F2B5CE500738744 /* Box.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box.hpp; sourceTree = "<group>"; };
 		05F471E51F2B5CEE00738744 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
@@ -354,6 +357,7 @@
 				057280751F5ED7CE00F02C27 /* PITM.cpp */,
 				05BFECD41F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp */,
 				05BFECE41F62F04D00A6909E /* THMB.cpp */,
+				05EAD3AC1F65FEFE003CCB9B /* TKHD.cpp */,
 				05BFED001F62F7F200A6909E /* URL.cpp */,
 				05BFED031F62F88700A6909E /* URN.cpp */,
 				05EAD38F1F65B345003CCB9B /* Utils.cpp */,
@@ -395,6 +399,7 @@
 				057280701F5ED7C200F02C27 /* PITM.hpp */,
 				05BFECD91F62EE2F00A6909E /* SingleItemTypeReferenceBox.hpp */,
 				05BFECDB1F62EFDB00A6909E /* THMB.hpp */,
+				05EAD3AB1F65FE15003CCB9B /* TKHD.hpp */,
 				05BFECE81F62F7E200A6909E /* URL.hpp */,
 				05BFED021F62F88100A6909E /* URN.hpp */,
 				05EAD38B1F65B33C003CCB9B /* Utils.hpp */,
@@ -624,6 +629,7 @@
 				059DBAD21F5EBC1000B7A940 /* HDLR.cpp in Sources */,
 				051F4D491F5E0AD500E6E12C /* MVHD.cpp in Sources */,
 				0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */,
+				05EAD3AD1F65FEFE003CCB9B /* TKHD.cpp in Sources */,
 				057280761F5ED7CE00F02C27 /* PITM.cpp in Sources */,
 				05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */,
 				05EAD3981F65E215003CCB9B /* DisplayableObjectContainer.cpp in Sources */,
