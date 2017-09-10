@@ -151,34 +151,27 @@ namespace ISOBMFF
     
     void ILOC::Item::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string i( ( indentLevel ) * 4, ' ' );
-        auto        extents( this->GetExtents() );
-        
-        os << i << "{" << std::endl
-           << i << "    Item ID:              " << this->GetItemID() << std::endl
-           << i << "    Construction method:  " << static_cast< uint32_t >( this->GetConstructionMethod() ) << std::endl
-           << i << "    Data reference index: " << this->GetDataReferenceIndex() << std::endl
-           << i << "    Base offset:          " << this->GetBaseOffset() << std::endl
-           << i << "    Extent count:         " << extents.size();
-        
-        if( extents.size() )
-        {
-            os << std::endl;
-        }
-        
-        for( const auto & extent: extents )
-        {
-            extent->WriteDescription( os, indentLevel + 1 );
-        }
-        
-        os << std::endl << i << "}";
+        DisplayableObject::WriteDescription( os, indentLevel );
+        DisplayableObjectContainer::WriteDescription( os, indentLevel );
     }
     
-    std::ostream & operator << ( std::ostream & os, const ILOC::Item & item )
+    std::vector< std::shared_ptr< DisplayableObject > > ILOC::Item::GetDisplayableObjects( void ) const
     {
-        item.WriteDescription( os, 0 );
+        auto v( this->GetExtents() );
         
-        return os;
+        return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
+    }
+    
+    std::vector< std::pair< std::string, std::string > > ILOC::Item::GetDisplayableProperties( void ) const
+    {
+        return
+        {
+            { "Item ID",              std::to_string( this->GetItemID() ) },
+            { "Construction method",  std::to_string( this->GetConstructionMethod() ) },
+            { "Data reference index", std::to_string( this->GetDataReferenceIndex() ) },
+            { "Base offset",          std::to_string( this->GetBaseOffset() ) },
+            { "Extent count",         std::to_string( this->GetExtents().size() ) }
+        };
     }
 }
 

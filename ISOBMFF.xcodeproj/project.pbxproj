@@ -56,6 +56,7 @@
 		05DA96141F2A7DD4005F46DB /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DA96131F2A7DD4005F46DB /* Parser.cpp */; };
 		05EAD3901F65B346003CCB9B /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05EAD38F1F65B345003CCB9B /* Utils.cpp */; };
 		05EAD3941F65CD84003CCB9B /* DisplayableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05EAD3931F65CD83003CCB9B /* DisplayableObject.cpp */; };
+		05EAD3981F65E215003CCB9B /* DisplayableObjectContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05EAD3971F65E215003CCB9B /* DisplayableObjectContainer.cpp */; };
 		05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E51F2B5CEE00738744 /* Parser.cpp */; };
 		05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E71F2B5CEF00738744 /* Box.cpp */; };
 		05F471F21F2B5E6B00738744 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471F11F2B5E6B00738744 /* main.cpp */; };
@@ -227,6 +228,8 @@
 		05EAD38B1F65B33C003CCB9B /* Utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
 		05EAD38F1F65B345003CCB9B /* Utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		05EAD3931F65CD83003CCB9B /* DisplayableObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayableObject.cpp; sourceTree = "<group>"; };
+		05EAD3961F65DC12003CCB9B /* DisplayableObjectContainer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DisplayableObjectContainer.hpp; sourceTree = "<group>"; };
+		05EAD3971F65E215003CCB9B /* DisplayableObjectContainer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayableObjectContainer.cpp; sourceTree = "<group>"; };
 		05F471DC1F2B5CE500738744 /* Parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Parser.hpp; sourceTree = "<group>"; };
 		05F471DD1F2B5CE500738744 /* Box.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box.hpp; sourceTree = "<group>"; };
 		05F471E51F2B5CEE00738744 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
@@ -323,6 +326,7 @@
 				0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */,
 				05BFECE31F62F04D00A6909E /* DIMG.cpp */,
 				05EAD3931F65CD83003CCB9B /* DisplayableObject.cpp */,
+				05EAD3971F65E215003CCB9B /* DisplayableObjectContainer.cpp */,
 				057280861F5EDBCF00F02C27 /* DREF.cpp */,
 				0515C8C11F2A7807003B8594 /* File.cpp */,
 				051F4D421F5E01C200E6E12C /* FTYP.cpp */,
@@ -368,6 +372,7 @@
 				059605931F5DC4130005F8C9 /* ContainerBox.hpp */,
 				05BFECDC1F62EFDB00A6909E /* DIMG.hpp */,
 				0563BFA51F64768C0064F26B /* DisplayableObject.hpp */,
+				05EAD3961F65DC12003CCB9B /* DisplayableObjectContainer.hpp */,
 				0572807D1F5EDBC700F02C27 /* DREF.hpp */,
 				0515C8C21F2A7807003B8594 /* File.hpp */,
 				051F4D441F5E01C800E6E12C /* FTYP.hpp */,
@@ -621,6 +626,7 @@
 				0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */,
 				057280761F5ED7CE00F02C27 /* PITM.cpp in Sources */,
 				05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */,
+				05EAD3981F65E215003CCB9B /* DisplayableObjectContainer.cpp in Sources */,
 				054480521F6007E1008CCDBA /* HVCC-Array.cpp in Sources */,
 				05BFED011F62F7F300A6909E /* URL.cpp in Sources */,
 				057280A91F5F240700F02C27 /* Container.cpp in Sources */,

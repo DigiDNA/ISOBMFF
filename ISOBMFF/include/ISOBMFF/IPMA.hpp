@@ -32,12 +32,14 @@
 
 #include <XS/PIMPL/Object.hpp>
 #include <ISOBMFF/FullBox.hpp>
+#include <ISOBMFF/DisplayableObject.hpp>
+#include <ISOBMFF/DisplayableObjectContainer.hpp>
 #include <vector>
 #include <cstdint>
 
 namespace ISOBMFF
 {
-    class IPMA: public FullBox, public XS::PIMPL::Object< IPMA >
+    class IPMA: public FullBox, public DisplayableObjectContainer, public XS::PIMPL::Object< IPMA >
     {
         public:
             
@@ -48,7 +50,10 @@ namespace ISOBMFF
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
-            class Entry: public XS::PIMPL::Object< Entry >
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
+            
+            class Entry: public XS::PIMPL::Object< Entry >, public DisplayableObject, public DisplayableObjectContainer
             {
                 public:
                     
@@ -60,11 +65,12 @@ namespace ISOBMFF
                     uint32_t GetItemID( void ) const;
                     void     SetItemID( uint32_t value );
                     
-                    void WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
+                    void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
                     
-                    friend std::ostream & operator << ( std::ostream & os, const Entry & entry );
+                    std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+                    std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
                     
-                    class Association: public XS::PIMPL::Object< Association >
+                    class Association: public XS::PIMPL::Object< Association >, public DisplayableObject
                     {
                         public:
                             
@@ -79,9 +85,7 @@ namespace ISOBMFF
                             void SetEssential( bool value );
                             void SetPropertyIndex( uint16_t value );
                             
-                            void WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
-                            
-                            friend std::ostream & operator << ( std::ostream & os, const Association & association );
+                            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
                     };
                     
                     std::vector< std::shared_ptr< Association > > GetAssociations( void ) const;

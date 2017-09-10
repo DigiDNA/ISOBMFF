@@ -74,39 +74,24 @@ namespace ISOBMFF
     
     void IPMA::Entry::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string i( ( indentLevel ) * 4, ' ' );
-        auto        associations( this->GetAssociations() );
-        
-        os << i << "{" << std::endl
-           << i << "    - Item ID:      " << this->GetItemID() << std::endl
-           << i << "    - Associations: " << associations.size();
-        
-        if( associations.size() > 0 )
-        {
-            os << std::endl
-               << i
-               << "    {"
-               << std::endl;
-            
-            for( const auto & association: associations )
-            {
-                association->WriteDescription( os, indentLevel + 2 );
-                
-                os << std::endl;
-            }
-            
-            os << i
-               << "    }";
-        }
-        
-        os << std::endl << i << "}";
+        DisplayableObject::WriteDescription( os, indentLevel );
+        DisplayableObjectContainer::WriteDescription( os, indentLevel );
     }
     
-    std::ostream & operator << ( std::ostream & os, const IPMA::Entry & entry )
+    std::vector< std::pair< std::string, std::string > > IPMA::Entry::GetDisplayableProperties( void ) const
     {
-        entry.WriteDescription( os, 0 );
+        return
+        {
+            { "Item ID",      std::to_string( this->GetItemID() ) },
+            { "Associations", std::to_string( this->GetAssociations().size() ) }
+        };
+    }
+    
+    std::vector< std::shared_ptr< DisplayableObject > > IPMA::Entry::GetDisplayableObjects( void ) const
+    {
+        auto v( this->GetAssociations() );
         
-        return os;
+        return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
     uint32_t IPMA::Entry::GetItemID( void ) const

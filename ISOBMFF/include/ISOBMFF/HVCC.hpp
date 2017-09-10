@@ -32,12 +32,14 @@
 
 #include <XS/PIMPL/Object.hpp>
 #include <ISOBMFF/FullBox.hpp>
+#include <ISOBMFF/DisplayableObject.hpp>
+#include <ISOBMFF/DisplayableObjectContainer.hpp>
 #include <vector>
 #include <cstdint>
 
 namespace ISOBMFF
 {
-    class HVCC: public Box, public XS::PIMPL::Object< HVCC >
+    class HVCC: public Box, public XS::PIMPL::Object< HVCC >, public DisplayableObjectContainer
     {
         public:
             
@@ -47,6 +49,9 @@ namespace ISOBMFF
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            
+            virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
             
             uint8_t  GetConfigurationVersion( void )             const;
             uint8_t  GetGeneralProfileSpace( void )              const;
@@ -84,7 +89,7 @@ namespace ISOBMFF
             void SetTemporalIdNested( uint8_t value );
             void SetLengthSizeMinusOne( uint8_t value );
             
-            class Array: public XS::PIMPL::Object< Array >
+            class Array: public XS::PIMPL::Object< Array >, public DisplayableObject, public DisplayableObjectContainer
             {
                 public:
                     
@@ -99,9 +104,10 @@ namespace ISOBMFF
                     void SetArrayCompleteness( bool value );
                     void SetNALUnitType( uint8_t value );
                     
-                    void WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
+                    void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
                     
-                    friend std::ostream & operator << ( std::ostream & os, const Array & array );
+                    virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
+                    virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
                     
                     class NALUnit: public XS::PIMPL::Object< NALUnit >, public DisplayableObject
                     {

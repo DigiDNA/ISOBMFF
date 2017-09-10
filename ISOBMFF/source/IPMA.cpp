@@ -66,31 +66,23 @@ namespace ISOBMFF
     
     void IPMA::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
-        auto        entries( this->GetEntries() );
-        
         FullBox::WriteDescription( os, indentLevel );
-        
-        os << std::endl
-           << i << "- Entries: " << entries.size();
-           
-        if( entries.size() > 0 )
+        DisplayableObjectContainer::WriteDescription( os, indentLevel );
+    }
+    
+    std::vector< std::pair< std::string, std::string > > IPMA::GetDisplayableProperties( void ) const
+    {
+        return
         {
-            os << std::endl
-               << i
-               << "{"
-               << std::endl;
-            
-            for( const auto & entry: entries )
-            {
-                entry->WriteDescription( os, indentLevel + 2 );
-                
-                os << std::endl;
-            }
-            
-            os << i
-               << "}";
-        }
+            { "Entries", std::to_string( this->GetEntries().size() ) }
+        };
+    }
+    
+    std::vector< std::shared_ptr< DisplayableObject > > IPMA::GetDisplayableObjects( void ) const
+    {
+        auto v( this->GetEntries() );
+        
+        return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
     std::vector< std::shared_ptr< IPMA::Entry > > IPMA::GetEntries( void ) const

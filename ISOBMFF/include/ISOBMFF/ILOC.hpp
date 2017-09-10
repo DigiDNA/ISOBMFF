@@ -32,12 +32,13 @@
 
 #include <XS/PIMPL/Object.hpp>
 #include <ISOBMFF/FullBox.hpp>
+#include <ISOBMFF/DisplayableObjectContainer.hpp>
 #include <cstdint>
 #include <vector>
 
 namespace ISOBMFF
 {
-    class ILOC: public FullBox, public XS::PIMPL::Object< ILOC >
+    class ILOC: public FullBox, public DisplayableObjectContainer, public XS::PIMPL::Object< ILOC >
     {
         public:
             
@@ -47,6 +48,9 @@ namespace ISOBMFF
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
+            
+            virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
             
             uint8_t GetOffsetSize( void )     const;
             uint8_t GetLengthSize( void )     const;
@@ -58,7 +62,7 @@ namespace ISOBMFF
             void SetBaseOffsetSize( uint8_t value );
             void SetIndexSize( uint8_t value );
             
-            class Item: public XS::PIMPL::Object< Item >
+            class Item: public XS::PIMPL::Object< Item >, public DisplayableObject, public DisplayableObjectContainer
             {
                 public:
                     
@@ -77,9 +81,10 @@ namespace ISOBMFF
                     void SetDataReferenceIndex( uint16_t value );
                     void SetBaseOffset( uint64_t value );
                     
-                    void WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
+                    void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
                     
-                    friend std::ostream & operator << ( std::ostream & os, const Item & item );
+                    std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
+                    std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
                     
                     class Extent: public XS::PIMPL::Object< Extent >, public DisplayableObject
                     {

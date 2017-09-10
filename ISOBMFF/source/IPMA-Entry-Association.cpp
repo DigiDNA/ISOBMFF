@@ -76,21 +76,13 @@ namespace ISOBMFF
         }
     }
     
-    void IPMA::Entry::Association::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    std::vector< std::pair< std::string, std::string > > IPMA::Entry::Association::GetDisplayableProperties( void ) const
     {
-        std::string i( ( indentLevel ) * 4, ' ' );
-        
-        os << i << "{" << std::endl
-           << i << "    Essential:      " << ( ( this->GetEssential() ) ? "yes" : "no" ) << std::endl
-           << i << "    Property index: " << this->GetPropertyIndex() << std::endl
-           << i << "}";
-    }
-    
-    std::ostream & operator << ( std::ostream & os, const IPMA::Entry::Association & association )
-    {
-        association.WriteDescription( os, 0 );
-        
-        return os;
+        return
+        {
+            { "Essential",      ( this->GetEssential() ) ? "yes" : "no" },
+            { "Property index", std::to_string( this->GetPropertyIndex() ) }
+        };
     }
     
     bool IPMA::Entry::Association::GetEssential( void ) const

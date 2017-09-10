@@ -48,10 +48,10 @@ class XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL
 
 namespace ISOBMFF
 {
-    HVCC::HVCC::Array::Array( void )
+    HVCC::Array::Array( void )
     {}
     
-    HVCC::HVCC::Array::Array( BinaryStream & stream )
+    HVCC::Array::Array( BinaryStream & stream )
     {
         uint8_t  u8;
         uint16_t count;
@@ -70,70 +70,57 @@ namespace ISOBMFF
         }
     }
     
-    bool HVCC::HVCC::Array::GetArrayCompleteness( void ) const
+    bool HVCC::Array::GetArrayCompleteness( void ) const
     {
         return this->impl->_arrayCompleteness;
     }
     
-    uint8_t HVCC::HVCC::Array::GetNALUnitType( void ) const
+    uint8_t HVCC::Array::GetNALUnitType( void ) const
     {
         return this->impl->_nalUnitType;
     }
     
-    void HVCC::HVCC::Array::SetArrayCompleteness( bool value )
+    void HVCC::Array::SetArrayCompleteness( bool value )
     {
         this->impl->_arrayCompleteness = value;
     }
     
-    void HVCC::HVCC::Array::SetNALUnitType( uint8_t value )
+    void HVCC::Array::SetNALUnitType( uint8_t value )
     {
         this->impl->_nalUnitType = value;
     }
     
-    std::vector< std::shared_ptr< HVCC::HVCC::Array::NALUnit > > HVCC::HVCC::Array::GetNALUnits( void ) const
+    void HVCC::Array::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    {
+        DisplayableObject::WriteDescription( os, indentLevel );
+        DisplayableObjectContainer::WriteDescription( os, indentLevel );
+    }
+    
+    std::vector< std::shared_ptr< HVCC::Array::NALUnit > > HVCC::Array::GetNALUnits( void ) const
     {
         return this->impl->_nalUnits;
     }
     
-    void HVCC::HVCC::Array::AddNALUnit( std::shared_ptr< NALUnit > unit )
+    void HVCC::Array::AddNALUnit( std::shared_ptr< NALUnit > unit )
     {
         this->impl->_nalUnits.push_back( unit );
     }
     
-    void HVCC::HVCC::Array::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
+    std::vector< std::shared_ptr< DisplayableObject > > HVCC::Array::GetDisplayableObjects( void ) const
     {
-        std::string i( ( indentLevel ) * 4, ' ' );
-        auto        units( this->GetNALUnits() );
+        auto v( this->GetNALUnits() );
         
-        os << i << "{" << std::endl
-           << i << "    Array completeness: " << ( ( this->GetArrayCompleteness() ) ? "yes" : "no" ) << std::endl
-           << i << "    NAL unit type:      " << static_cast< uint32_t >( this->GetNALUnitType() ) << std::endl
-           << i << "    NAL units:          " << units.size();
-        
-        if( units.size() > 0 )
-        {
-            os << std::endl
-               << i
-               << "    {"
-               << std::endl;
-            
-            for( const auto & unit: units )
-            {
-                os << i << "        " << *( unit ) << std::endl;
-            }
-            
-            os << i
-               << "    }";
-        }
-        
-        os << std::endl << i << "}";
+        return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
-    std::ostream & operator << ( std::ostream & os, const HVCC::HVCC::Array & array )
+    std::vector< std::pair< std::string, std::string > > HVCC::Array::GetDisplayableProperties( void ) const
     {
-        array.WriteDescription( os, 0 );
-        
-        return os;
+        return
+        {
+            { "Array completeness", ( this->GetArrayCompleteness() ) ? "yes" : "no" },
+            { "NAL unit type",      std::to_string( this->GetNALUnitType() ) },
+            { "NAL units",          std::to_string( this->GetNALUnits().size() ) }
+        };
     }
 }
 

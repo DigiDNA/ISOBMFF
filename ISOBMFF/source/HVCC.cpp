@@ -129,48 +129,41 @@ namespace ISOBMFF
     
     void HVCC::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
-        auto        arrays( this->GetArrays() );
-        
         Box::WriteDescription( os, indentLevel );
+        DisplayableObjectContainer::WriteDescription( os, indentLevel );
+    }
+    
+    std::vector< std::shared_ptr< DisplayableObject > > HVCC::GetDisplayableObjects( void ) const
+    {
+        auto v( this->GetArrays() );
         
-        os << std::endl
-           << i << "- Configuration version:               " << static_cast< uint32_t >( this->GetConfigurationVersion() ) << std::endl
-           << i << "- General profile space:               " << static_cast< uint32_t >( this->GetGeneralProfileSpace() ) << std::endl
-           << i << "- General tier flag:                   " << static_cast< uint32_t >( this->GetGeneralTierFlag() ) << std::endl
-           << i << "- General profile IDC:                 " << static_cast< uint32_t >( this->GetGeneralProfileIDC() ) << std::endl
-           << i << "- General profile compatibility flags: " << this->GetGeneralProfileCompatibilityFlags() << std::endl
-           << i << "- General constraint indicator flags:  " << this->GetGeneralConstraintIndicatorFlags() << std::endl
-           << i << "- General level IDC:                   " << static_cast< uint32_t >( this->GetGeneralLevelIDC() ) << std::endl
-           << i << "- Min spacial segmentation IDC:        " << this->GetMinSpatialSegmentationIDC() << std::endl
-           << i << "- Parallelism type:                    " << static_cast< uint32_t >( this->GetParallelismType() ) << std::endl
-           << i << "- Chroma format:                       " << static_cast< uint32_t >( this->GetChromaFormat() ) << std::endl
-           << i << "- Bit depth luma minus 8:              " << static_cast< uint32_t >( this->GetBitDepthLumaMinus8() ) << std::endl
-           << i << "- Bit depth chroma minus 8:            " << static_cast< uint32_t >( this->GetBitDepthChromaMinus8() ) << std::endl
-           << i << "- Avg frame rate:                      " << this->GetAvgFrameRate() << std::endl
-           << i << "- Constant frame rate:                 " << static_cast< uint32_t >( this->GetConstantFrameRate() ) << std::endl
-           << i << "- Num temporal layers:                 " << static_cast< uint32_t >( this->GetNumTemporalLayers() ) << std::endl
-           << i << "- Temporal id nested:                  " << static_cast< uint32_t >( this->GetTemporalIdNested() ) << std::endl
-           << i << "- Length size minus one:               " << static_cast< uint32_t >( this->GetLengthSizeMinusOne() ) << std::endl
-           << i << "- Arrays:                              " << arrays.size();
+        return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
+    }
+    
+    std::vector< std::pair< std::string, std::string > > HVCC::GetDisplayableProperties( void ) const
+    {
+        auto props( Box::GetDisplayableProperties() );
         
-        if( arrays.size() > 0 )
-        {
-            os << std::endl
-               << i
-               << "{"
-               << std::endl;
-            
-            for( const auto & array: arrays )
-            {
-                array->WriteDescription( os, indentLevel + 2 );
-                
-                os << std::endl;
-            }
-            
-            os << i
-               << "}";
-        }
+        props.push_back( { "Configuration version",               std::to_string( this->GetConfigurationVersion() ) } );
+        props.push_back( { "General profile space",               std::to_string( this->GetGeneralProfileSpace() ) } );
+        props.push_back( { "General tier flag",                   std::to_string( this->GetGeneralTierFlag() ) } );
+        props.push_back( { "General profile IDC",                 std::to_string( this->GetGeneralProfileIDC() ) } );
+        props.push_back( { "General profile compatibility flags", std::to_string( this->GetGeneralProfileCompatibilityFlags() ) } );
+        props.push_back( { "General constraint indicator flags",  std::to_string( this->GetGeneralConstraintIndicatorFlags() ) } );
+        props.push_back( { "General level IDC",                   std::to_string( this->GetGeneralLevelIDC() ) } );
+        props.push_back( { "Min spacial segmentation IDC",        std::to_string( this->GetMinSpatialSegmentationIDC() ) } );
+        props.push_back( { "Parallelism type",                    std::to_string( this->GetParallelismType() ) } );
+        props.push_back( { "Chroma format",                       std::to_string( this->GetChromaFormat() ) } );
+        props.push_back( { "Bit depth luma minus 8",              std::to_string( this->GetBitDepthLumaMinus8() ) } );
+        props.push_back( { "Bit depth chroma minus 8",            std::to_string( this->GetBitDepthChromaMinus8() ) } );
+        props.push_back( { "Avg frame rate",                      std::to_string( this->GetAvgFrameRate() ) } );
+        props.push_back( { "Constant frame rate",                 std::to_string( this->GetConstantFrameRate() ) } );
+        props.push_back( { "Num temporal layers",                 std::to_string( this->GetNumTemporalLayers() ) } );
+        props.push_back( { "Temporal id nested",                  std::to_string( this->GetTemporalIdNested() ) } );
+        props.push_back( { "Length size minus one",               std::to_string( this->GetLengthSizeMinusOne() ) } );
+        props.push_back( { "Arrays",                              std::to_string( this->GetArrays().size() ) } );
+        
+        return props;
     }
     
     uint8_t HVCC::GetConfigurationVersion( void ) const

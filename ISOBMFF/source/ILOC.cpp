@@ -90,40 +90,33 @@ namespace ISOBMFF
     
     void ILOC::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string i( ( indentLevel + 1 ) * 4, ' ' );
-        auto        items( this->GetItems() );
-        
         FullBox::WriteDescription( os, indentLevel );
+        DisplayableObjectContainer::WriteDescription( os, indentLevel );
+    }
+    
+    std::vector< std::shared_ptr< DisplayableObject > > ILOC::GetDisplayableObjects( void ) const
+    {
+        auto v( this->GetItems() );
         
-        os << std::endl
-           << i << "- Offset size:      " << static_cast< uint32_t >( this->GetOffsetSize() ) << std::endl
-           << i << "- Length size:      " << static_cast< uint32_t >( this->GetLengthSize() ) << std::endl
-           << i << "- Base offset size: " << static_cast< uint32_t >( this->GetBaseOffsetSize() );
+        return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
+    }
+    
+    std::vector< std::pair< std::string, std::string > > ILOC::GetDisplayableProperties( void ) const
+    {
+        auto props( FullBox::GetDisplayableProperties() );
+        
+         props.push_back( { "Offset size",      std::to_string( this->GetOffsetSize() ) } );
+         props.push_back( { "Length size",      std::to_string( this->GetLengthSize() ) } );
+         props.push_back( { "Base offset size", std::to_string( this->GetBaseOffsetSize() ) } );
            
         if( this->GetVersion() == 1 || this->GetVersion() == 2 )
         {
-            os << std::endl << i << "- Index size:       " << static_cast< uint32_t >( this->GetIndexSize() );
+            props.push_back( { "Index size", std::to_string( this->GetIndexSize() ) } );
         }
         
-        os << std::endl << i << "- Item count:       " << static_cast< uint32_t >( this->GetItems().size() );
+        props.push_back( { "Items", std::to_string( this->GetItems().size() ) } );
         
-        if( items.size() > 0 )
-        {
-            os << std::endl
-               << i
-               << "{"
-               << std::endl;
-            
-            for( const auto & item: items )
-            {
-                item->WriteDescription( os, indentLevel + 2 );
-                
-                os << std::endl;
-            }
-            
-            os << i
-               << "}";
-        }
+        return props;
     }
     
     uint8_t ILOC::GetOffsetSize( void ) const

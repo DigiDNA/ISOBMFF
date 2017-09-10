@@ -109,7 +109,7 @@ int main( int argc, const char * argv[] )
             std::shared_ptr< ISOBMFF::ILOC > iloc;
             std::shared_ptr< ISOBMFF::Box  > idat;
             std::shared_ptr< ISOBMFF::PITM > pitm;
-            std::vector< uint8_t >         data;
+            std::vector< uint8_t >           data;
             
             ftyp = file->GetTypedBox< ISOBMFF::FTYP >( "ftyp" );
             meta = file->GetTypedBox< ISOBMFF::META >( "meta" );
@@ -175,7 +175,7 @@ int main( int argc, const char * argv[] )
                             }
                             
                             std::cout << "Primary item info: " << std::endl << *( entry ) << std::endl << std::endl;
-                            std::cout << "Primary item: " << std::endl << item       << std::endl << std::endl;
+                            std::cout << "Primary item: "      << std::endl << *( item )  << std::endl << std::endl;
                             
                             extent = item->GetExtents()[ 0 ];
                             
