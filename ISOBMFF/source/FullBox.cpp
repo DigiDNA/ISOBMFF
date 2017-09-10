@@ -28,6 +28,7 @@
  */
 
 #include <ISOBMFF/FullBox.hpp>
+#include <ISOBMFF/Utils.hpp>
 
 template<>
 class XS::PIMPL::Object< ISOBMFF::FullBox >::IMPL
@@ -64,7 +65,7 @@ namespace ISOBMFF
         auto props( Box::GetDisplayableProperties() );
         
         props.push_back( { "Version", std::to_string( this->GetVersion() ) } );
-        props.push_back( { "Flags",   std::to_string( this->GetFlags() ) } );
+        props.push_back( { "Flags",   Utils::ToHexString( this->GetFlags() ) } );
         
         return props;
     }

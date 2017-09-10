@@ -28,6 +28,8 @@
  */
 
 #include <ISOBMFF/Utils.hpp>
+#include <sstream>
+#include <iomanip>
 
 namespace ISOBMFF
 {
@@ -58,6 +60,62 @@ namespace ISOBMFF
             }
             
             return s;
+        }
+        
+        std::string ToHexString( uint8_t u )
+        {
+            std::stringstream ss;
+            
+            ss << "0x"
+               << std::hex
+               << std::uppercase
+               << std::setfill( '0' )
+               << std::setw( 2 )
+               << static_cast< uint32_t >( u );
+            
+            return ss.str();
+        }
+        
+        std::string ToHexString( uint16_t u )
+        {
+            std::stringstream ss;
+            
+            ss << "0x"
+               << std::hex
+               << std::uppercase
+               << std::setfill( '0' )
+               << std::setw( 4 )
+               << static_cast< uint32_t >( u );
+            
+            return ss.str();
+        }
+        
+        std::string ToHexString( uint32_t u )
+        {
+            std::stringstream ss;
+            
+            ss << "0x"
+               << std::hex
+               << std::uppercase
+               << std::setfill( '0' )
+               << std::setw( 8 )
+               << static_cast< uint32_t >( u );
+            
+            return ss.str();
+        }
+        
+        std::string ToHexString( uint64_t u )
+        {
+            std::stringstream ss;
+            
+            ss << "0x"
+               << std::hex
+               << std::uppercase
+               << std::setfill( '0' )
+               << std::setw( 16 )
+               << static_cast< uint32_t >( u );
+            
+            return ss.str();
         }
     }
 }

@@ -28,6 +28,7 @@
  */
 
 #include <ISOBMFF/HVCC.hpp>
+#include <ISOBMFF/Utils.hpp>
 
 template<>
 class XS::PIMPL::Object< ISOBMFF::HVCC >::IMPL
@@ -146,10 +147,10 @@ namespace ISOBMFF
         
         props.push_back( { "Configuration version",               std::to_string( this->GetConfigurationVersion() ) } );
         props.push_back( { "General profile space",               std::to_string( this->GetGeneralProfileSpace() ) } );
-        props.push_back( { "General tier flag",                   std::to_string( this->GetGeneralTierFlag() ) } );
+        props.push_back( { "General tier flag",                   Utils::ToHexString( this->GetGeneralTierFlag() ) } );
         props.push_back( { "General profile IDC",                 std::to_string( this->GetGeneralProfileIDC() ) } );
-        props.push_back( { "General profile compatibility flags", std::to_string( this->GetGeneralProfileCompatibilityFlags() ) } );
-        props.push_back( { "General constraint indicator flags",  std::to_string( this->GetGeneralConstraintIndicatorFlags() ) } );
+        props.push_back( { "General profile compatibility flags", Utils::ToHexString( this->GetGeneralProfileCompatibilityFlags() ) } );
+        props.push_back( { "General constraint indicator flags",  Utils::ToHexString( this->GetGeneralConstraintIndicatorFlags() ) } );
         props.push_back( { "General level IDC",                   std::to_string( this->GetGeneralLevelIDC() ) } );
         props.push_back( { "Min spacial segmentation IDC",        std::to_string( this->GetMinSpatialSegmentationIDC() ) } );
         props.push_back( { "Parallelism type",                    std::to_string( this->GetParallelismType() ) } );

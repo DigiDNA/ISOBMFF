@@ -40,6 +40,10 @@ namespace ISOBMFF
     {
         std::string Pad( const std::string & s, size_t length );
         std::string ToString( const std::vector< std::string > & v );
+        std::string ToHexString( uint8_t u );
+        std::string ToHexString( uint16_t u );
+        std::string ToHexString( uint32_t u );
+        std::string ToHexString( uint64_t u );
         
         template< typename _T_ >
         std::string ToString( const std::vector< _T_ > & v )
