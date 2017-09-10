@@ -31,6 +31,7 @@
 #define ISOBMFF_IINF_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Container.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/INFE.hpp>
 #include <vector>
@@ -38,7 +39,7 @@
 
 namespace ISOBMFF
 {
-    class IINF: public FullBox, public XS::PIMPL::Object< IINF >
+    class IINF: public FullBox, public Container, public XS::PIMPL::Object< IINF >
     {
         public:
             
@@ -51,6 +52,9 @@ namespace ISOBMFF
             
             void                                   AddEntry( std::shared_ptr< INFE > entry );
             std::vector< std::shared_ptr< INFE > > GetEntries( void ) const;
+            
+            void                                  AddBox( std::shared_ptr< Box > box ) override;
+            std::vector< std::shared_ptr< Box > > GetBoxes( void ) const override;
     };
 }
 
