@@ -65,30 +65,8 @@ namespace ISOBMFF
     
     void IREF::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string                           i( indentLevel * 4, ' ' );
-        std::vector< std::shared_ptr< Box > > boxes;
-        
         FullBox::WriteDescription( os, indentLevel );
-        
-        boxes = this->GetBoxes();
-        
-        if( boxes.size() > 0 )
-        {
-            os << std::endl
-               << i
-               << "{"
-               << std::endl;
-            
-            for( const auto & box: boxes )
-            {
-                box->WriteDescription( os, indentLevel + 1 );
-                
-                os << std::endl;
-            }
-            
-            os << i
-               << "}";
-        }
+        Container::WriteBoxes( os, indentLevel + 1 );
     }
     
     void IREF::AddBox( std::shared_ptr< Box > box )

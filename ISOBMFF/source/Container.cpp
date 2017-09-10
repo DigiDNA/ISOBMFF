@@ -34,6 +34,34 @@ namespace ISOBMFF
     Container::~Container( void )
     {}
     
+    void Container::WriteBoxes( const std::vector< std::shared_ptr< Box > > & boxes, std::ostream & os, std::size_t indentLevel )
+    {
+        std::string i( indentLevel * 4, ' ' );
+        
+        if( boxes.size() > 0 )
+        {
+            os << std::endl
+               << i
+               << "{"
+               << std::endl;
+            
+            for( const auto & box: boxes )
+            {
+                box->WriteDescription( os, indentLevel + 1 );
+                
+                os << std::endl;
+            }
+            
+            os << i
+               << "}";
+        }
+    }
+    
+    void Container::WriteBoxes( std::ostream & os, std::size_t indentLevel ) const
+    {
+        Container::WriteBoxes( this->GetBoxes(), os, indentLevel );
+    }
+    
     std::vector< std::shared_ptr< Box > > Container::GetBoxes( const std::string & name ) const
     {
         std::vector< std::shared_ptr< Box > > boxes;

@@ -80,30 +80,10 @@ namespace ISOBMFF
     
     void IINF::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::vector< std::shared_ptr< INFE > > entries;
-        std::string                            i( indentLevel * 4, ' ' );
+        auto v( this->GetEntries() );
         
         FullBox::WriteDescription( os, indentLevel );
-        
-        entries = this->GetEntries();
-        
-        if( entries.size() > 0 )
-        {
-            os << std::endl
-               << i
-               << "{"
-               << std::endl;
-            
-            for( const auto & entry: entries )
-            {
-                entry->WriteDescription( os, indentLevel + 1 );
-                
-                os << std::endl;
-            }
-            
-            os << i
-               << "}";
-        }
+        Container::WriteBoxes( std::vector< std::shared_ptr< Box > >( v.begin(), v.end() ), os, indentLevel + 1 );
     }
     
     void IINF::AddEntry( std::shared_ptr< INFE > entry )
