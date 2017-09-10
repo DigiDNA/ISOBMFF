@@ -38,9 +38,9 @@ class XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL
         IMPL( const IMPL & o );
         ~IMPL( void );
         
-        bool                                         _arrayCompleteness;
-        uint8_t                                      _nalUnitType;
-        std::vector< ISOBMFF::HVCC::Array::NALUnit > _nalUnits;
+        bool                                                            _arrayCompleteness;
+        uint8_t                                                         _nalUnitType;
+        std::vector< std::shared_ptr< ISOBMFF::HVCC::Array::NALUnit > > _nalUnits;
 };
 
 #define XS_PIMPL_CLASS ISOBMFF::HVCC::Array
@@ -66,7 +66,7 @@ namespace ISOBMFF
         
         for( i = 0; i < count; i++ )
         {
-            this->AddNALUnit( NALUnit( stream ) );
+            this->AddNALUnit( std::make_shared< NALUnit >( stream ) );
         }
     }
     
@@ -90,22 +90,20 @@ namespace ISOBMFF
         this->impl->_nalUnitType = value;
     }
     
-    std::vector< HVCC::HVCC::Array::NALUnit > HVCC::HVCC::Array::GetNALUnits( void ) const
+    std::vector< std::shared_ptr< HVCC::HVCC::Array::NALUnit > > HVCC::HVCC::Array::GetNALUnits( void ) const
     {
         return this->impl->_nalUnits;
     }
     
-    void HVCC::HVCC::Array::AddNALUnit( const NALUnit & unit )
+    void HVCC::HVCC::Array::AddNALUnit( std::shared_ptr< NALUnit > unit )
     {
         this->impl->_nalUnits.push_back( unit );
     }
     
     void HVCC::HVCC::Array::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::vector< NALUnit > units;
-        std::string            i( ( indentLevel ) * 4, ' ' );
-        
-        units = this->GetNALUnits();
+        std::string i( ( indentLevel ) * 4, ' ' );
+        auto        units( this->GetNALUnits() );
         
         os << i << "{" << std::endl
            << i << "    Array completeness: " << ( ( this->GetArrayCompleteness() ) ? "yes" : "no" ) << std::endl
@@ -121,7 +119,7 @@ namespace ISOBMFF
             
             for( const auto & unit: units )
             {
-                os << i << "        " << unit << std::endl;
+                os << i << "        " << *( unit ) << std::endl;
             }
             
             os << i

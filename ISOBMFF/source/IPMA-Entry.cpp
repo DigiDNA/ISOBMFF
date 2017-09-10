@@ -38,8 +38,8 @@ class XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL
         IMPL( const IMPL & o );
         ~IMPL( void );
         
-        uint32_t                                         _itemID;
-        std::vector< ISOBMFF::IPMA::Entry::Association > _associations;
+        uint32_t                                                            _itemID;
+        std::vector< std::shared_ptr< ISOBMFF::IPMA::Entry::Association > > _associations;
 };
 
 #define XS_PIMPL_CLASS ISOBMFF::IPMA::Entry
@@ -68,16 +68,14 @@ namespace ISOBMFF
         
         for( i = 0; i < count; i++ )
         {
-            this->AddAssociation( Association( stream, ipma ) );
+            this->AddAssociation( std::make_shared< Association >( stream, ipma ) );
         }
     }
     
     void IPMA::Entry::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string                i( ( indentLevel ) * 4, ' ' );
-        std::vector< Association > associations;
-        
-        associations = this->GetAssociations();
+        std::string i( ( indentLevel ) * 4, ' ' );
+        auto        associations( this->GetAssociations() );
         
         os << i << "{" << std::endl
            << i << "    - Item ID:      " << this->GetItemID() << std::endl
@@ -92,7 +90,7 @@ namespace ISOBMFF
             
             for( const auto & association: associations )
             {
-                association.WriteDescription( os, indentLevel + 2 );
+                association->WriteDescription( os, indentLevel + 2 );
                 
                 os << std::endl;
             }
@@ -121,12 +119,12 @@ namespace ISOBMFF
         this->impl->_itemID = value;
     }
     
-    std::vector< IPMA::Entry::Association > IPMA::Entry::GetAssociations( void ) const
+    std::vector< std::shared_ptr< IPMA::Entry::Association > > IPMA::Entry::GetAssociations( void ) const
     {
         return this->impl->_associations;
     }
     
-    void IPMA::Entry::AddAssociation( const Association & association )
+    void IPMA::Entry::AddAssociation( std::shared_ptr< Association > association )
     {
         this->impl->_associations.push_back( association );
     }

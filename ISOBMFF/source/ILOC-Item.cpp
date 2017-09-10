@@ -38,11 +38,11 @@ class XS::PIMPL::Object< ISOBMFF::ILOC::Item >::IMPL
         IMPL( const IMPL & o );
         ~IMPL( void );
         
-        uint32_t                                   _itemID;
-        uint8_t                                    _constructionMethod;
-        uint16_t                                   _dataReferenceIndex;
-        uint64_t                                   _baseOffset;
-        std::vector< ISOBMFF::ILOC::Item::Extent > _extents;
+        uint32_t                                                      _itemID;
+        uint8_t                                                       _constructionMethod;
+        uint16_t                                                      _dataReferenceIndex;
+        uint64_t                                                      _baseOffset;
+        std::vector< std::shared_ptr< ISOBMFF::ILOC::Item::Extent > > _extents;
 };
 
 #define XS_PIMPL_CLASS ISOBMFF::ILOC::Item
@@ -95,7 +95,7 @@ namespace ISOBMFF
         
         for( i = 0; i < count; i++ )
         {
-            this->AddExtent( Extent( stream, iloc ) );
+            this->AddExtent( std::make_shared< Extent >( stream, iloc ) );
         }
     }
     
@@ -139,22 +139,20 @@ namespace ISOBMFF
         this->impl->_baseOffset = value;
     }
     
-    std::vector< ILOC::Item::Extent > ILOC::Item::GetExtents( void ) const
+    std::vector< std::shared_ptr< ILOC::Item::Extent > > ILOC::Item::GetExtents( void ) const
     {
         return this->impl->_extents;
     }
     
-    void ILOC::Item::AddExtent( const Extent & extent )
+    void ILOC::Item::AddExtent( std::shared_ptr< Extent > extent )
     {
         this->impl->_extents.push_back( extent );
     }
     
     void ILOC::Item::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string           i( ( indentLevel ) * 4, ' ' );
-        std::vector< Extent > extents;
-        
-        extents = this->GetExtents();
+        std::string i( ( indentLevel ) * 4, ' ' );
+        auto        extents( this->GetExtents() );
         
         os << i << "{" << std::endl
            << i << "    Item ID:              " << this->GetItemID() << std::endl
@@ -170,7 +168,7 @@ namespace ISOBMFF
         
         for( const auto & extent: extents )
         {
-            extent.WriteDescription( os, indentLevel + 1 );
+            extent->WriteDescription( os, indentLevel + 1 );
         }
         
         os << std::endl << i << "}";

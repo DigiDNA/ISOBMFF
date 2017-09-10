@@ -38,11 +38,11 @@ class XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL
         IMPL( const IMPL & o );
         ~IMPL( void );
         
-        uint8_t                            _offsetSize;
-        uint8_t                            _lengthSize;
-        uint8_t                            _baseOffsetSize;
-        uint8_t                            _indexSize;
-        std::vector< ISOBMFF::ILOC::Item > _items;
+        uint8_t                                               _offsetSize;
+        uint8_t                                               _lengthSize;
+        uint8_t                                               _baseOffsetSize;
+        uint8_t                                               _indexSize;
+        std::vector< std::shared_ptr< ISOBMFF::ILOC::Item > > _items;
 };
 
 #define XS_PIMPL_CLASS ISOBMFF::ILOC
@@ -84,14 +84,14 @@ namespace ISOBMFF
         
         for( i = 0; i < count; i++ )
         {
-            this->AddItem( Item( stream, *( this ) ) );
+            this->AddItem( std::make_shared< Item >( stream, *( this ) ) );
         }
     }
     
     void ILOC::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string         i( ( indentLevel + 1 ) * 4, ' ' );
-        std::vector< Item > items;
+        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        auto        items( this->GetItems() );
         
         FullBox::WriteDescription( os, indentLevel );
         
@@ -107,8 +107,6 @@ namespace ISOBMFF
         
         os << std::endl << i << "- Item count:       " << static_cast< uint32_t >( this->GetItems().size() );
         
-        items = this->GetItems();
-        
         if( items.size() > 0 )
         {
             os << std::endl
@@ -118,7 +116,7 @@ namespace ISOBMFF
             
             for( const auto & item: items )
             {
-                item.WriteDescription( os, indentLevel + 2 );
+                item->WriteDescription( os, indentLevel + 2 );
                 
                 os << std::endl;
             }
@@ -168,12 +166,12 @@ namespace ISOBMFF
         this->impl->_indexSize = value;
     }
     
-    std::vector< ILOC::Item > ILOC::GetItems( void ) const
+    std::vector< std::shared_ptr< ILOC::Item > > ILOC::GetItems( void ) const
     {
         return this->impl->_items;
     }
 	
-	void ILOC::AddItem( const Item & item )
+	void ILOC::AddItem( std::shared_ptr< Item > item )
 	{
         this->impl->_items.push_back( item );
     }

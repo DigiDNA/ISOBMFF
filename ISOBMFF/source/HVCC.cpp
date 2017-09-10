@@ -38,24 +38,24 @@ class XS::PIMPL::Object< ISOBMFF::HVCC >::IMPL
         IMPL( const IMPL & o );
         ~IMPL( void );
         
-        uint8_t                             _configurationVersion;
-        uint8_t                             _generalProfileSpace;
-        uint8_t                             _generalTierFlag;
-        uint8_t                             _generalProfileIDC;
-        uint32_t                            _generalProfileCompatibilityFlags;
-        uint64_t                            _generalConstraintIndicatorFlags;
-        uint8_t                             _generalLevelIDC;
-        uint16_t                            _minSpatialSegmentationIDC;
-        uint8_t                             _parallelismType;
-        uint8_t                             _chromaFormat;
-        uint8_t                             _bitDepthLumaMinus8;
-        uint8_t                             _bitDepthChromaMinus8;
-        uint16_t                            _avgFrameRate;
-        uint8_t                             _constantFrameRate;
-        uint8_t                             _numTemporalLayers;
-        uint8_t                             _temporalIdNested;
-        uint8_t                             _lengthSizeMinusOne;
-        std::vector< ISOBMFF::HVCC::Array > _arrays;
+        uint8_t                                                _configurationVersion;
+        uint8_t                                                _generalProfileSpace;
+        uint8_t                                                _generalTierFlag;
+        uint8_t                                                _generalProfileIDC;
+        uint32_t                                               _generalProfileCompatibilityFlags;
+        uint64_t                                               _generalConstraintIndicatorFlags;
+        uint8_t                                                _generalLevelIDC;
+        uint16_t                                               _minSpatialSegmentationIDC;
+        uint8_t                                                _parallelismType;
+        uint8_t                                                _chromaFormat;
+        uint8_t                                                _bitDepthLumaMinus8;
+        uint8_t                                                _bitDepthChromaMinus8;
+        uint16_t                                               _avgFrameRate;
+        uint8_t                                                _constantFrameRate;
+        uint8_t                                                _numTemporalLayers;
+        uint8_t                                                _temporalIdNested;
+        uint8_t                                                _lengthSizeMinusOne;
+        std::vector< std::shared_ptr< ISOBMFF::HVCC::Array > > _arrays;
 };
 
 #define XS_PIMPL_CLASS ISOBMFF::HVCC
@@ -123,18 +123,16 @@ namespace ISOBMFF
         
         for( i = 0; i < count; i++ )
         {
-            this->AddArray( Array( stream ) );
+            this->AddArray( std::make_shared< Array >( stream ) );
         }
     }
     
     void HVCC::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::vector< Array > arrays;
-        std::string          i( ( indentLevel + 1 ) * 4, ' ' );
+        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        auto        arrays( this->GetArrays() );
         
         Box::WriteDescription( os, indentLevel );
-        
-        arrays = this->GetArrays();
         
         os << std::endl
            << i << "- Configuration version:               " << static_cast< uint32_t >( this->GetConfigurationVersion() ) << std::endl
@@ -165,7 +163,7 @@ namespace ISOBMFF
             
             for( const auto & array: arrays )
             {
-                array.WriteDescription( os, indentLevel + 2 );
+                array->WriteDescription( os, indentLevel + 2 );
                 
                 os << std::endl;
             }
@@ -345,12 +343,12 @@ namespace ISOBMFF
         this->impl->_lengthSizeMinusOne = value;
     }
     
-    std::vector< HVCC::Array > HVCC::GetArrays( void ) const
+    std::vector< std::shared_ptr< HVCC::Array > > HVCC::GetArrays( void ) const
     {
         return this->impl->_arrays;
     }
     
-    void HVCC::AddArray( const Array & array )
+    void HVCC::AddArray( std::shared_ptr< Array > array )
     {
         this->impl->_arrays.push_back( array );
     }

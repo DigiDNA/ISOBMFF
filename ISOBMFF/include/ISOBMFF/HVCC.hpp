@@ -119,12 +119,12 @@ namespace ISOBMFF
                             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void )                               const override;
                     };
                     
-                    std::vector< NALUnit > GetNALUnits( void ) const;
-                    void                   AddNALUnit( const NALUnit & unit );
+                    std::vector< std::shared_ptr< NALUnit > > GetNALUnits( void ) const;
+                    void                                      AddNALUnit( std::shared_ptr< NALUnit > unit );
             };
             
-            std::vector< Array > GetArrays( void ) const;
-            void                 AddArray( const Array & array );
+            std::vector< std::shared_ptr< Array > > GetArrays( void ) const;
+            void                                    AddArray( std::shared_ptr< Array > array );
     };
 }
 

@@ -101,12 +101,12 @@ namespace ISOBMFF
                             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
                     };
                     
-                    std::vector< Extent > GetExtents( void ) const;
-                    void                  AddExtent( const Extent & extent );
+                    std::vector< std::shared_ptr< Extent > > GetExtents( void ) const;
+                    void                                     AddExtent( std::shared_ptr< Extent > extent );
             };
             
-            std::vector< Item > GetItems( void ) const;
-            void                AddItem( const Item & item );
+            std::vector< std::shared_ptr< Item > > GetItems( void ) const;
+            void                                   AddItem( std::shared_ptr< Item > item );
     };
 }
 

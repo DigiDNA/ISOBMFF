@@ -159,16 +159,16 @@ int main( int argc, const char * argv[] )
                 if( entry->GetItemID() == pitm->GetItemID() )
                 {
                     {
-                        ISOBMFF::ILOC::Item::Extent extent;
-                        std::vector< uint8_t >    itemData;
-                        ISOBMFF::BinaryStream       stream;
+                        std::shared_ptr< ISOBMFF::ILOC::Item::Extent > extent;
+                        std::vector< uint8_t >                         itemData;
+                        ISOBMFF::BinaryStream                          stream;
                         
                         for( const auto & item: iloc->GetItems() )
                         {
                             if
                             (
-                                   item.GetItemID()         != entry->GetItemID()
-                                || item.GetExtents().size() == 0
+                                   item->GetItemID()         != entry->GetItemID()
+                                || item->GetExtents().size() == 0
                             )
                             {
                                 continue;
@@ -177,19 +177,19 @@ int main( int argc, const char * argv[] )
                             std::cout << "Primary item info: " << std::endl << *( entry ) << std::endl << std::endl;
                             std::cout << "Primary item: " << std::endl << item       << std::endl << std::endl;
                             
-                            extent = item.GetExtents()[ 0 ];
+                            extent = item->GetExtents()[ 0 ];
                             
-                            if( item.GetConstructionMethod() == 0 )
+                            if( item->GetConstructionMethod() == 0 )
                             {
-                                itemData = Slice( data, extent.GetOffset(), extent.GetLength() );
+                                itemData = Slice( data, extent->GetOffset(), extent->GetLength() );
                                 stream   = ISOBMFF::BinaryStream( itemData );
                             }
-                            else if( item.GetConstructionMethod() == 1 )
+                            else if( item->GetConstructionMethod() == 1 )
                             {
-                                itemData = Slice( idat->GetData(), extent.GetOffset(), extent.GetLength() );
+                                itemData = Slice( idat->GetData(), extent->GetOffset(), extent->GetLength() );
                                 stream   = ISOBMFF::BinaryStream( itemData );
                             }
-                            else if( item.GetConstructionMethod() == 2 )
+                            else if( item->GetConstructionMethod() == 2 )
                             {
                                 /* ... */
                             }
@@ -212,27 +212,27 @@ int main( int argc, const char * argv[] )
                 else if( entry->GetItemType() == "Exif" )
                 {
                     {
-                        ISOBMFF::ILOC::Item::Extent exif;
+                        std::shared_ptr< ISOBMFF::ILOC::Item::Extent > exif;
                         
                         for( const auto & item: iloc->GetItems() )
                         {
                             if
                             (
-                                   item.GetItemID()         != entry->GetItemID()
-                                || item.GetExtents().size() == 0
+                                   item->GetItemID()         != entry->GetItemID()
+                                || item->GetExtents().size() == 0
                             )
                             {
                                 continue;
                             }
                             
-                            exif = item.GetExtents()[ 0 ];
+                            exif = item->GetExtents()[ 0 ];
                             
-                            if( exif.GetLength() > 0 )
+                            if( exif->GetLength() > 0 )
                             {
-                                std::cout << "Found EXIF data ( index = " << exif.GetIndex() << ", offset = " << exif.GetOffset() << ", length = " << exif.GetLength() << " ):" << std::endl;
+                                std::cout << "Found EXIF data ( index = " << exif->GetIndex() << ", offset = " << exif->GetOffset() << ", length = " << exif->GetLength() << " ):" << std::endl;
                                 std::cout << std::endl;
                                 
-                                PrintData( data, exif.GetOffset(), exif.GetLength() );
+                                PrintData( data, exif->GetOffset(), exif->GetLength() );
                                 
                                 std::cout << std::endl;
                             }

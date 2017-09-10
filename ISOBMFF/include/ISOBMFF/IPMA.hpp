@@ -84,12 +84,12 @@ namespace ISOBMFF
                             friend std::ostream & operator << ( std::ostream & os, const Association & association );
                     };
                     
-                    std::vector< Association > GetAssociations( void ) const;
-                    void                       AddAssociation( const Association & association );
+                    std::vector< std::shared_ptr< Association > > GetAssociations( void ) const;
+                    void                                          AddAssociation( std::shared_ptr< Association > association );
             };
             
-            std::vector< Entry > GetEntries( void ) const;
-            void                 AddEntry( const Entry & entry );
+            std::vector< std::shared_ptr< Entry > > GetEntries( void ) const;
+            void                                    AddEntry( std::shared_ptr< Entry > entry );
     };
 }
 

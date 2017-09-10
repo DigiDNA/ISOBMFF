@@ -38,7 +38,7 @@ class XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL
         IMPL( const IMPL & o );
         ~IMPL( void );
         
-        std::vector< ISOBMFF::IPMA::Entry > _entries;
+        std::vector< std::shared_ptr< ISOBMFF::IPMA::Entry > > _entries;
 };
 
 #define XS_PIMPL_CLASS ISOBMFF::IPMA
@@ -60,18 +60,16 @@ namespace ISOBMFF
         
         for( i = 0; i < count; i++ )
         {
-            this->AddEntry( Entry( stream, *( this ) ) );
+            this->AddEntry( std::make_shared< Entry >( stream, *( this ) ) );
         }
     }
     
     void IPMA::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
     {
-        std::string          i( ( indentLevel + 1 ) * 4, ' ' );
-        std::vector< Entry > entries;
+        std::string i( ( indentLevel + 1 ) * 4, ' ' );
+        auto        entries( this->GetEntries() );
         
         FullBox::WriteDescription( os, indentLevel );
-        
-        entries = this->GetEntries();
         
         os << std::endl
            << i << "- Entries: " << entries.size();
@@ -85,7 +83,7 @@ namespace ISOBMFF
             
             for( const auto & entry: entries )
             {
-                entry.WriteDescription( os, indentLevel + 2 );
+                entry->WriteDescription( os, indentLevel + 2 );
                 
                 os << std::endl;
             }
@@ -95,12 +93,12 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< IPMA::Entry > IPMA::GetEntries( void ) const
+    std::vector< std::shared_ptr< IPMA::Entry > > IPMA::GetEntries( void ) const
     {
         return this->impl->_entries;
     }
     
-    void IPMA::AddEntry( const Entry & entry )
+    void IPMA::AddEntry( std::shared_ptr< Entry > entry )
     {
         this->impl->_entries.push_back( entry );
     }
