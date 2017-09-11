@@ -325,64 +325,6 @@ int main( int argc, const char * argv[] )
                 
                 std::cout << std::endl;
             }
-            
-            /*
-            for( const auto & entry: iinf->GetEntries()  )
-            {
-                if( entry->GetItemType() == "Exif" )
-                {
-                    {
-                        std::shared_ptr< ISOBMFF::ILOC::Item::Extent > exif;
-                        
-                        for( const auto & item: iloc->GetItems() )
-                        {
-                            if
-                            (
-                                   item->GetItemID()         != entry->GetItemID()
-                                || item->GetExtents().size() == 0
-                            )
-                            {
-                                continue;
-                            }
-                            
-                            exif = item->GetExtents()[ 0 ];
-                            
-                            if( exif->GetLength() > 0 )
-                            {
-                                std::cout << "Found EXIF data ( index = " << exif->GetIndex() << ", offset = " << exif->GetOffset() << ", length = " << exif->GetLength() << " ):" << std::endl;
-                                std::cout << std::endl;
-                                
-                                PrintData( data, exif->GetOffset(), exif->GetLength() );
-                                
-                                std::cout << std::endl;
-                            }
-                        }
-                    }
-                }
-                else if( entry->GetItemType() == "hvc1" )
-                {
-                    {
-                        ISOBMFF::ILOC::Item::Extent hvc1;
-                        
-                        for( const auto & item: iloc->GetItems() )
-                        {
-                            if
-                            (
-                                   item.GetItemID()         == entry->GetItemID()
-                                && item.GetExtents().size() != 0
-                            )
-                            {
-                                hvc1 = item.GetExtents()[ 0 ];
-                                
-                                SaveData( data, hvc1.GetOffset(), hvc1.GetLength(), std::string( "/Users/macmade/Desktop/HVC1/" ) + std::to_string( item.GetItemID() ) + ".bin" );
-                                
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            */
         }
     }
     
