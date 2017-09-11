@@ -56,7 +56,7 @@ namespace ISOBMFF
     
     ImageGrid::ImageGrid( BinaryStream & stream )
     {
-         uint8_t s;
+        uint8_t s;
         
         this->SetVersion( stream.ReadUInt8() );
         this->SetFlags( stream.ReadUInt8() );

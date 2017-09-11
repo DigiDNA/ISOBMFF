@@ -107,7 +107,11 @@ namespace ISOBMFF
             s = s.substr( 0, s.length() - 1 );
         }
         
-        return { { "Data", s } };
+        return
+        {
+            { "Data", s },
+            { "Size", std::to_string( data.size() ) }
+        };
     }
 }
 

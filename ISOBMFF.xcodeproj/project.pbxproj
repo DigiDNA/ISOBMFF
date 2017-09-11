@@ -1064,6 +1064,7 @@
 				OTHER_LDFLAGS = (
 					"-lavformat",
 					"-lavcodec",
+					"-lavutil",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1080,6 +1081,7 @@
 				OTHER_LDFLAGS = (
 					"-lavformat",
 					"-lavcodec",
+					"-lavutil",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
