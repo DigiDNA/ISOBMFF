@@ -38,6 +38,7 @@
 void SaveData( const std::vector< uint8_t > & bytes, uint64_t offset, uint64_t length, const std::string & file );
 void PrintData( const std::vector< uint8_t > & bytes, uint64_t offset, uint64_t length );
 void PrintDataLine( const std::vector< uint8_t > & bytes, uint64_t length );
+void ConvertHEVCData( const std::vector< uint8_t > & data );
 
 template< typename _T_ >
 std::vector< _T_ > Slice( const std::vector< _T_ > & v, uint64_t start, uint64_t length )
@@ -314,6 +315,8 @@ int main( int argc, const char * argv[] )
                     continue;
                 }
                 
+                extent = item->GetExtents()[ 0 ];
+                
                 std::cout << "Primary thumbnail info: " << *( infe ) << std::endl << std::endl;
                 std::cout << "Primary thumbnail: "      << *( item ) << std::endl << std::endl;
                 std::cout << "Thumbnail properties:"    << std::endl;
@@ -324,6 +327,8 @@ int main( int argc, const char * argv[] )
                 }
                 
                 std::cout << std::endl;
+                
+                ConvertHEVCData( Slice( data, extent->GetOffset(), extent->GetLength() ) );
             }
         }
     }
@@ -415,4 +420,17 @@ void PrintDataLine( const std::vector< uint8_t > & bytes, uint64_t length )
     }
     
     std::cout << std::endl;
+}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wsign-conversion"
+#pragma clang diagnostic ignored "-Wconversion"
+#pragma clang diagnostic ignored "-Wdocumentation"
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
+#pragma clang diagnostic pop
+
+void ConvertHEVCData( const std::vector< uint8_t > & data )
+{
+    ( void )data;
 }
