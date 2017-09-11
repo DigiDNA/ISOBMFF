@@ -17,6 +17,7 @@
 		054480781F60174A008CCDBA /* HVCC-Array-NALUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 054480771F601749008CCDBA /* HVCC-Array-NALUnit.cpp */; };
 		055D9AF81F666B880056DE16 /* PIXI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 055D9AF61F666B880056DE16 /* PIXI.cpp */; };
 		055D9AF91F666B880056DE16 /* PIXI-Channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 055D9AF71F666B880056DE16 /* PIXI-Channel.cpp */; };
+		055D9AFD1F66700A0056DE16 /* IPCO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 055D9AFC1F66700A0056DE16 /* IPCO.cpp */; };
 		057280761F5ED7CE00F02C27 /* PITM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280751F5ED7CE00F02C27 /* PITM.cpp */; };
 		0572807A1F5ED9FF00F02C27 /* IINF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280791F5ED9FE00F02C27 /* IINF.cpp */; };
 		057280881F5EDBCF00F02C27 /* ILOC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280841F5EDBCE00F02C27 /* ILOC.cpp */; };
@@ -42,10 +43,8 @@
 		05BFED011F62F7F300A6909E /* URL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED001F62F7F200A6909E /* URL.cpp */; };
 		05BFED041F62F88700A6909E /* URN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED031F62F88700A6909E /* URN.cpp */; };
 		05BFED061F63192000A6909E /* COLR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED051F63191F00A6909E /* COLR.cpp */; };
-		05BFED091F637E7E00A6909E /* ISPE.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05BFED081F637E7E00A6909E /* ISPE.hpp */; };
 		05BFED0B1F637E8500A6909E /* ISPE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED0A1F637E8500A6909E /* ISPE.cpp */; };
 		05BFED0D1F63870300A6909E /* IPMA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED0C1F63870300A6909E /* IPMA.cpp */; };
-		05BFED0F1F63870F00A6909E /* IPMA.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05BFED0E1F63870F00A6909E /* IPMA.hpp */; };
 		05BFED111F63894100A6909E /* IPMA-Entry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED101F63894100A6909E /* IPMA-Entry.cpp */; };
 		05BFED131F638E4B00A6909E /* IPMA-Entry-Association.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED121F638E4A00A6909E /* IPMA-Entry-Association.cpp */; };
 		05BFED1A1F63952E00A6909E /* libISOBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libISOBMFF.a */; };
@@ -173,6 +172,8 @@
 		055D9AF11F666B640056DE16 /* PIXI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PIXI.hpp; sourceTree = "<group>"; };
 		055D9AF61F666B880056DE16 /* PIXI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PIXI.cpp; sourceTree = "<group>"; };
 		055D9AF71F666B880056DE16 /* PIXI-Channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "PIXI-Channel.cpp"; sourceTree = "<group>"; };
+		055D9AFA1F666FFF0056DE16 /* IPCO.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IPCO.hpp; sourceTree = "<group>"; };
+		055D9AFC1F66700A0056DE16 /* IPCO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IPCO.cpp; sourceTree = "<group>"; };
 		0563BFA51F64768C0064F26B /* DisplayableObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DisplayableObject.hpp; sourceTree = "<group>"; };
 		057280701F5ED7C200F02C27 /* PITM.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PITM.hpp; sourceTree = "<group>"; };
 		057280751F5ED7CE00F02C27 /* PITM.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PITM.cpp; sourceTree = "<group>"; };
@@ -349,6 +350,7 @@
 				057280841F5EDBCE00F02C27 /* ILOC.cpp */,
 				05A50AB41F604C2F00EE8C08 /* ImageGrid.cpp */,
 				0572809F1F5EE19400F02C27 /* INFE.cpp */,
+				055D9AFC1F66700A0056DE16 /* IPCO.cpp */,
 				05BFED121F638E4A00A6909E /* IPMA-Entry-Association.cpp */,
 				05BFED101F63894100A6909E /* IPMA-Entry.cpp */,
 				05BFED0C1F63870300A6909E /* IPMA.cpp */,
@@ -394,6 +396,7 @@
 				0572807C1F5EDBC700F02C27 /* ILOC.hpp */,
 				05A50AB61F604C3800EE8C08 /* ImageGrid.hpp */,
 				0572809D1F5EE18B00F02C27 /* INFE.hpp */,
+				055D9AFA1F666FFF0056DE16 /* IPCO.hpp */,
 				05BFED0E1F63870F00A6909E /* IPMA.hpp */,
 				0572807E1F5EDBC700F02C27 /* IREF.hpp */,
 				057280AA1F5F449600F02C27 /* IROT.hpp */,
@@ -461,8 +464,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05BFED091F637E7E00A6909E /* ISPE.hpp in Headers */,
-				05BFED0F1F63870F00A6909E /* IPMA.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,6 +659,7 @@
 				057280A01F5EE19400F02C27 /* INFE.cpp in Sources */,
 				05EAD3901F65B346003CCB9B /* Utils.cpp in Sources */,
 				054480781F60174A008CCDBA /* HVCC-Array-NALUnit.cpp in Sources */,
+				055D9AFD1F66700A0056DE16 /* IPCO.cpp in Sources */,
 				0572807A1F5ED9FF00F02C27 /* IINF.cpp in Sources */,
 				057280AD1F5F44A100F02C27 /* IROT.cpp in Sources */,
 				057280881F5EDBCF00F02C27 /* ILOC.cpp in Sources */,

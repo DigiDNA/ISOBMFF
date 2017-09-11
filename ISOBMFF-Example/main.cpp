@@ -99,17 +99,27 @@ int main( int argc, const char * argv[] )
         
         file = parser.GetFile();
         
-        std::cout << *( file ) << std::endl << std::endl;
-        
         {
-            std::shared_ptr< ISOBMFF::FTYP > ftyp;
-            std::shared_ptr< ISOBMFF::META > meta;
-            std::shared_ptr< ISOBMFF::Box  > mdat;
-            std::shared_ptr< ISOBMFF::IINF > iinf;
-            std::shared_ptr< ISOBMFF::ILOC > iloc;
-            std::shared_ptr< ISOBMFF::Box  > idat;
-            std::shared_ptr< ISOBMFF::PITM > pitm;
-            std::vector< uint8_t >           data;
+            std::shared_ptr< ISOBMFF::FTYP >               ftyp;
+            std::shared_ptr< ISOBMFF::META >               meta;
+            std::shared_ptr< ISOBMFF::Box  >               mdat;
+            std::shared_ptr< ISOBMFF::IINF >               iinf;
+            std::shared_ptr< ISOBMFF::ContainerBox >       iprp;
+            std::shared_ptr< ISOBMFF::IPCO >               ipco;
+            std::shared_ptr< ISOBMFF::IPMA >               ipma;
+            std::shared_ptr< ISOBMFF::ILOC >               iloc;
+            std::shared_ptr< ISOBMFF::IREF >               iref;
+            std::shared_ptr< ISOBMFF::Box  >               idat;
+            std::shared_ptr< ISOBMFF::PITM >               pitm;
+            std::shared_ptr< ISOBMFF::THMB >               thmbRef;
+            std::vector< uint8_t >                         data;
+            std::shared_ptr< ISOBMFF::INFE >               infe;
+            std::shared_ptr< ISOBMFF::ILOC::Item >         item;
+            std::vector< std::shared_ptr< ISOBMFF::Box > > props;
+            std::shared_ptr< ISOBMFF::ILOC::Item::Extent > extent;
+            std::shared_ptr< ISOBMFF::IPMA::Entry >        entry;
+            std::vector< uint8_t >                         itemData;
+            ISOBMFF::BinaryStream                          stream;
             
             ftyp = file->GetTypedBox< ISOBMFF::FTYP >( "ftyp" );
             meta = file->GetTypedBox< ISOBMFF::META >( "meta" );
@@ -128,88 +138,198 @@ int main( int argc, const char * argv[] )
             
             iinf = meta->GetTypedBox< ISOBMFF::IINF >( "iinf" );
             iloc = meta->GetTypedBox< ISOBMFF::ILOC >( "iloc" );
+            iprp = meta->GetTypedBox< ISOBMFF::ContainerBox >( "iprp" );
+            iref = meta->GetTypedBox< ISOBMFF::IREF >( "iref" );
             idat = meta->GetBox( "idat" );
             pitm = meta->GetTypedBox< ISOBMFF::PITM >( "pitm" );
             
-            if( iloc == nullptr || iinf == nullptr || idat == nullptr || pitm == nullptr )
+            if
+            (
+                   iloc == nullptr
+                || iinf == nullptr
+                || idat == nullptr
+                || pitm == nullptr
+                || iprp == nullptr
+                || iref == nullptr
+            )
+            {
+                continue;
+            }
+            
+            ipco = iprp->GetTypedBox< ISOBMFF::IPCO >( "ipco" );
+            ipma = iprp->GetTypedBox< ISOBMFF::IPMA >( "ipma" );
+            
+            if( ipco == nullptr || ipma == nullptr )
             {
                 continue;
             }
             
             {
-                std::ifstream           stream;
+                std::ifstream           fstream;
                 std::ifstream::pos_type length;
                 
-                stream.open( path, std::ios::binary | std::ios::ate );
+                fstream.open( path, std::ios::binary | std::ios::ate );
                 
-                if( stream.good() == false )
+                if( fstream.good() == false )
                 {
                     continue;
                 }
                 
-                length = stream.tellg();
+                length = fstream.tellg();
                 data   = std::vector< uint8_t >( static_cast< std::size_t >( length ) );
                 
-                stream.seekg( 0, std::ios::beg );
-                stream.read( reinterpret_cast< char * >( &( data[ 0 ] ) ), length );
+                fstream.seekg( 0, std::ios::beg );
+                fstream.read( reinterpret_cast< char * >( &( data[ 0 ] ) ), length );
             }
             
+            infe = iinf->GetItemInfo( pitm->GetItemID() );
+            
+            if( infe == nullptr )
+            {
+                continue;
+            }
+            
+            item = iloc->GetItem( pitm->GetItemID() );
+            
+            if( infe == nullptr )
+            {
+                continue;
+            }
+            
+            entry = ipma->GetEntry( pitm->GetItemID() );
+            
+            if( entry == nullptr )
+            {
+                continue;
+            }
+            
+            props = ipco->GetProperties( *( entry ) );
+            
+            if( props.size() == 0 )
+            {
+                continue;
+            }
+            
+            if( item->GetExtents().size() == 0 )
+            {
+                continue;
+            }
+            
+            std::cout << "Primary item info: " << *( infe ) << std::endl << std::endl;
+            std::cout << "Primary item: "      << *( item ) << std::endl << std::endl;
+            std::cout << "Item properties:"    << std::endl;
+            
+            for( const auto & prop: props )
+            {
+                std::cout << *( prop ) << std::endl;
+            }
+            
+            std::cout << std::endl;
+            
+            extent = item->GetExtents()[ 0 ];
+            
+            if( item->GetConstructionMethod() == 0 )
+            {
+                itemData = Slice( data, extent->GetOffset(), extent->GetLength() );
+                stream   = ISOBMFF::BinaryStream( itemData );
+            }
+            else if( item->GetConstructionMethod() == 1 )
+            {
+                itemData = Slice( idat->GetData(), extent->GetOffset(), extent->GetLength() );
+                stream   = ISOBMFF::BinaryStream( itemData );
+            }
+            else if( item->GetConstructionMethod() == 2 )
+            {
+                /* ... */
+            }
+            
+            if( infe->GetItemType() == "hvc1" )
+            {
+                /* ... */
+            }
+            else if( infe->GetItemType() == "grid" )
+            {
+                {
+                    ISOBMFF::ImageGrid grid( stream );
+                    
+                    std::cout << "Image grid: " << grid << std::endl;
+                }
+            }
+            
+            std::cout << std::endl;
+            
+            for( const auto & b: iref->GetBoxes() )
+            {
+                thmbRef = std::dynamic_pointer_cast< ISOBMFF::THMB >( b );
+                
+                if( thmbRef == nullptr )
+                {
+                    continue;
+                }
+                
+                {
+                    auto linked( thmbRef->GetToItemIDs() );
+                    
+                    if( std::find( linked.begin(), linked.end(), pitm->GetItemID() ) != linked.end() )
+                    {
+                        break;
+                    }
+                    
+                    thmbRef = nullptr;
+                }
+            }
+            
+            if( thmbRef != nullptr )
+            {
+                infe = iinf->GetItemInfo( thmbRef->GetFromItemID() );
+                
+                if( infe == nullptr )
+                {
+                    continue;
+                }
+                
+                item = iloc->GetItem( thmbRef->GetFromItemID() );
+                
+                if( infe == nullptr )
+                {
+                    continue;
+                }
+                
+                entry = ipma->GetEntry( thmbRef->GetFromItemID() );
+                
+                if( entry == nullptr )
+                {
+                    continue;
+                }
+                
+                props = ipco->GetProperties( *( entry ) );
+                
+                if( props.size() == 0 )
+                {
+                    continue;
+                }
+                
+                if( item->GetExtents().size() == 0 )
+                {
+                    continue;
+                }
+                
+                std::cout << "Primary thumbnail info: " << *( infe ) << std::endl << std::endl;
+                std::cout << "Primary thumbnail: "      << *( item ) << std::endl << std::endl;
+                std::cout << "Thumbnail properties:"    << std::endl;
+                
+                for( const auto & prop: props )
+                {
+                    std::cout << *( prop ) << std::endl;
+                }
+                
+                std::cout << std::endl;
+            }
+            
+            /*
             for( const auto & entry: iinf->GetEntries()  )
             {
-                if( entry->GetItemID() == pitm->GetItemID() )
-                {
-                    {
-                        std::shared_ptr< ISOBMFF::ILOC::Item::Extent > extent;
-                        std::vector< uint8_t >                         itemData;
-                        ISOBMFF::BinaryStream                          stream;
-                        
-                        for( const auto & item: iloc->GetItems() )
-                        {
-                            if
-                            (
-                                   item->GetItemID()         != entry->GetItemID()
-                                || item->GetExtents().size() == 0
-                            )
-                            {
-                                continue;
-                            }
-                            
-                            std::cout << "Primary item info: " << *( entry ) << std::endl << std::endl;
-                            std::cout << "Primary item: "      << *( item )  << std::endl << std::endl;
-                            
-                            extent = item->GetExtents()[ 0 ];
-                            
-                            if( item->GetConstructionMethod() == 0 )
-                            {
-                                itemData = Slice( data, extent->GetOffset(), extent->GetLength() );
-                                stream   = ISOBMFF::BinaryStream( itemData );
-                            }
-                            else if( item->GetConstructionMethod() == 1 )
-                            {
-                                itemData = Slice( idat->GetData(), extent->GetOffset(), extent->GetLength() );
-                                stream   = ISOBMFF::BinaryStream( itemData );
-                            }
-                            else if( item->GetConstructionMethod() == 2 )
-                            {
-                                /* ... */
-                            }
-                            
-                            if( entry->GetItemType() == "hvc1" )
-                            {
-                                /* ... */
-                            }
-                            else if( entry->GetItemType() == "grid" )
-                            {
-                                {
-                                    ISOBMFF::ImageGrid grid( stream );
-                                    
-                                    std::cout << "Image grid: " << grid << std::endl << std::endl;
-                                }
-                            }
-                        }
-                    }
-                }
-                else if( entry->GetItemType() == "Exif" )
+                if( entry->GetItemType() == "Exif" )
                 {
                     {
                         std::shared_ptr< ISOBMFF::ILOC::Item::Extent > exif;
@@ -239,8 +359,6 @@ int main( int argc, const char * argv[] )
                         }
                     }
                 }
-                
-                /*
                 else if( entry->GetItemType() == "hvc1" )
                 {
                     {
@@ -263,8 +381,8 @@ int main( int argc, const char * argv[] )
                         }
                     }
                 }
-                */
             }
+            */
         }
     }
     
