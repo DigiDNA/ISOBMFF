@@ -163,9 +163,22 @@ namespace ISOBMFF
     {
         return this->impl->_items;
     }
-	
-	void ILOC::AddItem( std::shared_ptr< Item > item )
-	{
+    
+    std::shared_ptr< ILOC::Item > ILOC::GetItem( uint32_t itemID ) const
+    {
+        for( const auto & item: this->GetItems() )
+        {
+            if( item->GetItemID() == itemID )
+            {
+                return item;
+            }
+        }
+        
+        return nullptr;
+    }
+    
+    void ILOC::AddItem( std::shared_ptr< Item > item )
+    {
         this->impl->_items.push_back( item );
     }
 }

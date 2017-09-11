@@ -114,7 +114,8 @@ namespace ISOBMFF
                     void                                     AddExtent( std::shared_ptr< Extent > extent );
             };
             
-            std::vector< std::shared_ptr< Item > > GetItems( void ) const;
+            std::vector< std::shared_ptr< Item > > GetItems( void )           const;
+            std::shared_ptr< Item >                GetItem( uint32_t itemID ) const;
             void                                   AddItem( std::shared_ptr< Item > item );
     };
 }

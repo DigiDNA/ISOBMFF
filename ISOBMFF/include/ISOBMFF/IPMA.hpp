@@ -96,7 +96,8 @@ namespace ISOBMFF
                     void                                          AddAssociation( std::shared_ptr< Association > association );
             };
             
-            std::vector< std::shared_ptr< Entry > > GetEntries( void ) const;
+            std::vector< std::shared_ptr< Entry > > GetEntries( void )          const;
+            std::shared_ptr< Entry >                GetEntry( uint32_t itemID ) const;
             void                                    AddEntry( std::shared_ptr< Entry > entry );
     };
 }

@@ -52,6 +52,7 @@
 #include <ISOBMFF/ISPE.hpp>
 #include <ISOBMFF/IPMA.hpp>
 #include <ISOBMFF/PIXI.hpp>
+#include <ISOBMFF/IPCO.hpp>
 #include <map>
 #include <stdexcept>
 
@@ -240,7 +241,6 @@ void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterContainerBox( "ipro" );
     this->RegisterContainerBox( "sinf" );
     this->RegisterContainerBox( "iprp" );
-    this->RegisterContainerBox( "ipco" );
     this->RegisterContainerBox( "fiin" );
     this->RegisterContainerBox( "paen" );
     this->RegisterContainerBox( "strk" );
@@ -267,4 +267,5 @@ void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterBox( "ispe", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::ISPE >(); } );
     this->RegisterBox( "ipma", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IPMA >(); } );
     this->RegisterBox( "pixi", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::PIXI >(); } );
+    this->RegisterBox( "ipco", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IPCO >(); } );
 }

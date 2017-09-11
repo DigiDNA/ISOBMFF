@@ -96,6 +96,19 @@ namespace ISOBMFF
     {
         return this->impl->_entries;
     }
+	
+	std::shared_ptr< INFE > IINF::GetItemInfo( uint32_t itemID ) const
+    {
+        for( const auto & infe: this->GetEntries() )
+        {
+            if( infe->GetItemID() == itemID )
+            {
+                return infe;
+            }
+        }
+        
+        return nullptr;
+    }
     
     void IINF::AddBox( std::shared_ptr< Box > box )
     {

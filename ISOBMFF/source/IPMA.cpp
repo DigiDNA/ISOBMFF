@@ -90,6 +90,19 @@ namespace ISOBMFF
         return this->impl->_entries;
     }
     
+    std::shared_ptr< IPMA::Entry > IPMA::GetEntry( uint32_t itemID ) const
+    {
+        for( const auto & entry: this->GetEntries() )
+        {
+            if( entry->GetItemID() == itemID )
+            {
+                return entry;
+            }
+        }
+        
+        return nullptr;
+    }
+    
     void IPMA::AddEntry( std::shared_ptr< Entry > entry )
     {
         this->impl->_entries.push_back( entry );

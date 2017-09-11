@@ -51,7 +51,8 @@ namespace ISOBMFF
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
             void                                   AddEntry( std::shared_ptr< INFE > entry );
-            std::vector< std::shared_ptr< INFE > > GetEntries( void ) const;
+            std::vector< std::shared_ptr< INFE > > GetEntries( void )             const;
+            std::shared_ptr< INFE >                GetItemInfo( uint32_t itemID ) const;
             
             void                                  AddBox( std::shared_ptr< Box > box ) override;
             std::vector< std::shared_ptr< Box > > GetBoxes( void ) const override;

@@ -23,49 +23,64 @@
  ******************************************************************************/
 
 /*!
- * @header      ISOBMFF.hpp
+ * @file        IPCO.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef ISOBMFF_HPP
-#define ISOBMFF_HPP
-
-#include <ISOBMFF/Utils.hpp>
-#include <ISOBMFF/Parser.hpp>
-#include <ISOBMFF/BinaryStream.hpp>
-#include <ISOBMFF/DisplayableObject.hpp>
-#include <ISOBMFF/DisplayableObjectContainer.hpp>
-#include <ISOBMFF/Box.hpp>
-#include <ISOBMFF/FullBox.hpp>
-#include <ISOBMFF/Container.hpp>
-#include <ISOBMFF/ContainerBox.hpp>
-#include <ISOBMFF/File.hpp>
-#include <ISOBMFF/Matrix.hpp>
-#include <ISOBMFF/FTYP.hpp>
-#include <ISOBMFF/MVHD.hpp>
-#include <ISOBMFF/TKHD.hpp>
-#include <ISOBMFF/META.hpp>
-#include <ISOBMFF/HDLR.hpp>
-#include <ISOBMFF/PITM.hpp>
-#include <ISOBMFF/IINF.hpp>
-#include <ISOBMFF/DREF.hpp>
-#include <ISOBMFF/URL.hpp>
-#include <ISOBMFF/URN.hpp>
-#include <ISOBMFF/ILOC.hpp>
-#include <ISOBMFF/IREF.hpp>
-#include <ISOBMFF/INFE.hpp>
-#include <ISOBMFF/IROT.hpp>
-#include <ISOBMFF/HVCC.hpp>
-#include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
-#include <ISOBMFF/DIMG.hpp>
-#include <ISOBMFF/THMB.hpp>
-#include <ISOBMFF/CDSC.hpp>
-#include <ISOBMFF/COLR.hpp>
-#include <ISOBMFF/ISPE.hpp>
-#include <ISOBMFF/IPMA.hpp>
-#include <ISOBMFF/PIXI.hpp>
 #include <ISOBMFF/IPCO.hpp>
-#include <ISOBMFF/ImageGrid.hpp>
 
-#endif /* ISOBMFF_HPP */
-
+namespace ISOBMFF
+{
+    IPCO::IPCO( void ): ContainerBox( "ipco" )
+    {}
+    
+    std::shared_ptr< Box > IPCO::GetPropertyAtIndex( size_t index ) const
+    {
+        auto boxes( this->GetBoxes() );
+        
+        if( index >= boxes.size() )
+        {
+            return nullptr;
+        }
+        
+        return boxes[ index ];
+    }
+    
+    std::shared_ptr< Box > IPCO::GetProperty( const IPMA::Entry::Association & association ) const
+    {
+        auto     boxes( this->GetBoxes() );
+        uint16_t index;
+        
+        index = association.GetPropertyIndex();
+        
+        if( index == 0 )
+        {
+            return nullptr;
+        }
+        
+        if( boxes.size() < index )
+        {
+            return nullptr;
+        }
+        
+        return boxes[ index - 1 ];
+    }
+    
+    std::vector< std::shared_ptr< Box > > IPCO::GetProperties( const IPMA::Entry & entry ) const
+    {
+        std::vector< std::shared_ptr< Box > > boxes;
+        std::shared_ptr< Box >                box;
+        
+        for( const auto & b: entry.GetAssociations() )
+        {
+            box = this->GetProperty( *( b ) );
+            
+            if( box != nullptr )
+            {
+                boxes.push_back( box );
+            }
+        }
+        
+        return boxes;
+    }
+}
