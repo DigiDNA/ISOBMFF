@@ -15,6 +15,8 @@
 		0531FB0A1F5FF45700BCD30D /* HVCC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0531FB091F5FF45700BCD30D /* HVCC.cpp */; };
 		054480521F6007E1008CCDBA /* HVCC-Array.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 054480501F6006B1008CCDBA /* HVCC-Array.cpp */; };
 		054480781F60174A008CCDBA /* HVCC-Array-NALUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 054480771F601749008CCDBA /* HVCC-Array-NALUnit.cpp */; };
+		055D9AF81F666B880056DE16 /* PIXI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 055D9AF61F666B880056DE16 /* PIXI.cpp */; };
+		055D9AF91F666B880056DE16 /* PIXI-Channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 055D9AF71F666B880056DE16 /* PIXI-Channel.cpp */; };
 		057280761F5ED7CE00F02C27 /* PITM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280751F5ED7CE00F02C27 /* PITM.cpp */; };
 		0572807A1F5ED9FF00F02C27 /* IINF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280791F5ED9FE00F02C27 /* IINF.cpp */; };
 		057280881F5EDBCF00F02C27 /* ILOC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280841F5EDBCE00F02C27 /* ILOC.cpp */; };
@@ -168,6 +170,9 @@
 		0531FB091F5FF45700BCD30D /* HVCC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HVCC.cpp; sourceTree = "<group>"; };
 		054480501F6006B1008CCDBA /* HVCC-Array.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "HVCC-Array.cpp"; sourceTree = "<group>"; };
 		054480771F601749008CCDBA /* HVCC-Array-NALUnit.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "HVCC-Array-NALUnit.cpp"; sourceTree = "<group>"; };
+		055D9AF11F666B640056DE16 /* PIXI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PIXI.hpp; sourceTree = "<group>"; };
+		055D9AF61F666B880056DE16 /* PIXI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PIXI.cpp; sourceTree = "<group>"; };
+		055D9AF71F666B880056DE16 /* PIXI-Channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "PIXI-Channel.cpp"; sourceTree = "<group>"; };
 		0563BFA51F64768C0064F26B /* DisplayableObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DisplayableObject.hpp; sourceTree = "<group>"; };
 		057280701F5ED7C200F02C27 /* PITM.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PITM.hpp; sourceTree = "<group>"; };
 		057280751F5ED7CE00F02C27 /* PITM.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PITM.cpp; sourceTree = "<group>"; };
@@ -355,6 +360,8 @@
 				051F4D481F5E0AD500E6E12C /* MVHD.cpp */,
 				05F471E51F2B5CEE00738744 /* Parser.cpp */,
 				057280751F5ED7CE00F02C27 /* PITM.cpp */,
+				055D9AF71F666B880056DE16 /* PIXI-Channel.cpp */,
+				055D9AF61F666B880056DE16 /* PIXI.cpp */,
 				05BFECD41F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp */,
 				05BFECE41F62F04D00A6909E /* THMB.cpp */,
 				05EAD3AC1F65FEFE003CCB9B /* TKHD.cpp */,
@@ -397,6 +404,7 @@
 				051F4D461F5E0AC400E6E12C /* MVHD.hpp */,
 				05F471DC1F2B5CE500738744 /* Parser.hpp */,
 				057280701F5ED7C200F02C27 /* PITM.hpp */,
+				055D9AF11F666B640056DE16 /* PIXI.hpp */,
 				05BFECD91F62EE2F00A6909E /* SingleItemTypeReferenceBox.hpp */,
 				05BFECDB1F62EFDB00A6909E /* THMB.hpp */,
 				05EAD3AB1F65FE15003CCB9B /* TKHD.hpp */,
@@ -632,6 +640,7 @@
 				05EAD3AD1F65FEFE003CCB9B /* TKHD.cpp in Sources */,
 				057280761F5ED7CE00F02C27 /* PITM.cpp in Sources */,
 				05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */,
+				055D9AF91F666B880056DE16 /* PIXI-Channel.cpp in Sources */,
 				05EAD3981F65E215003CCB9B /* DisplayableObjectContainer.cpp in Sources */,
 				054480521F6007E1008CCDBA /* HVCC-Array.cpp in Sources */,
 				05BFED011F62F7F300A6909E /* URL.cpp in Sources */,
@@ -639,6 +648,7 @@
 				051F4D4C1F5E0DD800E6E12C /* Matrix.cpp in Sources */,
 				05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */,
 				05BFED0B1F637E8500A6909E /* ISPE.cpp in Sources */,
+				055D9AF81F666B880056DE16 /* PIXI.cpp in Sources */,
 				05BFECE61F62F04D00A6909E /* DIMG.cpp in Sources */,
 				05BFED041F62F88700A6909E /* URN.cpp in Sources */,
 				05A50AB51F604C3000EE8C08 /* ImageGrid.cpp in Sources */,

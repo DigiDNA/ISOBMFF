@@ -51,6 +51,7 @@
 #include <ISOBMFF/COLR.hpp>
 #include <ISOBMFF/ISPE.hpp>
 #include <ISOBMFF/IPMA.hpp>
+#include <ISOBMFF/PIXI.hpp>
 #include <map>
 #include <stdexcept>
 
@@ -265,4 +266,5 @@ void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterBox( "colr", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::COLR >(); } );
     this->RegisterBox( "ispe", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::ISPE >(); } );
     this->RegisterBox( "ipma", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IPMA >(); } );
+    this->RegisterBox( "pixi", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::PIXI >(); } );
 }

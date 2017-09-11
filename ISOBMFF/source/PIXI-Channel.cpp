@@ -23,48 +23,69 @@
  ******************************************************************************/
 
 /*!
- * @header      ISOBMFF.hpp
+ * @file        PIXI-Channel.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef ISOBMFF_HPP
-#define ISOBMFF_HPP
-
-#include <ISOBMFF/Utils.hpp>
-#include <ISOBMFF/Parser.hpp>
-#include <ISOBMFF/BinaryStream.hpp>
-#include <ISOBMFF/DisplayableObject.hpp>
-#include <ISOBMFF/DisplayableObjectContainer.hpp>
-#include <ISOBMFF/Box.hpp>
-#include <ISOBMFF/FullBox.hpp>
-#include <ISOBMFF/Container.hpp>
-#include <ISOBMFF/ContainerBox.hpp>
-#include <ISOBMFF/File.hpp>
-#include <ISOBMFF/Matrix.hpp>
-#include <ISOBMFF/FTYP.hpp>
-#include <ISOBMFF/MVHD.hpp>
-#include <ISOBMFF/TKHD.hpp>
-#include <ISOBMFF/META.hpp>
-#include <ISOBMFF/HDLR.hpp>
-#include <ISOBMFF/PITM.hpp>
-#include <ISOBMFF/IINF.hpp>
-#include <ISOBMFF/DREF.hpp>
-#include <ISOBMFF/URL.hpp>
-#include <ISOBMFF/URN.hpp>
-#include <ISOBMFF/ILOC.hpp>
-#include <ISOBMFF/IREF.hpp>
-#include <ISOBMFF/INFE.hpp>
-#include <ISOBMFF/IROT.hpp>
-#include <ISOBMFF/HVCC.hpp>
-#include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
-#include <ISOBMFF/DIMG.hpp>
-#include <ISOBMFF/THMB.hpp>
-#include <ISOBMFF/CDSC.hpp>
-#include <ISOBMFF/COLR.hpp>
-#include <ISOBMFF/ISPE.hpp>
-#include <ISOBMFF/IPMA.hpp>
 #include <ISOBMFF/PIXI.hpp>
-#include <ISOBMFF/ImageGrid.hpp>
 
-#endif /* ISOBMFF_HPP */
+template<>
+class XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL
+{
+    public:
+        
+        IMPL( void );
+        IMPL( const IMPL & o );
+        ~IMPL( void );
+        
+        uint8_t _bitsPerChannel;
+};
+
+#define XS_PIMPL_CLASS ISOBMFF::PIXI::Channel
+#include <XS/PIMPL/Object-IMPL.hpp>
+
+namespace ISOBMFF
+{
+    PIXI::Channel::Channel( void )
+    {}
+    
+    PIXI::Channel::Channel( BinaryStream & stream )
+    {
+        this->SetBitsPerChannel( stream.ReadUInt8() );
+    }
+    
+    std::string PIXI::Channel::GetName( void ) const
+    {
+        return "Channel";
+    }
+    
+    uint8_t PIXI::Channel::GetBitsPerChannel( void ) const
+    {
+        return this->impl->_bitsPerChannel;
+    }
+    
+    void PIXI::Channel::SetBitsPerChannel( uint8_t value )
+    {
+        this->impl->_bitsPerChannel = value;
+    }
+    
+    std::vector< std::pair< std::string, std::string > > PIXI::Channel::GetDisplayableProperties( void ) const
+    {
+        return
+        {
+            { "Bits per channel", std::to_string( this->GetBitsPerChannel() ) },
+        };
+    }
+}
+
+XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL::IMPL( void ):
+    _bitsPerChannel( 0 )
+{}
+
+XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL::IMPL( const IMPL & o ):
+    _bitsPerChannel( o._bitsPerChannel )
+{}
+
+XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL::~IMPL( void )
+{}
 
