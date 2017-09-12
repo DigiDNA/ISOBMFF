@@ -28,9 +28,6 @@
 		057280A41F5F038A00F02C27 /* ILOC-Item-Extent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280A31F5F038A00F02C27 /* ILOC-Item-Extent.cpp */; };
 		057280A91F5F240700F02C27 /* Container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280A81F5F240700F02C27 /* Container.cpp */; };
 		057280AD1F5F44A100F02C27 /* IROT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280AC1F5F44A000F02C27 /* IROT.cpp */; };
-		057280C71F5F5B5B00F02C27 /* IMG1.HEIC in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C41F5F5B4E00F02C27 /* IMG1.HEIC */; };
-		057280C81F5F5B5D00F02C27 /* IMG2.HEIC in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C61F5F5B4E00F02C27 /* IMG2.HEIC */; };
-		057280C91F5F5B5F00F02C27 /* MOV1.MOV in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C51F5F5B4E00F02C27 /* MOV1.MOV */; };
 		0596059C1F5DC4CE0005F8C9 /* ContainerBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */; };
 		0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059D1F5DC4D50005F8C9 /* FullBox.cpp */; };
 		059DBAD21F5EBC1000B7A940 /* HDLR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 059DBACE1F5EBC1000B7A940 /* HDLR.cpp */; };
@@ -61,8 +58,6 @@
 		05EAD3AD1F65FEFE003CCB9B /* TKHD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05EAD3AC1F65FEFE003CCB9B /* TKHD.cpp */; };
 		05F471E81F2B5CEF00738744 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E51F2B5CEE00738744 /* Parser.cpp */; };
 		05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471E71F2B5CEF00738744 /* Box.cpp */; };
-		05F471F21F2B5E6B00738744 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05F471F11F2B5E6B00738744 /* main.cpp */; };
-		05F471F81F2B5F0D00738744 /* libISOBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libISOBMFF.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,13 +110,6 @@
 			remoteGlobalIDString = 05818F851A685AEA0072A469;
 			remoteInfo = GoogleMock;
 		};
-		05F471F61F2B5F0A00738744 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0515C8A71F2A71A8003B8594 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0515C8AE1F2A71A8003B8594;
-			remoteInfo = IBMFF;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -134,18 +122,6 @@
 				05BFED1C1F63952E00A6909E /* IMG1.HEIC in CopyFiles */,
 				05BFED1D1F63952E00A6909E /* IMG2.HEIC in CopyFiles */,
 				05BFED1E1F63952E00A6909E /* MOV1.MOV in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		05F471ED1F2B5E6B00738744 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = "";
-			dstSubfolderSpec = 16;
-			files = (
-				057280C71F5F5B5B00F02C27 /* IMG1.HEIC in CopyFiles */,
-				057280C81F5F5B5D00F02C27 /* IMG2.HEIC in CopyFiles */,
-				057280C91F5F5B5F00F02C27 /* MOV1.MOV in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,8 +219,6 @@
 		05F471DD1F2B5CE500738744 /* Box.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box.hpp; sourceTree = "<group>"; };
 		05F471E51F2B5CEE00738744 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
 		05F471E71F2B5CEF00738744 /* Box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
-		05F471EF1F2B5E6B00738744 /* ISOBMFF-Example */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "ISOBMFF-Example"; sourceTree = BUILT_PRODUCTS_DIR; };
-		05F471F11F2B5E6B00738744 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,14 +246,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		05F471EC1F2B5E6B00738744 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				05F471F81F2B5F0D00738744 /* libISOBMFF.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -290,7 +256,7 @@
 				051F4D1A1F5DD03700E6E12C /* README.md */,
 				0515C8B11F2A71A8003B8594 /* ISOBMFF */,
 				05BFED231F63956C00A6909E /* ISOBMFF-Dump */,
-				05F471F01F2B5E6B00738744 /* ISOBMFF-Example */,
+				05F471F01F2B5E6B00738744 /* Example-Files */,
 				05DA96021F2A7D5B005F46DB /* ISOBMFF-Tests */,
 				0515C8B01F2A71A8003B8594 /* Products */,
 			);
@@ -301,7 +267,6 @@
 			children = (
 				0515C8AF1F2A71A8003B8594 /* libISOBMFF.a */,
 				05DA96011F2A7D5B005F46DB /* ISOBMFF-Tests.xctest */,
-				05F471EF1F2B5E6B00738744 /* ISOBMFF-Example */,
 				05BFED221F63952E00A6909E /* ISOBMFF-Dump */,
 			);
 			name = Products;
@@ -446,15 +411,14 @@
 			path = "ISOBMFF-Tests";
 			sourceTree = "<group>";
 		};
-		05F471F01F2B5E6B00738744 /* ISOBMFF-Example */ = {
+		05F471F01F2B5E6B00738744 /* Example-Files */ = {
 			isa = PBXGroup;
 			children = (
 				057280C41F5F5B4E00F02C27 /* IMG1.HEIC */,
 				057280C61F5F5B4E00F02C27 /* IMG2.HEIC */,
 				057280C51F5F5B4E00F02C27 /* MOV1.MOV */,
-				05F471F11F2B5E6B00738744 /* main.cpp */,
 			);
-			path = "ISOBMFF-Example";
+			path = "Example-Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -524,24 +488,6 @@
 			productReference = 05DA96011F2A7D5B005F46DB /* ISOBMFF-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		05F471EE1F2B5E6B00738744 /* ISOBMFF-Example */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 05F471F31F2B5E6B00738744 /* Build configuration list for PBXNativeTarget "ISOBMFF-Example" */;
-			buildPhases = (
-				05F471EB1F2B5E6B00738744 /* Sources */,
-				05F471EC1F2B5E6B00738744 /* Frameworks */,
-				05F471ED1F2B5E6B00738744 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				05F471F71F2B5F0A00738744 /* PBXTargetDependency */,
-			);
-			name = "ISOBMFF-Example";
-			productName = IBMFF_Example;
-			productReference = 05F471EF1F2B5E6B00738744 /* ISOBMFF-Example */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -555,9 +501,6 @@
 						CreatedOnToolsVersion = 9.0;
 					};
 					05DA96001F2A7D5B005F46DB = {
-						CreatedOnToolsVersion = 9.0;
-					};
-					05F471EE1F2B5E6B00738744 = {
 						CreatedOnToolsVersion = 9.0;
 					};
 				};
@@ -582,7 +525,6 @@
 			targets = (
 				0515C8AE1F2A71A8003B8594 /* ISOBMFF */,
 				05DA96001F2A7D5B005F46DB /* ISOBMFF-Tests */,
-				05F471EE1F2B5E6B00738744 /* ISOBMFF-Example */,
 				05BFED141F63952E00A6909E /* ISOBMFF-Dump */,
 			);
 		};
@@ -696,14 +638,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		05F471EB1F2B5E6B00738744 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				05F471F21F2B5E6B00738744 /* main.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -721,11 +655,6 @@
 			isa = PBXTargetDependency;
 			name = GoogleMock;
 			targetProxy = 05DA96101F2A7DBE005F46DB /* PBXContainerItemProxy */;
-		};
-		05F471F71F2B5F0A00738744 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0515C8AE1F2A71A8003B8594 /* ISOBMFF */;
-			targetProxy = 05F471F61F2B5F0A00738744 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1053,40 +982,6 @@
 			};
 			name = Release;
 		};
-		05F471F41F2B5E6B00738744 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/include,
-				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				OTHER_LDFLAGS = (
-					"-lavformat",
-					"-lavcodec",
-					"-lavutil",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		05F471F51F2B5E6B00738744 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/include,
-				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				OTHER_LDFLAGS = (
-					"-lavformat",
-					"-lavcodec",
-					"-lavutil",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1122,15 +1017,6 @@
 			buildConfigurations = (
 				05DA96091F2A7D5B005F46DB /* Debug */,
 				05DA960A1F2A7D5B005F46DB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		05F471F31F2B5E6B00738744 /* Build configuration list for PBXNativeTarget "ISOBMFF-Example" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				05F471F41F2B5E6B00738744 /* Debug */,
-				05F471F51F2B5E6B00738744 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
