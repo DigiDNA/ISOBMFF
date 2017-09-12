@@ -174,6 +174,7 @@
 		057280C61F5F5B4E00F02C27 /* IMG2.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG2.HEIC; sourceTree = "<group>"; };
 		057758FD1F67B98700987694 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		057758FF1F67BFA300987694 /* ISOBMFF.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ISOBMFF.hpp; sourceTree = "<group>"; };
+		057759011F67CF6500987694 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		059605931F5DC4130005F8C9 /* ContainerBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContainerBox.hpp; sourceTree = "<group>"; };
 		059605971F5DC4300005F8C9 /* FullBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FullBox.hpp; sourceTree = "<group>"; };
 		0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContainerBox.cpp; sourceTree = "<group>"; };
@@ -256,6 +257,7 @@
 			children = (
 				05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */,
 				051F4D1A1F5DD03700E6E12C /* README.md */,
+				057759011F67CF6500987694 /* LICENSE */,
 				057758FD1F67B98700987694 /* Makefile */,
 				0515C8B11F2A71A8003B8594 /* ISOBMFF */,
 				05BFED231F63956C00A6909E /* ISOBMFF-Dump */,
