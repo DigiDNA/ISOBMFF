@@ -70,7 +70,20 @@ namespace ISOBMFF
     {
         if( this->impl->_stream.is_open() )
         {
-            return this->impl->_stream.eof() == false;
+            {
+                std::streampos cur;
+                std::streampos end;
+                
+                cur = this->impl->_stream.tellg();
+                
+                this->impl->_stream.seekg( 0, std::ios::end );
+                
+                end = this->impl->_stream.tellg();
+                
+                this->impl->_stream.seekg( cur, std::ios::beg );
+                
+                return cur < end;
+            }
         }
         else
         {
