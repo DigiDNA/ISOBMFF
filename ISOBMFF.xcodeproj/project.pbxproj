@@ -28,6 +28,7 @@
 		057280A41F5F038A00F02C27 /* ILOC-Item-Extent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280A31F5F038A00F02C27 /* ILOC-Item-Extent.cpp */; };
 		057280A91F5F240700F02C27 /* Container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280A81F5F240700F02C27 /* Container.cpp */; };
 		057280AD1F5F44A100F02C27 /* IROT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280AC1F5F44A000F02C27 /* IROT.cpp */; };
+		057759001F67BFA300987694 /* ISOBMFF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 057758FF1F67BFA300987694 /* ISOBMFF.hpp */; };
 		0596059C1F5DC4CE0005F8C9 /* ContainerBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */; };
 		0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059D1F5DC4D50005F8C9 /* FullBox.cpp */; };
 		059DBAD21F5EBC1000B7A940 /* HDLR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 059DBACE1F5EBC1000B7A940 /* HDLR.cpp */; };
@@ -129,7 +130,6 @@
 
 /* Begin PBXFileReference section */
 		0515C8AF1F2A71A8003B8594 /* libISOBMFF.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libISOBMFF.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		0515C8C01F2A77C4003B8594 /* ISOBMFF.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ISOBMFF.hpp; sourceTree = "<group>"; };
 		0515C8C11F2A7807003B8594 /* File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = File.cpp; sourceTree = "<group>"; };
 		0515C8C21F2A7807003B8594 /* File.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = File.hpp; sourceTree = "<group>"; };
 		051F4D1A1F5DD03700E6E12C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -172,6 +172,8 @@
 		057280C41F5F5B4E00F02C27 /* IMG1.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG1.HEIC; sourceTree = "<group>"; };
 		057280C51F5F5B4E00F02C27 /* MOV1.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = MOV1.MOV; sourceTree = "<group>"; };
 		057280C61F5F5B4E00F02C27 /* IMG2.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG2.HEIC; sourceTree = "<group>"; };
+		057758FD1F67B98700987694 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		057758FF1F67BFA300987694 /* ISOBMFF.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ISOBMFF.hpp; sourceTree = "<group>"; };
 		059605931F5DC4130005F8C9 /* ContainerBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContainerBox.hpp; sourceTree = "<group>"; };
 		059605971F5DC4300005F8C9 /* FullBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FullBox.hpp; sourceTree = "<group>"; };
 		0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContainerBox.cpp; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			children = (
 				05A411121F2A7D2E002B1A79 /* GoogleMock.xcodeproj */,
 				051F4D1A1F5DD03700E6E12C /* README.md */,
+				057758FD1F67B98700987694 /* Makefile */,
 				0515C8B11F2A71A8003B8594 /* ISOBMFF */,
 				05BFED231F63956C00A6909E /* ISOBMFF-Dump */,
 				05F471F01F2B5E6B00738744 /* Example-Files */,
@@ -284,6 +287,7 @@
 		0515C8BD1F2A71E7003B8594 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				057758FF1F67BFA300987694 /* ISOBMFF.hpp */,
 				0515C8BF1F2A7775003B8594 /* ISOBMFF */,
 			);
 			path = include;
@@ -365,7 +369,6 @@
 				05BFED0E1F63870F00A6909E /* IPMA.hpp */,
 				0572807E1F5EDBC700F02C27 /* IREF.hpp */,
 				057280AA1F5F449600F02C27 /* IROT.hpp */,
-				0515C8C01F2A77C4003B8594 /* ISOBMFF.hpp */,
 				05BFED081F637E7E00A6909E /* ISPE.hpp */,
 				051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */,
 				05A5A7651F5EAF9A00D16AD9 /* META.hpp */,
@@ -428,6 +431,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				057759001F67BFA300987694 /* ISOBMFF.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

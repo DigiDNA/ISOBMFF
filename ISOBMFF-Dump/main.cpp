@@ -27,7 +27,7 @@
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#include <ISOBMFF/ISOBMFF.hpp>
+#include <ISOBMFF.hpp>
 #include <iostream>
 #include <fstream>
 #include <cstring>
