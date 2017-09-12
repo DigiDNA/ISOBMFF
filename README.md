@@ -11,12 +11,47 @@ ISOBMFF
 [![Donate-Gratipay](https://img.shields.io/badge/donate-gratipay-yellow.svg?style=flat)](https://www.gratipay.com/macmade)
 [![Donate-Paypal](https://img.shields.io/badge/donate-paypal-yellow.svg?style=flat)](https://paypal.me/xslabs)
 
-### C++ Library for ISO/IEC 14496-12 - ISO Base Media File Format
+C++ Library for ISO/IEC 14496-12 - ISO Base Media File Format (QuickTime, MPEG-4, HEIF, etc)
+--------------------------------------------------------------------------------------------
+
+About
+-----
+
+**ISOBMFF** is a C++ library for reading/parsing files in the _**ISO Base Media File Format**_ (ISO/IEC 14496-12).
+
+The ISO Base Media File Format is a container format, used by many file types, including:
+
+ - **QuickTime** (`.mov`)
+ - **MPEG-4** (`.m4v`, `.m4a`, etc)
+ - **3GP** (`.3g2`)
+ - **HEIF/HEIC** (`.heif`, `.heic`, etc)
+ - ... and many others
+ 
+Support for editing/writing files is not available at the moment, but the library has been designed for this goal in mind, so writing support will eventually become available.
+
+### Targets
+
+The project contains 3 targets:
+
+ - `ISOBMFF`: **The main C++ library (cross-platform).**
+ - `ISOBMFF-Dump`: A cross-platform command-line utility for dumping files.
+ 
+### GUI Screenshots
+
+![Screenshot 1](Assets/Screen-1.png "Screenshot 1")
+
+### Building
+
+...
+
+### Library Usage
+
+...
 
 License
 -------
 
-ISOBMFF is released under the terms of the MIT License.
+**ISOBMFF** is released under the terms of the MIT License.
 
 Repository Infos
 ----------------
