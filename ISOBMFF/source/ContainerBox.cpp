@@ -66,11 +66,26 @@ namespace ISOBMFF
             if( length == 1 )
             {
                 length  = stream.ReadBigEndianUInt64();
-                content = BinaryStream( stream, length - 16 );
+                
+                if( name == "mdat" && parser.HasOption( ISOBMFF::Parser::Options::SkipMDAT ) )
+                {
+                    stream.DeleteBytes( length - 16 );
+                }
+                else
+                {
+                    content = BinaryStream( stream, length - 16 );
+                }
             }
             else
             {
-                content = BinaryStream( stream, length - 8 );
+                if( name == "mdat" && parser.HasOption( ISOBMFF::Parser::Options::SkipMDAT ) )
+                {
+                    stream.DeleteBytes( length - 8 );
+                }
+                else
+                {
+                    content = BinaryStream( stream, length - 8 );
+                }
             }
             
             box = parser.CreateBox( name );

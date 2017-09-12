@@ -34,6 +34,7 @@
 #include <string>
 #include <functional>
 #include <memory>
+#include <cstdint>
 #include <ISOBMFF/Box.hpp>
 #include <ISOBMFF/File.hpp>
 
@@ -51,6 +52,11 @@ namespace ISOBMFF
                 Pascal
             };
             
+            enum class Options: uint64_t
+            {
+                SkipMDAT = 1 << 0
+            };
+            
             Parser( void );
             Parser( const std::string & path );
             
@@ -65,6 +71,12 @@ namespace ISOBMFF
             
             StringType GetPreferredStringType( void ) const;
             void       SetPreferredStringType( StringType value );
+            
+            uint64_t GetOptions( void ) const;
+            void     SetOptions( uint64_t value );
+            void     AddOption( Options option );
+            void     RemoveOption( Options option );
+            bool     HasOption( Options option );
             
             const void * GetInfo( const std::string & key );
             void         SetInfo( const std::string & key, void * value );

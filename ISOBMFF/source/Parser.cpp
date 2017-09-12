@@ -73,6 +73,7 @@ class XS::PIMPL::Object< ISOBMFF::Parser >::IMPL
         std::string                                                                       _path;
         std::map< std::string, std::function< std::shared_ptr< ISOBMFF::Box >( void ) > > _types;
         ISOBMFF::Parser::StringType                                                       _stringType;
+        uint64_t                                                                          _options;
         std::map< std::string, void * >                                                   _info;
 };
 
@@ -158,6 +159,31 @@ namespace ISOBMFF
         this->impl->_stringType = value;
     }
     
+    uint64_t Parser::GetOptions( void ) const
+    {
+        return this->impl->_options;
+    }
+    
+    void Parser::SetOptions( uint64_t value )
+    {
+        this->impl->_options = value;
+    }
+    
+    void Parser::AddOption( Options option )
+    {
+        this->impl->_options |= static_cast< uint64_t >( option );
+    }
+    
+    void Parser::RemoveOption( Options option )
+    {
+        this->impl->_options &= ~static_cast< uint64_t >( option );
+    }
+    
+    bool Parser::HasOption( Options option )
+    {
+        return ( this->GetOptions() & static_cast< uint64_t >( option ) ) != 0;
+    }
+    
     const void * Parser::GetInfo( const std::string & key )
     {
         if( this->impl->_info.find( key ) == this->impl->_info.end() )
@@ -182,7 +208,8 @@ namespace ISOBMFF
 }
 
 XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::IMPL( void ):
-    _stringType( ISOBMFF::Parser::StringType::NULLTerminated )
+    _stringType( ISOBMFF::Parser::StringType::NULLTerminated ),
+    _options( 0 )
 {
     this->RegisterDefaultBoxes();
 }
@@ -192,6 +219,7 @@ XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::IMPL( const IMPL & o ):
     _path( o._path ),
     _types( o._types ),
     _stringType( o._stringType ),
+    _options( o._options ),
     _info( o._info )
 {
     this->RegisterDefaultBoxes();
