@@ -67,7 +67,7 @@ namespace ISOBMFF
             {
                 length  = stream.ReadBigEndianUInt64();
                 
-                if( name == "mdat" && parser.HasOption( ISOBMFF::Parser::Options::SkipMDAT ) )
+                if( name == "mdat" && parser.HasOption( ISOBMFF::Parser::Options::SkipMDATData ) )
                 {
                     stream.DeleteBytes( length - 16 );
                 }
@@ -78,7 +78,7 @@ namespace ISOBMFF
             }
             else
             {
-                if( name == "mdat" && parser.HasOption( ISOBMFF::Parser::Options::SkipMDAT ) )
+                if( name == "mdat" && parser.HasOption( ISOBMFF::Parser::Options::SkipMDATData ) )
                 {
                     stream.DeleteBytes( length - 8 );
                 }

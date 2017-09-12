@@ -62,6 +62,7 @@ int main( int argc, const char * argv[] )
         
         try
         {
+            parser.AddOption( ISOBMFF::Parser::Options::SkipMDATData );
             parser.Parse( path );
         }
         catch( const std::runtime_error & e )

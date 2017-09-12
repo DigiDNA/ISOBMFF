@@ -54,7 +54,7 @@ namespace ISOBMFF
             
             enum class Options: uint64_t
             {
-                SkipMDAT = 1 << 0
+                SkipMDATData = 1 << 0
             };
             
             Parser( void );

@@ -45,6 +45,8 @@ class XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL
         ~IMPL( void );
         
         std::vector< uint8_t > _bytes;
+        mutable std::ifstream  _stream;
+        std::string            _path;
 };
 
 #define XS_PIMPL_CLASS ISOBMFF::BinaryStream
@@ -66,7 +68,14 @@ namespace ISOBMFF
     
     bool BinaryStream::HasBytesAvailable( void ) const
     {
-        return this->impl->_bytes.size() > 0;
+        if( this->impl->_stream.is_open() )
+        {
+            return this->impl->_stream.eof() == false;
+        }
+        else
+        {
+            return this->impl->_bytes.size() > 0;
+        }
     }
     
     uint8_t BinaryStream::ReadUInt8( void )
@@ -395,35 +404,27 @@ namespace ISOBMFF
     
     std::string BinaryStream::ReadFourCC( void )
     {
-        std::string s( reinterpret_cast< const char * >( &( this->impl->_bytes[ 0 ] ) ), 4 );
+        uint8_t s[ 4 ];
         
-        this->DeleteBytes( 4 );
+        this->Read( s, 4 );
         
-        return s;
+        return std::string( reinterpret_cast< char * >( s ), 4 );
     }
     
     std::string BinaryStream::ReadNULLTerminatedString( void )
     {
-        uint64_t    length;
-        std::string ret;
+        std::vector< uint8_t > bytes;
+        uint8_t                b;
         
-        length = 0;
-        
-        for( const auto b: this->impl->_bytes )
+        do
         {
-            length++;
+            b = this->ReadUInt8();
             
-            if( b == 0 )
-            {
-                break;
-            }
+            bytes.push_back( b );
         }
+        while( b != 0 );
         
-        ret = std::string( length, ' ' );
-        
-        this->Read( reinterpret_cast< uint8_t * >( &( ret[ 0 ] ) ), length );
-        
-        return ret;
+        return std::string( reinterpret_cast< char * >( &( bytes[ 0 ] ) ), bytes.size() );
     }
     
     std::string BinaryStream::ReadPascalString( void )
@@ -465,48 +466,84 @@ namespace ISOBMFF
     {
         std::vector< uint8_t > v;
         
-        swap( v, this->impl->_bytes );
+        if( this->impl->_stream.is_open() )
+        {
+            {
+                std::ifstream::pos_type cur;
+                std::ifstream::pos_type length;
+                
+                cur = this->impl->_stream.tellg();
+                
+                this->impl->_stream.seekg( 0, std::ios::end );
+                
+                length = this->impl->_stream.tellg();
+                v      = std::vector< uint8_t >( static_cast< std::size_t >( length ) );
+                
+                this->impl->_stream.seekg( cur, std::ios::beg );
+                this->impl->_stream.read( reinterpret_cast< char * >( &( v[ 0 ] ) ), length );
+            }
+        }
+        else
+        {
+            swap( v, this->impl->_bytes );
+        }
         
         return v;
     }
     
     void BinaryStream::Read( uint8_t * buf, uint64_t length )
     {
-        memcpy( static_cast< void * >( buf ), static_cast< const void * >( &( this->impl->_bytes[ 0 ] ) ), length );
-        this->DeleteBytes( length );
+        if( this->impl->_stream.is_open() )
+        {
+            this->impl->_stream.read( reinterpret_cast< char * >( buf ), static_cast< std::streamsize >( length ) );
+        }
+        else
+        {
+            memcpy( static_cast< void * >( buf ), static_cast< const void * >( &( this->impl->_bytes[ 0 ] ) ), length );
+            this->DeleteBytes( length );
+        }
     }
     
     void BinaryStream::Get( uint8_t * buf, uint64_t pos, uint64_t length )
     {
-        memcpy( static_cast< void * >( buf ), static_cast< const void * >( &( this->impl->_bytes[ pos ] ) ), length );
+        if( this->impl->_stream.is_open() )
+        {
+            {
+                std::ifstream::pos_type cur;
+                
+                cur = this->impl->_stream.tellg();
+                
+                this->impl->_stream.seekg( static_cast< std::ifstream::off_type >( pos ), std::ios::cur );
+                this->impl->_stream.read( reinterpret_cast< char * >( buf ), static_cast< std::streamsize >( length ) );
+                this->impl->_stream.seekg( cur, std::ios::beg );
+            }
+        }
+        else
+        {
+            memcpy( static_cast< void * >( buf ), static_cast< const void * >( &( this->impl->_bytes[ pos ] ) ), length );
+        }
     }
     
     void BinaryStream::DeleteBytes( uint64_t length )
     {
-        std::vector< uint8_t >( this->impl->_bytes.begin() + static_cast< std::vector< uint8_t >::difference_type >( length ), this->impl->_bytes.end() ).swap( this->impl->_bytes );
+        if( this->impl->_stream.is_open() )
+        {
+            this->impl->_stream.seekg( static_cast< std::ifstream::off_type >( length ), std::ios::cur );
+        }
+        else
+        {
+            std::vector< uint8_t >( this->impl->_bytes.begin() + static_cast< std::vector< uint8_t >::difference_type >( length ), this->impl->_bytes.end() ).swap( this->impl->_bytes );
+        }
     }
 }
 
 XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( void )
 {}
 
-XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const std::string & path )
+XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const std::string & path ):
+    _path( path )
 {
-    std::ifstream           stream;
-    std::ifstream::pos_type length;
-    
-    stream.open( path, std::ios::binary | std::ios::ate );
-    
-    if( stream.good() == false )
-    {
-        return;
-    }
-    
-    length       = stream.tellg();
-    this->_bytes = std::vector< uint8_t >( static_cast< std::size_t >( length ) );
-    
-    stream.seekg( 0, std::ios::beg );
-    stream.read( reinterpret_cast< char * >( &( this->_bytes[ 0 ] ) ), length );
+    this->_stream.open( path, std::ios::binary );
 }
 
 XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( ISOBMFF::BinaryStream & stream, uint64_t length ):
@@ -520,8 +557,30 @@ XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const std::vector< uint8
 {}
 
 XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const IMPL & o ):
-    _bytes( o._bytes )
-{}
+    _bytes( o._bytes ),
+    _path( o._path )
+{
+    std::ifstream::pos_type pos;
+    
+    if( o._stream.is_open() )
+    {
+        this->_stream.open( this->_path );
+        
+        if( this->_stream.good() == false )
+        {
+            return;
+        }
+        
+        pos = o._stream.tellg();
+        
+        this->_stream.seekg( pos, std::ios::beg );
+    }
+}
 
 XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::~IMPL( void )
-{}
+{
+    if( this->_stream.is_open() )
+    {
+        this->_stream.close();
+    }
+}
