@@ -29,8 +29,9 @@ xcuserdata
 # VisualStudio
 *.suo
 *.sdf
+*.VC.db
+*.VC.opendb
 *.opensdf
 *.vcxproj.user
 *.csproj.user
 ipch
-
