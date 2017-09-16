@@ -175,6 +175,7 @@
 		057758FD1F67B98700987694 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		057758FF1F67BFA300987694 /* ISOBMFF.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ISOBMFF.hpp; sourceTree = "<group>"; };
 		057759011F67CF6500987694 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		0583F5A21F6CEB7400D5D49E /* Macros.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Macros.hpp; sourceTree = "<group>"; };
 		059605931F5DC4130005F8C9 /* ContainerBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContainerBox.hpp; sourceTree = "<group>"; };
 		059605971F5DC4300005F8C9 /* FullBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FullBox.hpp; sourceTree = "<group>"; };
 		0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContainerBox.cpp; sourceTree = "<group>"; };
@@ -372,6 +373,7 @@
 				0572807E1F5EDBC700F02C27 /* IREF.hpp */,
 				057280AA1F5F449600F02C27 /* IROT.hpp */,
 				05BFED081F637E7E00A6909E /* ISPE.hpp */,
+				0583F5A21F6CEB7400D5D49E /* Macros.hpp */,
 				051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */,
 				05A5A7651F5EAF9A00D16AD9 /* META.hpp */,
 				051F4D461F5E0AC400E6E12C /* MVHD.hpp */,
