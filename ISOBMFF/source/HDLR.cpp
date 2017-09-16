@@ -108,17 +108,18 @@ namespace ISOBMFF
 }
 
 XS::PIMPL::Object< ISOBMFF::HDLR >::IMPL::IMPL( void ):
-    _predefined( 0 ),
-    _reserved{ 0, 0, 0 }
-{}
+    _predefined( 0 )
+{
+    memset( this->_reserved, 0, sizeof( this->_reserved ) );
+}
 
 XS::PIMPL::Object< ISOBMFF::HDLR >::IMPL::IMPL( const IMPL & o ):
     _predefined( o._predefined ),
     _handlerType( o._handlerType ),
-    _reserved{ o._reserved[ 0 ], o._reserved[ 1 ], o._reserved[ 2 ] },
     _handlerName( o._handlerName )
-{}
+{
+    memcpy( this->_reserved, o._reserved, sizeof( this->_reserved ) );
+}
 
 XS::PIMPL::Object< ISOBMFF::HDLR >::IMPL::~IMPL( void )
 {}
-

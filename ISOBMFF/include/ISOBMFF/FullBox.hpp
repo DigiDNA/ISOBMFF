@@ -31,16 +31,18 @@
 #define ISOBMFF_FULL_BOX_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Box.hpp>
 
 namespace ISOBMFF
 {
-    class FullBox: public Box, public XS::PIMPL::Object< FullBox >
+    class ISOBMFF_EXPORT FullBox: public Box, public XS::PIMPL::Object< FullBox >
     {
         public:
             
             using XS::PIMPL::Object< FullBox >::impl;
-            using Box::Box;
+
+            FullBox( const std::string & name );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;

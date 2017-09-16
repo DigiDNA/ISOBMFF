@@ -202,10 +202,11 @@ XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL::IMPL( void ):
     _rate( 0 ),
     _volume( 0 ),
     _reserved1( 0 ),
-    _reserved2{ 0, 0 },
-    _predefined{ 0, 0, 0, 0, 0, 0 },
     _nextTrackID( 0 )
-{}
+{
+    memset( this->_reserved2,  0, sizeof( this->_reserved2 ) );
+    memset( this->_predefined, 0, sizeof( this->_predefined ) );
+}
 
 XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL::IMPL( const IMPL & o ):
     _creationTime( o._creationTime ),
@@ -215,11 +216,12 @@ XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL::IMPL( const IMPL & o ):
     _rate( o._rate ),
     _volume( o._volume ),
     _reserved1( o._reserved1 ),
-    _reserved2{ o._reserved2[ 0 ], o._reserved2[ 1 ] },
     _matrix( o._matrix ),
-    _predefined{ o._predefined[ 0 ], o._predefined[ 1 ], o._predefined[ 2 ], o._predefined[ 3 ], o._predefined[ 4 ], o._predefined[ 5 ] },
     _nextTrackID( o._nextTrackID )
-{}
+{
+    memcpy( this->_reserved2,  o._reserved2,  sizeof( this->_reserved2 ) );
+    memcpy( this->_predefined, o._predefined, sizeof( this->_predefined ) );
+}
 
 XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL::~IMPL( void )
 {}

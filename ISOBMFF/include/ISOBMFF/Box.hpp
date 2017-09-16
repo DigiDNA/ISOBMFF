@@ -31,6 +31,7 @@
 #define ISOBMFF_BOX_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/BinaryStream.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
 #include <string>
@@ -42,7 +43,7 @@ namespace ISOBMFF
 {
     class Parser;
     
-    class Box: public XS::PIMPL::Object< Box >, public DisplayableObject
+    class ISOBMFF_EXPORT Box: public XS::PIMPL::Object< Box >, public DisplayableObject
     {
         public:
             
@@ -52,7 +53,7 @@ namespace ISOBMFF
             
             std::string GetName( void ) const override;
             
-            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void )                               const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
             
             virtual void                   ReadData( Parser & parser, BinaryStream & stream );
             virtual std::vector< uint8_t > GetData( void ) const;

@@ -31,6 +31,7 @@
 #define ISOBMFF_META_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/Container.hpp>
 #include <vector>
@@ -38,7 +39,7 @@
 
 namespace ISOBMFF
 {
-    class META: public FullBox, public Container, public XS::PIMPL::Object< META >
+    class ISOBMFF_EXPORT META: public FullBox, public Container, public XS::PIMPL::Object< META >
     {
         public:
             

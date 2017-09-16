@@ -29,6 +29,7 @@
 
 #include <ISOBMFF/HVCC.hpp>
 #include <ISOBMFF/Utils.hpp>
+#include <ISOBMFF/Parser.hpp>
 
 template<>
 class XS::PIMPL::Object< ISOBMFF::HVCC >::IMPL

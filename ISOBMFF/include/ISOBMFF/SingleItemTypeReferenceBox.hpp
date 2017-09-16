@@ -31,17 +31,19 @@
 #define ISOBMFF_SINGLE_ITEM_TYPE_REFERENCE_BOX_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Box.hpp>
 #include <cstdint>
 
 namespace ISOBMFF
 {
-    class SingleItemTypeReferenceBox: public Box, public XS::PIMPL::Object< SingleItemTypeReferenceBox >
+    class ISOBMFF_EXPORT SingleItemTypeReferenceBox: public Box, public XS::PIMPL::Object< SingleItemTypeReferenceBox >
     {
         public:
             
             using XS::PIMPL::Object< SingleItemTypeReferenceBox >::impl;
-            using Box::Box;
+
+            SingleItemTypeReferenceBox( const std::string & name );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;

@@ -30,12 +30,13 @@
 #ifndef ISOBMFF_IPCO_HPP
 #define ISOBMFF_IPCO_HPP
 
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/ContainerBox.hpp>
 #include <ISOBMFF/IPMA.hpp>
 
 namespace ISOBMFF
 {
-    class IPCO: public ContainerBox
+    class ISOBMFF_EXPORT IPCO: public ContainerBox
     {
         public:
             

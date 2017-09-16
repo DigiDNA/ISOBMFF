@@ -31,13 +31,14 @@
 #define ISOBMFF_DREF_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/Container.hpp>
 #include <vector>
 
 namespace ISOBMFF
 {
-    class DREF: public FullBox, public Container, public XS::PIMPL::Object< DREF >
+    class ISOBMFF_EXPORT DREF: public FullBox, public Container, public XS::PIMPL::Object< DREF >
     {
         public:
             

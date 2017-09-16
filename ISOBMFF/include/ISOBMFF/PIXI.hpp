@@ -31,15 +31,17 @@
 #define ISOBMFF_PIXI_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
 #include <ISOBMFF/DisplayableObjectContainer.hpp>
 #include <vector>
 #include <cstdint>
+#include <memory>
 
 namespace ISOBMFF
 {
-    class PIXI: public FullBox, public XS::PIMPL::Object< PIXI >, public DisplayableObjectContainer
+    class ISOBMFF_EXPORT PIXI: public FullBox, public XS::PIMPL::Object< PIXI >, public DisplayableObjectContainer
     {
         public:
             

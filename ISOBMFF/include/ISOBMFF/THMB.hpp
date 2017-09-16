@@ -31,11 +31,12 @@
 #define ISOBMFF_THMB_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
 
 namespace ISOBMFF
 {
-    class THMB: public SingleItemTypeReferenceBox, public XS::PIMPL::Object< THMB >
+    class ISOBMFF_EXPORT THMB: public SingleItemTypeReferenceBox, public XS::PIMPL::Object< THMB >
     {
         public:
             

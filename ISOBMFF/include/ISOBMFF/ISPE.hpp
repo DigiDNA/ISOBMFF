@@ -31,12 +31,13 @@
 #define ISOBMFF_ISPE_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <cstdint>
 
 namespace ISOBMFF
 {
-    class ISPE: public FullBox, public XS::PIMPL::Object< ISPE >
+    class ISOBMFF_EXPORT ISPE: public FullBox, public XS::PIMPL::Object< ISPE >
     {
         public:
             

@@ -50,6 +50,9 @@ class XS::PIMPL::Object< ISOBMFF::SingleItemTypeReferenceBox >::IMPL
 
 namespace ISOBMFF
 {
+    SingleItemTypeReferenceBox::SingleItemTypeReferenceBox( const std::string & name ): Box( name )
+    {}
+
     void SingleItemTypeReferenceBox::ReadData( Parser & parser, BinaryStream & stream )
     {
         const IREF * iref;

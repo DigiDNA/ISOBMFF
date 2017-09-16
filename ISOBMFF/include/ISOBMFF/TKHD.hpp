@@ -31,13 +31,14 @@
 #define ISOBMFF_TKHD_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/Matrix.hpp>
 #include <cstdint>
 
 namespace ISOBMFF
 {
-    class TKHD: public FullBox, public XS::PIMPL::Object< TKHD >
+    class ISOBMFF_EXPORT TKHD: public FullBox, public XS::PIMPL::Object< TKHD >
     {
         public:
             

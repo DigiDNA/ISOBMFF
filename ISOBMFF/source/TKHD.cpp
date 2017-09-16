@@ -225,14 +225,15 @@ XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL::IMPL( void ):
     _trackID( 0 ),
     _reserved1( 0 ),
     _duration( 0 ),
-    _reserved2{ 0, 0 },
     _layer( 0 ),
     _alternateGroup( 0 ),
     _volume( 0 ),
     _reserved3( 0 ),
     _width( 0 ),
     _height( 0 )
-{}
+{
+    memset( this->_reserved2, 0, sizeof( this->_reserved2 ) );
+}
 
 XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL::IMPL( const IMPL & o ):
     _creationTime( o._creationTime ),
@@ -240,7 +241,6 @@ XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL::IMPL( const IMPL & o ):
     _trackID( o._trackID ),
     _reserved1( o._reserved1 ),
     _duration( o._duration ),
-    _reserved2{ o._reserved2[ 0 ], o._reserved2[ 1 ] },
     _layer( o._layer ),
     _alternateGroup( o._alternateGroup ),
     _volume( o._volume ),
@@ -248,7 +248,9 @@ XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL::IMPL( const IMPL & o ):
     _matrix( o._matrix ),
     _width( o._width ),
     _height( o._height )
-{}
+{
+    memcpy( this->_reserved2, o._reserved2, sizeof( this->_reserved2 ) );
+}
 
 XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL::~IMPL( void )
 {}

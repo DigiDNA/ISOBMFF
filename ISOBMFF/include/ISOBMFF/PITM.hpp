@@ -31,12 +31,13 @@
 #define ISOBMFF_PITM_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <cstdint>
 
 namespace ISOBMFF
 {
-    class PITM: public FullBox, public XS::PIMPL::Object< PITM >
+    class ISOBMFF_EXPORT PITM: public FullBox, public XS::PIMPL::Object< PITM >
     {
         public:
             

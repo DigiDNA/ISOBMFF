@@ -31,12 +31,13 @@
 #define ISOBMFF_COLR_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Box.hpp>
 #include <string>
 
 namespace ISOBMFF
 {
-    class COLR: public Box, public XS::PIMPL::Object< COLR >
+    class ISOBMFF_EXPORT COLR: public Box, public XS::PIMPL::Object< COLR >
     {
         public:
             

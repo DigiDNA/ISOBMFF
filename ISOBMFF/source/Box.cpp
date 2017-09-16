@@ -30,6 +30,7 @@
 #include <ISOBMFF/Box.hpp>
 #include <ISOBMFF/Utils.hpp>
 #include <ISOBMFF/DisplayableObjectContainer.hpp>
+#include <ISOBMFF/Parser.hpp>
 
 template<>
 class XS::PIMPL::Object< ISOBMFF::Box >::IMPL

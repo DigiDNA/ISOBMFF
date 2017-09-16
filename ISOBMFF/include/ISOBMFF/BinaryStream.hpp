@@ -35,11 +35,12 @@
 #include <cstdint>
 #include <vector>
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Matrix.hpp>
 
 namespace ISOBMFF
 {
-    class BinaryStream: public XS::PIMPL::Object< BinaryStream >
+    class ISOBMFF_EXPORT BinaryStream: public XS::PIMPL::Object< BinaryStream >
     {
         public:
             

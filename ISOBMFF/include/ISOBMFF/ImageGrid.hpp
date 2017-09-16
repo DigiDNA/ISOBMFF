@@ -31,6 +31,7 @@
 #define ISOBMFF_IMAGE_GRID_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/BinaryStream.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
 #include <cstdint>
@@ -38,7 +39,7 @@
 
 namespace ISOBMFF
 {
-    class ImageGrid: public XS::PIMPL::Object< ImageGrid >, public DisplayableObject
+    class ISOBMFF_EXPORT ImageGrid: public XS::PIMPL::Object< ImageGrid >, public DisplayableObject
     {
         public:
             

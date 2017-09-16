@@ -31,6 +31,7 @@
 #define ISOBMFF_IINF_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Container.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/INFE.hpp>
@@ -39,7 +40,7 @@
 
 namespace ISOBMFF
 {
-    class IINF: public FullBox, public Container, public XS::PIMPL::Object< IINF >
+    class ISOBMFF_EXPORT IINF: public FullBox, public Container, public XS::PIMPL::Object< IINF >
     {
         public:
             

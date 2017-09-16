@@ -31,6 +31,7 @@
 #define ISOBMFF_FTYP_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Box.hpp>
 #include <string>
 #include <vector>
@@ -38,7 +39,7 @@
 
 namespace ISOBMFF
 {
-    class FTYP: public Box, public XS::PIMPL::Object< FTYP >
+    class ISOBMFF_EXPORT FTYP: public Box, public XS::PIMPL::Object< FTYP >
     {
         public:
             

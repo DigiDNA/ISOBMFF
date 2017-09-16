@@ -42,6 +42,10 @@ int main( int argc, const char * argv[] )
     if( argc < 2 )
     {
         std::cerr << "No input file provided" << std::endl;
+
+        #if defined( _WIN32 ) && defined( _DEBUG )
+        getchar();
+        #endif
         
         return EXIT_FAILURE;
     }
@@ -54,6 +58,10 @@ int main( int argc, const char * argv[] )
         if( path.length() == 0 || stream.good() == false )
         {
             std::cerr << "Input file does not exist: '" << path << "'" << std::endl;
+
+            #if defined( _WIN32 ) && defined( _DEBUG )
+            getchar();
+            #endif
             
             return EXIT_FAILURE;
         }
@@ -68,12 +76,20 @@ int main( int argc, const char * argv[] )
         catch( const std::runtime_error & e )
         {
             std::cerr << e.what() << std::endl;
+
+            #if defined( _WIN32 ) && defined( _DEBUG )
+            getchar();
+            #endif
             
             return EXIT_FAILURE;
         }
         
         std::cout << *( parser.GetFile() ) << std::endl << std::endl;
     }
+
+    #if defined( _WIN32 ) && defined( _DEBUG )
+    getchar();
+    #endif
     
     return EXIT_SUCCESS;
 }

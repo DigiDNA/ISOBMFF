@@ -31,16 +31,17 @@
 #define ISOBMFF_URN_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 
 namespace ISOBMFF
 {
-    class URN: public FullBox, public XS::PIMPL::Object< URN >
+    class ISOBMFF_EXPORT URN: public FullBox, public XS::PIMPL::Object< URN >
     {
         public:
             
             using XS::PIMPL::Object< URN >::impl;
-            
+
             URN( void );
     };
 }

@@ -31,12 +31,13 @@
 #define ISOBMFF_MATRIX_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
 #include <cstdint>
 
 namespace ISOBMFF
 {
-    class Matrix: public XS::PIMPL::Object< Matrix >, public DisplayableObject
+    class ISOBMFF_EXPORT Matrix: public XS::PIMPL::Object< Matrix >, public DisplayableObject
     {
         public:
             

@@ -47,6 +47,9 @@ class XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL
 
 namespace ISOBMFF
 {
+    ContainerBox::ContainerBox( const std::string & name ): Box( name )
+    {}
+
     void ContainerBox::ReadData( Parser & parser, BinaryStream & stream )
     {
         uint64_t               length;

@@ -30,6 +30,7 @@
 #ifndef ISOBMFF_DISPLAYABLE_OBJECT_HPP
 #define ISOBMFF_DISPLAYABLE_OBJECT_HPP
 
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Utils.hpp>
 #include <ostream>
 #include <sstream>
@@ -39,7 +40,7 @@
 
 namespace ISOBMFF
 {
-    class DisplayableObject
+    class ISOBMFF_EXPORT DisplayableObject
     {
         public:
             

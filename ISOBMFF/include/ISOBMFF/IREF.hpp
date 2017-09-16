@@ -31,12 +31,13 @@
 #define ISOBMFF_IREF_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Container.hpp>
 #include <ISOBMFF/FullBox.hpp>
 
 namespace ISOBMFF
 {
-    class IREF: public FullBox, public Container, public XS::PIMPL::Object< IREF >
+    class ISOBMFF_EXPORT IREF: public FullBox, public Container, public XS::PIMPL::Object< IREF >
     {
         public:
             

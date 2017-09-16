@@ -48,10 +48,10 @@ class XS::PIMPL::Object< ISOBMFF::HVCC::Array::NALUnit >::IMPL
 
 namespace ISOBMFF
 {
-    HVCC::HVCC::Array::NALUnit::NALUnit( void )
+    HVCC::Array::NALUnit::NALUnit( void )
     {}
     
-    HVCC::HVCC::Array::NALUnit::NALUnit( BinaryStream & stream )
+    HVCC::Array::NALUnit::NALUnit( BinaryStream & stream )
     {
         std::vector< uint8_t > data;
         uint16_t               size;
@@ -73,17 +73,17 @@ namespace ISOBMFF
         return "NALUnit";
     }
     
-    std::vector< uint8_t > HVCC::HVCC::Array::NALUnit::GetData( void ) const
+    std::vector< uint8_t > HVCC::Array::NALUnit::GetData( void ) const
     {
         return this->impl->_data;
     }
     
-    void HVCC::HVCC::Array::NALUnit::SetData( const std::vector< uint8_t > & value )
+    void HVCC::Array::NALUnit::SetData( const std::vector< uint8_t > & value )
     {
         this->impl->_data = value;
     }
     
-    std::vector< std::pair< std::string, std::string > > HVCC::HVCC::Array::NALUnit::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > HVCC::Array::NALUnit::GetDisplayableProperties( void ) const
     {
         std::vector< uint8_t > data;
         std::stringstream      ss;

@@ -31,13 +31,14 @@
 #define ISOBMFF_INFE_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <string>
 #include <cstdint>
 
 namespace ISOBMFF
 {
-    class INFE: public FullBox, public XS::PIMPL::Object< INFE >
+    class ISOBMFF_EXPORT INFE: public FullBox, public XS::PIMPL::Object< INFE >
     {
         public:
             

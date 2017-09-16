@@ -31,11 +31,12 @@
 #define ISOBMFF_DIMG_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
 
 namespace ISOBMFF
 {
-    class DIMG: public SingleItemTypeReferenceBox, public XS::PIMPL::Object< DIMG >
+    class ISOBMFF_EXPORT DIMG: public SingleItemTypeReferenceBox, public XS::PIMPL::Object< DIMG >
     {
         public:
             

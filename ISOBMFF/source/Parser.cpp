@@ -113,7 +113,7 @@ namespace ISOBMFF
         return std::make_shared< Box >( type );
     }
     
-    void Parser::Parse( const std::string & path ) noexcept( false )
+    void Parser::Parse( const std::string & path ) ISOBMFF_NOEXCEPT( false )
     {
         char         n[ 4 ] = { 0, 0, 0, 0 };
         BinaryStream stream( path );

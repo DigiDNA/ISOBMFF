@@ -31,6 +31,7 @@
 #define ISOBMFF_IPMA_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
 #include <ISOBMFF/DisplayableObjectContainer.hpp>
@@ -39,7 +40,7 @@
 
 namespace ISOBMFF
 {
-    class IPMA: public FullBox, public DisplayableObjectContainer, public XS::PIMPL::Object< IPMA >
+    class ISOBMFF_EXPORT IPMA: public FullBox, public DisplayableObjectContainer, public XS::PIMPL::Object< IPMA >
     {
         public:
             

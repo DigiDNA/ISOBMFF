@@ -31,11 +31,12 @@
 #define ISOBMFF_IROT_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 
 namespace ISOBMFF
 {
-    class IROT: public Box, public XS::PIMPL::Object< IROT >
+    class ISOBMFF_EXPORT IROT: public Box, public XS::PIMPL::Object< IROT >
     {
         public:
             

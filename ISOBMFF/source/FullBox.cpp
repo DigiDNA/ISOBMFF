@@ -29,6 +29,7 @@
 
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/Utils.hpp>
+#include <ISOBMFF/Parser.hpp>
 
 template<>
 class XS::PIMPL::Object< ISOBMFF::FullBox >::IMPL
@@ -48,6 +49,9 @@ class XS::PIMPL::Object< ISOBMFF::FullBox >::IMPL
 
 namespace ISOBMFF
 {
+    FullBox::FullBox( const std::string & name ): Box( name )
+    {}
+
     void FullBox::ReadData( Parser & parser, BinaryStream & stream )
     {
         uint32_t vf;

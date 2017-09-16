@@ -23,37 +23,36 @@
  ******************************************************************************/
 
 /*!
- * @header      HDLR.hpp
+ * @header      Macros.hpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef ISOBMFF_HDLR_HPP
-#define ISOBMFF_HDLR_HPP
+#ifndef ISOBMFF_MACROS_HPP
+#define ISOBMFF_MACROS_HPP
 
-#include <XS/PIMPL/Object.hpp>
-#include <ISOBMFF/Macros.hpp>
-#include <ISOBMFF/FullBox.hpp>
-#include <string>
+/*
+ * Disable warnings about class members not having DLL-interface.
+ * Eg: std::shared_ptr
+ */
+#ifdef _WIN32
+#pragma warning( push )
+#pragma warning( disable: 4251 )
+#endif
 
-namespace ISOBMFF
-{
-    class ISOBMFF_EXPORT HDLR: public FullBox, public XS::PIMPL::Object< HDLR >
-    {
-        public:
-            
-            using XS::PIMPL::Object< HDLR >::impl;
-            
-            HDLR( void );
-            
-            void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
-            
-            std::string GetHandlerType( void ) const;
-            std::string GetHandlerName( void ) const;
-            
-            void SetHandlerType( const std::string & value );
-            void SetHandlerName( const std::string & value );
-    };
-}
+#if defined( _WIN32 ) && defined( ISOBMFF_DLL_BUILD )
+#define ISOBMFF_EXPORT __declspec( dllexport )
+#elif defined( _WIN32 ) && defined( ISOBMFF_LIB_BUILD )
+#define ISOBMFF_EXPORT 
+#elif defined( _WIN32 )
+#define ISOBMFF_EXPORT __declspec( dllimport )
+#else
+#define ISOBMFF_EXPORT 
+#endif
 
-#endif /* ISOBMFF_HDLR_HPP */
+#ifndef _MSC_VER
+#define ISOBMFF_NOEXCEPT( _a_ ) noexcept( _a_ )
+#else
+#define ISOBMFF_NOEXCEPT( _a_ ) 
+#endif
+
+#endif /* ISOBMFF_MACROS_HPP */

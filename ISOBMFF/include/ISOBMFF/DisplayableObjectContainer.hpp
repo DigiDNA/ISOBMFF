@@ -30,11 +30,14 @@
 #ifndef ISOBMFF_DISPLAYABLE_OBJECT_CONTAINER_HPP
 #define ISOBMFF_DISPLAYABLE_OBJECT_CONTAINER_HPP
 
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
+#include <memory>
+#include <vector>
 
 namespace ISOBMFF
 {
-    class DisplayableObjectContainer
+    class ISOBMFF_EXPORT DisplayableObjectContainer
     {
         public:
             

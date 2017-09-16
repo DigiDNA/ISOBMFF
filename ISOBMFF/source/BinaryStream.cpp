@@ -40,7 +40,6 @@ class XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL
         IMPL( void );
         IMPL( const std::string & path );
         IMPL( const std::vector< uint8_t > & bytes );
-        IMPL( ISOBMFF::BinaryStream & stream, uint64_t length );
         IMPL( const IMPL & o );
         ~IMPL( void );
         
@@ -63,8 +62,13 @@ namespace ISOBMFF
 	BinaryStream::BinaryStream( const std::vector< uint8_t > & bytes ): XS::PIMPL::Object< BinaryStream >( bytes )
 	{}
     
-    BinaryStream::BinaryStream( BinaryStream & stream, uint64_t length ): XS::PIMPL::Object< BinaryStream >( stream, length )
-    {}
+    BinaryStream::BinaryStream( BinaryStream & stream, uint64_t length ): BinaryStream( std::vector< uint8_t >( static_cast< size_t >( length ) ) )
+    {
+        if( length > 0 )
+        {
+            stream.Read( &( this->impl->_bytes[ 0 ] ), length );
+        }
+    }
     
     bool BinaryStream::HasBytesAvailable( void ) const
     {
@@ -389,7 +393,7 @@ namespace ISOBMFF
         fractionalMask = static_cast< unsigned int >( pow( 2, fractionalLength ) - 1 );
         fractional     = ( n & fractionalMask ) / ( 1 << fractionalLength );
         
-        return integer + fractional;
+        return static_cast< float >( integer + fractional );
     }
     
     float BinaryStream::ReadLittleEndianFixedPoint( unsigned int integerLength, unsigned int fractionalLength )
@@ -412,7 +416,7 @@ namespace ISOBMFF
         fractionalMask = static_cast< unsigned int >( pow( 2, fractionalLength ) - 1 );
         fractional     = ( n & fractionalMask ) / ( 1 << fractionalLength );
         
-        return integer + fractional;
+        return static_cast< float >( integer + fractional );
     }
     
     std::string BinaryStream::ReadFourCC( void )
@@ -512,7 +516,7 @@ namespace ISOBMFF
         }
         else
         {
-            memcpy( static_cast< void * >( buf ), static_cast< const void * >( &( this->impl->_bytes[ 0 ] ) ), length );
+            memcpy( static_cast< void * >( buf ), static_cast< const void * >( &( this->impl->_bytes[ 0 ] ) ), static_cast< size_t >( length ) );
             this->DeleteBytes( length );
         }
     }
@@ -533,7 +537,7 @@ namespace ISOBMFF
         }
         else
         {
-            memcpy( static_cast< void * >( buf ), static_cast< const void * >( &( this->impl->_bytes[ pos ] ) ), length );
+            memcpy( static_cast< void * >( buf ), static_cast< const void * >( &( this->impl->_bytes[ static_cast< size_t >( pos ) ] ) ), static_cast< size_t >( length ) );
         }
     }
     
@@ -557,12 +561,6 @@ XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const std::string & path
     _path( path )
 {
     this->_stream.open( path, std::ios::binary );
-}
-
-XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( ISOBMFF::BinaryStream & stream, uint64_t length ):
-    _bytes( length )
-{
-    stream.Read( &( this->_bytes[ 0 ] ), length );
 }
 
 XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const std::vector< uint8_t > & bytes ):

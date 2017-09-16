@@ -31,6 +31,7 @@
 #define ISOBMFF_HVCC_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
 #include <ISOBMFF/DisplayableObjectContainer.hpp>
@@ -39,7 +40,7 @@
 
 namespace ISOBMFF
 {
-    class HVCC: public Box, public XS::PIMPL::Object< HVCC >, public DisplayableObjectContainer
+    class ISOBMFF_EXPORT HVCC: public Box, public XS::PIMPL::Object< HVCC >, public DisplayableObjectContainer
     {
         public:
             

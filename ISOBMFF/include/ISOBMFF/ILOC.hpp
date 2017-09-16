@@ -31,6 +31,7 @@
 #define ISOBMFF_ILOC_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/DisplayableObjectContainer.hpp>
 #include <cstdint>
@@ -38,7 +39,7 @@
 
 namespace ISOBMFF
 {
-    class ILOC: public FullBox, public DisplayableObjectContainer, public XS::PIMPL::Object< ILOC >
+    class ISOBMFF_EXPORT ILOC: public FullBox, public DisplayableObjectContainer, public XS::PIMPL::Object< ILOC >
     {
         public:
             

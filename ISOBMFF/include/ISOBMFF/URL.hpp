@@ -31,11 +31,12 @@
 #define ISOBMFF_URL_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 
 namespace ISOBMFF
 {
-    class URL: public FullBox, public XS::PIMPL::Object< URL >
+    class ISOBMFF_EXPORT URL: public FullBox, public XS::PIMPL::Object< URL >
     {
         public:
             

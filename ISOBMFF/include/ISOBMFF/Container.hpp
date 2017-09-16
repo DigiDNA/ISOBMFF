@@ -30,13 +30,14 @@
 #ifndef ISOBMFF_CONTAINER_HPP
 #define ISOBMFF_CONTAINER_HPP
 
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Box.hpp>
 #include <vector>
 #include <memory>
 
 namespace ISOBMFF
 {
-    class Container
+    class ISOBMFF_EXPORT Container
     {
         public:
             

@@ -31,12 +31,13 @@
 #define ISOBMFF_FILE_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/ContainerBox.hpp>
 #include <ostream>
 
 namespace ISOBMFF
 {
-    class File: public ContainerBox, public XS::PIMPL::Object< File >
+    class ISOBMFF_EXPORT File: public ContainerBox, public XS::PIMPL::Object< File >
     {
         public:
             

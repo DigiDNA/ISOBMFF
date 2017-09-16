@@ -30,6 +30,7 @@
 #ifndef ISOBMFF_UTILS_HPP
 #define ISOBMFF_UTILS_HPP
 
+#include <ISOBMFF/Macros.hpp>
 #include <vector>
 #include <string>
 #include <cstdint>
@@ -38,12 +39,12 @@ namespace ISOBMFF
 {
     namespace Utils
     {
-        std::string Pad( const std::string & s, size_t length );
-        std::string ToString( const std::vector< std::string > & v );
-        std::string ToHexString( uint8_t u );
-        std::string ToHexString( uint16_t u );
-        std::string ToHexString( uint32_t u );
-        std::string ToHexString( uint64_t u );
+        ISOBMFF_EXPORT std::string Pad( const std::string & s, size_t length );
+        ISOBMFF_EXPORT std::string ToString( const std::vector< std::string > & v );
+        ISOBMFF_EXPORT std::string ToHexString( uint8_t u );
+        ISOBMFF_EXPORT std::string ToHexString( uint16_t u );
+        ISOBMFF_EXPORT std::string ToHexString( uint32_t u );
+        ISOBMFF_EXPORT std::string ToHexString( uint64_t u );
         
         template< typename _T_ >
         std::string ToString( const std::vector< _T_ > & v )

@@ -31,11 +31,12 @@
 #define ISOBMFF_CDSC_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
 
 namespace ISOBMFF
 {
-    class CDSC: public SingleItemTypeReferenceBox, public XS::PIMPL::Object< CDSC >
+    class ISOBMFF_EXPORT CDSC: public SingleItemTypeReferenceBox, public XS::PIMPL::Object< CDSC >
     {
         public:
             

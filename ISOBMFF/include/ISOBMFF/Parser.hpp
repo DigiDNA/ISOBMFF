@@ -31,6 +31,7 @@
 #define ISOBMFF_PARSER_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <string>
 #include <functional>
 #include <memory>
@@ -40,7 +41,7 @@
 
 namespace ISOBMFF
 {
-    class Parser: public XS::PIMPL::Object< Parser >
+    class ISOBMFF_EXPORT Parser: public XS::PIMPL::Object< Parser >
     {
         public:
             
@@ -65,7 +66,7 @@ namespace ISOBMFF
             
             std::shared_ptr< Box > CreateBox( const std::string & type ) const;
             
-            void Parse( const std::string & path ) noexcept( false );
+            void Parse( const std::string & path ) ISOBMFF_NOEXCEPT( false );
             
             std::shared_ptr< File > GetFile( void ) const;
             

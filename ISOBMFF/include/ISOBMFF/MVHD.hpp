@@ -31,12 +31,13 @@
 #define ISOBMFF_MVHD_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/Matrix.hpp>
 
 namespace ISOBMFF
 {
-    class MVHD: public FullBox, public XS::PIMPL::Object< MVHD >
+    class ISOBMFF_EXPORT MVHD: public FullBox, public XS::PIMPL::Object< MVHD >
     {
         public:
             

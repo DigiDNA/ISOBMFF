@@ -30,6 +30,7 @@
 #ifndef ISOBMFF_HPP
 #define ISOBMFF_HPP
 
+#include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Utils.hpp>
 #include <ISOBMFF/Parser.hpp>
 #include <ISOBMFF/BinaryStream.hpp>
