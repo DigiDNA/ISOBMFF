@@ -62,62 +62,76 @@ The library can be build with `make`, on the command line.
 
 Parsing is done with the `ISOBMFF::Parser` class:
 
-    ISOBMFF::Parser parser;
-    
-    try
-    {
-        parser.Parse( "path/to/some/file" );
-    }
-    catch( ... )
-    {}
-    
+```cpp
+ISOBMFF::Parser parser;
+
+try
+{
+    parser.Parse( "path/to/some/file" );
+}
+catch( ... )
+{}
+```
+
 When the parser is done, an instance of `ISOBMFF::File` can be retrieved:
 
-    std::shared_ptr< ISOBMFF::File > file = parser.GetFile();
-    
+```cpp
+std::shared_ptr< ISOBMFF::File > file = parser.GetFile();
+```
+
 Boxes can then be retrieved the following way, from the file:
 
-    std::shared_ptr< ISOBMFF::Box > box = file.GetBox( "ftyp" );
+```cpp
+std::shared_ptr< ISOBMFF::Box > box = file.GetBox( "ftyp" );
+```
     
 If the box does not exist, it will return `nullptr`.
 
 A typed box can be retrieved the following way:
 
-    std::shared_ptr< ISOBMFF::FTYP > ftyp = file.GetTypedBox< ISOBMFF::FTYP >( "ftyp" );
+```cpp
+std::shared_ptr< ISOBMFF::FTYP > ftyp = file.GetTypedBox< ISOBMFF::FTYP >( "ftyp" );
+```
 
 Here, `nullptr` will be returned if the box does not exist, or is not of the correct type.
 
 Container boxes acts just the same:
 
-    std::shared_ptr< ISOBMFF::ContainerBox > moov = file.GetTypedBox< ISOBMFF::ContainerBox >( "moov" );
-    std::shared_ptr< ISOBMFF::TRAK         > trak = moov.GetTypedBox< ISOBMFF::TRAK         >( "trak" );
+```cpp
+std::shared_ptr< ISOBMFF::ContainerBox > moov = file.GetTypedBox< ISOBMFF::ContainerBox >( "moov" );
+std::shared_ptr< ISOBMFF::TRAK         > trak = moov.GetTypedBox< ISOBMFF::TRAK         >( "trak" );
+```
 
 The parser also supports custom boxes:
 
-    parser.RegisterBox( "abcd", [ = ]( void ) -> std::shared_ptr< CustomBox > { return std::make_shared< CustomBox >(); } );
+```cpp
+parser.RegisterBox( "abcd", [ = ]( void ) -> std::shared_ptr< CustomBox > { return std::make_shared< CustomBox >(); } );
+```
 
 It will then create an instance of `CustomBox` when encountering an `abcd` box somewhere in the file.
 
 The custom class needs at least to inherit from `Box`:
 
-    class CustomBox: public ISOBMFF::Box
-    {
-        public:
-            
-            CustomBox( void ): Box( "abcd" )
-            {}
-            
-            void CustomBox::ReadData( Parser & parser, BinaryStream & stream )
-            {
-                /* Read box data here... */
-            }
-            
-            std::vector< std::pair< std::string, std::string > > CustomBox::GetDisplayableProperties( void ) const
-            {
-                /* Returns box properties, to support output... */
-                return {};
-            }
-    };
+```cpp
+class CustomBox: public ISOBMFF::Box
+{
+    public:
+        
+        CustomBox( void ): Box( "abcd" )
+        {}
+        
+        void CustomBox::ReadData( Parser & parser, BinaryStream & stream )
+        {
+            /* Read box data here... */
+        }
+        
+        std::vector< std::pair< std::string, std::string > > CustomBox::GetDisplayableProperties( void ) const
+        {
+            /* Returns box properties, to support output... */
+            return {};
+        }
+};
+```
 
 License
 -------
