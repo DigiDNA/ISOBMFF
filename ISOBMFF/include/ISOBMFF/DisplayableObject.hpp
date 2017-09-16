@@ -52,7 +52,7 @@ namespace ISOBMFF
             virtual void        WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
             virtual std::string ToString( void )                                               const;
             
-            friend std::ostream & operator << ( std::ostream & os, const DisplayableObject & o );
+            ISOBMFF_EXPORT friend std::ostream & operator << ( std::ostream & os, const DisplayableObject & o );
     };
 }
 
