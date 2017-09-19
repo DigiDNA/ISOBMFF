@@ -52,6 +52,7 @@
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\PITM.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\PIXI.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\SingleItemTypeReferenceBox.hpp" />
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\STSD.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\THMB.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\TKHD.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\URL.hpp" />
@@ -97,6 +98,7 @@
     <ClCompile Include="..\ISOBMFF\source\PIXI-Channel.cpp" />
     <ClCompile Include="..\ISOBMFF\source\PIXI.cpp" />
     <ClCompile Include="..\ISOBMFF\source\SingleItemTypeReferenceBox.cpp" />
+    <ClCompile Include="..\ISOBMFF\source\STSD.cpp" />
     <ClCompile Include="..\ISOBMFF\source\THMB.cpp" />
     <ClCompile Include="..\ISOBMFF\source\TKHD.cpp" />
     <ClCompile Include="..\ISOBMFF\source\URL.cpp" />
