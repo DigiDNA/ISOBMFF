@@ -53,6 +53,7 @@
 #include <ISOBMFF/IPMA.hpp>
 #include <ISOBMFF/PIXI.hpp>
 #include <ISOBMFF/IPCO.hpp>
+#include <ISOBMFF/STSD.hpp>
 #include <map>
 #include <stdexcept>
 
@@ -272,6 +273,7 @@ void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterContainerBox( "fiin" );
     this->RegisterContainerBox( "paen" );
     this->RegisterContainerBox( "strk" );
+    this->RegisterContainerBox( "tapt" );
     
     this->RegisterBox( "ftyp", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::FTYP >(); } );
     this->RegisterBox( "mvhd", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::MVHD >(); } );
@@ -296,4 +298,5 @@ void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterBox( "ipma", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IPMA >(); } );
     this->RegisterBox( "pixi", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::PIXI >(); } );
     this->RegisterBox( "ipco", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IPCO >(); } );
+    this->RegisterBox( "stsd", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::STSD >(); } );
 }
