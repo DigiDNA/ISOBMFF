@@ -63,7 +63,7 @@ namespace ISOBMFF
             void SetBaseOffsetSize( uint8_t value );
             void SetIndexSize( uint8_t value );
             
-            class Item: public XS::PIMPL::Object< Item >, public DisplayableObject, public DisplayableObjectContainer
+            class ISOBMFF_EXPORT Item: public XS::PIMPL::Object< Item >, public DisplayableObject, public DisplayableObjectContainer
             {
                 public:
                     
@@ -89,7 +89,7 @@ namespace ISOBMFF
                     std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
                     std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
                     
-                    class Extent: public XS::PIMPL::Object< Extent >, public DisplayableObject
+                    class ISOBMFF_EXPORT Extent: public XS::PIMPL::Object< Extent >, public DisplayableObject
                     {
                         public:
                             

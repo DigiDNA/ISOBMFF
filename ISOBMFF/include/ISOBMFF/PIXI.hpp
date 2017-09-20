@@ -55,7 +55,7 @@ namespace ISOBMFF
             virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
             
-            class Channel: public XS::PIMPL::Object< Channel >, public DisplayableObject
+            class ISOBMFF_EXPORT Channel: public XS::PIMPL::Object< Channel >, public DisplayableObject
             {
                 public:
                     

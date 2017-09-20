@@ -54,7 +54,7 @@ namespace ISOBMFF
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
             std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
             
-            class Entry: public XS::PIMPL::Object< Entry >, public DisplayableObject, public DisplayableObjectContainer
+            class ISOBMFF_EXPORT Entry: public XS::PIMPL::Object< Entry >, public DisplayableObject, public DisplayableObjectContainer
             {
                 public:
                     
@@ -73,7 +73,7 @@ namespace ISOBMFF
                     std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
                     std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
                     
-                    class Association: public XS::PIMPL::Object< Association >, public DisplayableObject
+                    class ISOBMFF_EXPORT Association: public XS::PIMPL::Object< Association >, public DisplayableObject
                     {
                         public:
                             

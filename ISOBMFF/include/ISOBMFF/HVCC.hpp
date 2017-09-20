@@ -90,7 +90,7 @@ namespace ISOBMFF
             void SetTemporalIdNested( uint8_t value );
             void SetLengthSizeMinusOne( uint8_t value );
             
-            class Array: public XS::PIMPL::Object< Array >, public DisplayableObject, public DisplayableObjectContainer
+            class ISOBMFF_EXPORT Array: public XS::PIMPL::Object< Array >, public DisplayableObject, public DisplayableObjectContainer
             {
                 public:
                     
@@ -112,7 +112,7 @@ namespace ISOBMFF
                     virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
                     virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
                     
-                    class NALUnit: public XS::PIMPL::Object< NALUnit >, public DisplayableObject
+                    class ISOBMFF_EXPORT NALUnit: public XS::PIMPL::Object< NALUnit >, public DisplayableObject
                     {
                         public:
                             
