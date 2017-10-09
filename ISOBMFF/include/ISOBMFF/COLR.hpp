@@ -34,6 +34,8 @@
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Box.hpp>
 #include <string>
+#include <cstdint>
+#include <vector>
 
 namespace ISOBMFF
 {
@@ -48,8 +50,19 @@ namespace ISOBMFF
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
             
-            std::string GetColourType( void ) const;
-            void        SetColourType( const std::string & value );
+            std::string            GetColourType( void )              const;
+            uint16_t               GetColourPrimaries( void )         const;
+            uint16_t               GetTransferCharacteristics( void ) const;
+            uint16_t               GetMatrixCoefficients( void )      const;
+            bool                   GetFullRangeFlag( void )           const;
+            std::vector< uint8_t > GetICCProfile( void )              const;
+            
+            void SetColourType( const std::string & value );
+            void SetColourPrimaries( uint16_t value );
+            void SetTransferCharacteristics( uint16_t value );
+            void SetMatrixCoefficients( uint16_t value );
+            void SetFullRangeFlag( bool value );
+            void SetICCProfile( const std::vector< uint8_t > & value );
     };
 }
 
