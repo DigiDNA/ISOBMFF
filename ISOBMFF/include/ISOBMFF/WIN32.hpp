@@ -36,10 +36,10 @@
 namespace ISOBMFF
 {
     #ifdef _WIN32
-
-	ISOBMFF_EXPORT std::string  WideStringToString( const std::wstring & ws );
-	ISOBMFF_EXPORT std::wstring StringToWideString( const std::string  & s );
-
+    
+    ISOBMFF_EXPORT std::string  WideStringToString( const std::wstring & ws );
+    ISOBMFF_EXPORT std::wstring StringToWideString( const std::string  & s );
+    
     #endif
 }
 

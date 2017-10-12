@@ -28,50 +28,53 @@
  */
 
 #include <ISOBMFF/WIN32.hpp>
-#include <Windows.h>
 #include <vector>
+
+#ifdef _WIN32
+#include <Windows.h>
+#endif
 
 namespace ISOBMFF
 {
     #ifdef _WIN32
 
-	std::string WideStringToString( const std::wstring & ws )
-	{
-		std::string         s;
-		int                 l;
-		std::vector< char > v;
-
-		l = WideCharToMultiByte( CP_UTF8, 0, ws.c_str(), -1, 0, 0, 0, 0 );
-		
-		if( l  > 0)
-		{
-			v = std::vector< char >( l );
-
-			WideCharToMultiByte( CP_UTF8, 0, ws.c_str(), -1, &( v[ 0 ] ), l, 0, 0 );
-			s.assign( v.begin(), v.end() - 1 );
-		}
-
-		return s;
-	}
-
-	std::wstring StringToWideString( const std::string & s )
-	{
-		std::wstring           ws;
-		int                    l;
-		std::vector< wchar_t > v;
-
-		l = MultiByteToWideChar( CP_UTF8, 0, s.c_str(), -1, 0, 0 );
-
-		if( l > 0 )
-		{
-			v = std::vector< wchar_t >( l );
-
-			MultiByteToWideChar( CP_UTF8, 0, s.c_str(), -1, &( v[ 0 ] ), l );
-			ws.assign( v.begin(), v.end() - 1 );
-		}
-
-		return ws;
-	}
-
+    std::string WideStringToString( const std::wstring & ws )
+    {
+        std::string         s;
+        int                 l;
+        std::vector< char > v;
+        
+        l = WideCharToMultiByte( CP_UTF8, 0, ws.c_str(), -1, 0, 0, 0, 0 );
+        
+        if( l  > 0)
+        {
+            v = std::vector< char >( l );
+            
+            WideCharToMultiByte( CP_UTF8, 0, ws.c_str(), -1, &( v[ 0 ] ), l, 0, 0 );
+            s.assign( v.begin(), v.end() - 1 );
+        }
+        
+        return s;
+    }
+    
+    std::wstring StringToWideString( const std::string & s )
+    {
+        std::wstring           ws;
+        int                    l;
+        std::vector< wchar_t > v;
+        
+        l = MultiByteToWideChar( CP_UTF8, 0, s.c_str(), -1, 0, 0 );
+        
+        if( l > 0 )
+        {
+            v = std::vector< wchar_t >( l );
+            
+            MultiByteToWideChar( CP_UTF8, 0, s.c_str(), -1, &( v[ 0 ] ), l );
+            ws.assign( v.begin(), v.end() - 1 );
+        }
+        
+        return ws;
+    }
+    
     #endif
 }
