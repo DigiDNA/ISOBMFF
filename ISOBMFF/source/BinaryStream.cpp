@@ -32,6 +32,10 @@
 #include <cmath>
 #include <cstdint>
 
+#ifdef _WIN32
+#include <ISOBMFF/WIN32.hpp>
+#endif
+
 template<>
 class XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL
 {
@@ -560,7 +564,11 @@ XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( void )
 XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const std::string & path ):
     _path( path )
 {
+	#ifdef _WIN32
+	this->_stream.open( ISOBMFF::StringToWideString( path ), std::ios::binary );
+	#else
     this->_stream.open( path, std::ios::binary );
+	#endif
 }
 
 XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const std::vector< uint8_t > & bytes ):
@@ -575,8 +583,12 @@ XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const IMPL & o ):
     
     if( o._stream.is_open() )
     {
-        this->_stream.open( this->_path );
-        
+		#ifdef _WIN32
+		this->_stream.open( ISOBMFF::StringToWideString( this->_path ), std::ios::binary );
+		#else
+        this->_stream.open( this->_path, std::ios::binary );
+		#endif
+
         if( this->_stream.good() == false )
         {
             return;
