@@ -132,6 +132,9 @@
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\STSD.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\WIN32.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\ISOBMFF\source\BinaryStream.cpp">
@@ -264,6 +267,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\ISOBMFF\source\STSD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISOBMFF\source\WIN32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

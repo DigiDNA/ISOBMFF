@@ -58,6 +58,7 @@
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\URL.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\URN.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\Utils.hpp" />
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\WIN32.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\ISOBMFF\source\BinaryStream.cpp" />
@@ -104,6 +105,7 @@
     <ClCompile Include="..\ISOBMFF\source\URL.cpp" />
     <ClCompile Include="..\ISOBMFF\source\URN.cpp" />
     <ClCompile Include="..\ISOBMFF\source\Utils.cpp" />
+    <ClCompile Include="..\ISOBMFF\source\WIN32.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{756EDB4D-E04C-4397-A7EF-FA62E8A45F39}</ProjectGuid>
