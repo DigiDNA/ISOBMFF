@@ -69,5 +69,9 @@
 #include <ISOBMFF/ImageGrid.hpp>
 #include <ISOBMFF/STSD.hpp>
 
+#ifdef _WIN32
+#include <ISOBMFF/WIN32.hpp>
+#endif
+
 #endif /* ISOBMFF_HPP */
 
