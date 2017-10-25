@@ -23,57 +23,68 @@
  ******************************************************************************/
 
 /*!
- * @header      ISOBMFF.hpp
+ * @file        FRMA.cpp
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
  */
 
-#ifndef ISOBMFF_HPP
-#define ISOBMFF_HPP
-
-#include <ISOBMFF/Macros.hpp>
-#include <ISOBMFF/Utils.hpp>
-#include <ISOBMFF/Parser.hpp>
-#include <ISOBMFF/BinaryStream.hpp>
-#include <ISOBMFF/DisplayableObject.hpp>
-#include <ISOBMFF/DisplayableObjectContainer.hpp>
-#include <ISOBMFF/Box.hpp>
-#include <ISOBMFF/FullBox.hpp>
-#include <ISOBMFF/Container.hpp>
-#include <ISOBMFF/ContainerBox.hpp>
-#include <ISOBMFF/File.hpp>
-#include <ISOBMFF/Matrix.hpp>
-#include <ISOBMFF/FTYP.hpp>
-#include <ISOBMFF/MVHD.hpp>
-#include <ISOBMFF/TKHD.hpp>
-#include <ISOBMFF/META.hpp>
-#include <ISOBMFF/HDLR.hpp>
-#include <ISOBMFF/PITM.hpp>
-#include <ISOBMFF/IINF.hpp>
-#include <ISOBMFF/DREF.hpp>
-#include <ISOBMFF/URL.hpp>
-#include <ISOBMFF/URN.hpp>
-#include <ISOBMFF/ILOC.hpp>
-#include <ISOBMFF/IREF.hpp>
-#include <ISOBMFF/INFE.hpp>
-#include <ISOBMFF/IROT.hpp>
-#include <ISOBMFF/HVCC.hpp>
-#include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
-#include <ISOBMFF/DIMG.hpp>
-#include <ISOBMFF/THMB.hpp>
-#include <ISOBMFF/CDSC.hpp>
-#include <ISOBMFF/COLR.hpp>
-#include <ISOBMFF/ISPE.hpp>
-#include <ISOBMFF/IPMA.hpp>
-#include <ISOBMFF/PIXI.hpp>
-#include <ISOBMFF/IPCO.hpp>
-#include <ISOBMFF/ImageGrid.hpp>
-#include <ISOBMFF/STSD.hpp>
 #include <ISOBMFF/FRMA.hpp>
-#include <ISOBMFF/SCHM.hpp>
+#include <ISOBMFF/Parser.hpp>
+#include <ISOBMFF/Utils.hpp>
 
-#ifdef _WIN32
-#include <ISOBMFF/WIN32.hpp>
-#endif
+template<>
+class XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL
+{
+    public:
+        
+        IMPL( void );
+        IMPL( const IMPL & o );
+        ~IMPL( void );
+        
+        std::string _dataFormat;
+};
 
-#endif /* ISOBMFF_HPP */
+#define XS_PIMPL_CLASS ISOBMFF::FRMA
+#include <XS/PIMPL/Object-IMPL.hpp>
+
+namespace ISOBMFF
+{
+    FRMA::FRMA( void ): Box( "frma" )
+    {}
+    
+    void FRMA::ReadData( Parser & parser, BinaryStream & stream )
+    {
+        ( void )parser;
+        
+        this->SetDataFormat( stream.ReadFourCC() );
+    }
+    
+    std::vector< std::pair< std::string, std::string > > FRMA::GetDisplayableProperties( void ) const
+    {
+        auto props( Box::GetDisplayableProperties() );
+        
+        props.push_back( { "Data format", this->GetDataFormat() } );
+        
+        return props;
+    }
+    
+    std::string FRMA::GetDataFormat( void ) const
+    {
+        return this->impl->_dataFormat;
+    }
+    
+    void FRMA::SetDataFormat( const std::string & value )
+    {
+        this->impl->_dataFormat = value;
+    }
+}
+
+XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL::IMPL( void )
+{}
+
+XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL::IMPL( const IMPL & o ):
+    _dataFormat( o._dataFormat )
+{}
+
+XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL::~IMPL( void )
+{}
 

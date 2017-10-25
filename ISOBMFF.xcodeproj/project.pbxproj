@@ -30,6 +30,7 @@
 		057280AD1F5F44A100F02C27 /* IROT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057280AC1F5F44A000F02C27 /* IROT.cpp */; };
 		057759001F67BFA300987694 /* ISOBMFF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 057758FF1F67BFA300987694 /* ISOBMFF.hpp */; };
 		05812A4C1FA0BCB1003B88DF /* FRMA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05812A4B1FA0BCB1003B88DF /* FRMA.cpp */; };
+		05812A4F1FA0BEA7003B88DF /* SCHM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05812A4E1FA0BEA6003B88DF /* SCHM.cpp */; };
 		0594C5D91F71541100456FF5 /* STSD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0594C5D51F71541000456FF5 /* STSD.cpp */; };
 		0596059C1F5DC4CE0005F8C9 /* ContainerBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059B1F5DC4CE0005F8C9 /* ContainerBox.cpp */; };
 		0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0596059D1F5DC4D50005F8C9 /* FullBox.cpp */; };
@@ -179,6 +180,8 @@
 		057759011F67CF6500987694 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		05812A461FA0BC9A003B88DF /* FRMA.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FRMA.hpp; sourceTree = "<group>"; };
 		05812A4B1FA0BCB1003B88DF /* FRMA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FRMA.cpp; sourceTree = "<group>"; };
+		05812A4D1FA0BE9B003B88DF /* SCHM.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SCHM.hpp; sourceTree = "<group>"; };
+		05812A4E1FA0BEA6003B88DF /* SCHM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SCHM.cpp; sourceTree = "<group>"; };
 		0583F5A21F6CEB7400D5D49E /* Macros.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Macros.hpp; sourceTree = "<group>"; };
 		0594C5D51F71541000456FF5 /* STSD.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = STSD.cpp; sourceTree = "<group>"; };
 		0594C5DA1F71542100456FF5 /* STSD.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = STSD.hpp; sourceTree = "<group>"; };
@@ -343,6 +346,7 @@
 				057280751F5ED7CE00F02C27 /* PITM.cpp */,
 				055D9AF71F666B880056DE16 /* PIXI-Channel.cpp */,
 				055D9AF61F666B880056DE16 /* PIXI.cpp */,
+				05812A4E1FA0BEA6003B88DF /* SCHM.cpp */,
 				05BFECD41F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp */,
 				0594C5D51F71541000456FF5 /* STSD.cpp */,
 				05BFECE41F62F04D00A6909E /* THMB.cpp */,
@@ -389,6 +393,7 @@
 				05F471DC1F2B5CE500738744 /* Parser.hpp */,
 				057280701F5ED7C200F02C27 /* PITM.hpp */,
 				055D9AF11F666B640056DE16 /* PIXI.hpp */,
+				05812A4D1FA0BE9B003B88DF /* SCHM.hpp */,
 				05BFECD91F62EE2F00A6909E /* SingleItemTypeReferenceBox.hpp */,
 				0594C5DA1F71542100456FF5 /* STSD.hpp */,
 				05BFECDB1F62EFDB00A6909E /* THMB.hpp */,
@@ -632,6 +637,7 @@
 				05BFECE51F62F04D00A6909E /* CDSC.cpp in Sources */,
 				05BFECE71F62F04D00A6909E /* THMB.cpp in Sources */,
 				051F4D3B1F5DDCFE00E6E12C /* BinaryStream.cpp in Sources */,
+				05812A4F1FA0BEA7003B88DF /* SCHM.cpp in Sources */,
 				05BFECD81F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp in Sources */,
 				0531FB0A1F5FF45700BCD30D /* HVCC.cpp in Sources */,
 				05BFED131F638E4B00A6909E /* IPMA-Entry-Association.cpp in Sources */,
