@@ -131,7 +131,7 @@ namespace ISOBMFF
         catch( ... )
         {}
         
-        if( strncmp( n, "ftyp", 4 ) != 0 )
+        if( strncmp( n, "ftyp", 4 ) != 0 && strncmp( n, "sinf", 4 ) != 0 )
         {
             throw std::runtime_error( std::string( "File is not an ISO media file: " ) + path );
         }
