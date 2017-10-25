@@ -71,7 +71,7 @@ namespace ISOBMFF
         
         if( iloc.GetVersion() == 1 || iloc.GetVersion() == 2 )
         {
-            this->SetConstructionMethod( static_cast< uint8_t >( stream.ReadBigEndianUInt16() & 0xFF ) );
+            this->SetConstructionMethod( static_cast< uint8_t >( stream.ReadBigEndianUInt16() & 0xF ) );
         }
         
         this->SetDataReferenceIndex( stream.ReadBigEndianUInt16() );

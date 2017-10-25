@@ -55,7 +55,7 @@ namespace ISOBMFF
     ILOC::Item::Extent::Extent( BinaryStream & stream, const ILOC & iloc ):
         XS::PIMPL::Object< Extent >()
     {
-        if( iloc.GetVersion() == 1 || iloc.GetVersion() == 2 )
+        if( ( iloc.GetVersion() == 1 || iloc.GetVersion() == 2 ) && iloc.GetIndexSize() > 0 )
         {
             if( iloc.GetIndexSize() == 2 )
             {
@@ -69,32 +69,32 @@ namespace ISOBMFF
             {
                 this->SetIndex( stream.ReadBigEndianUInt64() );
             }
+        }
+        
+        if( iloc.GetOffsetSize() == 2 )
+        {
+            this->SetOffset( stream.ReadBigEndianUInt16() );
+        }
+        else if( iloc.GetOffsetSize() == 4 )
+        {
+            this->SetOffset( stream.ReadBigEndianUInt32() );
+        }
+        else if( iloc.GetOffsetSize() == 8 )
+        {
+            this->SetOffset( stream.ReadBigEndianUInt64() );
+        }
             
-            if( iloc.GetOffsetSize() == 2 )
-            {
-                this->SetOffset( stream.ReadBigEndianUInt16() );
-            }
-            else if( iloc.GetOffsetSize() == 4 )
-            {
-                this->SetOffset( stream.ReadBigEndianUInt32() );
-            }
-            else if( iloc.GetOffsetSize() == 8 )
-            {
-                this->SetOffset( stream.ReadBigEndianUInt64() );
-            }
-            
-            if( iloc.GetLengthSize() == 2 )
-            {
-                this->SetLength( stream.ReadBigEndianUInt16() );
-            }
-            else if( iloc.GetLengthSize() == 4 )
-            {
-                this->SetLength( stream.ReadBigEndianUInt32() );
-            }
-            else if( iloc.GetLengthSize() == 8 )
-            {
-                this->SetLength( stream.ReadBigEndianUInt64() );
-            }
+        if( iloc.GetLengthSize() == 2 )
+        {
+            this->SetLength( stream.ReadBigEndianUInt16() );
+        }
+        else if( iloc.GetLengthSize() == 4 )
+        {
+            this->SetLength( stream.ReadBigEndianUInt32() );
+        }
+        else if( iloc.GetLengthSize() == 8 )
+        {
+            this->SetLength( stream.ReadBigEndianUInt64() );
         }
     }
     
