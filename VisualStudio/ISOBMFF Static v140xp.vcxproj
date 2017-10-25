@@ -31,6 +31,7 @@
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\DisplayableObjectContainer.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\DREF.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\File.hpp" />
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\FRMA.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\FTYP.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\FullBox.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\HDLR.hpp" />
@@ -51,6 +52,7 @@
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\Parser.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\PITM.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\PIXI.hpp" />
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\SCHM.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\SingleItemTypeReferenceBox.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\STSD.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\THMB.hpp" />
@@ -98,6 +100,7 @@
     <ClCompile Include="..\ISOBMFF\source\PITM.cpp" />
     <ClCompile Include="..\ISOBMFF\source\PIXI-Channel.cpp" />
     <ClCompile Include="..\ISOBMFF\source\PIXI.cpp" />
+    <ClCompile Include="..\ISOBMFF\source\SCHM.cpp" />
     <ClCompile Include="..\ISOBMFF\source\SingleItemTypeReferenceBox.cpp" />
     <ClCompile Include="..\ISOBMFF\source\STSD.cpp" />
     <ClCompile Include="..\ISOBMFF\source\THMB.cpp" />

@@ -135,6 +135,12 @@
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\WIN32.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\FRMA.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\SCHM.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\ISOBMFF\source\BinaryStream.cpp">
@@ -270,6 +276,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\ISOBMFF\source\WIN32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISOBMFF\source\FRMA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISOBMFF\source\SCHM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
