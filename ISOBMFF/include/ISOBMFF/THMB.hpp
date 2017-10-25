@@ -1,7 +1,7 @@
 /*******************************************************************************
  * The MIT License (MIT)
  * 
- * Copyright (c) 2017 Jean-David Gadina - www.xs-labs.com / www.imazing.com
+ * Copyright (c) 2017 DigiDNA - www.digidna.net
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,8 @@
 
 /*!
  * @header      THMB.hpp
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com / www.imazing.com
+ * @copyright   (c) 2017, DigiDNA - www.digidna.net
+ * @author      Jean-David Gadina - www.digidna.net
  */
 
 #ifndef ISOBMFF_THMB_HPP

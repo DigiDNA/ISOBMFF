@@ -1,15 +1,12 @@
 ISOBMFF
 =======
 
-[![Build Status](https://img.shields.io/travis/macmade/ISOBMFF.svg?branch=master&style=flat)](https://travis-ci.org/macmade/ISOBMFF)
-[![Coverage Status](https://img.shields.io/coveralls/macmade/ISOBMFF.svg?branch=master&style=flat)](https://coveralls.io/r/macmade/ISOBMFF?branch=master)
-[![Issues](http://img.shields.io/github/issues/macmade/ISOBMFF.svg?style=flat)](https://github.com/macmade/ISOBMFF/issues)
+[![Build Status](https://img.shields.io/travis/DigiDNA/ISOBMFF.svg?branch=master&style=flat)](https://travis-ci.org/DigiDNA/ISOBMFF)
+[![Coverage Status](https://img.shields.io/coveralls/DigiDNA/ISOBMFF.svg?branch=master&style=flat)](https://coveralls.io/r/DigiDNA/ISOBMFF?branch=master)
+[![Issues](http://img.shields.io/github/issues/DigiDNA/ISOBMFF.svg?style=flat)](https://github.com/DigiDNA/ISOBMFF/issues)
 ![Status](https://img.shields.io/badge/status-active-brightgreen.svg?style=flat)
-![License](https://img.shields.io/badge/license-boost-brightgreen.svg?style=flat)
-[![Contact](https://img.shields.io/badge/contact-@macmade-blue.svg?style=flat)](https://twitter.com/macmade)  
-[![Donate-Patreon](https://img.shields.io/badge/donate-patreon-yellow.svg?style=flat)](https://patreon.com/macmade)
-[![Donate-Gratipay](https://img.shields.io/badge/donate-gratipay-yellow.svg?style=flat)](https://www.gratipay.com/macmade)
-[![Donate-Paypal](https://img.shields.io/badge/donate-paypal-yellow.svg?style=flat)](https://paypal.me/xslabs)
+![License](https://img.shields.io/badge/license-mit-brightgreen.svg?style=flat)
+[![Contact](https://img.shields.io/badge/contact-@DigiDNA-blue.svg?style=flat)](https://twitter.com/DigiDNA)  
 
 C++ Library for ISO/IEC 14496-12 - ISO Base Media File Format (QuickTime, MPEG-4, HEIF, etc)
 --------------------------------------------------------------------------------------------
@@ -28,10 +25,6 @@ The ISO Base Media File Format is a container format, used by many file types, i
  - ... and many others
  
 Support for editing/writing files is not available at the moment, but the library has been designed for this goal in mind, so writing support will eventually become available.
- 
-### GUI Screenshots
-
-![Screenshot 1](Assets/Screen-1.png "Screenshot 1")
 
 ### Building
 
@@ -50,8 +43,10 @@ An VisualStudio solution is provided for convenience, containing the following t
 
  - `ISOBMFF Static v120xp`: A static library built with the V120XP toolset (VS 2013)
  - `ISOBMFF Static v140xp`: A static library built with the V140XP toolset (VS 2015)
+ - `ISOBMFF Static v141xp`: A static library built with the V141XP toolset (VS 2017)
  - `ISOBMFF DLL v120xp`: A dynamic library (DLL) built with the V120XP toolset (VS 2013)
  - `ISOBMFF DLL v140xp`: A dynamic library (DLL) built with the V140XP toolset (VS 2015)
+ - `ISOBMFF DLL v141xp`: A dynamic library (DLL) built with the V141XP toolset (VS 2017)
  - `ISOBMFF-Dump`: A cross-platform command-line utility for dumping files.
 
 #### Linux/Unix
@@ -141,10 +136,8 @@ License
 Repository Infos
 ----------------
 
-    Owner:          Jean-David Gadina - XS-Labs
-    Web:            www.xs-labs.com
-    Blog:           www.noxeos.com
-    Twitter:        @macmade
-    GitHub:         github.com/macmade
-    LinkedIn:       ch.linkedin.com/in/macmade/
-    StackOverflow:  stackoverflow.com/users/182676/macmade
+    Owner:          DigiDNA
+    Web:            www.digidna.net
+    Blog:           imazing.com/blog
+    Twitter:        @DigiDNA
+    GitHub:         github.com/DigiDNA
