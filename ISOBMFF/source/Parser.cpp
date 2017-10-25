@@ -54,6 +54,7 @@
 #include <ISOBMFF/PIXI.hpp>
 #include <ISOBMFF/IPCO.hpp>
 #include <ISOBMFF/STSD.hpp>
+#include <ISOBMFF/FRMA.hpp>
 #include <map>
 #include <stdexcept>
 
@@ -300,4 +301,5 @@ void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterBox( "pixi", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::PIXI >(); } );
     this->RegisterBox( "ipco", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IPCO >(); } );
     this->RegisterBox( "stsd", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::STSD >(); } );
+    this->RegisterBox( "frma", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::FRMA >(); } );
 }
