@@ -1,0 +1,7 @@
+language: cpp
+osx_image: xcode9.1
+script:
+    - if [ "$TRAVIS_OS_NAME" == "osx" ];   then xcodebuild build -project ISOBMFF.xcodeproj -scheme ISOBMFF-Dump; fi
+    - if [ "$TRAVIS_OS_NAME" == "linux" ]; then make; fi
+notifications:
+    slack: digidna:JnibNY2kbGTqfDWH33jMdcMj
