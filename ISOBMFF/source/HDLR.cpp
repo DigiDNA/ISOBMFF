@@ -67,7 +67,12 @@ namespace ISOBMFF
         this->impl->_reserved[ 1 ] = stream.ReadBigEndianUInt32();
         this->impl->_reserved[ 2 ] = stream.ReadBigEndianUInt32();
         
-        if( parser.GetPreferredStringType() == Parser::StringType::Pascal )
+        if
+        (
+               parser.GetPreferredStringType() == Parser::StringType::Pascal
+            || this->impl->_predefined         == 1835560050 /* mhlr */
+            || this->impl->_reserved[ 0 ]      == 1634758764 /* appl */
+        )
         {
             this->SetHandlerName( stream.ReadPascalString() );
         }
