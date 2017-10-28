@@ -44,19 +44,52 @@ namespace ISOBMFF
 {
     class Parser;
     
+    /*!
+     * @class       Box
+     * @abstract    Base interface for ISOBMFF boxes.
+     */
     class ISOBMFF_EXPORT Box: public XS::PIMPL::Object< Box >, public DisplayableObject
     {
         public:
             
             using XS::PIMPL::Object< Box >::impl;
             
+            /*!
+             * @function    Box
+             * @abstract    Constructor
+             * @param       name    The name of the box.
+             */
             Box( const std::string & name );
             
+            /*!
+             * @function    GetName
+             * @abstract    Gets the box name.
+             * @result      The box name.
+             */
             std::string GetName( void ) const override;
             
+            /*!
+             * @function    GetDisplayableProperties
+             * @abstract    Gets the box displayable properties.
+             * @result      The box displayable properties.
+             * @see         DisplayableObject
+             */
             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
             
-            virtual void                   ReadData( Parser & parser, BinaryStream & stream );
+            /*!
+             * @function    ReadData
+             * @abstract    Reads box data from a stream.
+             * @param       parser  The parser currently being used.
+             * @param       stream  The binary stream from which to read the box data.
+             * @discussion  Reading will discard all previous box data.
+             */
+            virtual void ReadData( Parser & parser, BinaryStream & stream );
+            
+            /*!
+             * @function    GetData
+             * @abstract    Gets the box data.
+             * @result      The box data, as a vector of bytes.
+             */
             virtual std::vector< uint8_t > GetData( void ) const;
     };
 }

@@ -52,7 +52,7 @@ namespace ISOBMFF
             void WriteBoxes( std::ostream & os, std::size_t indentLevel ) const;
             
             std::vector< std::shared_ptr< Box > > GetBoxes( const std::string & name ) const;
-            std::shared_ptr< Box >                GetBox( const std::string & name )                  const;
+            std::shared_ptr< Box >                GetBox( const std::string & name )   const;
             
             template< class _T_ >
             std::shared_ptr< _T_ > GetTypedBox( const std::string & name ) const
