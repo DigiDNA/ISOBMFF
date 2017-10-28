@@ -37,6 +37,8 @@
 		059DBAD21F5EBC1000B7A940 /* HDLR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 059DBACE1F5EBC1000B7A940 /* HDLR.cpp */; };
 		05A50AB51F604C3000EE8C08 /* ImageGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05A50AB41F604C2F00EE8C08 /* ImageGrid.cpp */; };
 		05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05A5A76B1F5EAFAE00D16AD9 /* META.cpp */; };
+		05B8BB8B1FA4BFB200C67878 /* WIN32.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05B8BB871FA4BFB100C67878 /* WIN32.hpp */; };
+		05B8BB8D1FA4BFC300C67878 /* WIN32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05B8BB8C1FA4BFC300C67878 /* WIN32.cpp */; };
 		05BFECD81F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFECD41F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp */; };
 		05BFECE51F62F04D00A6909E /* CDSC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFECE21F62F04D00A6909E /* CDSC.cpp */; };
 		05BFECE61F62F04D00A6909E /* DIMG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFECE31F62F04D00A6909E /* DIMG.cpp */; };
@@ -196,6 +198,8 @@
 		05A50AB61F604C3800EE8C08 /* ImageGrid.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageGrid.hpp; sourceTree = "<group>"; };
 		05A5A7651F5EAF9A00D16AD9 /* META.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = META.hpp; sourceTree = "<group>"; };
 		05A5A76B1F5EAFAE00D16AD9 /* META.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = META.cpp; sourceTree = "<group>"; };
+		05B8BB871FA4BFB100C67878 /* WIN32.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WIN32.hpp; sourceTree = "<group>"; };
+		05B8BB8C1FA4BFC300C67878 /* WIN32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WIN32.cpp; sourceTree = "<group>"; };
 		05BFECD41F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SingleItemTypeReferenceBox.cpp; sourceTree = "<group>"; };
 		05BFECD91F62EE2F00A6909E /* SingleItemTypeReferenceBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SingleItemTypeReferenceBox.hpp; sourceTree = "<group>"; };
 		05BFECDB1F62EFDB00A6909E /* THMB.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = THMB.hpp; sourceTree = "<group>"; };
@@ -354,6 +358,7 @@
 				05BFED001F62F7F200A6909E /* URL.cpp */,
 				05BFED031F62F88700A6909E /* URN.cpp */,
 				05EAD38F1F65B345003CCB9B /* Utils.cpp */,
+				05B8BB8C1FA4BFC300C67878 /* WIN32.cpp */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 				05BFECE81F62F7E200A6909E /* URL.hpp */,
 				05BFED021F62F88100A6909E /* URN.hpp */,
 				05EAD38B1F65B33C003CCB9B /* Utils.hpp */,
+				05B8BB871FA4BFB100C67878 /* WIN32.hpp */,
 			);
 			path = ISOBMFF;
 			sourceTree = "<group>";
@@ -450,6 +456,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05B8BB8B1FA4BFB200C67878 /* WIN32.hpp in Headers */,
 				057759001F67BFA300987694 /* ISOBMFF.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -600,6 +607,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0572808A1F5EDBCF00F02C27 /* DREF.cpp in Sources */,
+				05B8BB8D1FA4BFC300C67878 /* WIN32.cpp in Sources */,
 				059DBAD21F5EBC1000B7A940 /* HDLR.cpp in Sources */,
 				051F4D491F5E0AD500E6E12C /* MVHD.cpp in Sources */,
 				0596059E1F5DC4D50005F8C9 /* FullBox.cpp in Sources */,

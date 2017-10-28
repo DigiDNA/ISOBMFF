@@ -38,7 +38,22 @@ namespace ISOBMFF
 {
     #ifdef _WIN32
     
+    /*!
+     * @function    WideStringToString
+     * @abstract    Converts a wide-string to a string.
+     * @param       ws  The wide-string to convert.
+     * @result      The converted string.
+     * @discussion  Windows only, as conversion is necessary for file streams.
+     */
     ISOBMFF_EXPORT std::string  WideStringToString( const std::wstring & ws );
+    
+    /*!
+     * @function    StringToWideString
+     * @abstract    Converts a string to a wide-string.
+     * @param       ws  The string to convert.
+     * @result      The converted wide-string.
+     * @discussion  Windows only, as conversion is necessary for file streams.
+     */
     ISOBMFF_EXPORT std::wstring StringToWideString( const std::string  & s );
     
     #endif

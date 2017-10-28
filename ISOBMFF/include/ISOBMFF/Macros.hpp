@@ -40,6 +40,10 @@
 #pragma warning( disable: 4251 )
 #endif
 
+/*!
+ * @define      ISOBMFF_EXPORT
+ * @abstract    Used to export public functions.
+ */
 #if defined( _WIN32 ) && defined( ISOBMFF_DLL_BUILD )
 #define ISOBMFF_EXPORT __declspec( dllexport )
 #elif defined( _WIN32 ) && defined( ISOBMFF_LIB_BUILD )
@@ -50,6 +54,11 @@
 #define ISOBMFF_EXPORT 
 #endif
 
+/*!
+ * @define      ISOBMFF_NOEXCEPT
+ * @abstract    Replacement for the C++ `noexcept` keyword, not supported by all compilers.
+ * @param       _a_ If `_a_` evaluates to true, the function is declared to not throw any exceptions.
+ */
 #ifndef _MSC_VER
 #define ISOBMFF_NOEXCEPT( _a_ ) noexcept( _a_ )
 #else
