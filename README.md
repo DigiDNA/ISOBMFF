@@ -14,7 +14,7 @@ C++ Library for ISO/IEC 14496-12 - ISO Base Media File Format (QuickTime, MPEG-4
 About
 -----
 
-**ISOBMFF** is a C++ library for reading/parsing files in the _**ISO Base Media File Format**_ (ISO/IEC 14496-12).
+**ISOBMFF** is a cross-platform C++ library for reading/parsing files in the _**ISO Base Media File Format**_ (ISO/IEC 14496-12).
 
 The ISO Base Media File Format is a container format, used by many file types, including:
 
@@ -26,9 +26,20 @@ The ISO Base Media File Format is a container format, used by many file types, i
  
 Support for editing/writing files is not available at the moment, but the library has been designed for this goal in mind, so writing support will eventually become available.
 
-### Building
+### ISO Base Media File Format
 
-#### macOS
+> ISO base media file format (ISO/IEC 14496-12 - MPEG-4 Part 12) defines a general structure for time-based multimedia files such as video and audio.
+> It is designed as a flexible, extensible format that facilitates interchange, management, editing and presentation of the media.  
+> The presentation may be local, or via a network or other stream delivery mechanism.  
+> The file format is designed to be independent of any particular network protocol while enabling support for them in general.  
+> It is used as the basis for other media file formats (e.g. container formats MP4 and 3GP).
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/ISO_base_media_file_format)
+
+Building
+--------
+
+### macOS
 
 An Xcode project is provided for convenience, containing the following targets:
 
@@ -37,7 +48,7 @@ An Xcode project is provided for convenience, containing the following targets:
 
 Note that you can also build the library with `make`, on the command line.
 
-#### Windows
+### Windows
 
 An VisualStudio solution is provided for convenience, containing the following targets:
 
@@ -49,11 +60,12 @@ An VisualStudio solution is provided for convenience, containing the following t
  - `ISOBMFF DLL v141xp`: A dynamic library (DLL) built with the V141XP toolset (VS 2017)
  - `ISOBMFF-Dump`: A cross-platform command-line utility for dumping files.
 
-#### Linux/Unix
+### Linux/Unix
 
 The library can be build with `make`, on the command line.
 
-### Library Usage
+Library Usage
+-------------
 
 Parsing is done with the `ISOBMFF::Parser` class:
 
