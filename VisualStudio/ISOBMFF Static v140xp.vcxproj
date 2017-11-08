@@ -74,6 +74,7 @@
     <ClCompile Include="..\ISOBMFF\source\DisplayableObjectContainer.cpp" />
     <ClCompile Include="..\ISOBMFF\source\DREF.cpp" />
     <ClCompile Include="..\ISOBMFF\source\File.cpp" />
+    <ClCompile Include="..\ISOBMFF\source\FRMA.cpp" />
     <ClCompile Include="..\ISOBMFF\source\FTYP.cpp" />
     <ClCompile Include="..\ISOBMFF\source\FullBox.cpp" />
     <ClCompile Include="..\ISOBMFF\source\HDLR.cpp" />

@@ -281,5 +281,8 @@
     <ClCompile Include="..\ISOBMFF\source\SCHM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\ISOBMFF\source\FRMA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
