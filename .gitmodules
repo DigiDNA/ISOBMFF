@@ -7,3 +7,6 @@
 [submodule "Submodules/makelib"]
 	path = Submodules/makelib
 	url = https://github.com/macmade/makelib.git
+[submodule "Submodules/xcconfig"]
+	path = Submodules/xcconfig
+	url = https://github.com/macmade/xcconfig.git
