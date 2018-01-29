@@ -28,7 +28,7 @@ Support for editing/writing files is not available at the moment, but the librar
 
 ### ISO Base Media File Format
 
-> ISO base media file format (ISO/IEC 14496-12 - MPEG-4 Part 12) defines a general structure for time-based multimedia files such as video and audio.
+> ISO base media file format (ISO/IEC 14496-12 - MPEG-4 Part 12) defines a general structure for time-based multimedia files such as video and audio.  
 > It is designed as a flexible, extensible format that facilitates interchange, management, editing and presentation of the media.  
 > The presentation may be local, or via a network or other stream delivery mechanism.  
 > The file format is designed to be independent of any particular network protocol while enabling support for them in general.  
