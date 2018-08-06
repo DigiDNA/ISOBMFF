@@ -33,6 +33,29 @@
 #include <fstream>
 #include <cstring>
 
+using namespace ISOBMFF;
+
+class CustomBox: public ISOBMFF::Box
+{
+public:
+    
+    CustomBox( void ): Box( "caif" )
+    {}
+    
+    void ReadData( ISOBMFF::Parser & parser, ISOBMFF::BinaryStream & stream )
+    {
+        /* Read box data here... */
+        std::cout << *(parser.GetFile()) << std::endl;
+        stream.DeleteBytes(0);
+    }
+    
+    std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const
+    {
+        /* Returns box properties, to support output... */
+        return {};
+    }
+};
+
 int main( int argc, const char * argv[] )
 {
     ISOBMFF::Parser parser;
@@ -72,6 +95,7 @@ int main( int argc, const char * argv[] )
         try
         {
             parser.AddOption( ISOBMFF::Parser::Options::SkipMDATData );
+            parser.RegisterBox( "caif", [ = ]( void ) -> std::shared_ptr< CustomBox > { return std::make_shared< CustomBox >(); } );
             parser.Parse( path );
         }
         catch( const std::runtime_error & e )
@@ -84,8 +108,13 @@ int main( int argc, const char * argv[] )
             
             return EXIT_FAILURE;
         }
-        
-        std::cout << *( parser.GetFile() ) << std::endl << std::endl;
+        std::shared_ptr< ISOBMFF::File > file = parser.GetFile();
+        std::vector<std::shared_ptr< ISOBMFF::Box > > boxes = file->GetBoxes();
+        for (std::shared_ptr< ISOBMFF::Box > box : boxes)
+        {
+            std::cout << "Box : " << *box << std::endl;
+        }
+        std::cout << *file << std::endl << std::endl;
     }
 
     #if defined( _WIN32 ) && defined( _DEBUG )
