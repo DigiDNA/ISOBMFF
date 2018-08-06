@@ -444,8 +444,11 @@ namespace ISOBMFF
             
             bytes.push_back( b );
         }
-        while( b != 0 );
-        
+        while( b != 0 && this->impl->_bytes.size() > 0);
+        if (b != 0)
+        {
+            bytes.push_back('\0');
+        }
         return std::string( reinterpret_cast< char * >( &( bytes[ 0 ] ) ), bytes.size() );
     }
     
