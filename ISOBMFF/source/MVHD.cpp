@@ -30,6 +30,8 @@
 
 #include <ISOBMFF/MVHD.hpp>
 
+#include <cstring>
+
 template<>
 class XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL
 {

@@ -31,6 +31,8 @@
 #include <ISOBMFF/META.hpp>
 #include <ISOBMFF/ContainerBox.hpp>
 
+#include <cstring>
+
 template<>
 class XS::PIMPL::Object< ISOBMFF::META >::IMPL
 {

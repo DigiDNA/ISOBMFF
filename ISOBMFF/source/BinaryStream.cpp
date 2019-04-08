@@ -32,6 +32,7 @@
 #include <fstream>
 #include <cmath>
 #include <cstdint>
+#include <cstring>
 
 #ifdef _WIN32
 #include <ISOBMFF/WIN32.hpp>
