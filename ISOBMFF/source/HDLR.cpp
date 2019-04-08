@@ -31,6 +31,7 @@
 #include <ISOBMFF/HDLR.hpp>
 #include <ISOBMFF/Parser.hpp>
 #include <cstdint>
+#include <cstring>
 
 template<>
 class XS::PIMPL::Object< ISOBMFF::HDLR >::IMPL

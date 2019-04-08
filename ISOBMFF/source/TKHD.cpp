@@ -30,6 +30,8 @@
 
 #include <ISOBMFF/TKHD.hpp>
 
+#include <cstring>
+
 template<>
 class XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL
 {

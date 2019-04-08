@@ -59,6 +59,7 @@
 #include <ISOBMFF/SCHM.hpp>
 #include <map>
 #include <stdexcept>
+#include <cstring>
 
 template<>
 class XS::PIMPL::Object< ISOBMFF::Parser >::IMPL
