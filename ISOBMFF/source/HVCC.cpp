@@ -126,6 +126,16 @@ namespace ISOBMFF
         
         for( i = 0; i < count; i++ )
         {
+            if( stream.HasBytesAvailable() == false )
+            {
+                /*
+                 * Shouldn't happen in theory, but happens on some files...
+                 * So simply don't process next arrays if we don't have any data
+                 * available...
+                 */
+                break;
+            }
+            
             this->AddArray( std::make_shared< Array >( stream ) );
         }
     }
