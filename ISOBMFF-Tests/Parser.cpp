@@ -29,9 +29,7 @@
  */
 
 #include <ISOBMFF.hpp>
-#include <GoogleMock/GoogleMock.h>
+#include <XSTest/XSTest.hpp>
 
-using namespace testing;
-
-TEST( ISOBMFF_Parser, CTOR )
+XSTest( ISOBMFF_Parser, CTOR )
 {}
