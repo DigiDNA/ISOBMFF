@@ -63,9 +63,9 @@ namespace ISOBMFF
         
         if( this->GetColourType() == "nclx" )
         {
-            this->SetColourPrimaries( stream.ReadUInt16() );
-            this->SetTransferCharacteristics( stream.ReadUInt16() );
-            this->SetMatrixCoefficients( stream.ReadUInt16() );
+            this->SetColourPrimaries( stream.ReadBigEndianUInt16() );
+            this->SetTransferCharacteristics( stream.ReadBigEndianUInt16() );
+            this->SetMatrixCoefficients( stream.ReadBigEndianUInt16() );
             this->SetFullRangeFlag( ( stream.ReadUInt8() & 0x80 ) != 0 );
         }
         else if( this->GetColourType() == "rICC" || this->GetColourType() == "prof" )
