@@ -135,7 +135,17 @@ namespace ISOBMFF
         catch( ... )
         {}
         
-        if( strncmp( n, "ftyp", 4 ) != 0 && strncmp( n, "sinf", 4 ) != 0 )
+        if
+        (
+               memcmp( n, "ftyp", 4 ) != 0
+            && memcmp( n, "sinf", 4 ) != 0
+            && memcmp( n, "wide", 4 ) != 0
+            && memcmp( n, "free", 4 ) != 0
+            && memcmp( n, "skip", 4 ) != 0
+            && memcmp( n, "mdat", 4 ) != 0
+            && memcmp( n, "moov", 4 ) != 0
+            && memcmp( n, "pnot", 4 ) != 0
+        )
         {
             throw std::runtime_error( std::string( "File is not an ISO media file: " ) + path );
         }
