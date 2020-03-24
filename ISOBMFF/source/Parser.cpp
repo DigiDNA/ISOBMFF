@@ -267,7 +267,6 @@ void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
     this->RegisterContainerBox( "moof" );
     this->RegisterContainerBox( "traf" );
     this->RegisterContainerBox( "mfra" );
-    this->RegisterContainerBox( "skip" );
     this->RegisterContainerBox( "meco" );
     this->RegisterContainerBox( "mere" );
     this->RegisterContainerBox( "dinf" );
