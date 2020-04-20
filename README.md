@@ -89,7 +89,7 @@ std::shared_ptr< ISOBMFF::File > file = parser.GetFile();
 Boxes can then be retrieved the following way, from the file:
 
 ```cpp
-std::shared_ptr< ISOBMFF::Box > box = file.GetBox( "ftyp" );
+std::shared_ptr< ISOBMFF::Box > box = file->GetBox( "ftyp" );
 ```
     
 If the box does not exist, it will return `nullptr`.
@@ -97,7 +97,7 @@ If the box does not exist, it will return `nullptr`.
 A typed box can be retrieved the following way:
 
 ```cpp
-std::shared_ptr< ISOBMFF::FTYP > ftyp = file.GetTypedBox< ISOBMFF::FTYP >( "ftyp" );
+std::shared_ptr< ISOBMFF::FTYP > ftyp = file->GetTypedBox< ISOBMFF::FTYP >( "ftyp" );
 ```
 
 Here, `nullptr` will be returned if the box does not exist, or is not of the correct type.
@@ -105,8 +105,8 @@ Here, `nullptr` will be returned if the box does not exist, or is not of the cor
 Container boxes acts just the same:
 
 ```cpp
-std::shared_ptr< ISOBMFF::ContainerBox > moov = file.GetTypedBox< ISOBMFF::ContainerBox >( "moov" );
-std::shared_ptr< ISOBMFF::TRAK         > trak = moov.GetTypedBox< ISOBMFF::TRAK         >( "trak" );
+std::shared_ptr< ISOBMFF::ContainerBox > moov = file->GetTypedBox< ISOBMFF::ContainerBox >( "moov" );
+std::shared_ptr< ISOBMFF::MVHD         > mvhd = moov->GetTypedBox< ISOBMFF::MVHD         >( "mvhd" );
 ```
 
 The parser also supports custom boxes:
