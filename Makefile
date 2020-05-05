@@ -50,7 +50,7 @@ FLAGS_OPTIM         := Os
 FLAGS_WARN          := -Werror -Wall
 FLAGS_STD_C         := c99
 FLAGS_STD_CPP       := c++11
-FLAGS_OTHER         := -stdlib=libc++ -fno-strict-aliasing -ISubmodules/PIMPL/PIMPL/include
+FLAGS_OTHER         := -x c++ -fno-strict-aliasing -ISubmodules/PIMPL/PIMPL/include
 FLAGS_C             := 
 FLAGS_CPP           := 
 FLAGS_M             := -fobjc-arc
@@ -70,7 +70,7 @@ FILES_M_EXCLUDE     :=
 FILES_MM            := 
 FILES_MM_EXCLUDE    := 
 
-LIBS                := -lc++
+LIBS                :=
 
 FILES               := $(filter-out $(FILES_C_EXCLUDE),$(FILES_C))      \
                        $(filter-out $(FILES_CPP_EXCLUDE),$(FILES_CPP))  \
