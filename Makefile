@@ -50,9 +50,9 @@ FLAGS_OPTIM         := Os
 FLAGS_WARN          := -Werror -Wall
 FLAGS_STD_C         := c99
 FLAGS_STD_CPP       := c++11
-FLAGS_OTHER         := -stdlib=libc++ -fno-strict-aliasing -ISubmodules/PIMPL/PIMPL/include
+FLAGS_OTHER         := -fno-strict-aliasing -ISubmodules/PIMPL/PIMPL/include
 FLAGS_C             := 
-FLAGS_CPP           := 
+FLAGS_CPP           := -x c++ -stdlib=libc++
 FLAGS_M             := -fobjc-arc
 FLAGS_MM            := -fobjc-arc
 XCODE_PROJECT       := ISOBMFF.xcodeproj
