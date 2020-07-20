@@ -49,6 +49,10 @@ namespace ISOBMFF
     {
         public:
             
+            DisplayableObject( void )                                   = default;
+            DisplayableObject( const DisplayableObject & )              = default;
+            DisplayableObject & operator =( const DisplayableObject & ) = default;
+            
             /*! 
              * @function    ~DisplayableObject
              * @abstarct    Destructor.

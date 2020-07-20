@@ -61,7 +61,7 @@ namespace ISOBMFF
         
         vf = stream.ReadBigEndianUInt32();
         
-        this->SetVersion( ( uint8_t )( vf >> 24 ) );
+        this->SetVersion( static_cast< uint8_t >( vf >> 24 ) );
         this->SetFlags( vf & 0x00FFFFFF );
     }
     
