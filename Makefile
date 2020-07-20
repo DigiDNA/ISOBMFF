@@ -49,7 +49,7 @@ CC                  := clang
 FLAGS_OPTIM         := Os
 FLAGS_WARN          := -Werror -Wall
 FLAGS_STD_C         := c99
-FLAGS_STD_CPP       := c++11
+FLAGS_STD_CPP       := c++14
 FLAGS_OTHER         := -fno-strict-aliasing
 FLAGS_C             := 
 FLAGS_CPP           := -x c++ -stdlib=libc++
