@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         bool                                                            _arrayCompleteness;
         uint8_t                                                         _nalUnitType;
@@ -49,7 +49,7 @@ class XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL
 
 namespace ISOBMFF
 {
-    HVCC::Array::Array( void )
+    HVCC::Array::Array()
     {}
     
     HVCC::Array::Array( BinaryStream & stream )
@@ -71,17 +71,17 @@ namespace ISOBMFF
         }
     }
     
-    std::string HVCC::Array::GetName( void ) const
+    std::string HVCC::Array::GetName() const
     {
         return "Array";
     }
     
-    bool HVCC::Array::GetArrayCompleteness( void ) const
+    bool HVCC::Array::GetArrayCompleteness() const
     {
         return this->impl->_arrayCompleteness;
     }
     
-    uint8_t HVCC::Array::GetNALUnitType( void ) const
+    uint8_t HVCC::Array::GetNALUnitType() const
     {
         return this->impl->_nalUnitType;
     }
@@ -102,7 +102,7 @@ namespace ISOBMFF
         DisplayableObjectContainer::WriteDescription( os, indentLevel );
     }
     
-    std::vector< std::shared_ptr< HVCC::Array::NALUnit > > HVCC::Array::GetNALUnits( void ) const
+    std::vector< std::shared_ptr< HVCC::Array::NALUnit > > HVCC::Array::GetNALUnits() const
     {
         return this->impl->_nalUnits;
     }
@@ -112,14 +112,14 @@ namespace ISOBMFF
         this->impl->_nalUnits.push_back( unit );
     }
     
-    std::vector< std::shared_ptr< DisplayableObject > > HVCC::Array::GetDisplayableObjects( void ) const
+    std::vector< std::shared_ptr< DisplayableObject > > HVCC::Array::GetDisplayableObjects() const
     {
         auto v( this->GetNALUnits() );
         
         return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
-    std::vector< std::pair< std::string, std::string > > HVCC::Array::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > HVCC::Array::GetDisplayableProperties() const
     {
         return
         {
@@ -130,7 +130,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL::IMPL():
     _arrayCompleteness( false ),
     _nalUnitType( 0 )
 {}
@@ -141,6 +141,6 @@ XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL::IMPL( const IMPL & o ):
     _nalUnits( o._nalUnits )
 {}
 
-XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL::~IMPL()
 {}
 

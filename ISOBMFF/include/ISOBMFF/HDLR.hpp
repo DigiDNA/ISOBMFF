@@ -32,6 +32,8 @@
 #define ISOBMFF_HDLR_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <string>
@@ -44,13 +46,13 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< HDLR >::impl;
             
-            HDLR( void );
+            HDLR();
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            std::string GetHandlerType( void ) const;
-            std::string GetHandlerName( void ) const;
+            std::string GetHandlerType() const;
+            std::string GetHandlerName() const;
             
             void SetHandlerType( const std::string & value );
             void SetHandlerName( const std::string & value );

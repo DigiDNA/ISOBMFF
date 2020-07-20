@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::DIMG >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
 };
 
 #define XS_PIMPL_CLASS ISOBMFF::DIMG
@@ -45,11 +45,11 @@ class XS::PIMPL::Object< ISOBMFF::DIMG >::IMPL
 
 namespace ISOBMFF
 {
-    DIMG::DIMG( void ): SingleItemTypeReferenceBox( "dimg" )
+    DIMG::DIMG(): SingleItemTypeReferenceBox( "dimg" )
     {}
 }
 
-XS::PIMPL::Object< ISOBMFF::DIMG >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::DIMG >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::DIMG >::IMPL::IMPL( const IMPL & o )
@@ -57,6 +57,6 @@ XS::PIMPL::Object< ISOBMFF::DIMG >::IMPL::IMPL( const IMPL & o )
     ( void )o;
 }
 
-XS::PIMPL::Object< ISOBMFF::DIMG >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::DIMG >::IMPL::~IMPL()
 {}
 

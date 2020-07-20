@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint64_t _index;
         uint64_t _offset;
@@ -49,7 +49,7 @@ class XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL
 
 namespace ISOBMFF
 {
-    ILOC::Item::Extent::Extent( void ):
+    ILOC::Item::Extent::Extent():
         XS::PIMPL::Object< Extent >()
     {}
     
@@ -99,22 +99,22 @@ namespace ISOBMFF
         }
     }
     
-    std::string ILOC::Item::Extent::GetName( void ) const
+    std::string ILOC::Item::Extent::GetName() const
     {
         return "Extent";
     }
     
-    uint64_t ILOC::Item::Extent::GetIndex( void ) const
+    uint64_t ILOC::Item::Extent::GetIndex() const
     {
         return this->impl->_index;
     }
     
-    uint64_t ILOC::Item::Extent::GetOffset( void ) const
+    uint64_t ILOC::Item::Extent::GetOffset() const
     {
         return this->impl->_offset;
     }
     
-    uint64_t ILOC::Item::Extent::GetLength( void ) const
+    uint64_t ILOC::Item::Extent::GetLength() const
     {
         return this->impl->_length;
     }
@@ -134,7 +134,7 @@ namespace ISOBMFF
         this->impl->_length = value;
     }
     
-    std::vector< std::pair< std::string, std::string > > ILOC::Item::Extent::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > ILOC::Item::Extent::GetDisplayableProperties() const
     {
         return
         {
@@ -145,7 +145,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL::IMPL():
     _index( 0 ),
     _offset( 0 ),
     _length( 0 )
@@ -157,6 +157,6 @@ XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL::IMPL( const IMPL & o ):
     _length( o._length )
 {}
 
-XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL::~IMPL()
 {}
 

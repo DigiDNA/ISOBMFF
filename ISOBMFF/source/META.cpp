@@ -38,9 +38,9 @@ class XS::PIMPL::Object< ISOBMFF::META >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         bool                                           _isFullBox;
         std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
@@ -51,7 +51,7 @@ class XS::PIMPL::Object< ISOBMFF::META >::IMPL
 
 namespace ISOBMFF
 {
-    META::META( void ): FullBox( "meta" )
+    META::META(): FullBox( "meta" )
     {}
     
     void META::ReadData( Parser & parser, BinaryStream & stream )
@@ -95,13 +95,13 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::shared_ptr< Box > > META::GetBoxes( void ) const
+    std::vector< std::shared_ptr< Box > > META::GetBoxes() const
     {
         return this->impl->_boxes;
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::META >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::META >::IMPL::IMPL():
     _isFullBox( true )
 {}
 
@@ -110,6 +110,6 @@ XS::PIMPL::Object< ISOBMFF::META >::IMPL::IMPL( const IMPL & o ):
     _boxes( o._boxes )
 {}
 
-XS::PIMPL::Object< ISOBMFF::META >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::META >::IMPL::~IMPL()
 {}
 

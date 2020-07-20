@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::ISPE >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint32_t _displayWidth;
         uint32_t _displayHeight;
@@ -48,7 +48,7 @@ class XS::PIMPL::Object< ISOBMFF::ISPE >::IMPL
 
 namespace ISOBMFF
 {
-    ISPE::ISPE( void ): FullBox( "ispe" )
+    ISPE::ISPE(): FullBox( "ispe" )
     {}
     
     void ISPE::ReadData( Parser & parser, BinaryStream & stream )
@@ -59,7 +59,7 @@ namespace ISOBMFF
         this->SetDisplayHeight( stream.ReadBigEndianUInt32() );
     }
     
-	std::vector< std::pair< std::string, std::string > > ISPE::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > ISPE::GetDisplayableProperties() const
     {
         auto props( FullBox::GetDisplayableProperties() );
         
@@ -69,12 +69,12 @@ namespace ISOBMFF
         return props;
     }
     
-    uint32_t ISPE::GetDisplayWidth( void ) const
+    uint32_t ISPE::GetDisplayWidth() const
     {
         return this->impl->_displayWidth;
     }
     
-    uint32_t ISPE::GetDisplayHeight( void ) const
+    uint32_t ISPE::GetDisplayHeight() const
     {
         return this->impl->_displayHeight;
     }
@@ -90,7 +90,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::ISPE >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::ISPE >::IMPL::IMPL():
     _displayWidth( 0 ),
     _displayHeight( 0 )
 {}
@@ -100,6 +100,6 @@ XS::PIMPL::Object< ISOBMFF::ISPE >::IMPL::IMPL( const IMPL & o ):
     _displayHeight( o._displayHeight )
 {}
 
-XS::PIMPL::Object< ISOBMFF::ISPE >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::ISPE >::IMPL::~IMPL()
 {}
 

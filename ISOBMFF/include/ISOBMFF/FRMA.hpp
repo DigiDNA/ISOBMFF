@@ -32,6 +32,8 @@
 #define ISOBMFF_FRMA_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Box.hpp>
 
@@ -43,12 +45,12 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< FRMA >::impl;
             
-            FRMA( void );
+            FRMA();
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            std::string GetDataFormat( void ) const;
+            std::string GetDataFormat() const;
             void        SetDataFormat( const std::string & value );
     };
 }

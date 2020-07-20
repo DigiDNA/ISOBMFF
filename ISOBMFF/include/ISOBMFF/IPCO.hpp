@@ -41,7 +41,7 @@ namespace ISOBMFF
     {
         public:
             
-            IPCO( void );
+            IPCO();
             
             std::shared_ptr< Box >                GetPropertyAtIndex( size_t index ) const;
             std::shared_ptr< Box >                GetProperty( const IPMA::Entry::Association & association ) const;

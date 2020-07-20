@@ -40,7 +40,7 @@ class XS::PIMPL::Object< ISOBMFF::Box >::IMPL
         
         IMPL( const std::string & name = "????" );
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         std::string            _name;
         std::vector< uint8_t > _data;
@@ -55,7 +55,7 @@ namespace ISOBMFF
     Box::Box( const std::string & name ): XS::PIMPL::Object< Box >( name )
     {}
     
-    std::string Box::GetName( void ) const
+    std::string Box::GetName() const
     {
         return this->impl->_name;
     }
@@ -68,12 +68,12 @@ namespace ISOBMFF
         this->impl->_hasData = true;
     }
     
-    std::vector< uint8_t > Box::GetData( void ) const
+    std::vector< uint8_t > Box::GetData() const
     {
         return this->impl->_data;
     }
     
-    std::vector< std::pair< std::string, std::string > > Box::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > Box::GetDisplayableProperties() const
     {
         return {};
     }
@@ -90,5 +90,5 @@ XS::PIMPL::Object< ISOBMFF::Box >::IMPL::IMPL( const IMPL & o ):
     _hasData( o._hasData )
 {}
 
-XS::PIMPL::Object< ISOBMFF::Box >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::Box >::IMPL::~IMPL()
 {}

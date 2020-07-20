@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint8_t                                               _offsetSize;
         uint8_t                                               _lengthSize;
@@ -51,7 +51,7 @@ class XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL
 
 namespace ISOBMFF
 {
-    ILOC::ILOC( void ): FullBox( "iloc" )
+    ILOC::ILOC(): FullBox( "iloc" )
     {}
     
     void ILOC::ReadData( Parser & parser, BinaryStream & stream )
@@ -95,14 +95,14 @@ namespace ISOBMFF
         DisplayableObjectContainer::WriteDescription( os, indentLevel );
     }
     
-    std::vector< std::shared_ptr< DisplayableObject > > ILOC::GetDisplayableObjects( void ) const
+    std::vector< std::shared_ptr< DisplayableObject > > ILOC::GetDisplayableObjects() const
     {
         auto v( this->GetItems() );
         
         return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
-    std::vector< std::pair< std::string, std::string > > ILOC::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > ILOC::GetDisplayableProperties() const
     {
         auto props( FullBox::GetDisplayableProperties() );
         
@@ -120,22 +120,22 @@ namespace ISOBMFF
         return props;
     }
     
-    uint8_t ILOC::GetOffsetSize( void ) const
+    uint8_t ILOC::GetOffsetSize() const
     {
         return this->impl->_offsetSize;
     }
     
-    uint8_t ILOC::GetLengthSize( void ) const
+    uint8_t ILOC::GetLengthSize() const
     {
         return this->impl->_lengthSize;
     }
     
-    uint8_t ILOC::GetBaseOffsetSize( void ) const
+    uint8_t ILOC::GetBaseOffsetSize() const
     {
         return this->impl->_baseOffsetSize;
     }
     
-    uint8_t ILOC::GetIndexSize( void ) const
+    uint8_t ILOC::GetIndexSize() const
     {
         return this->impl->_indexSize;
     }
@@ -160,7 +160,7 @@ namespace ISOBMFF
         this->impl->_indexSize = value;
     }
     
-    std::vector< std::shared_ptr< ILOC::Item > > ILOC::GetItems( void ) const
+    std::vector< std::shared_ptr< ILOC::Item > > ILOC::GetItems() const
     {
         return this->impl->_items;
     }
@@ -184,7 +184,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL::IMPL():
     _offsetSize( 0 ),
     _lengthSize( 0 ),
     _baseOffsetSize( 0 ),
@@ -199,6 +199,6 @@ XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL::IMPL( const IMPL & o ):
     _items( o._items )
 {}
 
-XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL::~IMPL()
 {}
 

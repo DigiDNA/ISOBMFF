@@ -32,12 +32,13 @@
 #define ISOBMFF_IINF_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Container.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/INFE.hpp>
 #include <vector>
-#include <memory>
 
 namespace ISOBMFF
 {
@@ -47,17 +48,17 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< IINF >::impl;
             
-            IINF( void );
+            IINF();
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
             void                                   AddEntry( std::shared_ptr< INFE > entry );
-            std::vector< std::shared_ptr< INFE > > GetEntries( void )             const;
+            std::vector< std::shared_ptr< INFE > > GetEntries()                   const;
             std::shared_ptr< INFE >                GetItemInfo( uint32_t itemID ) const;
             
             void                                  AddBox( std::shared_ptr< Box > box ) override;
-            std::vector< std::shared_ptr< Box > > GetBoxes( void ) const override;
+            std::vector< std::shared_ptr< Box > > GetBoxes() const override;
     };
 }
 

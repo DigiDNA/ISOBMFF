@@ -32,7 +32,7 @@
 
 namespace ISOBMFF
 {
-    IPCO::IPCO( void ): ContainerBox( "ipco" )
+    IPCO::IPCO(): ContainerBox( "ipco" )
     {}
     
     std::shared_ptr< Box > IPCO::GetPropertyAtIndex( size_t index ) const

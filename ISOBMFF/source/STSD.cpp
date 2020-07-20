@@ -36,9 +36,9 @@ class XS::PIMPL::Object< ISOBMFF::STSD >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
 };
@@ -48,7 +48,7 @@ class XS::PIMPL::Object< ISOBMFF::STSD >::IMPL
 
 namespace ISOBMFF
 {
-    STSD::STSD( void ): FullBox( "stsd" )
+    STSD::STSD(): FullBox( "stsd" )
     {}
     
     void STSD::ReadData( Parser & parser, BinaryStream & stream )
@@ -76,19 +76,19 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::shared_ptr< Box > > STSD::GetBoxes( void ) const
+    std::vector< std::shared_ptr< Box > > STSD::GetBoxes() const
     {
         return this->impl->_boxes;
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::STSD >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::STSD >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::STSD >::IMPL::IMPL( const IMPL & o ):
     _boxes( o._boxes )
 {}
 
-XS::PIMPL::Object< ISOBMFF::STSD >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::STSD >::IMPL::~IMPL()
 {}
 

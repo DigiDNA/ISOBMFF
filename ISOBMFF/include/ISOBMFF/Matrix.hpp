@@ -32,6 +32,8 @@
 #define ISOBMFF_MATRIX_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
 #include <cstdint>
@@ -52,7 +54,7 @@ namespace ISOBMFF
              * @function    Matrix
              * @abstract    Default constructor.
              */
-            Matrix( void );
+            Matrix();
             
             /*!
              * @function    Matrix
@@ -75,70 +77,70 @@ namespace ISOBMFF
              * @result      The object's name
              * @see         DisplayableObject
              */
-            std::string GetName( void ) const override;
+            std::string GetName() const override;
             
             /*!
              * @function    GetA
              * @abstract    Gets the matrix A coordinate.
              * @result      The matrix A coordinate.
              */
-            uint32_t GetA( void ) const;
+            uint32_t GetA() const;
             
             /*!
              * @function    GetB
              * @abstract    Gets the matrix B coordinate.
              * @result      The matrix B coordinate.
              */
-            uint32_t GetB( void ) const;
+            uint32_t GetB() const;
             
             /*!
              * @function    GetU
              * @abstract    Gets the matrix U coordinate.
              * @result      The matrix U coordinate.
              */
-            uint32_t GetU( void ) const;
+            uint32_t GetU() const;
             
             /*!
              * @function    GetC
              * @abstract    Gets the matrix C coordinate.
              * @result      The matrix C coordinate.
              */
-            uint32_t GetC( void ) const;
+            uint32_t GetC() const;
             
             /*!
              * @function    GetD
              * @abstract    Gets the matrix D coordinate.
              * @result      The matrix D coordinate.
              */
-            uint32_t GetD( void ) const;
+            uint32_t GetD() const;
             
             /*!
              * @function    GetV
              * @abstract    Gets the matrix V coordinate.
              * @result      The matrix V coordinate.
              */
-            uint32_t GetV( void ) const;
+            uint32_t GetV() const;
             
             /*!
              * @function    GetX
              * @abstract    Gets the matrix X coordinate.
              * @result      The matrix X coordinate.
              */
-            uint32_t GetX( void ) const;
+            uint32_t GetX() const;
             
             /*!
              * @function    GetY
              * @abstract    Gets the matrix Y coordinate.
              * @result      The matrix Y coordinate.
              */
-            uint32_t GetY( void ) const;
+            uint32_t GetY() const;
             
             /*!
              * @function    GetW
              * @abstract    Gets the matrix W coordinate.
              * @result      The matrix W coordinate.
              */
-            uint32_t GetW( void ) const;
+            uint32_t GetW() const;
             
             /*!
              * @function    SetA
@@ -218,7 +220,7 @@ namespace ISOBMFF
              * @result      The matrix displayable properties.
              * @see         DisplayableObject
              */
-            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
     };
 }
 

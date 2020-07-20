@@ -32,6 +32,8 @@
 #define ISOBMFF_IMAGE_GRID_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/BinaryStream.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
@@ -46,17 +48,17 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< ImageGrid >::impl;
             
-            ImageGrid( void );
+            ImageGrid();
             ImageGrid( BinaryStream & stream );
             
-            std::string GetName( void ) const override;
+            std::string GetName() const override;
             
-            uint8_t  GetVersion( void )      const;
-            uint8_t  GetFlags( void )        const;
-            uint8_t  GetRows( void )         const;
-            uint8_t  GetColumns( void )      const;
-            uint64_t GetOutputWidth( void )  const;
-            uint64_t GetOutputHeight( void ) const;
+            uint8_t  GetVersion()      const;
+            uint8_t  GetFlags()        const;
+            uint8_t  GetRows()         const;
+            uint8_t  GetColumns()      const;
+            uint64_t GetOutputWidth()  const;
+            uint64_t GetOutputHeight() const;
             
             void SetVersion( uint8_t value );
             void SetFlags( uint8_t value );
@@ -65,7 +67,7 @@ namespace ISOBMFF
             void SetOutputWidth( uint64_t value );
             void SetOutputHeight( uint64_t value );
             
-            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
     };
 }
 

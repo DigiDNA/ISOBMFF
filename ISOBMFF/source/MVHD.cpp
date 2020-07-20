@@ -37,9 +37,9 @@ class XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint64_t        _creationTime;
         uint64_t        _modificationTime;
@@ -59,7 +59,7 @@ class XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL
 
 namespace ISOBMFF
 {
-    MVHD::MVHD( void ): FullBox( "mvhd" )
+    MVHD::MVHD(): FullBox( "mvhd" )
     {}
     
     void MVHD::ReadData( Parser & parser, BinaryStream & stream )
@@ -100,7 +100,7 @@ namespace ISOBMFF
         this->SetNextTrackID( stream.ReadBigEndianUInt32() );
     }
     
-    std::vector< std::pair< std::string, std::string > > MVHD::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > MVHD::GetDisplayableProperties() const
     {
         auto props( FullBox::GetDisplayableProperties() );
         
@@ -116,42 +116,42 @@ namespace ISOBMFF
         return props;
     }
     
-    uint64_t MVHD::GetCreationTime( void ) const
+    uint64_t MVHD::GetCreationTime() const
     {
         return this->impl->_creationTime;
     }
     
-    uint64_t MVHD::GetModificationTime( void ) const
+    uint64_t MVHD::GetModificationTime() const
     {
         return this->impl->_modificationTime;
     }
     
-    uint32_t MVHD::GetTimescale( void ) const
+    uint32_t MVHD::GetTimescale() const
     {
         return this->impl->_timescale;
     }
     
-    uint64_t MVHD::GetDuration( void ) const
+    uint64_t MVHD::GetDuration() const
     {
         return this->impl->_duration;
     }
     
-    uint32_t MVHD::GetRate( void ) const
+    uint32_t MVHD::GetRate() const
     {
         return this->impl->_rate;
     }
     
-    uint16_t MVHD::GetVolume( void ) const
+    uint16_t MVHD::GetVolume() const
     {
         return this->impl->_volume;
     }
     
-    Matrix MVHD::GetMatrix( void ) const
+    Matrix MVHD::GetMatrix() const
     {
         return this->impl->_matrix;
     }
     
-    uint32_t MVHD::GetNextTrackID( void ) const
+    uint32_t MVHD::GetNextTrackID() const
     {
         return this->impl->_nextTrackID;
     }
@@ -197,7 +197,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL::IMPL():
     _creationTime( 0 ),
     _modificationTime( 0 ),
     _timescale( 0 ),
@@ -226,6 +226,6 @@ XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL::IMPL( const IMPL & o ):
     memcpy( this->_predefined, o._predefined, sizeof( this->_predefined ) );
 }
 
-XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL::~IMPL()
 {}
 

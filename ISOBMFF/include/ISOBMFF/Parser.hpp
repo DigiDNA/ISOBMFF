@@ -32,10 +32,11 @@
 #define ISOBMFF_PARSER_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <string>
 #include <functional>
-#include <memory>
 #include <cstdint>
 #include <ISOBMFF/Box.hpp>
 #include <ISOBMFF/File.hpp>
@@ -81,7 +82,7 @@ namespace ISOBMFF
              * @function    Parser
              * @abstract    Default constructor.
              */
-            Parser( void );
+            Parser();
             
             /*!
              * @function    Parser
@@ -113,7 +114,7 @@ namespace ISOBMFF
              *              the parser will invoke the lambda to create a new
              *              object of the correct type.
              */
-            void RegisterBox( const std::string & type, const std::function< std::shared_ptr< Box >( void ) > & createBox );
+            void RegisterBox( const std::string & type, const std::function< std::shared_ptr< Box >() > & createBox );
             
             /*!
              * @function    RegisterContainerBox
@@ -159,7 +160,7 @@ namespace ISOBMFF
              * @abstract    Upon successfull parsing, gets the file object.
              * @result      The file object, or nullptr.
              */
-            std::shared_ptr< File > GetFile( void ) const;
+            std::shared_ptr< File > GetFile() const;
             
             /*!
              * @function    GetPreferredStringType
@@ -167,7 +168,7 @@ namespace ISOBMFF
              * @result      The preferred string type.
              * @see         StringType
              */
-            StringType GetPreferredStringType( void ) const;
+            StringType GetPreferredStringType() const;
             
             /*!
              * @function    SetPreferredStringType
@@ -183,7 +184,7 @@ namespace ISOBMFF
              * @result      The parser options.
              * @see         Options
              */
-            uint64_t GetOptions( void ) const;
+            uint64_t GetOptions() const;
             
             /*!
              * @function    SetOptions

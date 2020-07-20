@@ -36,9 +36,9 @@ class XS::PIMPL::Object< ISOBMFF::PIXI >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         std::vector< std::shared_ptr< ISOBMFF::PIXI::Channel > > _channels;
 };
@@ -48,7 +48,7 @@ class XS::PIMPL::Object< ISOBMFF::PIXI >::IMPL
 
 namespace ISOBMFF
 {
-    PIXI::PIXI( void ): FullBox( "pixi" )
+    PIXI::PIXI(): FullBox( "pixi" )
     {}
     
     void PIXI::ReadData( Parser & parser, BinaryStream & stream )
@@ -72,14 +72,14 @@ namespace ISOBMFF
         DisplayableObjectContainer::WriteDescription( os, indentLevel );
     }
     
-    std::vector< std::shared_ptr< DisplayableObject > > PIXI::GetDisplayableObjects( void ) const
+    std::vector< std::shared_ptr< DisplayableObject > > PIXI::GetDisplayableObjects() const
     {
         auto v( this->GetChannels() );
         
         return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
-    std::vector< std::pair< std::string, std::string > > PIXI::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > PIXI::GetDisplayableProperties() const
     {
         auto props( Box::GetDisplayableProperties() );
         
@@ -88,7 +88,7 @@ namespace ISOBMFF
         return props;
     }
     
-    std::vector< std::shared_ptr< PIXI::Channel > > PIXI::GetChannels( void ) const
+    std::vector< std::shared_ptr< PIXI::Channel > > PIXI::GetChannels() const
     {
         return this->impl->_channels;
     }
@@ -99,13 +99,13 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::PIXI >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::PIXI >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::PIXI >::IMPL::IMPL( const IMPL & o ):
     _channels( o._channels )
 {}
 
-XS::PIMPL::Object< ISOBMFF::PIXI >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::PIXI >::IMPL::~IMPL()
 {}
 

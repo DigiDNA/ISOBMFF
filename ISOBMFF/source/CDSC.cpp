@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::CDSC >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
 };
 
 #define XS_PIMPL_CLASS ISOBMFF::CDSC
@@ -45,11 +45,11 @@ class XS::PIMPL::Object< ISOBMFF::CDSC >::IMPL
 
 namespace ISOBMFF
 {
-    CDSC::CDSC( void ): SingleItemTypeReferenceBox( "cdsc" )
+    CDSC::CDSC(): SingleItemTypeReferenceBox( "cdsc" )
     {}
 }
 
-XS::PIMPL::Object< ISOBMFF::CDSC >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::CDSC >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::CDSC >::IMPL::IMPL( const IMPL & o )
@@ -57,6 +57,6 @@ XS::PIMPL::Object< ISOBMFF::CDSC >::IMPL::IMPL( const IMPL & o )
     ( void )o;
 }
 
-XS::PIMPL::Object< ISOBMFF::CDSC >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::CDSC >::IMPL::~IMPL()
 {}
 

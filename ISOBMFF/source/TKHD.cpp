@@ -37,9 +37,9 @@ class XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint64_t        _creationTime;
         uint64_t        _modificationTime;
@@ -61,7 +61,7 @@ class XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL
 
 namespace ISOBMFF
 {
-    TKHD::TKHD( void ): FullBox( "tkhd" )
+    TKHD::TKHD(): FullBox( "tkhd" )
     {}
     
     void TKHD::ReadData( Parser & parser, BinaryStream & stream )
@@ -103,7 +103,7 @@ namespace ISOBMFF
         this->SetHeight( stream.ReadBigEndianFixedPoint( 16, 16 ) );
     }
     
-    std::vector< std::pair< std::string, std::string > > TKHD::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > TKHD::GetDisplayableProperties() const
     {
         auto props( FullBox::GetDisplayableProperties() );
         
@@ -121,52 +121,52 @@ namespace ISOBMFF
         return props;
     }
     
-    uint64_t TKHD::GetCreationTime( void ) const
+    uint64_t TKHD::GetCreationTime() const
     {
         return this->impl->_creationTime;
     }
     
-    uint64_t TKHD::GetModificationTime( void ) const
+    uint64_t TKHD::GetModificationTime() const
     {
         return this->impl->_modificationTime;
     }
     
-    uint32_t TKHD::GetTrackID( void ) const
+    uint32_t TKHD::GetTrackID() const
     {
         return this->impl->_trackID;
     }
     
-    uint64_t TKHD::GetDuration( void ) const
+    uint64_t TKHD::GetDuration() const
     {
         return this->impl->_duration;
     }
     
-    uint16_t TKHD::GetLayer( void ) const
+    uint16_t TKHD::GetLayer() const
     {
         return this->impl->_layer;
     }
     
-    uint16_t TKHD::GetAlternateGroup( void ) const
+    uint16_t TKHD::GetAlternateGroup() const
     {
         return this->impl->_alternateGroup;
     }
     
-    uint16_t TKHD::GetVolume( void ) const
+    uint16_t TKHD::GetVolume() const
     {
         return this->impl->_volume;
     }
     
-    Matrix TKHD::GetMatrix( void ) const
+    Matrix TKHD::GetMatrix() const
     {
         return this->impl->_matrix;
     }
     
-    float TKHD::GetWidth( void ) const
+    float TKHD::GetWidth() const
     {
         return this->impl->_width;
     }
     
-    float TKHD::GetHeight( void ) const
+    float TKHD::GetHeight() const
     {
         return this->impl->_height;
     }
@@ -222,7 +222,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL::IMPL():
     _creationTime( 0 ),
     _modificationTime( 0 ),
     _trackID( 0 ),
@@ -255,5 +255,5 @@ XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL::IMPL( const IMPL & o ):
     memcpy( this->_reserved2, o._reserved2, sizeof( this->_reserved2 ) );
 }
 
-XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL::~IMPL()
 {}

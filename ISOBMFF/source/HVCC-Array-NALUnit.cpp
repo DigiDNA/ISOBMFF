@@ -37,9 +37,9 @@ class XS::PIMPL::Object< ISOBMFF::HVCC::Array::NALUnit >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         std::vector< uint8_t > _data;
 };
@@ -49,7 +49,7 @@ class XS::PIMPL::Object< ISOBMFF::HVCC::Array::NALUnit >::IMPL
 
 namespace ISOBMFF
 {
-    HVCC::Array::NALUnit::NALUnit( void )
+    HVCC::Array::NALUnit::NALUnit()
     {}
     
     HVCC::Array::NALUnit::NALUnit( BinaryStream & stream )
@@ -69,12 +69,12 @@ namespace ISOBMFF
         this->SetData( data );
     }
     
-    std::string HVCC::Array::NALUnit::GetName( void ) const
+    std::string HVCC::Array::NALUnit::GetName() const
     {
         return "NALUnit";
     }
     
-    std::vector< uint8_t > HVCC::Array::NALUnit::GetData( void ) const
+    std::vector< uint8_t > HVCC::Array::NALUnit::GetData() const
     {
         return this->impl->_data;
     }
@@ -84,7 +84,7 @@ namespace ISOBMFF
         this->impl->_data = value;
     }
     
-    std::vector< std::pair< std::string, std::string > > HVCC::Array::NALUnit::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > HVCC::Array::NALUnit::GetDisplayableProperties() const
     {
         std::vector< uint8_t > data;
         std::stringstream      ss;
@@ -116,13 +116,13 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::HVCC::Array::NALUnit >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::HVCC::Array::NALUnit >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::HVCC::Array::NALUnit >::IMPL::IMPL( const IMPL & o ):
     _data( o._data )
 {}
 
-XS::PIMPL::Object< ISOBMFF::HVCC::Array::NALUnit >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::HVCC::Array::NALUnit >::IMPL::~IMPL()
 {}
 

@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::File >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
 };
 
 #define XS_PIMPL_CLASS ISOBMFF::File
@@ -45,16 +45,16 @@ class XS::PIMPL::Object< ISOBMFF::File >::IMPL
 
 namespace ISOBMFF
 {
-    File::File( void ): ContainerBox( "????" )
+    File::File(): ContainerBox( "????" )
     {}
     
-    std::string File::GetName( void ) const
+    std::string File::GetName() const
     {
         return "ISOBMFF::File";
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::File >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::File >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::File >::IMPL::IMPL( const IMPL & o )
@@ -62,6 +62,6 @@ XS::PIMPL::Object< ISOBMFF::File >::IMPL::IMPL( const IMPL & o )
     ( void )o;
 }
 
-XS::PIMPL::Object< ISOBMFF::File >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::File >::IMPL::~IMPL()
 {}
 

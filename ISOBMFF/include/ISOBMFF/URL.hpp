@@ -32,6 +32,8 @@
 #define ISOBMFF_URL_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 
@@ -43,7 +45,7 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< URL >::impl;
             
-            URL( void );
+            URL();
     };
 }
 

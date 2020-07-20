@@ -36,9 +36,9 @@ class XS::PIMPL::Object< ISOBMFF::IINF >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         std::vector< std::shared_ptr< ISOBMFF::INFE > > _entries;
 };
@@ -48,7 +48,7 @@ class XS::PIMPL::Object< ISOBMFF::IINF >::IMPL
 
 namespace ISOBMFF
 {
-    IINF::IINF( void ): FullBox( "iinf" )
+    IINF::IINF(): FullBox( "iinf" )
     {}
     
     void IINF::ReadData( Parser & parser, BinaryStream & stream )
@@ -93,12 +93,12 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::shared_ptr< INFE > > IINF::GetEntries( void ) const
+    std::vector< std::shared_ptr< INFE > > IINF::GetEntries() const
     {
         return this->impl->_entries;
     }
-	
-	std::shared_ptr< INFE > IINF::GetItemInfo( uint32_t itemID ) const
+    
+    std::shared_ptr< INFE > IINF::GetItemInfo( uint32_t itemID ) const
     {
         for( const auto & infe: this->GetEntries() )
         {
@@ -116,7 +116,7 @@ namespace ISOBMFF
         this->AddEntry( std::dynamic_pointer_cast< INFE >( box ) );
     }
     
-    std::vector< std::shared_ptr< Box > > IINF::GetBoxes( void ) const
+    std::vector< std::shared_ptr< Box > > IINF::GetBoxes() const
     {
         auto v( this->GetEntries() );
         
@@ -124,13 +124,13 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::IINF >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::IINF >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::IINF >::IMPL::IMPL( const IMPL & o ):
     _entries( o._entries )
 {}
 
-XS::PIMPL::Object< ISOBMFF::IINF >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::IINF >::IMPL::~IMPL()
 {}
 

@@ -46,8 +46,8 @@ namespace ISOBMFF
             
             virtual ~Container();
             
-            virtual void                                  AddBox( std::shared_ptr< Box > box )       = 0;
-            virtual std::vector< std::shared_ptr< Box > > GetBoxes( void )                     const = 0;
+            virtual void                                  AddBox( std::shared_ptr< Box > box ) = 0;
+            virtual std::vector< std::shared_ptr< Box > > GetBoxes()                     const = 0;
             
             void WriteBoxes( std::ostream & os, std::size_t indentLevel ) const;
             

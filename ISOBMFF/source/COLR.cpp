@@ -37,9 +37,9 @@ class XS::PIMPL::Object< ISOBMFF::COLR >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         std::string            _colourType;
         uint16_t               _colourPrimaries;
@@ -54,7 +54,7 @@ class XS::PIMPL::Object< ISOBMFF::COLR >::IMPL
 
 namespace ISOBMFF
 {
-    COLR::COLR( void ): Box( "colr" )
+    COLR::COLR(): Box( "colr" )
     {}
     
     void COLR::ReadData( Parser & parser, BinaryStream & stream )
@@ -78,7 +78,7 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::pair< std::string, std::string > > COLR::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > COLR::GetDisplayableProperties() const
     {
         auto props( Box::GetDisplayableProperties() );
         
@@ -123,32 +123,32 @@ namespace ISOBMFF
         return props;
     }
     
-    std::string COLR::GetColourType( void ) const
+    std::string COLR::GetColourType() const
     {
         return this->impl->_colourType;
     }
     
-    uint16_t COLR::GetColourPrimaries( void ) const
+    uint16_t COLR::GetColourPrimaries() const
     {
         return this->impl->_colourPrimaries;
     }
     
-    uint16_t COLR::GetTransferCharacteristics( void ) const
+    uint16_t COLR::GetTransferCharacteristics() const
     {
         return this->impl->_transferCharacteristics;
     }
     
-    uint16_t COLR::GetMatrixCoefficients( void ) const
+    uint16_t COLR::GetMatrixCoefficients() const
     {
         return this->impl->_matrixCoefficients;
     }
     
-    bool COLR::GetFullRangeFlag( void ) const
+    bool COLR::GetFullRangeFlag() const
     {
         return this->impl->_fullRangeFlag;
     }
     
-    std::vector< uint8_t > COLR::GetICCProfile( void ) const
+    std::vector< uint8_t > COLR::GetICCProfile() const
     {
         return this->impl->_iccProfile;
     }
@@ -184,7 +184,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::COLR >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::COLR >::IMPL::IMPL():
     _colourPrimaries( 0 ),
     _transferCharacteristics( 0 ),
     _matrixCoefficients( 0 ),
@@ -200,6 +200,6 @@ XS::PIMPL::Object< ISOBMFF::COLR >::IMPL::IMPL( const IMPL & o ):
     _iccProfile( o._iccProfile )
 {}
 
-XS::PIMPL::Object< ISOBMFF::COLR >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::COLR >::IMPL::~IMPL()
 {}
 

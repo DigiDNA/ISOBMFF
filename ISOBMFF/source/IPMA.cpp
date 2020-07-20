@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         std::vector< std::shared_ptr< ISOBMFF::IPMA::Entry > > _entries;
 };
@@ -47,7 +47,7 @@ class XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL
 
 namespace ISOBMFF
 {
-    IPMA::IPMA( void ): FullBox( "ipma" )
+    IPMA::IPMA(): FullBox( "ipma" )
     {}
     
     void IPMA::ReadData( Parser & parser, BinaryStream & stream )
@@ -71,7 +71,7 @@ namespace ISOBMFF
         DisplayableObjectContainer::WriteDescription( os, indentLevel );
     }
     
-    std::vector< std::pair< std::string, std::string > > IPMA::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > IPMA::GetDisplayableProperties() const
     {
         return
         {
@@ -79,14 +79,14 @@ namespace ISOBMFF
         };
     }
     
-    std::vector< std::shared_ptr< DisplayableObject > > IPMA::GetDisplayableObjects( void ) const
+    std::vector< std::shared_ptr< DisplayableObject > > IPMA::GetDisplayableObjects() const
     {
         auto v( this->GetEntries() );
         
         return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
-    std::vector< std::shared_ptr< IPMA::Entry > > IPMA::GetEntries( void ) const
+    std::vector< std::shared_ptr< IPMA::Entry > > IPMA::GetEntries() const
     {
         return this->impl->_entries;
     }
@@ -110,13 +110,13 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::IMPL( const IMPL & o ):
     _entries( o._entries )
 {}
 
-XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::~IMPL()
 {}
 

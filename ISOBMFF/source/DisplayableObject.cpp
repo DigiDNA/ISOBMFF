@@ -32,7 +32,7 @@
 
 namespace ISOBMFF
 {
-    DisplayableObject::~DisplayableObject( void )
+    DisplayableObject::~DisplayableObject()
     {}
     
     void DisplayableObject::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
@@ -66,7 +66,7 @@ namespace ISOBMFF
         }
     }
     
-    std::string DisplayableObject::ToString( void ) const
+    std::string DisplayableObject::ToString() const
     {
         std::stringstream ss;
         
@@ -75,7 +75,7 @@ namespace ISOBMFF
         return ss.str();
     }
     
-    std::vector< std::pair< std::string, std::string > > DisplayableObject::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > DisplayableObject::GetDisplayableProperties() const
     {
         return {};
     }

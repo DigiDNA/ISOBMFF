@@ -32,6 +32,8 @@
 #define ISOBMFF_IPMA_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
@@ -47,13 +49,13 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< IPMA >::impl;
             
-            IPMA( void );
+            IPMA();
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
-            std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+            std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects()    const override;
             
             class ISOBMFF_EXPORT Entry: public XS::PIMPL::Object< Entry >, public DisplayableObject, public DisplayableObjectContainer
             {
@@ -61,18 +63,18 @@ namespace ISOBMFF
                     
                     using XS::PIMPL::Object< Entry >::impl;
                     
-                    Entry( void );
+                    Entry();
                     Entry( BinaryStream & stream, const IPMA & ipma );
                     
-                    std::string GetName( void ) const override;
+                    std::string GetName() const override;
                     
-                    uint32_t GetItemID( void ) const;
+                    uint32_t GetItemID() const;
                     void     SetItemID( uint32_t value );
                     
                     void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
                     
-                    std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
-                    std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
+                    std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+                    std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects()    const override;
                     
                     class ISOBMFF_EXPORT Association: public XS::PIMPL::Object< Association >, public DisplayableObject
                     {
@@ -80,25 +82,25 @@ namespace ISOBMFF
                             
                             using XS::PIMPL::Object< Association >::impl;
                             
-                            Association( void );
+                            Association();
                             Association( BinaryStream & stream, const IPMA & ipma );
                             
-                            std::string GetName( void ) const override;
+                            std::string GetName() const override;
                             
-                            bool     GetEssential( void )     const;
-                            uint16_t GetPropertyIndex( void ) const;
+                            bool     GetEssential()     const;
+                            uint16_t GetPropertyIndex() const;
                             
                             void SetEssential( bool value );
                             void SetPropertyIndex( uint16_t value );
                             
-                            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+                            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
                     };
                     
-                    std::vector< std::shared_ptr< Association > > GetAssociations( void ) const;
+                    std::vector< std::shared_ptr< Association > > GetAssociations() const;
                     void                                          AddAssociation( std::shared_ptr< Association > association );
             };
             
-            std::vector< std::shared_ptr< Entry > > GetEntries( void )          const;
+            std::vector< std::shared_ptr< Entry > > GetEntries()                const;
             std::shared_ptr< Entry >                GetEntry( uint32_t itemID ) const;
             void                                    AddEntry( std::shared_ptr< Entry > entry );
     };

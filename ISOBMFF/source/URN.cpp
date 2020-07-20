@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::URN >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
 };
 
 #define XS_PIMPL_CLASS ISOBMFF::URN
@@ -45,11 +45,11 @@ class XS::PIMPL::Object< ISOBMFF::URN >::IMPL
 
 namespace ISOBMFF
 {
-    URN::URN( void ): FullBox( "urn " )
+    URN::URN(): FullBox( "urn " )
     {}
 }
 
-XS::PIMPL::Object< ISOBMFF::URN >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::URN >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::URN >::IMPL::IMPL( const IMPL & o )
@@ -57,6 +57,6 @@ XS::PIMPL::Object< ISOBMFF::URN >::IMPL::IMPL( const IMPL & o )
     ( void )o;
 }
 
-XS::PIMPL::Object< ISOBMFF::URN >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::URN >::IMPL::~IMPL()
 {}
 

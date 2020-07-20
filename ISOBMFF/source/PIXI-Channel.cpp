@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint8_t _bitsPerChannel;
 };
@@ -47,7 +47,7 @@ class XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL
 
 namespace ISOBMFF
 {
-    PIXI::Channel::Channel( void )
+    PIXI::Channel::Channel()
     {}
     
     PIXI::Channel::Channel( BinaryStream & stream )
@@ -55,12 +55,12 @@ namespace ISOBMFF
         this->SetBitsPerChannel( stream.ReadUInt8() );
     }
     
-    std::string PIXI::Channel::GetName( void ) const
+    std::string PIXI::Channel::GetName() const
     {
         return "Channel";
     }
     
-    uint8_t PIXI::Channel::GetBitsPerChannel( void ) const
+    uint8_t PIXI::Channel::GetBitsPerChannel() const
     {
         return this->impl->_bitsPerChannel;
     }
@@ -70,7 +70,7 @@ namespace ISOBMFF
         this->impl->_bitsPerChannel = value;
     }
     
-    std::vector< std::pair< std::string, std::string > > PIXI::Channel::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > PIXI::Channel::GetDisplayableProperties() const
     {
         return
         {
@@ -79,7 +79,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL::IMPL():
     _bitsPerChannel( 0 )
 {}
 
@@ -87,6 +87,6 @@ XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL::IMPL( const IMPL & o ):
     _bitsPerChannel( o._bitsPerChannel )
 {}
 
-XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL::~IMPL()
 {}
 

@@ -32,6 +32,8 @@
 #define ISOBMFF_PITM_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <cstdint>
@@ -44,12 +46,12 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< PITM >::impl;
             
-            PITM( void );
+            PITM();
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            uint32_t GetItemID( void ) const;
+            uint32_t GetItemID() const;
             
             void SetItemID( uint32_t value );
     };

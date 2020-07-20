@@ -32,13 +32,14 @@
 #define ISOBMFF_PIXI_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
 #include <ISOBMFF/DisplayableObjectContainer.hpp>
 #include <vector>
 #include <cstdint>
-#include <memory>
 
 namespace ISOBMFF
 {
@@ -48,13 +49,13 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< PIXI >::impl;
             
-            PIXI( void );
+            PIXI();
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
-            virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
-            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects()    const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
             class ISOBMFF_EXPORT Channel: public XS::PIMPL::Object< Channel >, public DisplayableObject
             {
@@ -62,18 +63,18 @@ namespace ISOBMFF
                     
                     using XS::PIMPL::Object< Channel >::impl;
                     
-                    Channel( void );
+                    Channel();
                     Channel( BinaryStream & stream );
                     
-                    std::string GetName( void ) const override;
+                    std::string GetName() const override;
                     
-                    uint8_t GetBitsPerChannel( void ) const;
+                    uint8_t GetBitsPerChannel() const;
                     void    SetBitsPerChannel( uint8_t value );
                     
-                    virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+                    virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             };
             
-            std::vector< std::shared_ptr< Channel > > GetChannels( void ) const;
+            std::vector< std::shared_ptr< Channel > > GetChannels() const;
             void                                      AddChannel( std::shared_ptr< Channel > array );
     };
 }

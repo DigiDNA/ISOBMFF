@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::THMB >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
 };
 
 #define XS_PIMPL_CLASS ISOBMFF::THMB
@@ -45,11 +45,11 @@ class XS::PIMPL::Object< ISOBMFF::THMB >::IMPL
 
 namespace ISOBMFF
 {
-    THMB::THMB( void ): SingleItemTypeReferenceBox( "thmb" )
+    THMB::THMB(): SingleItemTypeReferenceBox( "thmb" )
     {}
 }
 
-XS::PIMPL::Object< ISOBMFF::THMB >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::THMB >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::THMB >::IMPL::IMPL( const IMPL & o )
@@ -57,7 +57,7 @@ XS::PIMPL::Object< ISOBMFF::THMB >::IMPL::IMPL( const IMPL & o )
     ( void )o;
 }
 
-XS::PIMPL::Object< ISOBMFF::THMB >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::THMB >::IMPL::~IMPL()
 {}
 
 

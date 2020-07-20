@@ -36,6 +36,8 @@
 #include <cstdint>
 #include <vector>
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Matrix.hpp>
 
@@ -57,7 +59,7 @@ namespace ISOBMFF
              * @function    BinaryStream
              * @abstract    Default constructor - Creates an empty stream.
              */
-            BinaryStream( void );
+            BinaryStream();
             
             /*!
              * @function    BinaryStream
@@ -86,21 +88,21 @@ namespace ISOBMFF
              * @abstract    Tests whether the stream has bytes available to read.
              * @result      True if the stream has bytes available, otherwise false.
              */
-            bool HasBytesAvailable( void ) const;
+            bool HasBytesAvailable() const;
             
             /*!
              * @function    ReadUInt8
              * @abstract    Reads an 8-bits unsigned integer value from the stream.
              * @result      An 8-bits unsigned integer value.
              */
-            uint8_t ReadUInt8( void );
+            uint8_t ReadUInt8();
             
             /*!
              * @function    ReadInt8
              * @abstract    Reads an 8-bits signed integer value from the stream.
              * @result      An 8-bits signed integer value.
              */
-            int8_t ReadInt8( void );
+            int8_t ReadInt8();
             
             /*!
              * @function    ReadUInt16
@@ -110,7 +112,7 @@ namespace ISOBMFF
              * @see         ReadBigEndianUInt16
              * @see         ReadLittleEndianUInt16
              */
-            uint16_t ReadUInt16( void );
+            uint16_t ReadUInt16();
             
             /*!
              * @function    ReadInt16
@@ -118,7 +120,7 @@ namespace ISOBMFF
              * @result      A 16-bits signed integer value.
              * @discussion  Byte order is platform-specific.
              */
-            int16_t ReadInt16( void );
+            int16_t ReadInt16();
             
             /*!
              * @function    ReadBigEndianUInt16
@@ -126,7 +128,7 @@ namespace ISOBMFF
              * @result      A 16-bits signed big-endian integer value.
              " @see         ReadLittleEndianUInt16
              */
-            uint16_t ReadBigEndianUInt16( void );
+            uint16_t ReadBigEndianUInt16();
             
             /*!
              * @function    ReadLittleEndianUInt16
@@ -134,7 +136,7 @@ namespace ISOBMFF
              * @result      A 16-bits signed little-endian integer value.
              " @see         ReadBigEndianUInt16
              */
-            uint16_t ReadLittleEndianUInt16( void );
+            uint16_t ReadLittleEndianUInt16();
             
             /*!
              * @function    ReadUInt32
@@ -144,7 +146,7 @@ namespace ISOBMFF
              * @see         ReadBigEndianUInt32
              * @see         ReadLittleEndianUInt32
              */
-            uint32_t ReadUInt32( void );
+            uint32_t ReadUInt32();
             
             /*!
              * @function    ReadInt32
@@ -152,7 +154,7 @@ namespace ISOBMFF
              * @result      A 32-bits signed integer value.
              * @discussion  Byte order is platform-specific.
              */
-            int32_t ReadInt32( void );
+            int32_t ReadInt32();
             
             /*!
              * @function    ReadBigEndianUInt32
@@ -160,7 +162,7 @@ namespace ISOBMFF
              * @result      A 32-bits unsigned integer value.
              * @see         ReadLittleEndianUInt32
              */
-            uint32_t ReadBigEndianUInt32( void );
+            uint32_t ReadBigEndianUInt32();
             
             /*!
              * @function    ReadLittleEndianUInt32
@@ -168,7 +170,7 @@ namespace ISOBMFF
              * @result      A 32-bits unsigned integer value.
              * @see         ReadBigEndianUInt32
              */
-            uint32_t ReadLittleEndianUInt32( void );
+            uint32_t ReadLittleEndianUInt32();
             
             /*!
              * @function    ReadUInt64
@@ -178,7 +180,7 @@ namespace ISOBMFF
              * @see         ReadBigEndianUInt64
              * @see         ReadLittleEndianUInt64
              */
-            uint64_t ReadUInt64( void );
+            uint64_t ReadUInt64();
             
             /*!
              * @function    ReadInt64
@@ -186,7 +188,7 @@ namespace ISOBMFF
              * @result      A 64-bits signed integer value.
              * @discussion  Byte order is platform-specific
              */
-            int64_t ReadInt64( void );
+            int64_t ReadInt64();
             
             /*!
              * @function    ReadBigEndianUInt64
@@ -194,7 +196,7 @@ namespace ISOBMFF
              * @result      A 64-bits unsigned integer value.
              * @see         ReadLittleEndianUInt64
              */
-            uint64_t ReadBigEndianUInt64( void );
+            uint64_t ReadBigEndianUInt64();
             
             /*!
              * @function    ReadLittleEndianUInt64
@@ -202,7 +204,7 @@ namespace ISOBMFF
              * @result      A 64-bits unsigned integer value.
              * @see         ReadBigEndianUInt64
              */
-            uint64_t ReadLittleEndianUInt64( void );
+            uint64_t ReadLittleEndianUInt64();
             
             /*!
              * @function    ReadBigEndianFixedPoint
@@ -228,21 +230,21 @@ namespace ISOBMFF
              * @result      The four-character code as a string.
              * @discussion  Four-character codes are 32-bits.
              */
-            std::string ReadFourCC( void );
+            std::string ReadFourCC();
             
             /*!
              * @function    ReadNULLTerminatedString
              * @abstract    Reads a NULL-terminated string from the stream.
              * @result      The string value.
              */
-            std::string ReadNULLTerminatedString( void );
+            std::string ReadNULLTerminatedString();
             
             /*!
              * @function    ReadPascalString
              * @abstract    Reads a pascal string (length-prefixed) from the stream.
              * @result      The string value.
              */
-            std::string ReadPascalString( void );
+            std::string ReadPascalString();
             
             /*!
              * @function    ReadMatrix
@@ -250,14 +252,14 @@ namespace ISOBMFF
              * @result      The Matrix object.
              * @see         Matrix
              */
-            Matrix ReadMatrix( void );
+            Matrix ReadMatrix();
             
             /*!
              * @function    ReadAllData
              * @abstract    Reads all the data available in the stream.
              * @result      A vector of bytes remaining in the stream.
              */
-            std::vector< uint8_t > ReadAllData( void );
+            std::vector< uint8_t > ReadAllData();
             
             /*!
              * @function    Read

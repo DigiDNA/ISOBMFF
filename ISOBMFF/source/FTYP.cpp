@@ -37,9 +37,9 @@ class XS::PIMPL::Object< ISOBMFF::FTYP >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         std::string                _majorBrand;
         uint32_t                   _minorVersion;
@@ -51,7 +51,7 @@ class XS::PIMPL::Object< ISOBMFF::FTYP >::IMPL
 
 namespace ISOBMFF
 {
-    FTYP::FTYP( void ): Box( "ftyp" )
+    FTYP::FTYP(): Box( "ftyp" )
     {}
     
     void FTYP::ReadData( Parser & parser, BinaryStream & stream )
@@ -74,7 +74,7 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::pair< std::string, std::string > > FTYP::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > FTYP::GetDisplayableProperties() const
     {
         auto props( Box::GetDisplayableProperties() );
         
@@ -85,17 +85,17 @@ namespace ISOBMFF
         return props;
     }
     
-    std::string FTYP::GetMajorBrand( void ) const
+    std::string FTYP::GetMajorBrand() const
     {
         return this->impl->_majorBrand;
     }
     
-    uint32_t FTYP::GetMinorVersion( void ) const
+    uint32_t FTYP::GetMinorVersion() const
     {
         return this->impl->_minorVersion;
     }
     
-    std::vector< std::string > FTYP::GetCompatibleBrands( void ) const
+    std::vector< std::string > FTYP::GetCompatibleBrands() const
     {
         return this->impl->_compatibleBrands;
     }
@@ -121,7 +121,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::FTYP >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::FTYP >::IMPL::IMPL():
     _minorVersion( 0 )
 {}
 
@@ -131,6 +131,6 @@ XS::PIMPL::Object< ISOBMFF::FTYP >::IMPL::IMPL( const IMPL & o ):
     _compatibleBrands( o._compatibleBrands )
 {}
 
-XS::PIMPL::Object< ISOBMFF::FTYP >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::FTYP >::IMPL::~IMPL()
 {}
 

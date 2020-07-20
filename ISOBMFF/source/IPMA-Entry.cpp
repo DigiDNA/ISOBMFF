@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint32_t                                                            _itemID;
         std::vector< std::shared_ptr< ISOBMFF::IPMA::Entry::Association > > _associations;
@@ -48,7 +48,7 @@ class XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL
 
 namespace ISOBMFF
 {
-    IPMA::Entry::Entry( void )
+    IPMA::Entry::Entry()
     {}
     
     IPMA::Entry::Entry( BinaryStream & stream, const IPMA & ipma )
@@ -73,7 +73,7 @@ namespace ISOBMFF
         }
     }
     
-    std::string IPMA::Entry::GetName( void ) const
+    std::string IPMA::Entry::GetName() const
     {
         return "Entry";
     }
@@ -84,7 +84,7 @@ namespace ISOBMFF
         DisplayableObjectContainer::WriteDescription( os, indentLevel );
     }
     
-    std::vector< std::pair< std::string, std::string > > IPMA::Entry::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > IPMA::Entry::GetDisplayableProperties() const
     {
         return
         {
@@ -93,14 +93,14 @@ namespace ISOBMFF
         };
     }
     
-    std::vector< std::shared_ptr< DisplayableObject > > IPMA::Entry::GetDisplayableObjects( void ) const
+    std::vector< std::shared_ptr< DisplayableObject > > IPMA::Entry::GetDisplayableObjects() const
     {
         auto v( this->GetAssociations() );
         
         return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
-    uint32_t IPMA::Entry::GetItemID( void ) const
+    uint32_t IPMA::Entry::GetItemID() const
     {
         return this->impl->_itemID;
     }
@@ -110,7 +110,7 @@ namespace ISOBMFF
         this->impl->_itemID = value;
     }
     
-    std::vector< std::shared_ptr< IPMA::Entry::Association > > IPMA::Entry::GetAssociations( void ) const
+    std::vector< std::shared_ptr< IPMA::Entry::Association > > IPMA::Entry::GetAssociations() const
     {
         return this->impl->_associations;
     }
@@ -121,7 +121,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::IMPL():
     _itemID( 0 )
 {}
 
@@ -130,6 +130,6 @@ XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::IMPL( const IMPL & o ):
     _associations( o._associations )
 {}
 
-XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::~IMPL()
 {}
 

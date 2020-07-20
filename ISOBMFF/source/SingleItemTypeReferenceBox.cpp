@@ -38,9 +38,9 @@ class XS::PIMPL::Object< ISOBMFF::SingleItemTypeReferenceBox >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint32_t                _fromItemID;
         std::vector< uint32_t > _toItemIDs;
@@ -93,7 +93,7 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::pair< std::string, std::string > > SingleItemTypeReferenceBox::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > SingleItemTypeReferenceBox::GetDisplayableProperties() const
     {
         auto props( Box::GetDisplayableProperties() );
         
@@ -103,12 +103,12 @@ namespace ISOBMFF
         return props;
     }
     
-    uint32_t SingleItemTypeReferenceBox::GetFromItemID( void ) const
+    uint32_t SingleItemTypeReferenceBox::GetFromItemID() const
     {
         return this->impl->_fromItemID;
     }
     
-    std::vector< uint32_t > SingleItemTypeReferenceBox::GetToItemIDs( void ) const
+    std::vector< uint32_t > SingleItemTypeReferenceBox::GetToItemIDs() const
     {
         return this->impl->_toItemIDs;
     }
@@ -124,7 +124,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::SingleItemTypeReferenceBox >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::SingleItemTypeReferenceBox >::IMPL::IMPL():
     _fromItemID( 0 )
 {}
 
@@ -133,6 +133,6 @@ XS::PIMPL::Object< ISOBMFF::SingleItemTypeReferenceBox >::IMPL::IMPL( const IMPL
     _toItemIDs( o._toItemIDs )
 {}
 
-XS::PIMPL::Object< ISOBMFF::SingleItemTypeReferenceBox >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::SingleItemTypeReferenceBox >::IMPL::~IMPL()
 {}
 

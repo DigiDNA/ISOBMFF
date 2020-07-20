@@ -43,11 +43,11 @@ class XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const std::string & path );
         IMPL( const std::vector< uint8_t > & bytes );
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         std::vector< uint8_t > _bytes;
         mutable std::ifstream  _stream;
@@ -59,14 +59,14 @@ class XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL
 
 namespace ISOBMFF
 {
-    BinaryStream::BinaryStream( void )
+    BinaryStream::BinaryStream()
     {}
     
-	BinaryStream::BinaryStream( const std::string & path ): XS::PIMPL::Object< BinaryStream >( path )
+    BinaryStream::BinaryStream( const std::string & path ): XS::PIMPL::Object< BinaryStream >( path )
     {}
     
-	BinaryStream::BinaryStream( const std::vector< uint8_t > & bytes ): XS::PIMPL::Object< BinaryStream >( bytes )
-	{}
+    BinaryStream::BinaryStream( const std::vector< uint8_t > & bytes ): XS::PIMPL::Object< BinaryStream >( bytes )
+    {}
     
     BinaryStream::BinaryStream( BinaryStream & stream, uint64_t length ): BinaryStream( std::vector< uint8_t >( static_cast< size_t >( length ) ) )
     {
@@ -76,7 +76,7 @@ namespace ISOBMFF
         }
     }
     
-    bool BinaryStream::HasBytesAvailable( void ) const
+    bool BinaryStream::HasBytesAvailable() const
     {
         if( this->impl->_stream.is_open() )
         {
@@ -101,7 +101,7 @@ namespace ISOBMFF
         }
     }
     
-    uint8_t BinaryStream::ReadUInt8( void )
+    uint8_t BinaryStream::ReadUInt8()
     {
         uint8_t n;
         
@@ -112,7 +112,7 @@ namespace ISOBMFF
         return n;
     }
     
-    int8_t BinaryStream::ReadInt8( void )
+    int8_t BinaryStream::ReadInt8()
     {
         int8_t n;
         
@@ -123,7 +123,7 @@ namespace ISOBMFF
         return n;
     }
     
-    uint16_t BinaryStream::ReadUInt16( void )
+    uint16_t BinaryStream::ReadUInt16()
     {
         uint16_t n;
         
@@ -134,7 +134,7 @@ namespace ISOBMFF
         return n;
     }
     
-    int16_t BinaryStream::ReadInt16( void )
+    int16_t BinaryStream::ReadInt16()
     {
         int16_t n;
         
@@ -145,7 +145,7 @@ namespace ISOBMFF
         return n;
     }
     
-    uint16_t BinaryStream::ReadBigEndianUInt16( void )
+    uint16_t BinaryStream::ReadBigEndianUInt16()
     {
         uint8_t  c[ 2 ];
         uint16_t n;
@@ -166,7 +166,7 @@ namespace ISOBMFF
         return n;
     }
     
-    uint16_t BinaryStream::ReadLittleEndianUInt16( void )
+    uint16_t BinaryStream::ReadLittleEndianUInt16()
     {
         uint8_t  c[ 2 ];
         uint16_t n;
@@ -187,7 +187,7 @@ namespace ISOBMFF
         return n;
     }
     
-    uint32_t BinaryStream::ReadUInt32( void )
+    uint32_t BinaryStream::ReadUInt32()
     {
         uint32_t n;
         
@@ -198,7 +198,7 @@ namespace ISOBMFF
         return n;
     }
     
-    int32_t BinaryStream::ReadInt32( void )
+    int32_t BinaryStream::ReadInt32()
     {
         int32_t n;
         
@@ -209,7 +209,7 @@ namespace ISOBMFF
         return n;
     }
     
-    uint32_t BinaryStream::ReadBigEndianUInt32( void )
+    uint32_t BinaryStream::ReadBigEndianUInt32()
     {
         uint8_t  c[ 4 ];
         uint32_t n;
@@ -238,7 +238,7 @@ namespace ISOBMFF
         return n;
     }
     
-    uint32_t BinaryStream::ReadLittleEndianUInt32( void )
+    uint32_t BinaryStream::ReadLittleEndianUInt32()
     {
         uint8_t  c[ 4 ];
         uint32_t n;
@@ -267,7 +267,7 @@ namespace ISOBMFF
         return n;
     }
     
-    uint64_t BinaryStream::ReadUInt64( void )
+    uint64_t BinaryStream::ReadUInt64()
     {
         uint64_t n;
         
@@ -278,7 +278,7 @@ namespace ISOBMFF
         return n;
     }
     
-    int64_t BinaryStream::ReadInt64( void )
+    int64_t BinaryStream::ReadInt64()
     {
         int64_t n;
         
@@ -289,7 +289,7 @@ namespace ISOBMFF
         return n;
     }
     
-    uint64_t BinaryStream::ReadBigEndianUInt64( void )
+    uint64_t BinaryStream::ReadBigEndianUInt64()
     {
         uint8_t  c[ 8 ];
         uint64_t n;
@@ -334,7 +334,7 @@ namespace ISOBMFF
         return n;
     }
     
-    uint64_t BinaryStream::ReadLittleEndianUInt64( void )
+    uint64_t BinaryStream::ReadLittleEndianUInt64()
     {
         uint8_t  c[ 8 ];
         uint64_t n;
@@ -425,7 +425,7 @@ namespace ISOBMFF
         return static_cast< float >( integer ) + fractional;
     }
     
-    std::string BinaryStream::ReadFourCC( void )
+    std::string BinaryStream::ReadFourCC()
     {
         uint8_t s[ 4 ];
         
@@ -434,7 +434,7 @@ namespace ISOBMFF
         return std::string( reinterpret_cast< char * >( s ), 4 );
     }
     
-    std::string BinaryStream::ReadNULLTerminatedString( void )
+    std::string BinaryStream::ReadNULLTerminatedString()
     {
         std::vector< uint8_t > bytes;
         uint8_t                b;
@@ -450,7 +450,7 @@ namespace ISOBMFF
         return std::string( reinterpret_cast< char * >( &( bytes[ 0 ] ) ), bytes.size() );
     }
     
-    std::string BinaryStream::ReadPascalString( void )
+    std::string BinaryStream::ReadPascalString()
     {
         uint8_t     length;
         std::string ret;
@@ -469,7 +469,7 @@ namespace ISOBMFF
         return ret;
     }
     
-    Matrix BinaryStream::ReadMatrix( void )
+    Matrix BinaryStream::ReadMatrix()
     {
         return Matrix
         (
@@ -485,7 +485,7 @@ namespace ISOBMFF
         );
     }
     
-    std::vector< uint8_t > BinaryStream::ReadAllData( void )
+    std::vector< uint8_t > BinaryStream::ReadAllData()
     {
         std::vector< uint8_t > v;
         
@@ -560,17 +560,17 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const std::string & path ):
     _path( path )
 {
-	#ifdef _WIN32
-	this->_stream.open( ISOBMFF::StringToWideString( path ), std::ios::binary );
-	#else
+    #ifdef _WIN32
+    this->_stream.open( ISOBMFF::StringToWideString( path ), std::ios::binary );
+    #else
     this->_stream.open( path, std::ios::binary );
-	#endif
+    #endif
 }
 
 XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const std::vector< uint8_t > & bytes ):
@@ -585,11 +585,11 @@ XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const IMPL & o ):
     
     if( o._stream.is_open() )
     {
-		#ifdef _WIN32
-		this->_stream.open( ISOBMFF::StringToWideString( this->_path ), std::ios::binary );
-		#else
+	    #ifdef _WIN32
+	    this->_stream.open( ISOBMFF::StringToWideString( this->_path ), std::ios::binary );
+	    #else
         this->_stream.open( this->_path, std::ios::binary );
-		#endif
+	    #endif
 
         if( this->_stream.good() == false )
         {
@@ -602,7 +602,7 @@ XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const IMPL & o ):
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::~IMPL()
 {
     if( this->_stream.is_open() )
     {

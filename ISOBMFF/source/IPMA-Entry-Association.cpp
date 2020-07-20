@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::IPMA::Entry::Association >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         bool     _essential;
         uint16_t _propertyIndex;
@@ -48,7 +48,7 @@ class XS::PIMPL::Object< ISOBMFF::IPMA::Entry::Association >::IMPL
 
 namespace ISOBMFF
 {
-    IPMA::Entry::Association::Association( void )
+    IPMA::Entry::Association::Association()
     {}
     
     IPMA::Entry::Association::Association( BinaryStream & stream, const IPMA & ipma )
@@ -77,12 +77,12 @@ namespace ISOBMFF
         }
     }
     
-    std::string IPMA::Entry::Association::GetName( void ) const
+    std::string IPMA::Entry::Association::GetName() const
     {
         return "Association";
     }
     
-    std::vector< std::pair< std::string, std::string > > IPMA::Entry::Association::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > IPMA::Entry::Association::GetDisplayableProperties() const
     {
         return
         {
@@ -91,12 +91,12 @@ namespace ISOBMFF
         };
     }
     
-    bool IPMA::Entry::Association::GetEssential( void ) const
+    bool IPMA::Entry::Association::GetEssential() const
     {
         return this->impl->_essential;
     }
     
-    uint16_t IPMA::Entry::Association::GetPropertyIndex( void ) const
+    uint16_t IPMA::Entry::Association::GetPropertyIndex() const
     {
         return this->impl->_propertyIndex;
     }
@@ -112,7 +112,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::IPMA::Entry::Association >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::IPMA::Entry::Association >::IMPL::IMPL():
     _essential( false ),
     _propertyIndex( 0 )
 {}
@@ -122,6 +122,6 @@ XS::PIMPL::Object< ISOBMFF::IPMA::Entry::Association >::IMPL::IMPL( const IMPL &
     _propertyIndex( o._propertyIndex )
 {}
 
-XS::PIMPL::Object< ISOBMFF::IPMA::Entry::Association >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::IPMA::Entry::Association >::IMPL::~IMPL()
 {}
 

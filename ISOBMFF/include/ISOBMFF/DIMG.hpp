@@ -32,6 +32,8 @@
 #define ISOBMFF_DIMG_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
 
@@ -43,7 +45,7 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< DIMG >::impl;
             
-            DIMG( void );
+            DIMG();
     };
 }
 

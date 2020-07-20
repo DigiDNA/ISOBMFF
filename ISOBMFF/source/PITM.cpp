@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::PITM >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint32_t _itemID;
 };
@@ -47,7 +47,7 @@ class XS::PIMPL::Object< ISOBMFF::PITM >::IMPL
 
 namespace ISOBMFF
 {
-    PITM::PITM( void ): FullBox( "pitm" )
+    PITM::PITM(): FullBox( "pitm" )
     {}
     
     void PITM::ReadData( Parser & parser, BinaryStream & stream )
@@ -64,7 +64,7 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::pair< std::string, std::string > > PITM::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > PITM::GetDisplayableProperties() const
     {
         auto props( FullBox::GetDisplayableProperties() );
         
@@ -73,7 +73,7 @@ namespace ISOBMFF
         return props;
     }
     
-    uint32_t PITM::GetItemID( void ) const
+    uint32_t PITM::GetItemID() const
     {
         return this->impl->_itemID;
     }
@@ -84,7 +84,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::PITM >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::PITM >::IMPL::IMPL():
     _itemID( 0 )
 {}
 
@@ -92,6 +92,6 @@ XS::PIMPL::Object< ISOBMFF::PITM >::IMPL::IMPL( const IMPL & o ):
     _itemID( o._itemID )
 {}
 
-XS::PIMPL::Object< ISOBMFF::PITM >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::PITM >::IMPL::~IMPL()
 {}
 

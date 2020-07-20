@@ -32,11 +32,12 @@
 #define ISOBMFF_CONTAINER_BOX_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Box.hpp>
 #include <ISOBMFF/Container.hpp>
 #include <vector>
-#include <memory>
 #include <ostream>
 
 namespace ISOBMFF
@@ -53,7 +54,7 @@ namespace ISOBMFF
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
             void                                  AddBox( std::shared_ptr< Box > box ) override;
-            std::vector< std::shared_ptr< Box > > GetBoxes( void ) const override;
+            std::vector< std::shared_ptr< Box > > GetBoxes() const override;
     };
 }
 

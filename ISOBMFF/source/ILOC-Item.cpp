@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::ILOC::Item >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint32_t                                                      _itemID;
         uint8_t                                                       _constructionMethod;
@@ -51,7 +51,7 @@ class XS::PIMPL::Object< ISOBMFF::ILOC::Item >::IMPL
 
 namespace ISOBMFF
 {
-    ILOC::Item::Item( void ):
+    ILOC::Item::Item():
         XS::PIMPL::Object< Item >()
     {}
     
@@ -100,27 +100,27 @@ namespace ISOBMFF
         }
     }
     
-    std::string ILOC::Item::GetName( void ) const
+    std::string ILOC::Item::GetName() const
     {
         return "Item";
     }
     
-    uint32_t ILOC::Item::GetItemID( void ) const
+    uint32_t ILOC::Item::GetItemID() const
     {
         return this->impl->_itemID;
     }
     
-    uint8_t ILOC::Item::GetConstructionMethod( void ) const
+    uint8_t ILOC::Item::GetConstructionMethod() const
     {
         return this->impl->_constructionMethod;
     }
     
-    uint16_t ILOC::Item::GetDataReferenceIndex( void ) const
+    uint16_t ILOC::Item::GetDataReferenceIndex() const
     {
         return this->impl->_dataReferenceIndex;
     }
     
-    uint64_t ILOC::Item::GetBaseOffset( void ) const
+    uint64_t ILOC::Item::GetBaseOffset() const
     {
         return this->impl->_baseOffset;
     }
@@ -145,7 +145,7 @@ namespace ISOBMFF
         this->impl->_baseOffset = value;
     }
     
-    std::vector< std::shared_ptr< ILOC::Item::Extent > > ILOC::Item::GetExtents( void ) const
+    std::vector< std::shared_ptr< ILOC::Item::Extent > > ILOC::Item::GetExtents() const
     {
         return this->impl->_extents;
     }
@@ -161,14 +161,14 @@ namespace ISOBMFF
         DisplayableObjectContainer::WriteDescription( os, indentLevel );
     }
     
-    std::vector< std::shared_ptr< DisplayableObject > > ILOC::Item::GetDisplayableObjects( void ) const
+    std::vector< std::shared_ptr< DisplayableObject > > ILOC::Item::GetDisplayableObjects() const
     {
         auto v( this->GetExtents() );
         
         return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
-    std::vector< std::pair< std::string, std::string > > ILOC::Item::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > ILOC::Item::GetDisplayableProperties() const
     {
         return
         {
@@ -181,7 +181,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::ILOC::Item >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::ILOC::Item >::IMPL::IMPL():
     _itemID( 0 ),
     _constructionMethod( 0 ),
     _dataReferenceIndex( 0 ),
@@ -196,6 +196,6 @@ XS::PIMPL::Object< ISOBMFF::ILOC::Item >::IMPL::IMPL( const IMPL & o ):
     _extents( o._extents )
 {}
 
-XS::PIMPL::Object< ISOBMFF::ILOC::Item >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::ILOC::Item >::IMPL::~IMPL()
 {}
 

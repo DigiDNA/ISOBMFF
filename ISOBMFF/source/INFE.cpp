@@ -36,9 +36,9 @@ class XS::PIMPL::Object< ISOBMFF::INFE >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint32_t    _itemID;
         uint16_t    _itemProtectionIndex;
@@ -54,7 +54,7 @@ class XS::PIMPL::Object< ISOBMFF::INFE >::IMPL
 
 namespace ISOBMFF
 {
-    INFE::INFE( void ): FullBox( "infe" )
+    INFE::INFE(): FullBox( "infe" )
     {}
     
     void INFE::ReadData( Parser & parser, BinaryStream & stream )
@@ -146,7 +146,7 @@ namespace ISOBMFF
         }
     }
     
-	std::vector< std::pair< std::string, std::string > > INFE::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > INFE::GetDisplayableProperties() const
     {
         auto props( FullBox::GetDisplayableProperties() );
         
@@ -161,37 +161,37 @@ namespace ISOBMFF
         return props;
     }
     
-    uint32_t INFE::GetItemID( void ) const
+    uint32_t INFE::GetItemID() const
     {
         return this->impl->_itemID;
     }
     
-    uint16_t INFE::GetItemProtectionIndex( void ) const
+    uint16_t INFE::GetItemProtectionIndex() const
     {
         return this->impl->_itemProtectionIndex;
     }
     
-    std::string INFE::GetItemType( void ) const
+    std::string INFE::GetItemType() const
     {
         return this->impl->_itemType;
     }
     
-    std::string INFE::GetItemName( void ) const
+    std::string INFE::GetItemName() const
     {
         return this->impl->_itemName;
     }
     
-    std::string INFE::GetContentType( void ) const
+    std::string INFE::GetContentType() const
     {
         return this->impl->_contentType;
     }
     
-    std::string INFE::GetContentEncoding( void ) const
+    std::string INFE::GetContentEncoding() const
     {
         return this->impl->_contentEncoding;
     }
     
-    std::string INFE::GetItemURIType( void ) const
+    std::string INFE::GetItemURIType() const
     {
         return this->impl->_itemURIType;
     }
@@ -232,7 +232,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::INFE >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::INFE >::IMPL::IMPL():
     _itemID( 0 ),
     _itemProtectionIndex( 0 )
 {}
@@ -247,6 +247,6 @@ XS::PIMPL::Object< ISOBMFF::INFE >::IMPL::IMPL( const IMPL & o ):
     _itemURIType( o._itemURIType )
 {}
 
-XS::PIMPL::Object< ISOBMFF::INFE >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::INFE >::IMPL::~IMPL()
 {}
 

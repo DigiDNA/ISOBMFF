@@ -36,9 +36,9 @@ class XS::PIMPL::Object< ISOBMFF::IROT >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint8_t _angle;
 };
@@ -48,7 +48,7 @@ class XS::PIMPL::Object< ISOBMFF::IROT >::IMPL
 
 namespace ISOBMFF
 {
-    IROT::IROT( void ): Box( "irot" )
+    IROT::IROT(): Box( "irot" )
     {}
     
     void IROT::ReadData( Parser & parser, BinaryStream & stream )
@@ -62,7 +62,7 @@ namespace ISOBMFF
         this->SetAngle( u8 & 0x3 );
     }
     
-	std::vector< std::pair< std::string, std::string > > IROT::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > IROT::GetDisplayableProperties() const
     {
         auto props( Box::GetDisplayableProperties() );
         
@@ -71,18 +71,18 @@ namespace ISOBMFF
         return props;
     }
     
-    uint8_t IROT::GetAngle( void ) const
+    uint8_t IROT::GetAngle() const
     {
         return this->impl->_angle;
     }
     
-    void IROT::SetAngle( uint8_t value ) const
+    void IROT::SetAngle( uint8_t value )
     {
         this->impl->_angle = value;
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::IROT >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::IROT >::IMPL::IMPL():
     _angle( 0 )
 {}
 
@@ -90,6 +90,6 @@ XS::PIMPL::Object< ISOBMFF::IROT >::IMPL::IMPL( const IMPL & o ):
     _angle( o._angle )
 {}
 
-XS::PIMPL::Object< ISOBMFF::IROT >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::IROT >::IMPL::~IMPL()
 {}
 

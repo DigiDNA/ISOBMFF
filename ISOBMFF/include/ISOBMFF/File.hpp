@@ -32,6 +32,8 @@
 #define ISOBMFF_FILE_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/ContainerBox.hpp>
 #include <ostream>
@@ -44,9 +46,9 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< File >::impl;
             
-            File( void );
+            File();
             
-            std::string GetName( void ) const override;
+            std::string GetName() const override;
     };
 }
 

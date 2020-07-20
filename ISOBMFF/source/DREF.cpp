@@ -36,9 +36,9 @@ class XS::PIMPL::Object< ISOBMFF::DREF >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
 };
@@ -48,7 +48,7 @@ class XS::PIMPL::Object< ISOBMFF::DREF >::IMPL
 
 namespace ISOBMFF
 {
-    DREF::DREF( void ): FullBox( "dref" )
+    DREF::DREF(): FullBox( "dref" )
     {}
     
     void DREF::ReadData( Parser & parser, BinaryStream & stream )
@@ -76,19 +76,19 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::shared_ptr< Box > > DREF::GetBoxes( void ) const
+    std::vector< std::shared_ptr< Box > > DREF::GetBoxes() const
     {
         return this->impl->_boxes;
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::DREF >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::DREF >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::DREF >::IMPL::IMPL( const IMPL & o ):
     _boxes( o._boxes )
 {}
 
-XS::PIMPL::Object< ISOBMFF::DREF >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::DREF >::IMPL::~IMPL()
 {}
 

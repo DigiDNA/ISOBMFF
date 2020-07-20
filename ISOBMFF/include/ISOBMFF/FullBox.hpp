@@ -32,6 +32,8 @@
 #define ISOBMFF_FULL_BOX_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Box.hpp>
 
@@ -46,10 +48,10 @@ namespace ISOBMFF
             FullBox( const std::string & name );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            uint8_t  GetVersion( void ) const;
-            uint32_t GetFlags( void )   const;
+            uint8_t  GetVersion() const;
+            uint32_t GetFlags()   const;
             
             void SetVersion( uint8_t value );
             void SetFlags( uint32_t value );

@@ -37,9 +37,9 @@ class XS::PIMPL::Object< ISOBMFF::SCHM >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         std::string _schemeType;
         uint32_t    _schemeVersion;
@@ -51,7 +51,7 @@ class XS::PIMPL::Object< ISOBMFF::SCHM >::IMPL
 
 namespace ISOBMFF
 {
-    SCHM::SCHM( void ): FullBox( "schm" )
+    SCHM::SCHM(): FullBox( "schm" )
     {}
     
     void SCHM::ReadData( Parser & parser, BinaryStream & stream )
@@ -74,7 +74,7 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::pair< std::string, std::string > > SCHM::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > SCHM::GetDisplayableProperties() const
     {
         auto props( FullBox::GetDisplayableProperties() );
         
@@ -85,17 +85,17 @@ namespace ISOBMFF
         return props;
     }
     
-    std::string SCHM::GetSchemeType( void ) const
+    std::string SCHM::GetSchemeType() const
     {
         return this->impl->_schemeType;
     }
     
-    uint32_t SCHM::GetSchemeVersion( void ) const
+    uint32_t SCHM::GetSchemeVersion() const
     {
         return this->impl->_schemeVersion;
     }
     
-    std::string SCHM::GetSchemeURI( void ) const
+    std::string SCHM::GetSchemeURI() const
     {
         return this->impl->_schemeURI;
     }
@@ -116,7 +116,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::SCHM >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::SCHM >::IMPL::IMPL():
     _schemeVersion( 0 )
 {}
 
@@ -126,5 +126,5 @@ XS::PIMPL::Object< ISOBMFF::SCHM >::IMPL::IMPL( const IMPL & o ):
     _schemeURI( o._schemeURI )
 {}
 
-XS::PIMPL::Object< ISOBMFF::SCHM >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::SCHM >::IMPL::~IMPL()
 {}

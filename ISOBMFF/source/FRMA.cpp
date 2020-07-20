@@ -37,9 +37,9 @@ class XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         std::string _dataFormat;
 };
@@ -49,7 +49,7 @@ class XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL
 
 namespace ISOBMFF
 {
-    FRMA::FRMA( void ): Box( "frma" )
+    FRMA::FRMA(): Box( "frma" )
     {}
     
     void FRMA::ReadData( Parser & parser, BinaryStream & stream )
@@ -59,7 +59,7 @@ namespace ISOBMFF
         this->SetDataFormat( stream.ReadFourCC() );
     }
     
-    std::vector< std::pair< std::string, std::string > > FRMA::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > FRMA::GetDisplayableProperties() const
     {
         auto props( Box::GetDisplayableProperties() );
         
@@ -68,7 +68,7 @@ namespace ISOBMFF
         return props;
     }
     
-    std::string FRMA::GetDataFormat( void ) const
+    std::string FRMA::GetDataFormat() const
     {
         return this->impl->_dataFormat;
     }
@@ -79,13 +79,13 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL::IMPL( const IMPL & o ):
     _dataFormat( o._dataFormat )
 {}
 
-XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL::~IMPL()
 {}
 

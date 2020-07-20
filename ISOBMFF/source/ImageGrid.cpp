@@ -35,9 +35,9 @@ class XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint8_t  _version;
         uint8_t  _flags;
@@ -52,7 +52,7 @@ class XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL
 
 namespace ISOBMFF
 {
-    ImageGrid::ImageGrid( void )
+    ImageGrid::ImageGrid()
     {}
     
     ImageGrid::ImageGrid( BinaryStream & stream )
@@ -88,37 +88,37 @@ namespace ISOBMFF
         }
     }
     
-    std::string ImageGrid::GetName( void ) const
+    std::string ImageGrid::GetName() const
     {
         return "ImageGrid";
     }
     
-    uint8_t ImageGrid::GetVersion( void ) const
+    uint8_t ImageGrid::GetVersion() const
     {
         return this->impl->_version;
     }
     
-    uint8_t ImageGrid::GetFlags( void ) const
+    uint8_t ImageGrid::GetFlags() const
     {
         return this->impl->_flags;
     }
     
-    uint8_t ImageGrid::GetRows( void ) const
+    uint8_t ImageGrid::GetRows() const
     {
         return this->impl->_rows;
     }
     
-    uint8_t ImageGrid::GetColumns( void ) const
+    uint8_t ImageGrid::GetColumns() const
     {
         return this->impl->_columns;
     }
     
-    uint64_t ImageGrid::GetOutputWidth( void ) const
+    uint64_t ImageGrid::GetOutputWidth() const
     {
         return this->impl->_outputWidth;
     }
     
-    uint64_t ImageGrid::GetOutputHeight( void ) const
+    uint64_t ImageGrid::GetOutputHeight() const
     {
         return this->impl->_outputHeight;
     }
@@ -153,7 +153,7 @@ namespace ISOBMFF
         this->impl->_outputHeight = value;
     }
     
-    std::vector< std::pair< std::string, std::string > > ImageGrid::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > ImageGrid::GetDisplayableProperties() const
     {
         return
         {
@@ -167,7 +167,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL::IMPL():
     _version( 0 ),
     _flags( 0 ),
     _rows( 0 ),
@@ -185,6 +185,6 @@ XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL::IMPL( const IMPL & o ):
     _outputHeight( o._outputHeight )
 {}
 
-XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL::~IMPL()
 {}
 

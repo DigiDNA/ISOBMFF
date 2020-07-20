@@ -32,6 +32,8 @@
 #define ISOBMFF_ISPE_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <cstdint>
@@ -44,13 +46,13 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< ISPE >::impl;
             
-            ISPE( void );
+            ISPE();
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            uint32_t GetDisplayWidth( void )  const;
-            uint32_t GetDisplayHeight( void ) const;
+            uint32_t GetDisplayWidth()  const;
+            uint32_t GetDisplayHeight() const;
             
             void SetDisplayWidth( uint32_t value );
             void SetDisplayHeight( uint32_t value );

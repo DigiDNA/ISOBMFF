@@ -32,6 +32,8 @@
 #define ISOBMFF_HVCC_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
@@ -47,31 +49,31 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< HVCC >::impl;
             
-            HVCC( void );
+            HVCC();
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
-            virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
-            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects()    const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            uint8_t  GetConfigurationVersion( void )             const;
-            uint8_t  GetGeneralProfileSpace( void )              const;
-            uint8_t  GetGeneralTierFlag( void )                  const;
-            uint8_t  GetGeneralProfileIDC( void )                const;
-            uint32_t GetGeneralProfileCompatibilityFlags( void ) const;
-            uint64_t GetGeneralConstraintIndicatorFlags( void )  const;
-            uint8_t  GetGeneralLevelIDC( void )                  const;
-            uint16_t GetMinSpatialSegmentationIDC( void )        const;
-            uint8_t  GetParallelismType( void )                  const;
-            uint8_t  GetChromaFormat( void )                     const;
-            uint8_t  GetBitDepthLumaMinus8( void )               const;
-            uint8_t  GetBitDepthChromaMinus8( void )             const;
-            uint16_t GetAvgFrameRate( void )                     const;
-            uint8_t  GetConstantFrameRate( void )                const;
-            uint8_t  GetNumTemporalLayers( void )                const;
-            uint8_t  GetTemporalIdNested( void )                 const;
-            uint8_t  GetLengthSizeMinusOne( void )               const;
+            uint8_t  GetConfigurationVersion()             const;
+            uint8_t  GetGeneralProfileSpace()              const;
+            uint8_t  GetGeneralTierFlag()                  const;
+            uint8_t  GetGeneralProfileIDC()                const;
+            uint32_t GetGeneralProfileCompatibilityFlags() const;
+            uint64_t GetGeneralConstraintIndicatorFlags()  const;
+            uint8_t  GetGeneralLevelIDC()                  const;
+            uint16_t GetMinSpatialSegmentationIDC()        const;
+            uint8_t  GetParallelismType()                  const;
+            uint8_t  GetChromaFormat()                     const;
+            uint8_t  GetBitDepthLumaMinus8()               const;
+            uint8_t  GetBitDepthChromaMinus8()             const;
+            uint16_t GetAvgFrameRate()                     const;
+            uint8_t  GetConstantFrameRate()                const;
+            uint8_t  GetNumTemporalLayers()                const;
+            uint8_t  GetTemporalIdNested()                 const;
+            uint8_t  GetLengthSizeMinusOne()               const;
             
             void SetConfigurationVersion( uint8_t value );
             void SetGeneralProfileSpace( uint8_t value );
@@ -97,21 +99,21 @@ namespace ISOBMFF
                     
                     using XS::PIMPL::Object< Array >::impl;
                     
-                    Array( void );
+                    Array();
                     Array( BinaryStream & stream );
                     
-                    std::string GetName( void ) const override;
+                    std::string GetName() const override;
                     
-                    bool    GetArrayCompleteness( void ) const;
-                    uint8_t GetNALUnitType( void )       const;
+                    bool    GetArrayCompleteness() const;
+                    uint8_t GetNALUnitType()       const;
                     
                     void SetArrayCompleteness( bool value );
                     void SetNALUnitType( uint8_t value );
                     
                     void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
                     
-                    virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
-                    virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+                    virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects()    const override;
+                    virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
                     
                     class ISOBMFF_EXPORT NALUnit: public XS::PIMPL::Object< NALUnit >, public DisplayableObject
                     {
@@ -119,22 +121,22 @@ namespace ISOBMFF
                             
                             using XS::PIMPL::Object< NALUnit >::impl;
                             
-                            NALUnit( void );
+                            NALUnit();
                             NALUnit( BinaryStream & stream );
                             
-                            std::string GetName( void ) const override;
+                            std::string GetName() const override;
                             
-                            std::vector< uint8_t > GetData( void ) const;
+                            std::vector< uint8_t > GetData() const;
                             void                   SetData( const std::vector< uint8_t > & value );
                             
-                            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void )                               const override;
+                            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
                     };
                     
-                    std::vector< std::shared_ptr< NALUnit > > GetNALUnits( void ) const;
+                    std::vector< std::shared_ptr< NALUnit > > GetNALUnits() const;
                     void                                      AddNALUnit( std::shared_ptr< NALUnit > unit );
             };
             
-            std::vector< std::shared_ptr< Array > > GetArrays( void ) const;
+            std::vector< std::shared_ptr< Array > > GetArrays() const;
             void                                    AddArray( std::shared_ptr< Array > array );
     };
 }

@@ -32,6 +32,8 @@
 #define ISOBMFF_COLR_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Box.hpp>
 #include <string>
@@ -46,17 +48,17 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< COLR >::impl;
             
-            COLR( void );
+            COLR();
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            std::string            GetColourType( void )              const;
-            uint16_t               GetColourPrimaries( void )         const;
-            uint16_t               GetTransferCharacteristics( void ) const;
-            uint16_t               GetMatrixCoefficients( void )      const;
-            bool                   GetFullRangeFlag( void )           const;
-            std::vector< uint8_t > GetICCProfile( void )              const;
+            std::string            GetColourType()              const;
+            uint16_t               GetColourPrimaries()         const;
+            uint16_t               GetTransferCharacteristics() const;
+            uint16_t               GetMatrixCoefficients()      const;
+            bool                   GetFullRangeFlag()           const;
+            std::vector< uint8_t > GetICCProfile()              const;
             
             void SetColourType( const std::string & value );
             void SetColourPrimaries( uint16_t value );

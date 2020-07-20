@@ -32,6 +32,8 @@
 #define ISOBMFF_IROT_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 
@@ -43,13 +45,13 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< IROT >::impl;
             
-            IROT( void );
+            IROT();
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            uint8_t GetAngle( void ) const;
-            void    SetAngle( uint8_t value ) const;
+            uint8_t GetAngle() const;
+            void    SetAngle( uint8_t value );
     };
 }
 

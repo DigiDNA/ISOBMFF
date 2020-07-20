@@ -35,10 +35,10 @@ class XS::PIMPL::Object< ISOBMFF::Matrix >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( uint32_t a, uint32_t b, uint32_t u, uint32_t c, uint32_t d, uint32_t v, uint32_t x, uint32_t y, uint32_t w );
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint32_t _a;
         uint32_t _b;
@@ -56,7 +56,7 @@ class XS::PIMPL::Object< ISOBMFF::Matrix >::IMPL
 
 namespace ISOBMFF
 {
-    Matrix::Matrix( void ):
+    Matrix::Matrix():
         XS::PIMPL::Object< Matrix >()
     {}
     
@@ -64,52 +64,52 @@ namespace ISOBMFF
         XS::PIMPL::Object< Matrix >( a, b, u, c, d, v, x, y, w )
     {}
     
-    std::string Matrix::GetName( void ) const
+    std::string Matrix::GetName() const
     {
         return "Matrix";
     }
     
-    uint32_t Matrix::GetA( void ) const
+    uint32_t Matrix::GetA() const
     {
         return this->impl->_a;
     }
     
-    uint32_t Matrix::GetB( void ) const
+    uint32_t Matrix::GetB() const
     {
         return this->impl->_b;
     }
     
-    uint32_t Matrix::GetU( void ) const
+    uint32_t Matrix::GetU() const
     {
         return this->impl->_u;
     }
     
-    uint32_t Matrix::GetC( void ) const
+    uint32_t Matrix::GetC() const
     {
         return this->impl->_c;
     }
     
-    uint32_t Matrix::GetD( void ) const
+    uint32_t Matrix::GetD() const
     {
         return this->impl->_d;
     }
     
-    uint32_t Matrix::GetV( void ) const
+    uint32_t Matrix::GetV() const
     {
         return this->impl->_v;
     }
     
-    uint32_t Matrix::GetX( void ) const
+    uint32_t Matrix::GetX() const
     {
         return this->impl->_x;
     }
     
-    uint32_t Matrix::GetY( void ) const
+    uint32_t Matrix::GetY() const
     {
         return this->impl->_y;
     }
     
-    uint32_t Matrix::GetW( void ) const
+    uint32_t Matrix::GetW() const
     {
         return this->impl->_w;
     }
@@ -176,7 +176,7 @@ namespace ISOBMFF
            << " }";
     }
     
-    std::vector< std::pair< std::string, std::string > > Matrix::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > Matrix::GetDisplayableProperties() const
     {
         return {
             { "a", std::to_string( this->GetA() ) },
@@ -192,7 +192,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::Matrix >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::Matrix >::IMPL::IMPL():
     IMPL( 0, 0, 0, 0, 0, 0, 0, 0, 0 )
 {}
 
@@ -220,6 +220,6 @@ XS::PIMPL::Object< ISOBMFF::Matrix >::IMPL::IMPL( const IMPL & o ):
     _w( o._w )
 {}
 
-XS::PIMPL::Object< ISOBMFF::Matrix >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::Matrix >::IMPL::~IMPL()
 {}
 

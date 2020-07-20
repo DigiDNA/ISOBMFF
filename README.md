@@ -112,7 +112,7 @@ std::shared_ptr< ISOBMFF::MVHD         > mvhd = moov->GetTypedBox< ISOBMFF::MVHD
 The parser also supports custom boxes:
 
 ```cpp
-parser.RegisterBox( "abcd", [ = ]( void ) -> std::shared_ptr< CustomBox > { return std::make_shared< CustomBox >(); } );
+parser.RegisterBox( "abcd", [ = ]() -> std::shared_ptr< CustomBox > { return std::make_shared< CustomBox >(); } );
 ```
 
 It will then create an instance of `CustomBox` when encountering an `abcd` box somewhere in the file.
@@ -124,7 +124,7 @@ class CustomBox: public ISOBMFF::Box
 {
     public:
         
-        CustomBox( void ): Box( "abcd" )
+        CustomBox(): Box( "abcd" )
         {}
         
         void CustomBox::ReadData( Parser & parser, BinaryStream & stream )
@@ -132,7 +132,7 @@ class CustomBox: public ISOBMFF::Box
             /* Read box data here... */
         }
         
-        std::vector< std::pair< std::string, std::string > > CustomBox::GetDisplayableProperties( void ) const
+        std::vector< std::pair< std::string, std::string > > CustomBox::GetDisplayableProperties() const
         {
             /* Returns box properties, to support output... */
             return {};

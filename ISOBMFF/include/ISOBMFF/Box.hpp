@@ -32,6 +32,8 @@
 #define ISOBMFF_BOX_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/BinaryStream.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
@@ -66,7 +68,7 @@ namespace ISOBMFF
              * @abstract    Gets the box name.
              * @result      The box name.
              */
-            std::string GetName( void ) const override;
+            std::string GetName() const override;
             
             /*!
              * @function    GetDisplayableProperties
@@ -74,7 +76,7 @@ namespace ISOBMFF
              * @result      The box displayable properties.
              * @see         DisplayableObject
              */
-            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
             /*!
              * @function    ReadData
@@ -90,7 +92,7 @@ namespace ISOBMFF
              * @abstract    Gets the box data.
              * @result      The box data, as a vector of bytes.
              */
-            virtual std::vector< uint8_t > GetData( void ) const;
+            virtual std::vector< uint8_t > GetData() const;
     };
 }
 

@@ -37,9 +37,9 @@ class XS::PIMPL::Object< ISOBMFF::FullBox >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         uint8_t  _version;
         uint32_t _flags;
@@ -65,7 +65,7 @@ namespace ISOBMFF
         this->SetFlags( vf & 0x00FFFFFF );
     }
     
-    std::vector< std::pair< std::string, std::string > > FullBox::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > FullBox::GetDisplayableProperties() const
     {
         auto props( Box::GetDisplayableProperties() );
         
@@ -75,12 +75,12 @@ namespace ISOBMFF
         return props;
     }
     
-    uint8_t FullBox::GetVersion( void ) const
+    uint8_t FullBox::GetVersion() const
     {
         return this->impl->_version;
     }
     
-    uint32_t FullBox::GetFlags( void ) const
+    uint32_t FullBox::GetFlags() const
     {
         return this->impl->_flags;
     }
@@ -96,7 +96,7 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::FullBox >::IMPL::IMPL( void ):
+XS::PIMPL::Object< ISOBMFF::FullBox >::IMPL::IMPL():
     _version( 0 ),
     _flags( 0 )
 {}
@@ -106,6 +106,6 @@ XS::PIMPL::Object< ISOBMFF::FullBox >::IMPL::IMPL( const IMPL & o ):
     _flags( o._flags )
 {}
 
-XS::PIMPL::Object< ISOBMFF::FullBox >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::FullBox >::IMPL::~IMPL()
 {}
 

@@ -32,6 +32,8 @@
 #define ISOBMFF_INFE_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <string>
@@ -45,18 +47,18 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< INFE >::impl;
             
-            INFE( void );
+            INFE();
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            uint32_t    GetItemID( void )              const;
-            uint16_t    GetItemProtectionIndex( void ) const;
-            std::string GetItemType( void )            const;
-            std::string GetItemName( void )            const;
-            std::string GetContentType( void )         const;
-            std::string GetContentEncoding( void )     const;
-            std::string GetItemURIType( void )         const;
+            uint32_t    GetItemID()              const;
+            uint16_t    GetItemProtectionIndex() const;
+            std::string GetItemType()            const;
+            std::string GetItemName()            const;
+            std::string GetContentType()         const;
+            std::string GetContentEncoding()     const;
+            std::string GetItemURIType()         const;
             
             void SetItemID( uint32_t value );
             void SetItemProtectionIndex( uint16_t value );

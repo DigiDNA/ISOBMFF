@@ -32,6 +32,8 @@
 #define ISOBMFF_FTYP_HPP
 
 #include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Box.hpp>
 #include <string>
@@ -46,14 +48,14 @@ namespace ISOBMFF
             
             using XS::PIMPL::Object< FTYP >::impl;
             
-            FTYP( void );
+            FTYP();
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            std::string                GetMajorBrand( void )       const;
-            uint32_t                   GetMinorVersion( void )     const;
-            std::vector< std::string > GetCompatibleBrands( void ) const;
+            std::string                GetMajorBrand()       const;
+            uint32_t                   GetMinorVersion()     const;
+            std::vector< std::string > GetCompatibleBrands() const;
             
             void SetMajorBrand( const std::string & value );
             void SetMinorVersion( uint32_t value );

@@ -36,9 +36,9 @@ class XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL
 {
     public:
         
-        IMPL( void );
+        IMPL();
         IMPL( const IMPL & o );
-        ~IMPL( void );
+        ~IMPL();
         
         std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
 };
@@ -110,7 +110,7 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::shared_ptr< Box > > ContainerBox::GetBoxes( void ) const
+    std::vector< std::shared_ptr< Box > > ContainerBox::GetBoxes() const
     {
         return this->impl->_boxes;
     }
@@ -122,13 +122,13 @@ namespace ISOBMFF
     }
 }
 
-XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL::IMPL( void )
+XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL::IMPL()
 {}
 
 XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL::IMPL( const IMPL & o ):
     _boxes( o._boxes )
 {}
 
-XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL::~IMPL( void )
+XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL::~IMPL()
 {}
 
