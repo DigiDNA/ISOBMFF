@@ -31,25 +31,54 @@
 #include <ISOBMFF/STSD.hpp>
 #include <ISOBMFF/ContainerBox.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::STSD >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::STSD
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    STSD::STSD(): FullBox( "stsd" )
+    class STSD::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
+    };
+    
+    STSD::STSD():
+        FullBox( "stsd" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    STSD::STSD( const STSD & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    STSD::STSD( STSD && o ) ISOBMFF_NOEXCEPT( true ):
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    STSD::~STSD()
+    {}
+    
+    STSD & STSD::operator =( STSD o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( STSD & o1, STSD & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void STSD::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -80,15 +109,14 @@ namespace ISOBMFF
     {
         return this->impl->_boxes;
     }
+    
+    STSD::IMPL::IMPL()
+    {}
+
+    STSD::IMPL::IMPL( const IMPL & o ):
+        _boxes( o._boxes )
+    {}
+
+    STSD::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::STSD >::IMPL::IMPL()
-{}
-
-XS::PIMPL::Object< ISOBMFF::STSD >::IMPL::IMPL( const IMPL & o ):
-    _boxes( o._boxes )
-{}
-
-XS::PIMPL::Object< ISOBMFF::STSD >::IMPL::~IMPL()
-{}
-

@@ -823,10 +823,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 057224132011201F00DC0502 /* Debug - ccache.xcconfig */;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Submodules/PIMPL/PIMPL/include",
-					"$(SRCROOT)/ISOBMFF/include",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/ISOBMFF/include";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 			};
 			name = Debug;
@@ -835,10 +832,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 057224112011201F00DC0502 /* Release - ccache.xcconfig */;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Submodules/PIMPL/PIMPL/include",
-					"$(SRCROOT)/ISOBMFF/include",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/ISOBMFF/include";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 			};
 			name = Release;

@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_ILOC_HPP
 #define ISOBMFF_ILOC_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -42,13 +41,16 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT ILOC: public FullBox, public DisplayableObjectContainer, public XS::PIMPL::Object< ILOC >
+    class ISOBMFF_EXPORT ILOC: public FullBox, public DisplayableObjectContainer
     {
         public:
             
-            using XS::PIMPL::Object< ILOC >::impl;
-            
             ILOC();
+            ILOC( const ILOC & o );
+            ILOC( ILOC && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~ILOC() override;
+            
+            ILOC & operator =( ILOC o );
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
@@ -66,14 +68,17 @@ namespace ISOBMFF
             void SetBaseOffsetSize( uint8_t value );
             void SetIndexSize( uint8_t value );
             
-            class ISOBMFF_EXPORT Item: public XS::PIMPL::Object< Item >, public DisplayableObject, public DisplayableObjectContainer
+            class ISOBMFF_EXPORT Item: public DisplayableObject, public DisplayableObjectContainer
             {
                 public:
                     
-                    using XS::PIMPL::Object< Item >::impl;
-                    
                     Item();
                     Item( BinaryStream & stream, const ILOC & iloc );
+                    Item( const Item & o );
+                    Item( Item && o ) ISOBMFF_NOEXCEPT( true );
+                    virtual ~Item() override;
+                    
+                    Item & operator =( Item o );
                     
                     std::string GetName() const override;
                     
@@ -92,14 +97,17 @@ namespace ISOBMFF
                     std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects()    const override;
                     std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
                     
-                    class ISOBMFF_EXPORT Extent: public XS::PIMPL::Object< Extent >, public DisplayableObject
+                    class ISOBMFF_EXPORT Extent: public DisplayableObject
                     {
                         public:
                             
-                            using XS::PIMPL::Object< Extent >::impl;
-                            
                             Extent();
                             Extent( BinaryStream & stream, const ILOC & iloc );
+                            Extent( const Extent & o );
+                            Extent( Extent && o ) ISOBMFF_NOEXCEPT( true );
+                            virtual ~Extent() override;
+                            
+                            Extent & operator =( Extent o );
                             
                             std::string GetName() const override;
                             
@@ -112,15 +120,39 @@ namespace ISOBMFF
                             void SetLength( uint64_t value );
                             
                             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+                            
+                            friend void swap( Extent & o1, Extent & o2 );
+                            
+                        private:
+                            
+                            class IMPL;
+                            
+                            std::unique_ptr< IMPL > impl;
                     };
                     
                     std::vector< std::shared_ptr< Extent > > GetExtents() const;
                     void                                     AddExtent( std::shared_ptr< Extent > extent );
+                    
+                    friend void swap( Item & o1, Item & o2 );
+                    
+                private:
+                    
+                    class IMPL;
+                    
+                    std::unique_ptr< IMPL > impl;
             };
             
             std::vector< std::shared_ptr< Item > > GetItems()                 const;
             std::shared_ptr< Item >                GetItem( uint32_t itemID ) const;
             void                                   AddItem( std::shared_ptr< Item > item );
+            
+            friend void swap( ILOC & o1, ILOC & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

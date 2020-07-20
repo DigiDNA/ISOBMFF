@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_SCHM_HPP
 #define ISOBMFF_SCHM_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -40,13 +39,16 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT SCHM: public FullBox, public XS::PIMPL::Object< SCHM >
+    class ISOBMFF_EXPORT SCHM: public FullBox
     {
         public:
             
-            using XS::PIMPL::Object< SCHM >::impl;
-            
             SCHM();
+            SCHM( const SCHM & o );
+            SCHM( SCHM && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~SCHM() override;
+            
+            SCHM & operator =( SCHM o );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
@@ -58,6 +60,14 @@ namespace ISOBMFF
             void SetSchemeType( const std::string & value );
             void SetSchemeVersion( uint32_t value );
             void SetSchemeURI( const std::string & value );
+            
+            friend void swap( SCHM & o1, SCHM & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

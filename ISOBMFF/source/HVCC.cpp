@@ -32,42 +32,71 @@
 #include <ISOBMFF/Utils.hpp>
 #include <ISOBMFF/Parser.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::HVCC >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        uint8_t                                                _configurationVersion;
-        uint8_t                                                _generalProfileSpace;
-        uint8_t                                                _generalTierFlag;
-        uint8_t                                                _generalProfileIDC;
-        uint32_t                                               _generalProfileCompatibilityFlags;
-        uint64_t                                               _generalConstraintIndicatorFlags;
-        uint8_t                                                _generalLevelIDC;
-        uint16_t                                               _minSpatialSegmentationIDC;
-        uint8_t                                                _parallelismType;
-        uint8_t                                                _chromaFormat;
-        uint8_t                                                _bitDepthLumaMinus8;
-        uint8_t                                                _bitDepthChromaMinus8;
-        uint16_t                                               _avgFrameRate;
-        uint8_t                                                _constantFrameRate;
-        uint8_t                                                _numTemporalLayers;
-        uint8_t                                                _temporalIdNested;
-        uint8_t                                                _lengthSizeMinusOne;
-        std::vector< std::shared_ptr< ISOBMFF::HVCC::Array > > _arrays;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::HVCC
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    HVCC::HVCC(): Box( "hvcC" )
+    class HVCC::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint8_t                                                _configurationVersion;
+            uint8_t                                                _generalProfileSpace;
+            uint8_t                                                _generalTierFlag;
+            uint8_t                                                _generalProfileIDC;
+            uint32_t                                               _generalProfileCompatibilityFlags;
+            uint64_t                                               _generalConstraintIndicatorFlags;
+            uint8_t                                                _generalLevelIDC;
+            uint16_t                                               _minSpatialSegmentationIDC;
+            uint8_t                                                _parallelismType;
+            uint8_t                                                _chromaFormat;
+            uint8_t                                                _bitDepthLumaMinus8;
+            uint8_t                                                _bitDepthChromaMinus8;
+            uint16_t                                               _avgFrameRate;
+            uint8_t                                                _constantFrameRate;
+            uint8_t                                                _numTemporalLayers;
+            uint8_t                                                _temporalIdNested;
+            uint8_t                                                _lengthSizeMinusOne;
+            std::vector< std::shared_ptr< ISOBMFF::HVCC::Array > > _arrays;
+    };
+    
+    HVCC::HVCC():
+        Box( "hvcC" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    HVCC::HVCC( const HVCC & o ):
+        Box( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    HVCC::HVCC( HVCC && o ) ISOBMFF_NOEXCEPT( true ):
+        Box( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    HVCC::~HVCC()
+    {}
+    
+    HVCC & HVCC::operator =( HVCC o )
+    {
+        Box::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( HVCC & o1, HVCC & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< Box & >( o1 ), static_cast< Box & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void HVCC::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -358,49 +387,48 @@ namespace ISOBMFF
     {
         this->impl->_arrays.push_back( array );
     }
+
+    HVCC::IMPL::IMPL():
+        _configurationVersion( 0 ),
+        _generalProfileSpace( 0 ),
+        _generalTierFlag( 0 ),
+        _generalProfileIDC( 0 ),
+        _generalProfileCompatibilityFlags( 0 ),
+        _generalConstraintIndicatorFlags( 0 ),
+        _generalLevelIDC( 0 ),
+        _minSpatialSegmentationIDC( 0 ),
+        _parallelismType( 0 ),
+        _chromaFormat( 0 ),
+        _bitDepthLumaMinus8( 0 ),
+        _bitDepthChromaMinus8( 0 ),
+        _avgFrameRate( 0 ),
+        _constantFrameRate( 0 ),
+        _numTemporalLayers( 0 ),
+        _temporalIdNested( 0 ),
+        _lengthSizeMinusOne( 0 )
+    {}
+
+    HVCC::IMPL::IMPL( const IMPL & o ):
+        _configurationVersion( o._configurationVersion ),
+        _generalProfileSpace( o._generalProfileSpace ),
+        _generalTierFlag( o._generalTierFlag ),
+        _generalProfileIDC( o._generalProfileIDC ),
+        _generalProfileCompatibilityFlags( o._generalProfileCompatibilityFlags ),
+        _generalConstraintIndicatorFlags( o._generalConstraintIndicatorFlags ),
+        _generalLevelIDC( o._generalLevelIDC ),
+        _minSpatialSegmentationIDC( o._minSpatialSegmentationIDC ),
+        _parallelismType( o._parallelismType ),
+        _chromaFormat( o._chromaFormat ),
+        _bitDepthLumaMinus8( o._bitDepthLumaMinus8 ),
+        _bitDepthChromaMinus8( o._bitDepthChromaMinus8 ),
+        _avgFrameRate( o._avgFrameRate ),
+        _constantFrameRate( o._constantFrameRate ),
+        _numTemporalLayers( o._numTemporalLayers ),
+        _temporalIdNested( o._temporalIdNested ),
+        _lengthSizeMinusOne( o._lengthSizeMinusOne ),
+        _arrays( o._arrays )
+    {}
+
+    HVCC::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::HVCC >::IMPL::IMPL():
-    _configurationVersion( 0 ),
-    _generalProfileSpace( 0 ),
-    _generalTierFlag( 0 ),
-    _generalProfileIDC( 0 ),
-    _generalProfileCompatibilityFlags( 0 ),
-    _generalConstraintIndicatorFlags( 0 ),
-    _generalLevelIDC( 0 ),
-    _minSpatialSegmentationIDC( 0 ),
-    _parallelismType( 0 ),
-    _chromaFormat( 0 ),
-    _bitDepthLumaMinus8( 0 ),
-    _bitDepthChromaMinus8( 0 ),
-    _avgFrameRate( 0 ),
-    _constantFrameRate( 0 ),
-    _numTemporalLayers( 0 ),
-    _temporalIdNested( 0 ),
-    _lengthSizeMinusOne( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::HVCC >::IMPL::IMPL( const IMPL & o ):
-    _configurationVersion( o._configurationVersion ),
-    _generalProfileSpace( o._generalProfileSpace ),
-    _generalTierFlag( o._generalTierFlag ),
-    _generalProfileIDC( o._generalProfileIDC ),
-    _generalProfileCompatibilityFlags( o._generalProfileCompatibilityFlags ),
-    _generalConstraintIndicatorFlags( o._generalConstraintIndicatorFlags ),
-    _generalLevelIDC( o._generalLevelIDC ),
-    _minSpatialSegmentationIDC( o._minSpatialSegmentationIDC ),
-    _parallelismType( o._parallelismType ),
-    _chromaFormat( o._chromaFormat ),
-    _bitDepthLumaMinus8( o._bitDepthLumaMinus8 ),
-    _bitDepthChromaMinus8( o._bitDepthChromaMinus8 ),
-    _avgFrameRate( o._avgFrameRate ),
-    _constantFrameRate( o._constantFrameRate ),
-    _numTemporalLayers( o._numTemporalLayers ),
-    _temporalIdNested( o._temporalIdNested ),
-    _lengthSizeMinusOne( o._lengthSizeMinusOne ),
-    _arrays( o._arrays )
-{}
-
-XS::PIMPL::Object< ISOBMFF::HVCC >::IMPL::~IMPL()
-{}
-

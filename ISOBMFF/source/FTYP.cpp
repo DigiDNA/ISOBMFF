@@ -32,27 +32,56 @@
 #include <ISOBMFF/Parser.hpp>
 #include <ISOBMFF/Utils.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::FTYP >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        std::string                _majorBrand;
-        uint32_t                   _minorVersion;
-        std::vector< std::string > _compatibleBrands;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::FTYP
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    FTYP::FTYP(): Box( "ftyp" )
+    class FTYP::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::string                _majorBrand;
+            uint32_t                   _minorVersion;
+            std::vector< std::string > _compatibleBrands;
+    };
+    
+    FTYP::FTYP():
+        Box( "ftyp" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    FTYP::FTYP( const FTYP & o ):
+        Box( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    FTYP::FTYP( FTYP && o ) ISOBMFF_NOEXCEPT( true ):
+        Box( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    FTYP::~FTYP()
+    {}
+    
+    FTYP & FTYP::operator =( FTYP o )
+    {
+        Box::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( FTYP & o1, FTYP & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< Box & >( o1 ), static_cast< Box & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void FTYP::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -119,18 +148,17 @@ namespace ISOBMFF
     {
         this->impl->_compatibleBrands.push_back( value );
     }
+    
+    FTYP::IMPL::IMPL():
+        _minorVersion( 0 )
+    {}
+
+    FTYP::IMPL::IMPL( const IMPL & o ):
+        _majorBrand( o._majorBrand ),
+        _minorVersion( o._minorVersion ),
+        _compatibleBrands( o._compatibleBrands )
+    {}
+
+    FTYP::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::FTYP >::IMPL::IMPL():
-    _minorVersion( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::FTYP >::IMPL::IMPL( const IMPL & o ):
-    _majorBrand( o._majorBrand ),
-    _minorVersion( o._minorVersion ),
-    _compatibleBrands( o._compatibleBrands )
-{}
-
-XS::PIMPL::Object< ISOBMFF::FTYP >::IMPL::~IMPL()
-{}
-

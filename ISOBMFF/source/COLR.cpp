@@ -32,30 +32,59 @@
 #include <sstream>
 #include <iomanip>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::COLR >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        std::string            _colourType;
-        uint16_t               _colourPrimaries;
-        uint16_t               _transferCharacteristics;
-        uint16_t               _matrixCoefficients;
-        bool                   _fullRangeFlag;
-        std::vector< uint8_t > _iccProfile;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::COLR
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    COLR::COLR(): Box( "colr" )
+    class COLR::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::string            _colourType;
+            uint16_t               _colourPrimaries;
+            uint16_t               _transferCharacteristics;
+            uint16_t               _matrixCoefficients;
+            bool                   _fullRangeFlag;
+            std::vector< uint8_t > _iccProfile;
+    };
+    
+    COLR::COLR():
+        Box( "colr" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    COLR::COLR( const COLR & o ):
+        Box( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    COLR::COLR( COLR && o ) ISOBMFF_NOEXCEPT( true ):
+        Box( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    COLR::~COLR()
+    {}
+    
+    COLR & COLR::operator =( COLR o )
+    {
+        Box::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( COLR & o1, COLR & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< Box & >( o1 ), static_cast< Box & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void COLR::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -182,24 +211,23 @@ namespace ISOBMFF
     {
         this->impl->_iccProfile = value;
     }
+
+    COLR::IMPL::IMPL():
+        _colourPrimaries( 0 ),
+        _transferCharacteristics( 0 ),
+        _matrixCoefficients( 0 ),
+        _fullRangeFlag( false )
+    {}
+
+    COLR::IMPL::IMPL( const IMPL & o ):
+        _colourType( o._colourType ),
+        _colourPrimaries( o._colourPrimaries ),
+        _transferCharacteristics( o._transferCharacteristics ),
+        _matrixCoefficients( o._matrixCoefficients ),
+        _fullRangeFlag( o._fullRangeFlag ),
+        _iccProfile( o._iccProfile )
+    {}
+
+    COLR::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::COLR >::IMPL::IMPL():
-    _colourPrimaries( 0 ),
-    _transferCharacteristics( 0 ),
-    _matrixCoefficients( 0 ),
-    _fullRangeFlag( false )
-{}
-
-XS::PIMPL::Object< ISOBMFF::COLR >::IMPL::IMPL( const IMPL & o ):
-    _colourType( o._colourType ),
-    _colourPrimaries( o._colourPrimaries ),
-    _transferCharacteristics( o._transferCharacteristics ),
-    _matrixCoefficients( o._matrixCoefficients ),
-    _fullRangeFlag( o._fullRangeFlag ),
-    _iccProfile( o._iccProfile )
-{}
-
-XS::PIMPL::Object< ISOBMFF::COLR >::IMPL::~IMPL()
-{}
-

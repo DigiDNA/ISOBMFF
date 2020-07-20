@@ -30,25 +30,54 @@
 
 #include <ISOBMFF/PITM.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::PITM >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        uint32_t _itemID;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::PITM
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    PITM::PITM(): FullBox( "pitm" )
+    class PITM::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint32_t _itemID;
+    };
+    
+    PITM::PITM():
+        FullBox( "pitm" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    PITM::PITM( const PITM & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    PITM::PITM( PITM && o ) ISOBMFF_NOEXCEPT( true ):
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    PITM::~PITM()
+    {}
+    
+    PITM & PITM::operator =( PITM o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( PITM & o1, PITM & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void PITM::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -82,16 +111,16 @@ namespace ISOBMFF
     {
         this->impl->_itemID = value;
     }
+    
+    PITM::IMPL::IMPL():
+        _itemID( 0 )
+    {}
+
+    PITM::IMPL::IMPL( const IMPL & o ):
+        _itemID( o._itemID )
+    {}
+
+    PITM::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::PITM >::IMPL::IMPL():
-    _itemID( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::PITM >::IMPL::IMPL( const IMPL & o ):
-    _itemID( o._itemID )
-{}
-
-XS::PIMPL::Object< ISOBMFF::PITM >::IMPL::~IMPL()
-{}
 

@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_THMB_HPP
 #define ISOBMFF_THMB_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -39,13 +38,24 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT THMB: public SingleItemTypeReferenceBox, public XS::PIMPL::Object< THMB >
+    class ISOBMFF_EXPORT THMB: public SingleItemTypeReferenceBox
     {
         public:
             
-            using XS::PIMPL::Object< THMB >::impl;
-            
             THMB();
+            THMB( const THMB & o );
+            THMB( THMB && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~THMB() override;
+            
+            THMB & operator =( THMB o );
+            
+            friend void swap( THMB & o1, THMB & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

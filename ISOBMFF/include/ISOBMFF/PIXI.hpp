@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_PIXI_HPP
 #define ISOBMFF_PIXI_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -43,13 +42,16 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT PIXI: public FullBox, public XS::PIMPL::Object< PIXI >, public DisplayableObjectContainer
+    class ISOBMFF_EXPORT PIXI: public FullBox, public DisplayableObjectContainer
     {
         public:
             
-            using XS::PIMPL::Object< PIXI >::impl;
-            
             PIXI();
+            PIXI( const PIXI & o );
+            PIXI( PIXI && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~PIXI() override;
+            
+            PIXI & operator =( PIXI o );
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
@@ -57,14 +59,17 @@ namespace ISOBMFF
             virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects()    const override;
             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            class ISOBMFF_EXPORT Channel: public XS::PIMPL::Object< Channel >, public DisplayableObject
+            class ISOBMFF_EXPORT Channel: public DisplayableObject
             {
                 public:
                     
-                    using XS::PIMPL::Object< Channel >::impl;
-                    
                     Channel();
                     Channel( BinaryStream & stream );
+                    Channel( const Channel & o );
+                    Channel( Channel && o ) ISOBMFF_NOEXCEPT( true );
+                    virtual ~Channel() override;
+                    
+                    Channel & operator =( Channel o );
                     
                     std::string GetName() const override;
                     
@@ -72,10 +77,26 @@ namespace ISOBMFF
                     void    SetBitsPerChannel( uint8_t value );
                     
                     virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+                    
+                    friend void swap( Channel & o1, Channel & o2 );
+                    
+                private:
+                    
+                    class IMPL;
+                    
+                    std::unique_ptr< IMPL > impl;
             };
             
             std::vector< std::shared_ptr< Channel > > GetChannels() const;
             void                                      AddChannel( std::shared_ptr< Channel > array );
+            
+            friend void swap( PIXI & o1, PIXI & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

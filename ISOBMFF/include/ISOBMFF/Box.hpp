@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_BOX_HPP
 #define ISOBMFF_BOX_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -50,11 +49,9 @@ namespace ISOBMFF
      * @class       Box
      * @abstract    Base interface for ISOBMFF boxes.
      */
-    class ISOBMFF_EXPORT Box: public XS::PIMPL::Object< Box >, public DisplayableObject
+    class ISOBMFF_EXPORT Box: public DisplayableObject
     {
         public:
-            
-            using XS::PIMPL::Object< Box >::impl;
             
             /*!
              * @function    Box
@@ -62,6 +59,33 @@ namespace ISOBMFF
              * @param       name    The name of the box.
              */
             Box( const std::string & name );
+            
+            /*!
+             * @function    Box
+             * @abstract    Copy constructor.
+             * @param       o   The object to copy from.
+             */
+            Box( const Box & o );
+            
+            /*!
+             * @function    Box
+             * @abstract    Move constructor.
+             * @param       o   The object to move from.
+             */
+            Box( Box && o ) ISOBMFF_NOEXCEPT( true );
+            
+            /*!
+             * @function    ~Box
+             * @abstract    Destructor.
+             */
+            virtual ~Box() override;
+            
+            /*!
+             * @function    operator=
+             * @abstract    Assignment operator.
+             * @param       o   The object to assign from.
+             */
+            Box & operator =( Box o );
             
             /*!
              * @function    GetName
@@ -93,6 +117,20 @@ namespace ISOBMFF
              * @result      The box data, as a vector of bytes.
              */
             virtual std::vector< uint8_t > GetData() const;
+            
+            /*!
+             * @function    swap
+             * @abstract    Swap two objects.
+             * @param       o1  The first object to swap.
+             * @param       o2  The second object to swap.
+             */
+            friend void swap( Box & o1, Box & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

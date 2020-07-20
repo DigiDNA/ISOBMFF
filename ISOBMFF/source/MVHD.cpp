@@ -29,38 +29,66 @@
  */
 
 #include <ISOBMFF/MVHD.hpp>
-
 #include <cstring>
-
-template<>
-class XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        uint64_t        _creationTime;
-        uint64_t        _modificationTime;
-        uint32_t        _timescale;
-        uint64_t        _duration;
-        uint32_t        _rate;
-        uint16_t        _volume;
-        uint16_t        _reserved1;
-        uint32_t        _reserved2[ 2 ];
-        ISOBMFF::Matrix _matrix;
-        uint32_t        _predefined[ 6 ];
-        uint32_t        _nextTrackID;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::MVHD
-#include <XS/PIMPL/Object-IMPL.hpp>
 
 namespace ISOBMFF
 {
-    MVHD::MVHD(): FullBox( "mvhd" )
+    class MVHD::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint64_t        _creationTime;
+            uint64_t        _modificationTime;
+            uint32_t        _timescale;
+            uint64_t        _duration;
+            uint32_t        _rate;
+            uint16_t        _volume;
+            uint16_t        _reserved1;
+            uint32_t        _reserved2[ 2 ];
+            ISOBMFF::Matrix _matrix;
+            uint32_t        _predefined[ 6 ];
+            uint32_t        _nextTrackID;
+    };
+    
+    MVHD::MVHD():
+        FullBox( "mvhd" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    MVHD::MVHD( const MVHD & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    MVHD::MVHD( MVHD && o ) ISOBMFF_NOEXCEPT( true ):
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    MVHD::~MVHD()
+    {}
+    
+    MVHD & MVHD::operator =( MVHD o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( MVHD & o1, MVHD & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void MVHD::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -195,37 +223,36 @@ namespace ISOBMFF
     {
         this->impl->_nextTrackID = value;
     }
+    
+    MVHD::IMPL::IMPL():
+        _creationTime( 0 ),
+        _modificationTime( 0 ),
+        _timescale( 0 ),
+        _duration( 0 ),
+        _rate( 0 ),
+        _volume( 0 ),
+        _reserved1( 0 ),
+        _nextTrackID( 0 )
+    {
+        memset( this->_reserved2,  0, sizeof( this->_reserved2 ) );
+        memset( this->_predefined, 0, sizeof( this->_predefined ) );
+    }
+
+    MVHD::IMPL::IMPL( const IMPL & o ):
+        _creationTime( o._creationTime ),
+        _modificationTime( o._modificationTime ),
+        _timescale( o._timescale ),
+        _duration( o._duration ),
+        _rate( o._rate ),
+        _volume( o._volume ),
+        _reserved1( o._reserved1 ),
+        _matrix( o._matrix ),
+        _nextTrackID( o._nextTrackID )
+    {
+        memcpy( this->_reserved2,  o._reserved2,  sizeof( this->_reserved2 ) );
+        memcpy( this->_predefined, o._predefined, sizeof( this->_predefined ) );
+    }
+
+    MVHD::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL::IMPL():
-    _creationTime( 0 ),
-    _modificationTime( 0 ),
-    _timescale( 0 ),
-    _duration( 0 ),
-    _rate( 0 ),
-    _volume( 0 ),
-    _reserved1( 0 ),
-    _nextTrackID( 0 )
-{
-    memset( this->_reserved2,  0, sizeof( this->_reserved2 ) );
-    memset( this->_predefined, 0, sizeof( this->_predefined ) );
-}
-
-XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL::IMPL( const IMPL & o ):
-    _creationTime( o._creationTime ),
-    _modificationTime( o._modificationTime ),
-    _timescale( o._timescale ),
-    _duration( o._duration ),
-    _rate( o._rate ),
-    _volume( o._volume ),
-    _reserved1( o._reserved1 ),
-    _matrix( o._matrix ),
-    _nextTrackID( o._nextTrackID )
-{
-    memcpy( this->_reserved2,  o._reserved2,  sizeof( this->_reserved2 ) );
-    memcpy( this->_predefined, o._predefined, sizeof( this->_predefined ) );
-}
-
-XS::PIMPL::Object< ISOBMFF::MVHD >::IMPL::~IMPL()
-{}
-

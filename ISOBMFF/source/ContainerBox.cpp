@@ -31,25 +31,54 @@
 #include <ISOBMFF/ContainerBox.hpp>
 #include <ISOBMFF/Parser.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::ContainerBox
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    ContainerBox::ContainerBox( const std::string & name ): Box( name )
+    class ContainerBox::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
+    };
+    
+    ContainerBox::ContainerBox( const std::string & name ):
+        Box( name ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    ContainerBox::ContainerBox( const ContainerBox & o ):
+        Box( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    ContainerBox::ContainerBox( ContainerBox && o ) ISOBMFF_NOEXCEPT( true ):
+        Box( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    ContainerBox::~ContainerBox()
+    {}
+    
+    ContainerBox & ContainerBox::operator =( ContainerBox o )
+    {
+        Box::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( ContainerBox & o1, ContainerBox & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< Box & >( o1 ), static_cast< Box & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
 
     void ContainerBox::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -120,15 +149,14 @@ namespace ISOBMFF
         Box::WriteDescription( os, indentLevel );
         Container::WriteBoxes( os, indentLevel );
     }
+    
+    ContainerBox::IMPL::IMPL()
+    {}
+
+    ContainerBox::IMPL::IMPL( const IMPL & o ):
+        _boxes( o._boxes )
+    {}
+
+    ContainerBox::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL::IMPL()
-{}
-
-XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL::IMPL( const IMPL & o ):
-    _boxes( o._boxes )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL::~IMPL()
-{}
-

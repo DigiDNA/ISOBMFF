@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_IMAGE_GRID_HPP
 #define ISOBMFF_IMAGE_GRID_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -42,14 +41,17 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT ImageGrid: public XS::PIMPL::Object< ImageGrid >, public DisplayableObject
+    class ISOBMFF_EXPORT ImageGrid: public DisplayableObject
     {
         public:
             
-            using XS::PIMPL::Object< ImageGrid >::impl;
-            
             ImageGrid();
             ImageGrid( BinaryStream & stream );
+            ImageGrid( const ImageGrid & o );
+            ImageGrid( ImageGrid && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~ImageGrid() override;
+            
+            ImageGrid & operator =( ImageGrid o );
             
             std::string GetName() const override;
             
@@ -68,6 +70,14 @@ namespace ISOBMFF
             void SetOutputHeight( uint64_t value );
             
             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+            
+            friend void swap( ImageGrid & o1, ImageGrid & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

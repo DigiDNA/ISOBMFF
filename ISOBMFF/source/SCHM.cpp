@@ -32,27 +32,56 @@
 #include <ISOBMFF/Parser.hpp>
 #include <cstdint>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::SCHM >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        std::string _schemeType;
-        uint32_t    _schemeVersion;
-        std::string _schemeURI;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::SCHM
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    SCHM::SCHM(): FullBox( "schm" )
+    class SCHM::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::string _schemeType;
+            uint32_t    _schemeVersion;
+            std::string _schemeURI;
+    };
+    
+    SCHM::SCHM():
+        FullBox( "schm" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    SCHM::SCHM( const SCHM & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    SCHM::SCHM( SCHM && o ) ISOBMFF_NOEXCEPT( true ):
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    SCHM::~SCHM()
+    {}
+    
+    SCHM & SCHM::operator =( SCHM o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( SCHM & o1, SCHM & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void SCHM::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -114,17 +143,17 @@ namespace ISOBMFF
     {
         this->impl->_schemeURI = value;
     }
+    
+    SCHM::IMPL::IMPL():
+        _schemeVersion( 0 )
+    {}
+
+    SCHM::IMPL::IMPL( const IMPL & o ):
+        _schemeType( o._schemeType ),
+        _schemeVersion( o._schemeVersion ),
+        _schemeURI( o._schemeURI )
+    {}
+
+    SCHM::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::SCHM >::IMPL::IMPL():
-    _schemeVersion( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::SCHM >::IMPL::IMPL( const IMPL & o ):
-    _schemeType( o._schemeType ),
-    _schemeVersion( o._schemeVersion ),
-    _schemeURI( o._schemeURI )
-{}
-
-XS::PIMPL::Object< ISOBMFF::SCHM >::IMPL::~IMPL()
-{}

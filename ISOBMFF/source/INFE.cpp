@@ -31,31 +31,60 @@
 #include <ISOBMFF/INFE.hpp>
 #include <ISOBMFF/Parser.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::INFE >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        uint32_t    _itemID;
-        uint16_t    _itemProtectionIndex;
-        std::string _itemType;
-        std::string _itemName;
-        std::string _contentType;
-        std::string _contentEncoding;
-        std::string _itemURIType;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::INFE
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    INFE::INFE(): FullBox( "infe" )
+    class INFE::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint32_t    _itemID;
+            uint16_t    _itemProtectionIndex;
+            std::string _itemType;
+            std::string _itemName;
+            std::string _contentType;
+            std::string _contentEncoding;
+            std::string _itemURIType;
+    };
+    
+    INFE::INFE():
+        FullBox( "infe" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    INFE::INFE( const INFE & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    INFE::INFE( INFE && o ) ISOBMFF_NOEXCEPT( true ):
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    INFE::~INFE()
+    {}
+    
+    INFE & INFE::operator =( INFE o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( INFE & o1, INFE & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void INFE::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -230,23 +259,22 @@ namespace ISOBMFF
     {
         this->impl->_itemURIType = value;
     }
+    
+    INFE::IMPL::IMPL():
+        _itemID( 0 ),
+        _itemProtectionIndex( 0 )
+    {}
+
+    INFE::IMPL::IMPL( const IMPL & o ):
+        _itemID( o._itemID ),
+        _itemProtectionIndex( o._itemProtectionIndex ),
+        _itemType( o._itemType ),
+        _itemName( o._itemName ),
+        _contentType( o._contentType ),
+        _contentEncoding( o._contentEncoding ),
+        _itemURIType( o._itemURIType )
+    {}
+
+    INFE::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::INFE >::IMPL::IMPL():
-    _itemID( 0 ),
-    _itemProtectionIndex( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::INFE >::IMPL::IMPL( const IMPL & o ):
-    _itemID( o._itemID ),
-    _itemProtectionIndex( o._itemProtectionIndex ),
-    _itemType( o._itemType ),
-    _itemName( o._itemName ),
-    _contentType( o._contentType ),
-    _contentEncoding( o._contentEncoding ),
-    _itemURIType( o._itemURIType )
-{}
-
-XS::PIMPL::Object< ISOBMFF::INFE >::IMPL::~IMPL()
-{}
-

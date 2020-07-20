@@ -30,28 +30,26 @@
 
 #include <ISOBMFF/IPMA.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        uint32_t                                                            _itemID;
-        std::vector< std::shared_ptr< ISOBMFF::IPMA::Entry::Association > > _associations;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::IPMA::Entry
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    IPMA::Entry::Entry()
+    class IPMA::Entry::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint32_t                                                            _itemID;
+            std::vector< std::shared_ptr< ISOBMFF::IPMA::Entry::Association > > _associations;
+    };
+    
+    IPMA::Entry::Entry():
+        impl( std::make_unique< IMPL >() )
     {}
     
-    IPMA::Entry::Entry( BinaryStream & stream, const IPMA & ipma )
+    IPMA::Entry::Entry( BinaryStream & stream, const IPMA & ipma ):
+        impl( std::make_unique< IMPL >() )
     {
         uint8_t count;
         uint8_t i;
@@ -71,6 +69,33 @@ namespace ISOBMFF
         {
             this->AddAssociation( std::make_shared< Association >( stream, ipma ) );
         }
+    }
+    
+    IPMA::Entry::Entry( const IPMA::Entry & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    IPMA::Entry::Entry( IPMA::Entry && o ) ISOBMFF_NOEXCEPT( true ):
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    IPMA::Entry::~Entry()
+    {}
+    
+    IPMA::Entry & IPMA::Entry::operator =( IPMA::Entry o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( IPMA::Entry & o1, IPMA::Entry & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
     }
     
     std::string IPMA::Entry::GetName() const
@@ -119,17 +144,16 @@ namespace ISOBMFF
     {
         this->impl->_associations.push_back( association );
     }
+
+    IPMA::Entry::IMPL::IMPL():
+        _itemID( 0 )
+    {}
+
+    IPMA::Entry::IMPL::IMPL( const IMPL & o ):
+        _itemID( o._itemID ),
+        _associations( o._associations )
+    {}
+
+    IPMA::Entry::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::IMPL():
-    _itemID( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::IMPL( const IMPL & o ):
-    _itemID( o._itemID ),
-    _associations( o._associations )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::~IMPL()
-{}
-

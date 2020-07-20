@@ -30,32 +30,30 @@
 
 #include <ISOBMFF/ImageGrid.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        uint8_t  _version;
-        uint8_t  _flags;
-        uint8_t  _rows;
-        uint8_t  _columns;
-        uint64_t _outputWidth;
-        uint64_t _outputHeight;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::ImageGrid
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    ImageGrid::ImageGrid()
+    class ImageGrid::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint8_t  _version;
+            uint8_t  _flags;
+            uint8_t  _rows;
+            uint8_t  _columns;
+            uint64_t _outputWidth;
+            uint64_t _outputHeight;
+    };
+    
+    ImageGrid::ImageGrid():
+        impl( std::make_unique< IMPL >() )
     {}
     
-    ImageGrid::ImageGrid( BinaryStream & stream )
+    ImageGrid::ImageGrid( BinaryStream & stream ):
+        impl( std::make_unique< IMPL >() )
     {
         uint8_t s;
         
@@ -86,6 +84,33 @@ namespace ISOBMFF
             this->SetOutputWidth( stream.ReadBigEndianUInt64() );
             this->SetOutputHeight( stream.ReadBigEndianUInt64() );
         }
+    }
+    
+    ImageGrid::ImageGrid( const ImageGrid & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    ImageGrid::ImageGrid( ImageGrid && o ) ISOBMFF_NOEXCEPT( true ):
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    ImageGrid::~ImageGrid()
+    {}
+    
+    ImageGrid & ImageGrid::operator =( ImageGrid o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( ImageGrid & o1, ImageGrid & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
     }
     
     std::string ImageGrid::GetName() const
@@ -165,26 +190,25 @@ namespace ISOBMFF
             { "Output height", std::to_string( this->GetOutputHeight() ) },
         };
     }
+
+    ImageGrid::IMPL::IMPL():
+        _version( 0 ),
+        _flags( 0 ),
+        _rows( 0 ),
+        _columns( 0 ),
+        _outputWidth( 0 ),
+        _outputHeight( 0 )
+    {}
+
+    ImageGrid::IMPL::IMPL( const IMPL & o ):
+        _version( o._version ),
+        _flags( o._flags ),
+        _rows( o._rows ),
+        _columns( o._columns ),
+        _outputWidth( o._outputWidth ),
+        _outputHeight( o._outputHeight )
+    {}
+
+    ImageGrid::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL::IMPL():
-    _version( 0 ),
-    _flags( 0 ),
-    _rows( 0 ),
-    _columns( 0 ),
-    _outputWidth( 0 ),
-    _outputHeight( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL::IMPL( const IMPL & o ):
-    _version( o._version ),
-    _flags( o._flags ),
-    _rows( o._rows ),
-    _columns( o._columns ),
-    _outputWidth( o._outputWidth ),
-    _outputHeight( o._outputHeight )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL::~IMPL()
-{}
-

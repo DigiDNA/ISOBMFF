@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_DIMG_HPP
 #define ISOBMFF_DIMG_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -39,13 +38,24 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT DIMG: public SingleItemTypeReferenceBox, public XS::PIMPL::Object< DIMG >
+    class ISOBMFF_EXPORT DIMG: public SingleItemTypeReferenceBox
     {
         public:
             
-            using XS::PIMPL::Object< DIMG >::impl;
-            
             DIMG();
+            DIMG( const DIMG & o );
+            DIMG( DIMG && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~DIMG() override;
+            
+            DIMG & operator =( DIMG o );
+            
+            friend void swap( DIMG & o1, DIMG & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

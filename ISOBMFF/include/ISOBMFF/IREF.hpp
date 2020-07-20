@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_IREF_HPP
 #define ISOBMFF_IREF_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -40,19 +39,30 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT IREF: public FullBox, public Container, public XS::PIMPL::Object< IREF >
+    class ISOBMFF_EXPORT IREF: public FullBox, public Container
     {
         public:
             
-            using XS::PIMPL::Object< IREF >::impl;
-            
             IREF();
+            IREF( const IREF & o );
+            IREF( IREF && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~IREF() override;
+            
+            IREF & operator =( IREF o );
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
             void                                  AddBox( std::shared_ptr< Box > box ) override;
             std::vector< std::shared_ptr< Box > > GetBoxes() const override;
+            
+            friend void swap( IREF & o1, IREF & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

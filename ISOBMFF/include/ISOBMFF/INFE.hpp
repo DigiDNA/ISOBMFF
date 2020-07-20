@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_INFE_HPP
 #define ISOBMFF_INFE_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -41,13 +40,16 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT INFE: public FullBox, public XS::PIMPL::Object< INFE >
+    class ISOBMFF_EXPORT INFE: public FullBox
     {
         public:
             
-            using XS::PIMPL::Object< INFE >::impl;
-            
             INFE();
+            INFE( const INFE & o );
+            INFE( INFE && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~INFE() override;
+            
+            INFE & operator =( INFE o );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
@@ -67,6 +69,14 @@ namespace ISOBMFF
             void SetContentType( const std::string & value );
             void SetContentEncoding( const std::string & value );
             void SetItemURIType( const std::string & value );
+            
+            friend void swap( INFE & o1, INFE & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

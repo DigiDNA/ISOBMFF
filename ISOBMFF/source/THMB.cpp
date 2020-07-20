@@ -30,34 +30,61 @@
 
 #include <ISOBMFF/THMB.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::THMB >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::THMB
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    THMB::THMB(): SingleItemTypeReferenceBox( "thmb" )
+    class THMB::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+    };
+    
+    THMB::THMB():
+        SingleItemTypeReferenceBox( "thmb" ),
+        impl( std::make_unique< IMPL >() )
+    {}
+    
+    THMB::THMB( const THMB & o ):
+        SingleItemTypeReferenceBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    THMB::THMB( THMB && o ) ISOBMFF_NOEXCEPT( true ):
+        SingleItemTypeReferenceBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    THMB::~THMB()
+    {}
+    
+    THMB & THMB::operator =( THMB o )
+    {
+        SingleItemTypeReferenceBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( THMB & o1, THMB & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< SingleItemTypeReferenceBox & >( o1 ), static_cast< SingleItemTypeReferenceBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
+    
+    THMB::IMPL::IMPL()
+    {}
+
+    THMB::IMPL::IMPL( const IMPL & o )
+    {
+        ( void )o;
+    }
+
+    THMB::IMPL::~IMPL()
     {}
 }
-
-XS::PIMPL::Object< ISOBMFF::THMB >::IMPL::IMPL()
-{}
-
-XS::PIMPL::Object< ISOBMFF::THMB >::IMPL::IMPL( const IMPL & o )
-{
-    ( void )o;
-}
-
-XS::PIMPL::Object< ISOBMFF::THMB >::IMPL::~IMPL()
-{}
-
-

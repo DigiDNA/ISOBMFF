@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_MVHD_HPP
 #define ISOBMFF_MVHD_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -40,13 +39,16 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT MVHD: public FullBox, public XS::PIMPL::Object< MVHD >
+    class ISOBMFF_EXPORT MVHD: public FullBox
     {
         public:
             
-            using XS::PIMPL::Object< MVHD >::impl;
-            
             MVHD();
+            MVHD( const MVHD & o );
+            MVHD( MVHD && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~MVHD() override;
+            
+            MVHD & operator =( MVHD o );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
@@ -68,6 +70,14 @@ namespace ISOBMFF
             void SetVolume( uint16_t value );
             void SetMatrix( const Matrix & value );
             void SetNextTrackID( uint32_t value );
+            
+            friend void swap( MVHD & o1, MVHD & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

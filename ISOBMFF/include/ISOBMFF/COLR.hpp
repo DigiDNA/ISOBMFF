@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_COLR_HPP
 #define ISOBMFF_COLR_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -42,13 +41,16 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT COLR: public Box, public XS::PIMPL::Object< COLR >
+    class ISOBMFF_EXPORT COLR: public Box
     {
         public:
             
-            using XS::PIMPL::Object< COLR >::impl;
-            
             COLR();
+            COLR( const COLR & o );
+            COLR( COLR && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~COLR() override;
+            
+            COLR & operator =( COLR o );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
@@ -66,6 +68,14 @@ namespace ISOBMFF
             void SetMatrixCoefficients( uint16_t value );
             void SetFullRangeFlag( bool value );
             void SetICCProfile( const std::vector< uint8_t > & value );
+            
+            friend void swap( COLR & o1, COLR & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

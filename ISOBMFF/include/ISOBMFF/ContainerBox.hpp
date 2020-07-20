@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_CONTAINER_BOX_HPP
 #define ISOBMFF_CONTAINER_BOX_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -42,19 +41,30 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT ContainerBox: public Box, public Container, public XS::PIMPL::Object< ContainerBox >
+    class ISOBMFF_EXPORT ContainerBox: public Box, public Container
     {
         public:
             
-            using XS::PIMPL::Object< ContainerBox >::impl;
-
             ContainerBox( const std::string & name );
+            ContainerBox( const ContainerBox & o );
+            ContainerBox( ContainerBox && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~ContainerBox() override;
+            
+            ContainerBox & operator =( ContainerBox o );
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
             void                                  AddBox( std::shared_ptr< Box > box ) override;
             std::vector< std::shared_ptr< Box > > GetBoxes() const override;
+            
+            friend void swap( ContainerBox & o1, ContainerBox & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

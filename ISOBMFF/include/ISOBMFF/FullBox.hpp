@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_FULL_BOX_HPP
 #define ISOBMFF_FULL_BOX_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -39,13 +38,16 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT FullBox: public Box, public XS::PIMPL::Object< FullBox >
+    class ISOBMFF_EXPORT FullBox: public Box
     {
         public:
             
-            using XS::PIMPL::Object< FullBox >::impl;
-
             FullBox( const std::string & name );
+            FullBox( const FullBox & o );
+            FullBox( FullBox && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~FullBox() override;
+            
+            FullBox & operator =( FullBox o );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
@@ -55,6 +57,14 @@ namespace ISOBMFF
             
             void SetVersion( uint8_t value );
             void SetFlags( uint32_t value );
+            
+            friend void swap( FullBox & o1, FullBox & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

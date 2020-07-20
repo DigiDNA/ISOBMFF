@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_TKHD_HPP
 #define ISOBMFF_TKHD_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -41,13 +40,16 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT TKHD: public FullBox, public XS::PIMPL::Object< TKHD >
+    class ISOBMFF_EXPORT TKHD: public FullBox
     {
         public:
             
-            using XS::PIMPL::Object< TKHD >::impl;
-            
             TKHD();
+            TKHD( const TKHD & o );
+            TKHD( TKHD && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~TKHD() override;
+            
+            TKHD & operator =( TKHD o );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
@@ -73,6 +75,14 @@ namespace ISOBMFF
             void SetMatrix( Matrix value );
             void SetWidth( float value );
             void SetHeight( float value );
+            
+            friend void swap( TKHD & o1, TKHD & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

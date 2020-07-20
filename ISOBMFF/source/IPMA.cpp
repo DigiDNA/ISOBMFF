@@ -30,25 +30,54 @@
 
 #include <ISOBMFF/IPMA.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        std::vector< std::shared_ptr< ISOBMFF::IPMA::Entry > > _entries;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::IPMA
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    IPMA::IPMA(): FullBox( "ipma" )
+    class IPMA::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::vector< std::shared_ptr< ISOBMFF::IPMA::Entry > > _entries;
+    };
+    
+    IPMA::IPMA():
+        FullBox( "ipma" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    IPMA::IPMA( const IPMA & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    IPMA::IPMA( IPMA && o ) ISOBMFF_NOEXCEPT( true ):
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    IPMA::~IPMA()
+    {}
+    
+    IPMA & IPMA::operator =( IPMA o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( IPMA & o1, IPMA & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void IPMA::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -108,15 +137,14 @@ namespace ISOBMFF
     {
         this->impl->_entries.push_back( entry );
     }
+
+    IPMA::IMPL::IMPL()
+    {}
+
+    IPMA::IMPL::IMPL( const IMPL & o ):
+        _entries( o._entries )
+    {}
+
+    IPMA::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::IMPL()
-{}
-
-XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::IMPL( const IMPL & o ):
-    _entries( o._entries )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::~IMPL()
-{}
-

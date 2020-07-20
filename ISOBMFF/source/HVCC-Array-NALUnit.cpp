@@ -32,27 +32,25 @@
 #include <sstream>
 #include <iomanip>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::HVCC::Array::NALUnit >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        std::vector< uint8_t > _data;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::HVCC::Array::NALUnit
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    HVCC::Array::NALUnit::NALUnit()
+    class HVCC::Array::NALUnit::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::vector< uint8_t > _data;
+    };
+    
+    HVCC::Array::NALUnit::NALUnit():
+        impl( std::make_unique< IMPL >() )
     {}
     
-    HVCC::Array::NALUnit::NALUnit( BinaryStream & stream )
+    HVCC::Array::NALUnit::NALUnit( BinaryStream & stream ):
+        impl( std::make_unique< IMPL >() )
     {
         std::vector< uint8_t > data;
         uint16_t               size;
@@ -67,6 +65,33 @@ namespace ISOBMFF
         }
         
         this->SetData( data );
+    }
+    
+    HVCC::Array::NALUnit::NALUnit( const HVCC::Array::NALUnit & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    HVCC::Array::NALUnit::NALUnit( HVCC::Array::NALUnit && o ) ISOBMFF_NOEXCEPT( true ):
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    HVCC::Array::NALUnit::~NALUnit()
+    {}
+    
+    HVCC::Array::NALUnit & HVCC::Array::NALUnit::operator =( HVCC::Array::NALUnit o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( HVCC::Array::NALUnit & o1, HVCC::Array::NALUnit & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
     }
     
     std::string HVCC::Array::NALUnit::GetName() const
@@ -114,15 +139,14 @@ namespace ISOBMFF
             { "Size", std::to_string( data.size() ) }
         };
     }
+    
+    HVCC::Array::NALUnit::IMPL::IMPL()
+    {}
+
+    HVCC::Array::NALUnit::IMPL::IMPL( const IMPL & o ):
+        _data( o._data )
+    {}
+
+    HVCC::Array::NALUnit::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::HVCC::Array::NALUnit >::IMPL::IMPL()
-{}
-
-XS::PIMPL::Object< ISOBMFF::HVCC::Array::NALUnit >::IMPL::IMPL( const IMPL & o ):
-    _data( o._data )
-{}
-
-XS::PIMPL::Object< ISOBMFF::HVCC::Array::NALUnit >::IMPL::~IMPL()
-{}
-

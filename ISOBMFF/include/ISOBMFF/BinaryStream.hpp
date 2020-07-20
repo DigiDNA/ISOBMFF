@@ -35,7 +35,6 @@
 #include <iostream>
 #include <cstdint>
 #include <vector>
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -49,11 +48,9 @@ namespace ISOBMFF
      * @discussion  Streams can either be backed by a standard C++ file stream,
      *              or by plain data.
      */
-    class ISOBMFF_EXPORT BinaryStream: public XS::PIMPL::Object< BinaryStream >
+    class ISOBMFF_EXPORT BinaryStream
     {
         public:
-            
-            using XS::PIMPL::Object< BinaryStream >::impl;
             
             /*!
              * @function    BinaryStream
@@ -82,6 +79,33 @@ namespace ISOBMFF
              * @discussion  Bytes from the source-stream will be consumed.
              */
             BinaryStream( BinaryStream & stream, uint64_t length );
+            
+            /*!
+             * @function    BinaryStream
+             * @abstract    Copy constructor.
+             * @param       o   The object to copy from.
+             */
+            BinaryStream( const BinaryStream & o );
+            
+            /*!
+             * @function    BinaryStream
+             * @abstract    Move constructor.
+             * @param       o   The object to move from.
+             */
+            BinaryStream( BinaryStream && o ) ISOBMFF_NOEXCEPT( true );
+            
+            /*!
+             * @function    ~BinaryStream
+             * @abstract    Destructor.
+             */
+            virtual ~BinaryStream();
+            
+            /*!
+             * @function    operator=
+             * @abstract    Assignment operator.
+             * @param       o   The object to assign from.
+             */
+            BinaryStream & operator =( BinaryStream o );
             
             /*!
              * @function    HasBytesAvailable
@@ -289,6 +313,20 @@ namespace ISOBMFF
              *              will seek from the current positio.
              */
             void DeleteBytes( uint64_t length );
+            
+            /*!
+             * @function    swap
+             * @abstract    Swap two objects.
+             * @param       o1  The first object to swap.
+             * @param       o2  The second object to swap.
+             */
+            friend void swap( BinaryStream & o1, BinaryStream & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

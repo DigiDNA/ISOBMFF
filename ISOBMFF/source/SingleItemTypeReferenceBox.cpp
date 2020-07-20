@@ -33,26 +33,55 @@
 #include <ISOBMFF/Parser.hpp>
 #include <ISOBMFF/Utils.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::SingleItemTypeReferenceBox >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        uint32_t                _fromItemID;
-        std::vector< uint32_t > _toItemIDs;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::SingleItemTypeReferenceBox
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    SingleItemTypeReferenceBox::SingleItemTypeReferenceBox( const std::string & name ): Box( name )
+    class SingleItemTypeReferenceBox::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint32_t                _fromItemID;
+            std::vector< uint32_t > _toItemIDs;
+    };
+    
+    SingleItemTypeReferenceBox::SingleItemTypeReferenceBox( const std::string & name ):
+        Box( name ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    SingleItemTypeReferenceBox::SingleItemTypeReferenceBox( const SingleItemTypeReferenceBox & o ):
+        Box( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    SingleItemTypeReferenceBox::SingleItemTypeReferenceBox( SingleItemTypeReferenceBox && o ) ISOBMFF_NOEXCEPT( true ):
+        Box( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    SingleItemTypeReferenceBox::~SingleItemTypeReferenceBox()
+    {}
+    
+    SingleItemTypeReferenceBox & SingleItemTypeReferenceBox::operator =( SingleItemTypeReferenceBox o )
+    {
+        Box::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( SingleItemTypeReferenceBox & o1, SingleItemTypeReferenceBox & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< Box & >( o1 ), static_cast< Box & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
 
     void SingleItemTypeReferenceBox::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -122,17 +151,16 @@ namespace ISOBMFF
     {
         this->impl->_toItemIDs.push_back( value );
     }
+    
+    SingleItemTypeReferenceBox::IMPL::IMPL():
+        _fromItemID( 0 )
+    {}
+
+    SingleItemTypeReferenceBox::IMPL::IMPL( const IMPL & o ):
+        _fromItemID( o._fromItemID ),
+        _toItemIDs( o._toItemIDs )
+    {}
+
+    SingleItemTypeReferenceBox::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::SingleItemTypeReferenceBox >::IMPL::IMPL():
-    _fromItemID( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::SingleItemTypeReferenceBox >::IMPL::IMPL( const IMPL & o ):
-    _fromItemID( o._fromItemID ),
-    _toItemIDs( o._toItemIDs )
-{}
-
-XS::PIMPL::Object< ISOBMFF::SingleItemTypeReferenceBox >::IMPL::~IMPL()
-{}
-

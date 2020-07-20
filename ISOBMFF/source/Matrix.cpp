@@ -30,39 +30,62 @@
 
 #include <ISOBMFF/Matrix.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::Matrix >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( uint32_t a, uint32_t b, uint32_t u, uint32_t c, uint32_t d, uint32_t v, uint32_t x, uint32_t y, uint32_t w );
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        uint32_t _a;
-        uint32_t _b;
-        uint32_t _u;
-        uint32_t _c;
-        uint32_t _d;
-        uint32_t _v;
-        uint32_t _x;
-        uint32_t _y;
-        uint32_t _w;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::Matrix
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
+    class Matrix::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( uint32_t a, uint32_t b, uint32_t u, uint32_t c, uint32_t d, uint32_t v, uint32_t x, uint32_t y, uint32_t w );
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint32_t _a;
+            uint32_t _b;
+            uint32_t _u;
+            uint32_t _c;
+            uint32_t _d;
+            uint32_t _v;
+            uint32_t _x;
+            uint32_t _y;
+            uint32_t _w;
+    };
+    
     Matrix::Matrix():
-        XS::PIMPL::Object< Matrix >()
+        impl( std::make_unique< IMPL >() )
     {}
     
     Matrix::Matrix( uint32_t a, uint32_t b, uint32_t u, uint32_t c, uint32_t d, uint32_t v, uint32_t x, uint32_t y, uint32_t w ):
-        XS::PIMPL::Object< Matrix >( a, b, u, c, d, v, x, y, w )
+        impl( std::make_unique< IMPL >( a, b, u, c, d, v, x, y, w ) )
     {}
+    
+    Matrix::Matrix( const Matrix & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    Matrix::Matrix( Matrix && o ) ISOBMFF_NOEXCEPT( true ):
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    Matrix::~Matrix()
+    {}
+    
+    Matrix & Matrix::operator =( Matrix o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( Matrix & o1, Matrix & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
+    }
     
     std::string Matrix::GetName() const
     {
@@ -190,36 +213,35 @@ namespace ISOBMFF
             { "w", std::to_string( this->GetW() ) },
         };
     }
+    
+    Matrix::IMPL::IMPL():
+        IMPL( 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+    {}
+
+    Matrix::IMPL::IMPL( uint32_t a, uint32_t b, uint32_t u, uint32_t c, uint32_t d, uint32_t v, uint32_t x, uint32_t y, uint32_t w ):
+        _a( a ),
+        _b( b ),
+        _u( u ),
+        _c( c ),
+        _d( d ),
+        _v( v ),
+        _x( x ),
+        _y( y ),
+        _w( w )
+    {}
+
+    Matrix::IMPL::IMPL( const IMPL & o ):
+        _a( o._a ),
+        _b( o._b ),
+        _u( o._u ),
+        _c( o._c ),
+        _d( o._d ),
+        _v( o._v ),
+        _x( o._x ),
+        _y( o._y ),
+        _w( o._w )
+    {}
+
+    Matrix::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::Matrix >::IMPL::IMPL():
-    IMPL( 0, 0, 0, 0, 0, 0, 0, 0, 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::Matrix >::IMPL::IMPL( uint32_t a, uint32_t b, uint32_t u, uint32_t c, uint32_t d, uint32_t v, uint32_t x, uint32_t y, uint32_t w ):
-    _a( a ),
-    _b( b ),
-    _u( u ),
-    _c( c ),
-    _d( d ),
-    _v( v ),
-    _x( x ),
-    _y( y ),
-    _w( w )
-{}
-
-XS::PIMPL::Object< ISOBMFF::Matrix >::IMPL::IMPL( const IMPL & o ):
-    _a( o._a ),
-    _b( o._b ),
-    _u( o._u ),
-    _c( o._c ),
-    _d( o._d ),
-    _v( o._v ),
-    _x( o._x ),
-    _y( o._y ),
-    _w( o._w )
-{}
-
-XS::PIMPL::Object< ISOBMFF::Matrix >::IMPL::~IMPL()
-{}
-

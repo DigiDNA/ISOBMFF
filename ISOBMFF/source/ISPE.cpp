@@ -30,26 +30,55 @@
 
 #include <ISOBMFF/ISPE.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::ISPE >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        uint32_t _displayWidth;
-        uint32_t _displayHeight;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::ISPE
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    ISPE::ISPE(): FullBox( "ispe" )
+    class ISPE::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint32_t _displayWidth;
+            uint32_t _displayHeight;
+    };
+    
+    ISPE::ISPE():
+        FullBox( "ispe" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    ISPE::ISPE( const ISPE & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    ISPE::ISPE( ISPE && o ) ISOBMFF_NOEXCEPT( true ):
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    ISPE::~ISPE()
+    {}
+    
+    ISPE & ISPE::operator =( ISPE o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( ISPE & o1, ISPE & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void ISPE::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -88,18 +117,17 @@ namespace ISOBMFF
     {
         this->impl->_displayHeight = value;
     }
+    
+    ISPE::IMPL::IMPL():
+        _displayWidth( 0 ),
+        _displayHeight( 0 )
+    {}
+
+    ISPE::IMPL::IMPL( const IMPL & o ):
+        _displayWidth( o._displayWidth ),
+        _displayHeight( o._displayHeight )
+    {}
+
+    ISPE::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::ISPE >::IMPL::IMPL():
-    _displayWidth( 0 ),
-    _displayHeight( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ISPE >::IMPL::IMPL( const IMPL & o ):
-    _displayWidth( o._displayWidth ),
-    _displayHeight( o._displayHeight )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ISPE >::IMPL::~IMPL()
-{}
-

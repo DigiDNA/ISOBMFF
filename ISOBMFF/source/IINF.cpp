@@ -31,25 +31,54 @@
 #include <ISOBMFF/IINF.hpp>
 #include <ISOBMFF/ContainerBox.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::IINF >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        std::vector< std::shared_ptr< ISOBMFF::INFE > > _entries;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::IINF
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    IINF::IINF(): FullBox( "iinf" )
+    class IINF::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::vector< std::shared_ptr< ISOBMFF::INFE > > _entries;
+    };
+    
+    IINF::IINF():
+        FullBox( "iinf" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    IINF::IINF( const IINF & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    IINF::IINF( IINF && o ) ISOBMFF_NOEXCEPT( true ):
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    IINF::~IINF()
+    {}
+    
+    IINF & IINF::operator =( IINF o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( IINF & o1, IINF & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void IINF::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -122,15 +151,14 @@ namespace ISOBMFF
         
         return std::vector< std::shared_ptr< Box > >( v.begin(), v.end() );
     }
+
+    IINF::IMPL::IMPL()
+    {}
+
+    IINF::IMPL::IMPL( const IMPL & o ):
+        _entries( o._entries )
+    {}
+
+    IINF::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::IINF >::IMPL::IMPL()
-{}
-
-XS::PIMPL::Object< ISOBMFF::IINF >::IMPL::IMPL( const IMPL & o ):
-    _entries( o._entries )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IINF >::IMPL::~IMPL()
-{}
-

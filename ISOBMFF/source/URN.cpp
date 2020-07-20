@@ -30,33 +30,62 @@
 
 #include <ISOBMFF/URN.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::URN >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::URN
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    URN::URN(): FullBox( "urn " )
+    class URN::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+    };
+    
+    URN::URN():
+        FullBox( "urn " ),
+        impl( std::make_unique< IMPL >() )
+    {}
+    
+    URN::URN( const URN & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    URN::URN( URN && o ) ISOBMFF_NOEXCEPT( true ):
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    URN::~URN()
+    {}
+    
+    URN & URN::operator =( URN o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( URN & o1, URN & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
+    
+    URN::IMPL::IMPL()
+    {}
+
+    URN::IMPL::IMPL( const IMPL & o )
+    {
+        ( void )o;
+    }
+
+    URN::IMPL::~IMPL()
     {}
 }
-
-XS::PIMPL::Object< ISOBMFF::URN >::IMPL::IMPL()
-{}
-
-XS::PIMPL::Object< ISOBMFF::URN >::IMPL::IMPL( const IMPL & o )
-{
-    ( void )o;
-}
-
-XS::PIMPL::Object< ISOBMFF::URN >::IMPL::~IMPL()
-{}
 

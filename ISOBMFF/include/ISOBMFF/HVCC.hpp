@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_HVCC_HPP
 #define ISOBMFF_HVCC_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -43,13 +42,16 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT HVCC: public Box, public XS::PIMPL::Object< HVCC >, public DisplayableObjectContainer
+    class ISOBMFF_EXPORT HVCC: public Box, public DisplayableObjectContainer
     {
         public:
             
-            using XS::PIMPL::Object< HVCC >::impl;
-            
             HVCC();
+            HVCC( const HVCC & o );
+            HVCC( HVCC && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~HVCC() override;
+            
+            HVCC & operator =( HVCC o );
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
@@ -93,14 +95,17 @@ namespace ISOBMFF
             void SetTemporalIdNested( uint8_t value );
             void SetLengthSizeMinusOne( uint8_t value );
             
-            class ISOBMFF_EXPORT Array: public XS::PIMPL::Object< Array >, public DisplayableObject, public DisplayableObjectContainer
+            class ISOBMFF_EXPORT Array: public DisplayableObject, public DisplayableObjectContainer
             {
                 public:
                     
-                    using XS::PIMPL::Object< Array >::impl;
-                    
                     Array();
                     Array( BinaryStream & stream );
+                    Array( const Array & o );
+                    Array( Array && o ) ISOBMFF_NOEXCEPT( true );
+                    virtual ~Array() override;
+                    
+                    Array & operator =( Array o );
                     
                     std::string GetName() const override;
                     
@@ -115,14 +120,17 @@ namespace ISOBMFF
                     virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects()    const override;
                     virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
                     
-                    class ISOBMFF_EXPORT NALUnit: public XS::PIMPL::Object< NALUnit >, public DisplayableObject
+                    class ISOBMFF_EXPORT NALUnit: public DisplayableObject
                     {
                         public:
                             
-                            using XS::PIMPL::Object< NALUnit >::impl;
-                            
                             NALUnit();
                             NALUnit( BinaryStream & stream );
+                            NALUnit( const NALUnit & o );
+                            NALUnit( NALUnit && o ) ISOBMFF_NOEXCEPT( true );
+                            virtual ~NALUnit() override;
+                            
+                            NALUnit & operator =( NALUnit o );
                             
                             std::string GetName() const override;
                             
@@ -130,14 +138,38 @@ namespace ISOBMFF
                             void                   SetData( const std::vector< uint8_t > & value );
                             
                             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+                            
+                            friend void swap( NALUnit & o1, NALUnit & o2 );
+                            
+                        private:
+                            
+                            class IMPL;
+                            
+                            std::unique_ptr< IMPL > impl;
                     };
                     
                     std::vector< std::shared_ptr< NALUnit > > GetNALUnits() const;
                     void                                      AddNALUnit( std::shared_ptr< NALUnit > unit );
+                    
+                    friend void swap( Array & o1, Array & o2 );
+                    
+                private:
+                    
+                    class IMPL;
+                    
+                    std::unique_ptr< IMPL > impl;
             };
             
             std::vector< std::shared_ptr< Array > > GetArrays() const;
             void                                    AddArray( std::shared_ptr< Array > array );
+            
+            friend void swap( HVCC & o1, HVCC & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

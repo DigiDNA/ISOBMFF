@@ -38,42 +38,69 @@
 #include <ISOBMFF/WIN32.hpp>
 #endif
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const std::string & path );
-        IMPL( const std::vector< uint8_t > & bytes );
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        std::vector< uint8_t > _bytes;
-        mutable std::ifstream  _stream;
-        std::string            _path;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::BinaryStream
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    BinaryStream::BinaryStream()
+    class BinaryStream::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const std::string & path );
+            IMPL( const std::vector< uint8_t > & bytes );
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::vector< uint8_t > _bytes;
+            mutable std::ifstream  _stream;
+            std::string            _path;
+    };
+    
+    BinaryStream::BinaryStream():
+        impl( std::make_unique< IMPL >() )
     {}
     
-    BinaryStream::BinaryStream( const std::string & path ): XS::PIMPL::Object< BinaryStream >( path )
+    BinaryStream::BinaryStream( const std::string & path ):
+        impl( std::make_unique< IMPL >( path ) )
     {}
     
-    BinaryStream::BinaryStream( const std::vector< uint8_t > & bytes ): XS::PIMPL::Object< BinaryStream >( bytes )
+    BinaryStream::BinaryStream( const std::vector< uint8_t > & bytes ):
+        impl( std::make_unique< IMPL >( bytes ) )
     {}
     
-    BinaryStream::BinaryStream( BinaryStream & stream, uint64_t length ): BinaryStream( std::vector< uint8_t >( static_cast< size_t >( length ) ) )
+    BinaryStream::BinaryStream( BinaryStream & stream, uint64_t length ):
+        BinaryStream( std::vector< uint8_t >( static_cast< size_t >( length ) ) )
     {
         if( length > 0 )
         {
             stream.Read( &( this->impl->_bytes[ 0 ] ), length );
         }
+    }
+    
+    BinaryStream::BinaryStream( const BinaryStream & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    BinaryStream::BinaryStream( BinaryStream && o ) ISOBMFF_NOEXCEPT( true ):
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    BinaryStream::~BinaryStream()
+    {}
+    
+    BinaryStream & BinaryStream::operator =( BinaryStream o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( BinaryStream & o1, BinaryStream & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
     }
     
     bool BinaryStream::HasBytesAvailable() const
@@ -558,54 +585,54 @@ namespace ISOBMFF
             std::vector< uint8_t >( this->impl->_bytes.begin() + static_cast< std::vector< uint8_t >::difference_type >( length ), this->impl->_bytes.end() ).swap( this->impl->_bytes );
         }
     }
-}
-
-XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL()
-{}
-
-XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const std::string & path ):
-    _path( path )
-{
-    #ifdef _WIN32
-    this->_stream.open( ISOBMFF::StringToWideString( path ), std::ios::binary );
-    #else
-    this->_stream.open( path, std::ios::binary );
-    #endif
-}
-
-XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const std::vector< uint8_t > & bytes ):
-    _bytes( bytes )
-{}
-
-XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::IMPL( const IMPL & o ):
-    _bytes( o._bytes ),
-    _path( o._path )
-{
-    std::ifstream::pos_type pos;
     
-    if( o._stream.is_open() )
-    {
-	    #ifdef _WIN32
-	    this->_stream.open( ISOBMFF::StringToWideString( this->_path ), std::ios::binary );
-	    #else
-        this->_stream.open( this->_path, std::ios::binary );
-	    #endif
+    BinaryStream::IMPL::IMPL()
+    {}
 
-        if( this->_stream.good() == false )
-        {
-            return;
-        }
-        
-        pos = o._stream.tellg();
-        
-        this->_stream.seekg( pos, std::ios::beg );
+    BinaryStream::IMPL::IMPL( const std::string & path ):
+        _path( path )
+    {
+        #ifdef _WIN32
+        this->_stream.open( ISOBMFF::StringToWideString( path ), std::ios::binary );
+        #else
+        this->_stream.open( path, std::ios::binary );
+        #endif
     }
-}
 
-XS::PIMPL::Object< ISOBMFF::BinaryStream >::IMPL::~IMPL()
-{
-    if( this->_stream.is_open() )
+    BinaryStream::IMPL::IMPL( const std::vector< uint8_t > & bytes ):
+        _bytes( bytes )
+    {}
+
+    BinaryStream::IMPL::IMPL( const IMPL & o ):
+        _bytes( o._bytes ),
+        _path( o._path )
     {
-        this->_stream.close();
+        std::ifstream::pos_type pos;
+        
+        if( o._stream.is_open() )
+        {
+            #ifdef _WIN32
+            this->_stream.open( ISOBMFF::StringToWideString( this->_path ), std::ios::binary );
+            #else
+            this->_stream.open( this->_path, std::ios::binary );
+            #endif
+
+            if( this->_stream.good() == false )
+            {
+                return;
+            }
+            
+            pos = o._stream.tellg();
+            
+            this->_stream.seekg( pos, std::ios::beg );
+        }
+    }
+
+    BinaryStream::IMPL::~IMPL()
+    {
+        if( this->_stream.is_open() )
+        {
+            this->_stream.close();
+        }
     }
 }

@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_PARSER_HPP
 #define ISOBMFF_PARSER_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -47,11 +46,9 @@ namespace ISOBMFF
      * @class       Parser
      * @abstract    ISO media file parser.
      */
-    class ISOBMFF_EXPORT Parser: public XS::PIMPL::Object< Parser >
+    class ISOBMFF_EXPORT Parser
     {
         public:
-            
-            using XS::PIMPL::Object< Parser >::impl;
             
             /*!
              * @enum        StringType
@@ -104,6 +101,33 @@ namespace ISOBMFF
              * @param       stream  The stream object.
              */
             Parser( BinaryStream & stream );
+            
+            /*!
+             * @function    Parser
+             * @abstract    Copy constructor.
+             * @param       o   The object to copy from.
+             */
+            Parser( const Parser & o );
+            
+            /*!
+             * @function    Parser
+             * @abstract    Move constructor.
+             * @param       o   The object to move from.
+             */
+            Parser( Parser && o ) ISOBMFF_NOEXCEPT( true );
+            
+            /*!
+             * @function    ~Parser
+             * @abstract    Destructor.
+             */
+            virtual ~Parser();
+            
+            /*!
+             * @function    operator=
+             * @abstract    Assignment operator.
+             * @param       o   The object to assign from.
+             */
+            Parser & operator =( Parser o );
             
             /*!
              * @function    RegisterBox
@@ -239,6 +263,20 @@ namespace ISOBMFF
              * @see         GetInfo
              */
             void SetInfo( const std::string & key, void * value );
+            
+            /*!
+             * @function    swap
+             * @abstract    Swap two objects.
+             * @param       o1  The first object to swap.
+             * @param       o2  The second object to swap.
+             */
+            friend void swap( Parser & o1, Parser & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

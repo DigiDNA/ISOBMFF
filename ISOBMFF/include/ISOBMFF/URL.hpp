@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_URL_HPP
 #define ISOBMFF_URL_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -39,13 +38,24 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT URL: public FullBox, public XS::PIMPL::Object< URL >
+    class ISOBMFF_EXPORT URL: public FullBox
     {
         public:
             
-            using XS::PIMPL::Object< URL >::impl;
-            
             URL();
+            URL( const URL & o );
+            URL( URL && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~URL() override;
+            
+            URL & operator =( URL o );
+            
+            friend void swap( URL & o1, URL & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

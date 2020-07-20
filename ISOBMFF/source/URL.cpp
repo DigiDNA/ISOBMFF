@@ -30,33 +30,62 @@
 
 #include <ISOBMFF/URL.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::URL >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::URL
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    URL::URL(): FullBox( "url " )
+    class URL::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+    };
+    
+    URL::URL():
+        FullBox( "url " ),
+        impl( std::make_unique< IMPL>() )
+    {}
+    
+    URL::URL( const URL & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    URL::URL( URL && o ) ISOBMFF_NOEXCEPT( true ):
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    URL::~URL()
+    {}
+    
+    URL & URL::operator =( URL o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( URL & o1, URL & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
+
+    URL::IMPL::IMPL()
+    {}
+
+    URL::IMPL::IMPL( const IMPL & o )
+    {
+        ( void )o;
+    }
+
+    URL::IMPL::~IMPL()
     {}
 }
-
-XS::PIMPL::Object< ISOBMFF::URL >::IMPL::IMPL()
-{}
-
-XS::PIMPL::Object< ISOBMFF::URL >::IMPL::IMPL( const IMPL & o )
-{
-    ( void )o;
-}
-
-XS::PIMPL::Object< ISOBMFF::URL >::IMPL::~IMPL()
-{}
 

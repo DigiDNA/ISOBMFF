@@ -30,31 +30,27 @@
 
 #include <ISOBMFF/ILOC.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        uint64_t _index;
-        uint64_t _offset;
-        uint64_t _length;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::ILOC::Item::Extent
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
+    class ILOC::Item::Extent::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint64_t _index;
+            uint64_t _offset;
+            uint64_t _length;
+    };
+    
     ILOC::Item::Extent::Extent():
-        XS::PIMPL::Object< Extent >()
+        impl( std::make_unique< IMPL >() )
     {}
     
     ILOC::Item::Extent::Extent( BinaryStream & stream, const ILOC & iloc ):
-        XS::PIMPL::Object< Extent >()
+        impl( std::make_unique< IMPL >() )
     {
         if( ( iloc.GetVersion() == 1 || iloc.GetVersion() == 2 ) && iloc.GetIndexSize() > 0 )
         {
@@ -97,6 +93,33 @@ namespace ISOBMFF
         {
             this->SetLength( stream.ReadBigEndianUInt64() );
         }
+    }
+    
+    ILOC::Item::Extent::Extent( const ILOC::Item::Extent & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    ILOC::Item::Extent::Extent( ILOC::Item::Extent && o ) ISOBMFF_NOEXCEPT( true ):
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    ILOC::Item::Extent::~Extent()
+    {}
+    
+    ILOC::Item::Extent & ILOC::Item::Extent::operator =( ILOC::Item::Extent o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( ILOC::Item::Extent & o1, ILOC::Item::Extent & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
     }
     
     std::string ILOC::Item::Extent::GetName() const
@@ -143,20 +166,19 @@ namespace ISOBMFF
             { "Length", std::to_string( this->GetLength() ) }
         };
     }
+
+    ILOC::Item::Extent::IMPL::IMPL():
+        _index( 0 ),
+        _offset( 0 ),
+        _length( 0 )
+    {}
+
+    ILOC::Item::Extent::IMPL::IMPL( const IMPL & o ):
+        _index( o._index ),
+        _offset( o._offset ),
+        _length( o._length )
+    {}
+
+    ILOC::Item::Extent::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL::IMPL():
-    _index( 0 ),
-    _offset( 0 ),
-    _length( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL::IMPL( const IMPL & o ):
-    _index( o._index ),
-    _offset( o._offset ),
-    _length( o._length )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL::~IMPL()
-{}
-

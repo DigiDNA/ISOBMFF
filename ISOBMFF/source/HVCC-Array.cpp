@@ -30,29 +30,27 @@
 
 #include <ISOBMFF/HVCC.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        bool                                                            _arrayCompleteness;
-        uint8_t                                                         _nalUnitType;
-        std::vector< std::shared_ptr< ISOBMFF::HVCC::Array::NALUnit > > _nalUnits;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::HVCC::Array
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    HVCC::Array::Array()
+    class HVCC::Array::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            bool                                                            _arrayCompleteness;
+            uint8_t                                                         _nalUnitType;
+            std::vector< std::shared_ptr< ISOBMFF::HVCC::Array::NALUnit > > _nalUnits;
+    };
+    
+    HVCC::Array::Array():
+        impl( std::make_unique< IMPL >() )
     {}
     
-    HVCC::Array::Array( BinaryStream & stream )
+    HVCC::Array::Array( BinaryStream & stream ):
+        impl( std::make_unique< IMPL >() )
     {
         uint8_t  u8;
         uint16_t count;
@@ -69,6 +67,33 @@ namespace ISOBMFF
         {
             this->AddNALUnit( std::make_shared< NALUnit >( stream ) );
         }
+    }
+    
+    HVCC::Array::Array( const HVCC::Array & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    HVCC::Array::Array( HVCC::Array && o ) ISOBMFF_NOEXCEPT( true ):
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    HVCC::Array::~Array()
+    {}
+    
+    HVCC::Array & HVCC::Array::operator =( HVCC::Array o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( HVCC::Array & o1, HVCC::Array & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
     }
     
     std::string HVCC::Array::GetName() const
@@ -128,19 +153,18 @@ namespace ISOBMFF
             { "NAL units",          std::to_string( this->GetNALUnits().size() ) }
         };
     }
+    
+    HVCC::Array::IMPL::IMPL():
+        _arrayCompleteness( false ),
+        _nalUnitType( 0 )
+    {}
+
+    HVCC::Array::IMPL::IMPL( const IMPL & o ):
+        _arrayCompleteness( o._arrayCompleteness ),
+        _nalUnitType( o._nalUnitType ),
+        _nalUnits( o._nalUnits )
+    {}
+
+    HVCC::Array::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL::IMPL():
-    _arrayCompleteness( false ),
-    _nalUnitType( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL::IMPL( const IMPL & o ):
-    _arrayCompleteness( o._arrayCompleteness ),
-    _nalUnitType( o._nalUnitType ),
-    _nalUnits( o._nalUnits )
-{}
-
-XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL::~IMPL()
-{}
-

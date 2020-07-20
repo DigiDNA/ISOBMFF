@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_DREF_HPP
 #define ISOBMFF_DREF_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -41,19 +40,30 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT DREF: public FullBox, public Container, public XS::PIMPL::Object< DREF >
+    class ISOBMFF_EXPORT DREF: public FullBox, public Container
     {
         public:
             
-            using XS::PIMPL::Object< DREF >::impl;
-            
             DREF();
+            DREF( const DREF & o );
+            DREF( DREF && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~DREF() override;
+            
+            DREF & operator =( DREF o );
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
             void                                  AddBox( std::shared_ptr< Box > box ) override;
             std::vector< std::shared_ptr< Box > > GetBoxes() const override;
+            
+            friend void swap( DREF & o1, DREF & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

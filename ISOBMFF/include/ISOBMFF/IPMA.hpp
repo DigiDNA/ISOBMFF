@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_IPMA_HPP
 #define ISOBMFF_IPMA_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -43,13 +42,16 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT IPMA: public FullBox, public DisplayableObjectContainer, public XS::PIMPL::Object< IPMA >
+    class ISOBMFF_EXPORT IPMA: public FullBox, public DisplayableObjectContainer
     {
         public:
             
-            using XS::PIMPL::Object< IPMA >::impl;
-            
             IPMA();
+            IPMA( const IPMA & o );
+            IPMA( IPMA && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~IPMA() override;
+            
+            IPMA & operator =( IPMA o );
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
@@ -57,14 +59,17 @@ namespace ISOBMFF
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects()    const override;
             
-            class ISOBMFF_EXPORT Entry: public XS::PIMPL::Object< Entry >, public DisplayableObject, public DisplayableObjectContainer
+            class ISOBMFF_EXPORT Entry: public DisplayableObject, public DisplayableObjectContainer
             {
                 public:
                     
-                    using XS::PIMPL::Object< Entry >::impl;
-                    
                     Entry();
                     Entry( BinaryStream & stream, const IPMA & ipma );
+                    Entry( const Entry & o );
+                    Entry( Entry && o ) ISOBMFF_NOEXCEPT( true );
+                    virtual ~Entry() override;
+                    
+                    Entry & operator =( Entry o );
                     
                     std::string GetName() const override;
                     
@@ -76,14 +81,17 @@ namespace ISOBMFF
                     std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
                     std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects()    const override;
                     
-                    class ISOBMFF_EXPORT Association: public XS::PIMPL::Object< Association >, public DisplayableObject
+                    class ISOBMFF_EXPORT Association: public DisplayableObject
                     {
                         public:
                             
-                            using XS::PIMPL::Object< Association >::impl;
-                            
                             Association();
                             Association( BinaryStream & stream, const IPMA & ipma );
+                            Association( const Association & o );
+                            Association( Association && o ) ISOBMFF_NOEXCEPT( true );
+                            virtual ~Association() override;
+                            
+                            Association & operator =( Association o );
                             
                             std::string GetName() const override;
                             
@@ -94,15 +102,39 @@ namespace ISOBMFF
                             void SetPropertyIndex( uint16_t value );
                             
                             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+                            
+                            friend void swap( Association & o1, Association & o2 );
+                            
+                        private:
+                            
+                            class IMPL;
+                            
+                            std::unique_ptr< IMPL > impl;
                     };
                     
                     std::vector< std::shared_ptr< Association > > GetAssociations() const;
                     void                                          AddAssociation( std::shared_ptr< Association > association );
+                    
+                    friend void swap( Entry & o1, Entry & o2 );
+                    
+                private:
+                    
+                    class IMPL;
+                    
+                    std::unique_ptr< IMPL > impl;
             };
             
             std::vector< std::shared_ptr< Entry > > GetEntries()                const;
             std::shared_ptr< Entry >                GetEntry( uint32_t itemID ) const;
             void                                    AddEntry( std::shared_ptr< Entry > entry );
+            
+            friend void swap( IPMA & o1, IPMA & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

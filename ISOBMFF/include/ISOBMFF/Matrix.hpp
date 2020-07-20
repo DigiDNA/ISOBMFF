@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_MATRIX_HPP
 #define ISOBMFF_MATRIX_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -44,11 +43,9 @@ namespace ISOBMFF
      * @class       Matrix
      * @abstract    Represents a transformation of video images for presentation.
      */
-    class ISOBMFF_EXPORT Matrix: public XS::PIMPL::Object< Matrix >, public DisplayableObject
+    class ISOBMFF_EXPORT Matrix: public DisplayableObject
     {
         public:
-            
-            using XS::PIMPL::Object< Matrix >::impl;
             
             /*!
              * @function    Matrix
@@ -70,6 +67,33 @@ namespace ISOBMFF
              * @param       w   The matrix W coordinate.
              */
             Matrix( uint32_t a, uint32_t b, uint32_t u, uint32_t c, uint32_t d, uint32_t v, uint32_t x, uint32_t y, uint32_t w );
+            
+            /*!
+             * @function    Matrix
+             * @abstract    Copy constructor.
+             * @param       o   The object to copy from.
+             */
+            Matrix( const Matrix & o );
+            
+            /*!
+             * @function    Matrix
+             * @abstract    Move constructor.
+             * @param       o   The object to move from.
+             */
+            Matrix( Matrix && o ) ISOBMFF_NOEXCEPT( true );
+            
+            /*!
+             * @function    ~Matrix
+             * @abstract    Destructor.
+             */
+            virtual ~Matrix() override;
+            
+            /*!
+             * @function    operator=
+             * @abstract    Assignment operator.
+             * @param       o   The object to assign from.
+             */
+            Matrix & operator =( Matrix o );
             
             /*!
              * @function    GetName
@@ -221,6 +245,20 @@ namespace ISOBMFF
              * @see         DisplayableObject
              */
             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+            
+            /*!
+             * @function    swap
+             * @abstract    Swap two objects.
+             * @param       o1  The first object to swap.
+             * @param       o2  The second object to swap.
+             */
+            friend void swap( Matrix & o1, Matrix & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

@@ -31,7 +31,6 @@
 #ifndef ISOBMFF_ISPE_HPP
 #define ISOBMFF_ISPE_HPP
 
-#include <XS/PIMPL/Object.hpp>
 #include <memory>
 #include <algorithm>
 #include <ISOBMFF/Macros.hpp>
@@ -40,13 +39,16 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT ISPE: public FullBox, public XS::PIMPL::Object< ISPE >
+    class ISOBMFF_EXPORT ISPE: public FullBox
     {
         public:
             
-            using XS::PIMPL::Object< ISPE >::impl;
-            
             ISPE();
+            ISPE( const ISPE & o );
+            ISPE( ISPE && o ) ISOBMFF_NOEXCEPT( true );
+            virtual ~ISPE() override;
+            
+            ISPE & operator =( ISPE o );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
@@ -56,6 +58,14 @@ namespace ISOBMFF
             
             void SetDisplayWidth( uint32_t value );
             void SetDisplayHeight( uint32_t value );
+            
+            friend void swap( ISPE & o1, ISPE & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

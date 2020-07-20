@@ -32,25 +32,54 @@
 #include <ISOBMFF/Parser.hpp>
 #include <ISOBMFF/Utils.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL
-{
-    public:
-        
-        IMPL();
-        IMPL( const IMPL & o );
-        ~IMPL();
-        
-        std::string _dataFormat;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::FRMA
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    FRMA::FRMA(): Box( "frma" )
+    class FRMA::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::string _dataFormat;
+    };
+    
+    FRMA::FRMA():
+        Box( "frma" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    FRMA::FRMA( const FRMA & o ):
+        Box( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    FRMA::FRMA( FRMA && o ) ISOBMFF_NOEXCEPT( true ):
+        Box( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    FRMA::~FRMA()
+    {}
+    
+    FRMA & FRMA::operator =( FRMA o )
+    {
+        Box::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( FRMA & o1, FRMA & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< Box & >( o1 ), static_cast< Box & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void FRMA::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -77,15 +106,15 @@ namespace ISOBMFF
     {
         this->impl->_dataFormat = value;
     }
+    
+    FRMA::IMPL::IMPL()
+    {}
+
+    FRMA::IMPL::IMPL( const IMPL & o ):
+        _dataFormat( o._dataFormat )
+    {}
+
+    FRMA::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL::IMPL()
-{}
-
-XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL::IMPL( const IMPL & o ):
-    _dataFormat( o._dataFormat )
-{}
-
-XS::PIMPL::Object< ISOBMFF::FRMA >::IMPL::~IMPL()
-{}
 
