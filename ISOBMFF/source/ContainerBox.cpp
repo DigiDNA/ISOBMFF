@@ -30,6 +30,7 @@
 
 #include <ISOBMFF/ContainerBox.hpp>
 #include <ISOBMFF/Parser.hpp>
+#include <ISOBMFF/BinaryDataStream.hpp>
 
 namespace ISOBMFF
 {
@@ -85,7 +86,7 @@ namespace ISOBMFF
         uint64_t               length;
         std::string            name;
         std::shared_ptr< Box > box;
-        BinaryStream           content;
+        BinaryDataStream       content;
         
         this->impl->_boxes.clear();
         
@@ -102,22 +103,22 @@ namespace ISOBMFF
                 
                 if( name == "mdat" && parser.HasOption( ISOBMFF::Parser::Options::SkipMDATData ) )
                 {
-                    stream.DeleteBytes( length - 16 );
+                    stream.Seek( length - 16, BinaryStream::SeekDirection::Current );
                 }
                 else
                 {
-                    content = BinaryStream( stream, length - 16 );
+                    content = BinaryDataStream( stream.Read( length - 16 ) );
                 }
             }
             else
             {
                 if( name == "mdat" && parser.HasOption( ISOBMFF::Parser::Options::SkipMDATData ) )
                 {
-                    stream.DeleteBytes( length - 8 );
+                    stream.Seek( length - 8, BinaryStream::SeekDirection::Current );
                 }
                 else
                 {
-                    content = BinaryStream( stream, length - 8 );
+                    content = BinaryDataStream( stream.Read( length - 8 ) );
                 }
             }
             

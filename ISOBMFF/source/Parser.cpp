@@ -30,7 +30,8 @@
 
 #include <ISOBMFF/Parser.hpp>
 #include <ISOBMFF/ContainerBox.hpp>
-#include <ISOBMFF/BinaryStream.hpp>
+#include <ISOBMFF/BinaryFileStream.hpp>
+#include <ISOBMFF/BinaryDataStream.hpp>
 #include <ISOBMFF/FTYP.hpp>
 #include <ISOBMFF/MVHD.hpp>
 #include <ISOBMFF/TKHD.hpp>
@@ -157,7 +158,7 @@ namespace ISOBMFF
     
     void Parser::Parse( const std::string & path ) ISOBMFF_NOEXCEPT( false )
     {
-        BinaryStream stream( path );
+        BinaryFileStream stream( path );
         
         this->Parse( stream );
         
@@ -166,7 +167,7 @@ namespace ISOBMFF
     
     void Parser::Parse( const std::vector< uint8_t > & data ) ISOBMFF_NOEXCEPT( false )
     {
-        BinaryStream stream( data );
+        BinaryDataStream stream( data );
         
         this->Parse( stream );
     }

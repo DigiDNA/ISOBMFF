@@ -28,104 +28,57 @@
  * @author      Jean-David Gadina - www.digidna.net
  */
 
-#include <ISOBMFF/BinaryStream.hpp>
 #include <fstream>
 #include <cmath>
-#include <cstdint>
-#include <cstring>
-
-#ifdef _WIN32
-#include <ISOBMFF/WIN32.hpp>
-#endif
+#include <ISOBMFF/BinaryStream.hpp>
 
 namespace ISOBMFF
 {
-    class BinaryStream::IMPL
+    bool BinaryStream::HasBytesAvailable()
     {
-        public:
-            
-            IMPL();
-            IMPL( const std::string & path );
-            IMPL( const std::vector< uint8_t > & bytes );
-            IMPL( const IMPL & o );
-            ~IMPL();
-            
-            std::vector< uint8_t > _bytes;
-            mutable std::ifstream  _stream;
-            std::string            _path;
-    };
-    
-    BinaryStream::BinaryStream():
-        impl( std::make_unique< IMPL >() )
-    {}
-    
-    BinaryStream::BinaryStream( const std::string & path ):
-        impl( std::make_unique< IMPL >( path ) )
-    {}
-    
-    BinaryStream::BinaryStream( const std::vector< uint8_t > & bytes ):
-        impl( std::make_unique< IMPL >( bytes ) )
-    {}
-    
-    BinaryStream::BinaryStream( BinaryStream & stream, uint64_t length ):
-        BinaryStream( std::vector< uint8_t >( static_cast< size_t >( length ) ) )
-    {
-        if( length > 0 )
-        {
-            stream.Read( &( this->impl->_bytes[ 0 ] ), length );
-        }
+        return this->AvailableBytes() > 0;
     }
     
-    BinaryStream::BinaryStream( const BinaryStream & o ):
-        impl( std::make_unique< IMPL >( *( o.impl ) ) )
-    {}
-    
-    BinaryStream::BinaryStream( BinaryStream && o ) ISOBMFF_NOEXCEPT( true ):
-        impl( std::move( o.impl ) )
+    size_t BinaryStream::AvailableBytes()
     {
-        o.impl = nullptr;
-    }
-    
-    BinaryStream::~BinaryStream()
-    {}
-    
-    BinaryStream & BinaryStream::operator =( BinaryStream o )
-    {
-        swap( *( this ), o );
+        size_t cur( this->Tell() );
+        size_t pos;
         
-        return *( this );
-    }
-    
-    void swap( BinaryStream & o1, BinaryStream & o2 )
-    {
-        using std::swap;
+        this->Seek( 0, SeekDirection::End );
         
-        swap( o1.impl, o2.impl );
+        pos = this->Tell();
+        
+        this->Seek( numeric_cast< ssize_t >( cur ), SeekDirection::Begin );
+        
+        return pos - cur;
     }
     
-    bool BinaryStream::HasBytesAvailable() const
+    void BinaryStream::Seek( ssize_t offset )
     {
-        if( this->impl->_stream.is_open() )
-        {
-            {
-                std::streampos cur;
-                std::streampos end;
-                
-                cur = this->impl->_stream.tellg();
-                
-                this->impl->_stream.seekg( 0, std::ios::end );
-                
-                end = this->impl->_stream.tellg();
-                
-                this->impl->_stream.seekg( cur, std::ios::beg );
-                
-                return cur < end;
-            }
-        }
-        else
-        {
-            return this->impl->_bytes.size() > 0;
-        }
+        this->Seek( offset, SeekDirection::Current );
+    }
+    
+    void BinaryStream::Get( uint8_t * buf, uint64_t pos, uint64_t length )
+    {
+        size_t cur = this->Tell();
+        
+        this->Seek( pos, SeekDirection::Current );
+        this->Read( buf, length );
+        this->Seek( cur, SeekDirection::Begin );
+    }
+    
+    std::vector< uint8_t > BinaryStream::Read( size_t size )
+    {
+        std::vector< uint8_t > data( size, 0 );
+        
+        this->Read( &( data[ 0 ] ), size );
+        
+        return data;
+    }
+    
+    std::vector< uint8_t > BinaryStream::ReadAllData()
+    {
+        return this->Read( this->AvailableBytes() );
     }
     
     uint8_t BinaryStream::ReadUInt8()
@@ -161,17 +114,6 @@ namespace ISOBMFF
         return n;
     }
     
-    int16_t BinaryStream::ReadInt16()
-    {
-        int16_t n;
-        
-        n = 0;
-        
-        this->Read( reinterpret_cast< uint8_t * >( &n ), 2 );
-        
-        return n;
-    }
-    
     uint16_t BinaryStream::ReadBigEndianUInt16()
     {
         uint8_t  c[ 2 ];
@@ -184,10 +126,10 @@ namespace ISOBMFF
         
         this->Read( reinterpret_cast< uint8_t * >( c ), 2 );
         
-        n1 = static_cast< uint16_t >( c[ 0 ] );
-        n2 = static_cast< uint16_t >( c[ 1 ] );
+        n1 = numeric_cast< uint16_t >( c[ 0 ] );
+        n2 = numeric_cast< uint16_t >( c[ 1 ] );
         
-        n  = static_cast< uint16_t >( n1 << 8 )
+        n  = numeric_cast< uint16_t >( n1 << 8 )
            | n2;
         
         return n;
@@ -205,10 +147,10 @@ namespace ISOBMFF
         
         this->Read( reinterpret_cast< uint8_t * >( c ), 2 );
         
-        n1 = static_cast< uint16_t >( c[ 1 ] );
-        n2 = static_cast< uint16_t >( c[ 0 ] );
+        n1 = numeric_cast< uint16_t >( c[ 1 ] );
+        n2 = numeric_cast< uint16_t >( c[ 0 ] );
         
-        n  = static_cast< uint16_t >( n1 << 8 )
+        n  = numeric_cast< uint16_t >( n1 << 8 )
            | n2;
         
         return n;
@@ -217,17 +159,6 @@ namespace ISOBMFF
     uint32_t BinaryStream::ReadUInt32()
     {
         uint32_t n;
-        
-        n = 0;
-        
-        this->Read( reinterpret_cast< uint8_t * >( &n ), 4 );
-        
-        return n;
-    }
-    
-    int32_t BinaryStream::ReadInt32()
-    {
-        int32_t n;
         
         n = 0;
         
@@ -252,14 +183,14 @@ namespace ISOBMFF
         
         this->Read( reinterpret_cast< uint8_t * >( c ), 4 );
         
-        n1 = static_cast< uint32_t >( c[ 0 ] );
-        n2 = static_cast< uint32_t >( c[ 1 ] );
-        n3 = static_cast< uint32_t >( c[ 2 ] );
-        n4 = static_cast< uint32_t >( c[ 3 ] );
+        n1 = numeric_cast< uint32_t >( c[ 0 ] );
+        n2 = numeric_cast< uint32_t >( c[ 1 ] );
+        n3 = numeric_cast< uint32_t >( c[ 2 ] );
+        n4 = numeric_cast< uint32_t >( c[ 3 ] );
         
-        n  = static_cast< uint32_t >( n1 << 24 )
-           | static_cast< uint32_t >( n2 << 16 )
-           | static_cast< uint32_t >( n3 << 8 )
+        n  = numeric_cast< uint32_t >( n1 << 24 )
+           | numeric_cast< uint32_t >( n2 << 16 )
+           | numeric_cast< uint32_t >( n3 << 8 )
            | n4;
         
         return n;
@@ -281,14 +212,14 @@ namespace ISOBMFF
         
         this->Read( reinterpret_cast< uint8_t * >( c ), 4 );
         
-        n1 = static_cast< uint32_t >( c[ 3 ] );
-        n2 = static_cast< uint32_t >( c[ 2 ] );
-        n3 = static_cast< uint32_t >( c[ 1 ] );
-        n4 = static_cast< uint32_t >( c[ 0 ] );
+        n1 = numeric_cast< uint32_t >( c[ 3 ] );
+        n2 = numeric_cast< uint32_t >( c[ 2 ] );
+        n3 = numeric_cast< uint32_t >( c[ 1 ] );
+        n4 = numeric_cast< uint32_t >( c[ 0 ] );
         
-        n  = static_cast< uint32_t >( n1 << 24 )
-           | static_cast< uint32_t >( n2 << 16 )
-           | static_cast< uint32_t >( n3 << 8 )
+        n  = numeric_cast< uint32_t >( n1 << 24 )
+           | numeric_cast< uint32_t >( n2 << 16 )
+           | numeric_cast< uint32_t >( n3 << 8 )
            | n4;
         
         return n;
@@ -297,17 +228,6 @@ namespace ISOBMFF
     uint64_t BinaryStream::ReadUInt64()
     {
         uint64_t n;
-        
-        n = 0;
-        
-        this->Read( reinterpret_cast< uint8_t * >( &n ), 8 );
-        
-        return n;
-    }
-    
-    int64_t BinaryStream::ReadInt64()
-    {
-        int64_t n;
         
         n = 0;
         
@@ -340,22 +260,22 @@ namespace ISOBMFF
         
         this->Read( reinterpret_cast< uint8_t * >( c ), 8 );
         
-        n1 = static_cast< uint64_t >( c[ 0 ] );
-        n2 = static_cast< uint64_t >( c[ 1 ] );
-        n3 = static_cast< uint64_t >( c[ 2 ] );
-        n4 = static_cast< uint64_t >( c[ 3 ] );
-        n5 = static_cast< uint64_t >( c[ 4 ] );
-        n6 = static_cast< uint64_t >( c[ 5 ] );
-        n7 = static_cast< uint64_t >( c[ 6 ] );
-        n8 = static_cast< uint64_t >( c[ 7 ] );
+        n1 = numeric_cast< uint64_t >( c[ 0 ] );
+        n2 = numeric_cast< uint64_t >( c[ 1 ] );
+        n3 = numeric_cast< uint64_t >( c[ 2 ] );
+        n4 = numeric_cast< uint64_t >( c[ 3 ] );
+        n5 = numeric_cast< uint64_t >( c[ 4 ] );
+        n6 = numeric_cast< uint64_t >( c[ 5 ] );
+        n7 = numeric_cast< uint64_t >( c[ 6 ] );
+        n8 = numeric_cast< uint64_t >( c[ 7 ] );
         
-        n  = static_cast< uint64_t >( n1 << 56 )
-           | static_cast< uint64_t >( n2 << 48 )
-           | static_cast< uint64_t >( n3 << 40 )
-           | static_cast< uint64_t >( n4 << 32 )
-           | static_cast< uint64_t >( n5 << 24 )
-           | static_cast< uint64_t >( n6 << 16 )
-           | static_cast< uint64_t >( n7 << 8 )
+        n  = numeric_cast< uint64_t >( n1 << 56 )
+           | numeric_cast< uint64_t >( n2 << 48 )
+           | numeric_cast< uint64_t >( n3 << 40 )
+           | numeric_cast< uint64_t >( n4 << 32 )
+           | numeric_cast< uint64_t >( n5 << 24 )
+           | numeric_cast< uint64_t >( n6 << 16 )
+           | numeric_cast< uint64_t >( n7 << 8 )
            | n8;
         
         return n;
@@ -385,22 +305,22 @@ namespace ISOBMFF
         
         this->Read( reinterpret_cast< uint8_t * >( c ), 8 );
         
-        n1 = static_cast< uint64_t >( c[ 7 ] );
-        n2 = static_cast< uint64_t >( c[ 6 ] );
-        n3 = static_cast< uint64_t >( c[ 5 ] );
-        n4 = static_cast< uint64_t >( c[ 4 ] );
-        n5 = static_cast< uint64_t >( c[ 3 ] );
-        n6 = static_cast< uint64_t >( c[ 2 ] );
-        n7 = static_cast< uint64_t >( c[ 1 ] );
-        n8 = static_cast< uint64_t >( c[ 0 ] );
+        n1 = numeric_cast< uint64_t >( c[ 7 ] );
+        n2 = numeric_cast< uint64_t >( c[ 6 ] );
+        n3 = numeric_cast< uint64_t >( c[ 5 ] );
+        n4 = numeric_cast< uint64_t >( c[ 4 ] );
+        n5 = numeric_cast< uint64_t >( c[ 3 ] );
+        n6 = numeric_cast< uint64_t >( c[ 2 ] );
+        n7 = numeric_cast< uint64_t >( c[ 1 ] );
+        n8 = numeric_cast< uint64_t >( c[ 0 ] );
         
-        n  = static_cast< uint64_t >( n1 << 56 )
-           | static_cast< uint64_t >( n2 << 48 )
-           | static_cast< uint64_t >( n3 << 40 )
-           | static_cast< uint64_t >( n4 << 32 )
-           | static_cast< uint64_t >( n5 << 24 )
-           | static_cast< uint64_t >( n6 << 16 )
-           | static_cast< uint64_t >( n7 << 8 )
+        n  = numeric_cast< uint64_t >( n1 << 56 )
+           | numeric_cast< uint64_t >( n2 << 48 )
+           | numeric_cast< uint64_t >( n3 << 40 )
+           | numeric_cast< uint64_t >( n4 << 32 )
+           | numeric_cast< uint64_t >( n5 << 24 )
+           | numeric_cast< uint64_t >( n6 << 16 )
+           | numeric_cast< uint64_t >( n7 << 8 )
            | n8;
         
         return n;
@@ -411,7 +331,7 @@ namespace ISOBMFF
         uint32_t     n;
         unsigned int integer;
         unsigned int fractionalMask;
-        float        fractional;
+        unsigned int fractional;
         
         if( integerLength + fractionalLength == 16 )
         {
@@ -423,10 +343,10 @@ namespace ISOBMFF
         }
         
         integer        = n >> fractionalLength;
-        fractionalMask = static_cast< unsigned int >( pow( 2, fractionalLength ) - 1 );
-        fractional     = static_cast< float >( n & fractionalMask ) / static_cast< float >( 1 << fractionalLength );
+        fractionalMask = numeric_cast< unsigned int >( pow( 2, fractionalLength ) - 1 );
+        fractional     = ( n & fractionalMask ) / ( 1 << fractionalLength );
         
-        return static_cast< float >( integer ) + fractional;
+        return integer + fractional;
     }
     
     float BinaryStream::ReadLittleEndianFixedPoint( unsigned int integerLength, unsigned int fractionalLength )
@@ -434,7 +354,7 @@ namespace ISOBMFF
         uint32_t     n;
         unsigned int integer;
         unsigned int fractionalMask;
-        float        fractional;
+        unsigned int fractional;
         
         if( integerLength + fractionalLength == 16 )
         {
@@ -446,10 +366,10 @@ namespace ISOBMFF
         }
         
         integer        = n >> fractionalLength;
-        fractionalMask = static_cast< unsigned int >( pow( 2, fractionalLength ) - 1 );
-        fractional     = static_cast< float >( n & fractionalMask ) / static_cast< float >( 1 << fractionalLength );
+        fractionalMask = numeric_cast< unsigned int >( pow( 2, fractionalLength ) - 1 );
+        fractional     = ( n & fractionalMask ) / ( 1 << fractionalLength );
         
-        return static_cast< float >( integer ) + fractional;
+        return integer + fractional;
     }
     
     std::string BinaryStream::ReadFourCC()
@@ -459,22 +379,6 @@ namespace ISOBMFF
         this->Read( s, 4 );
         
         return std::string( reinterpret_cast< char * >( s ), 4 );
-    }
-    
-    std::string BinaryStream::ReadNULLTerminatedString()
-    {
-        std::vector< uint8_t > bytes;
-        uint8_t                b;
-        
-        do
-        {
-            b = this->ReadUInt8();
-            
-            bytes.push_back( b );
-        }
-        while( b != 0 );
-        
-        return std::string( reinterpret_cast< char * >( &( bytes[ 0 ] ) ), bytes.size() );
     }
     
     std::string BinaryStream::ReadPascalString()
@@ -496,6 +400,37 @@ namespace ISOBMFF
         return ret;
     }
     
+    std::string BinaryStream::ReadString( size_t length )
+    {
+        std::vector< char > cp( length + 1, 0 );
+        
+        this->Read( reinterpret_cast< uint8_t * >( &( cp[ 0 ] ) ), length );
+        
+        return &( cp[ 0 ] );
+    }
+    
+    std::string BinaryStream::ReadNULLTerminatedString()
+    {
+        char        c;
+        std::string s;
+        
+        while( 1 )
+        {
+            c = 0;
+            
+            this->Read( reinterpret_cast< uint8_t * >( &c ), 1 );
+            
+            if( c == 0 )
+            {
+                break;
+            }
+            
+            s.append( 1, c );
+        }
+        
+        return s;
+    }
+    
     Matrix BinaryStream::ReadMatrix()
     {
         return Matrix
@@ -510,129 +445,5 @@ namespace ISOBMFF
             this->ReadBigEndianUInt32(),
             this->ReadBigEndianUInt32()
         );
-    }
-    
-    std::vector< uint8_t > BinaryStream::ReadAllData()
-    {
-        std::vector< uint8_t > v;
-        
-        if( this->impl->_stream.is_open() )
-        {
-            {
-                std::ifstream::pos_type cur;
-                std::ifstream::pos_type length;
-                
-                cur = this->impl->_stream.tellg();
-                
-                this->impl->_stream.seekg( 0, std::ios::end );
-                
-                length = this->impl->_stream.tellg();
-                v      = std::vector< uint8_t >( static_cast< std::size_t >( length ) );
-                
-                this->impl->_stream.seekg( cur, std::ios::beg );
-                this->impl->_stream.read( reinterpret_cast< char * >( &( v[ 0 ] ) ), length );
-            }
-        }
-        else
-        {
-            swap( v, this->impl->_bytes );
-        }
-        
-        return v;
-    }
-    
-    void BinaryStream::Read( uint8_t * buf, uint64_t length )
-    {
-        if( this->impl->_stream.is_open() )
-        {
-            this->impl->_stream.read( reinterpret_cast< char * >( buf ), static_cast< std::streamsize >( length ) );
-        }
-        else
-        {
-            memcpy( static_cast< void * >( buf ), static_cast< const void * >( &( this->impl->_bytes[ 0 ] ) ), static_cast< size_t >( length ) );
-            this->DeleteBytes( length );
-        }
-    }
-    
-    void BinaryStream::Get( uint8_t * buf, uint64_t pos, uint64_t length )
-    {
-        if( this->impl->_stream.is_open() )
-        {
-            {
-                std::ifstream::pos_type cur;
-                
-                cur = this->impl->_stream.tellg();
-                
-                this->impl->_stream.seekg( static_cast< std::ifstream::off_type >( pos ), std::ios::cur );
-                this->impl->_stream.read( reinterpret_cast< char * >( buf ), static_cast< std::streamsize >( length ) );
-                this->impl->_stream.seekg( cur, std::ios::beg );
-            }
-        }
-        else
-        {
-            memcpy( static_cast< void * >( buf ), static_cast< const void * >( &( this->impl->_bytes[ static_cast< size_t >( pos ) ] ) ), static_cast< size_t >( length ) );
-        }
-    }
-    
-    void BinaryStream::DeleteBytes( uint64_t length )
-    {
-        if( this->impl->_stream.is_open() )
-        {
-            this->impl->_stream.seekg( static_cast< std::ifstream::off_type >( length ), std::ios::cur );
-        }
-        else
-        {
-            std::vector< uint8_t >( this->impl->_bytes.begin() + static_cast< std::vector< uint8_t >::difference_type >( length ), this->impl->_bytes.end() ).swap( this->impl->_bytes );
-        }
-    }
-    
-    BinaryStream::IMPL::IMPL()
-    {}
-
-    BinaryStream::IMPL::IMPL( const std::string & path ):
-        _path( path )
-    {
-        #ifdef _WIN32
-        this->_stream.open( ISOBMFF::StringToWideString( path ), std::ios::binary );
-        #else
-        this->_stream.open( path, std::ios::binary );
-        #endif
-    }
-
-    BinaryStream::IMPL::IMPL( const std::vector< uint8_t > & bytes ):
-        _bytes( bytes )
-    {}
-
-    BinaryStream::IMPL::IMPL( const IMPL & o ):
-        _bytes( o._bytes ),
-        _path( o._path )
-    {
-        std::ifstream::pos_type pos;
-        
-        if( o._stream.is_open() )
-        {
-            #ifdef _WIN32
-            this->_stream.open( ISOBMFF::StringToWideString( this->_path ), std::ios::binary );
-            #else
-            this->_stream.open( this->_path, std::ios::binary );
-            #endif
-
-            if( this->_stream.good() == false )
-            {
-                return;
-            }
-            
-            pos = o._stream.tellg();
-            
-            this->_stream.seekg( pos, std::ios::beg );
-        }
-    }
-
-    BinaryStream::IMPL::~IMPL()
-    {
-        if( this->_stream.is_open() )
-        {
-            this->_stream.close();
-        }
     }
 }
