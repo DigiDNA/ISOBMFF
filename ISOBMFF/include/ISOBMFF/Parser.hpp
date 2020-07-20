@@ -98,6 +98,13 @@ namespace ISOBMFF
             Parser( const std::vector< uint8_t > & data );
             
             /*!
+             * @function    Parser
+             * @abstract    Creates a parser for a stream.
+             * @param       stream  The stream object.
+             */
+            Parser( BinaryStream & stream );
+            
+            /*!
              * @function    RegisterBox
              * @abstract    Registers a custom box type.
              * @param       type        The custom box type (four character string).

@@ -100,6 +100,11 @@ namespace ISOBMFF
         this->Parse( data );
     }
     
+    Parser::Parser( BinaryStream & stream ): XS::PIMPL::Object< Parser >()
+    {
+        this->Parse( stream );
+    }
+    
     void Parser::RegisterContainerBox( const std::string & type )
     {
         this->impl->RegisterContainerBox( type );
