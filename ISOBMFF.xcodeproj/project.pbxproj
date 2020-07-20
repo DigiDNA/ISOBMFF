@@ -670,14 +670,14 @@
 				TargetAttributes = {
 					0515C8AE1F2A71A8003B8594 = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					05BFED141F63952E00A6909E = {
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					05DA96001F2A7D5B005F46DB = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -823,6 +823,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 057224132011201F00DC0502 /* Debug - ccache.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/ISOBMFF/include";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 			};
@@ -832,6 +835,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 057224112011201F00DC0502 /* Release - ccache.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/ISOBMFF/include";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 			};
