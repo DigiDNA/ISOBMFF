@@ -3,6 +3,7 @@ os:
   - osx
   - linux
 osx_image: xcode11.6
+dist: bionic
 script:
     - if [ "$TRAVIS_OS_NAME" == "osx" ];   then xcodebuild build -project ISOBMFF.xcodeproj -scheme ISOBMFF-Dump; fi
     - if [ "$TRAVIS_OS_NAME" == "linux" ]; then make; fi
