@@ -95,6 +95,11 @@ namespace ISOBMFF
         this->Parse( path );
     }
     
+    Parser::Parser( const std::vector< uint8_t > & data ): XS::PIMPL::Object< Parser >()
+    {
+        this->Parse( data );
+    }
+    
     void Parser::RegisterContainerBox( const std::string & type )
     {
         this->impl->RegisterContainerBox( type );
@@ -120,12 +125,27 @@ namespace ISOBMFF
     
     void Parser::Parse( const std::string & path ) ISOBMFF_NOEXCEPT( false )
     {
-        char         n[ 4 ] = { 0, 0, 0, 0 };
         BinaryStream stream( path );
+        
+        this->Parse( stream );
+        
+        this->impl->_path = path;
+    }
+    
+    void Parser::Parse( const std::vector< uint8_t > & data ) ISOBMFF_NOEXCEPT( false )
+    {
+        BinaryStream stream( data );
+        
+        this->Parse( stream );
+    }
+    
+    void Parser::Parse( BinaryStream & stream ) ISOBMFF_NOEXCEPT( false )
+    {
+        char n[ 4 ] = { 0, 0, 0, 0 };
         
         if( stream.HasBytesAvailable() == false )
         {
-            throw std::runtime_error( std::string( "Cannot read file: " ) + path );
+            throw std::runtime_error( std::string( "Cannot read file" ) );
         }
         
         try
@@ -147,10 +167,10 @@ namespace ISOBMFF
             && memcmp( n, "pnot", 4 ) != 0
         )
         {
-            throw std::runtime_error( std::string( "File is not an ISO media file: " ) + path );
+            throw std::runtime_error( std::string( "Data is not an ISO media file" ) );
         }
         
-        this->impl->_path = path;
+        this->impl->_path = "";
         this->impl->_file = std::make_shared< File >();
         
         if( stream.HasBytesAvailable() )

@@ -91,6 +91,13 @@ namespace ISOBMFF
             Parser( const std::string & path );
             
             /*!
+             * @function    Parser
+             * @abstract    Creates a parser for data.
+             * @param       data    The data bytes.
+             */
+            Parser( const std::vector< uint8_t > & data );
+            
+            /*!
              * @function    RegisterBox
              * @abstract    Registers a custom box type.
              * @param       type        The custom box type (four character string).
@@ -123,6 +130,22 @@ namespace ISOBMFF
              * @param       path    The file's path.
              */
             void Parse( const std::string & path ) ISOBMFF_NOEXCEPT( false );
+            
+            /*!
+             * @function    Parse
+             * @abstract    Parses data.
+             * @discussion  This will discard any previously parsed file/data.
+             * @param       data    The data bytes.
+             */
+            void Parse( const std::vector< uint8_t > & data ) ISOBMFF_NOEXCEPT( false );
+            
+            /*!
+             * @function    Parse
+             * @abstract    Parses data from a stream.
+             * @discussion  This will discard any previously parsed file/data.
+             * @param       stream  The stream object.
+             */
+            void Parse( BinaryStream & stream ) ISOBMFF_NOEXCEPT( false );
             
             /*!
              * @function    GetFile
