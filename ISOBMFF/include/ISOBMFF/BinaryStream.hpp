@@ -54,25 +54,25 @@ namespace ISOBMFF
             
             virtual ~BinaryStream() = default;
             
-            virtual void   Read( uint8_t * buf, size_t size )        = 0;
-            virtual size_t Tell()                              const = 0;
-            virtual void   Seek( ssize_t offset, SeekDirection dir ) = 0;
+            virtual void   Read( uint8_t * buf, size_t size )               = 0;
+            virtual size_t Tell()                                     const = 0;
+            virtual void   Seek( std::streamoff offset, SeekDirection dir ) = 0;
             
             bool   HasBytesAvailable();
             size_t AvailableBytes();
             
-            void Seek( ssize_t offset );
+            void Seek( std::streamoff offset );
             
             template< typename T, typename std::enable_if< std::is_integral< T >::value && std::is_unsigned< T >::value >::type * = nullptr >
             void Seek( T offset )
             {
-                this->Seek( numeric_cast< ssize_t >( offset ) );
+                this->Seek( numeric_cast< std::streamoff >( offset ) );
             }
             
             template< typename T, typename std::enable_if< std::is_integral< T >::value && std::is_unsigned< T >::value >::type * = nullptr >
             void Seek( T offset, SeekDirection dir )
             {
-                this->Seek( numeric_cast< ssize_t >( offset ), dir );
+                this->Seek( numeric_cast< std::streamoff >( offset ), dir );
             }
             
             void Get( uint8_t * buf, uint64_t pos, uint64_t length );

@@ -55,9 +55,9 @@ namespace ISOBMFF
             
             using BinaryStream::Read;
             
-            void   Read( uint8_t * buf, size_t size )        override;
-            void   Seek( ssize_t offset, SeekDirection dir ) override;
-            size_t Tell()                              const override;
+            void   Read( uint8_t * buf, size_t size )               override;
+            void   Seek( std::streamoff offset, SeekDirection dir ) override;
+            size_t Tell()                                     const override;
             
         private:
             

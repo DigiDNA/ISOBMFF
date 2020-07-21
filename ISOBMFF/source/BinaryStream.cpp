@@ -48,12 +48,12 @@ namespace ISOBMFF
         
         pos = this->Tell();
         
-        this->Seek( numeric_cast< ssize_t >( cur ), SeekDirection::Begin );
+        this->Seek( numeric_cast< std::streamoff >( cur ), SeekDirection::Begin );
         
         return pos - cur;
     }
     
-    void BinaryStream::Seek( ssize_t offset )
+    void BinaryStream::Seek( std::streamoff offset )
     {
         this->Seek( offset, SeekDirection::Current );
     }

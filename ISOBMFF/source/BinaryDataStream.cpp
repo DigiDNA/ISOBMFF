@@ -87,7 +87,7 @@ namespace ISOBMFF
         this->impl->_pos += size;
     }
     
-    void BinaryDataStream::Seek( ssize_t offset, SeekDirection dir )
+    void BinaryDataStream::Seek( std::streamoff offset, SeekDirection dir )
     {
         size_t pos;
         

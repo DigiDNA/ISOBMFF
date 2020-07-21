@@ -77,7 +77,7 @@ namespace ISOBMFF
         this->impl->_stream.read( reinterpret_cast< char * >( buf ), numeric_cast< std::streamsize >( size ) );
     }
     
-    void BinaryFileStream::Seek( ssize_t offset, SeekDirection dir )
+    void BinaryFileStream::Seek( std::streamoff offset, SeekDirection dir )
     {
         size_t pos;
         
