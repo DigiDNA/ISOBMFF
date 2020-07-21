@@ -331,7 +331,7 @@ namespace ISOBMFF
         uint32_t     n;
         unsigned int integer;
         unsigned int fractionalMask;
-        unsigned int fractional;
+        float        fractional;
         
         if( integerLength + fractionalLength == 16 )
         {
@@ -343,10 +343,10 @@ namespace ISOBMFF
         }
         
         integer        = n >> fractionalLength;
-        fractionalMask = numeric_cast< unsigned int >( pow( 2, fractionalLength ) - 1 );
-        fractional     = ( n & fractionalMask ) / ( 1 << fractionalLength );
+        fractionalMask = static_cast< unsigned int >( pow( 2, fractionalLength ) - 1 );
+        fractional     = static_cast< float >( n & fractionalMask ) / static_cast< float >( 1 << fractionalLength );
         
-        return integer + fractional;
+        return static_cast< float >( integer ) + fractional;
     }
     
     float BinaryStream::ReadLittleEndianFixedPoint( unsigned int integerLength, unsigned int fractionalLength )
@@ -354,7 +354,7 @@ namespace ISOBMFF
         uint32_t     n;
         unsigned int integer;
         unsigned int fractionalMask;
-        unsigned int fractional;
+        float        fractional;
         
         if( integerLength + fractionalLength == 16 )
         {
@@ -366,10 +366,10 @@ namespace ISOBMFF
         }
         
         integer        = n >> fractionalLength;
-        fractionalMask = numeric_cast< unsigned int >( pow( 2, fractionalLength ) - 1 );
-        fractional     = ( n & fractionalMask ) / ( 1 << fractionalLength );
+        fractionalMask = static_cast< unsigned int >( pow( 2, fractionalLength ) - 1 );
+        fractional     = static_cast< float >( n & fractionalMask ) / static_cast< float >( 1 << fractionalLength );
         
-        return integer + fractional;
+        return static_cast< float >( integer ) + fractional;
     }
     
     std::string BinaryStream::ReadFourCC()
