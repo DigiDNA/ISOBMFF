@@ -71,7 +71,7 @@ namespace ISOBMFF
             void SetMatrix( const Matrix & value );
             void SetNextTrackID( uint32_t value );
             
-            friend void swap( MVHD & o1, MVHD & o2 );
+            ISOBMFF_EXPORT friend void swap( MVHD & o1, MVHD & o2 );
             
         private:
             

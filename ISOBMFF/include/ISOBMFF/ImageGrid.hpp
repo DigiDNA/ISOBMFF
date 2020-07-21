@@ -71,7 +71,7 @@ namespace ISOBMFF
             
             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            friend void swap( ImageGrid & o1, ImageGrid & o2 );
+            ISOBMFF_EXPORT friend void swap( ImageGrid & o1, ImageGrid & o2 );
             
         private:
             

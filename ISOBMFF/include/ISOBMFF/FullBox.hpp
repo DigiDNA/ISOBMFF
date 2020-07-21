@@ -58,7 +58,7 @@ namespace ISOBMFF
             void SetVersion( uint8_t value );
             void SetFlags( uint32_t value );
             
-            friend void swap( FullBox & o1, FullBox & o2 );
+            ISOBMFF_EXPORT friend void swap( FullBox & o1, FullBox & o2 );
             
         private:
             

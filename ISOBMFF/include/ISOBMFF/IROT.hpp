@@ -55,7 +55,7 @@ namespace ISOBMFF
             uint8_t GetAngle() const;
             void    SetAngle( uint8_t value );
             
-            friend void swap( IROT & o1, IROT & o2 );
+            ISOBMFF_EXPORT friend void swap( IROT & o1, IROT & o2 );
             
         private:
             

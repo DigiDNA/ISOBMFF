@@ -121,7 +121,7 @@ namespace ISOBMFF
                             
                             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
                             
-                            friend void swap( Extent & o1, Extent & o2 );
+                            ISOBMFF_EXPORT friend void swap( Extent & o1, Extent & o2 );
                             
                         private:
                             
@@ -133,7 +133,7 @@ namespace ISOBMFF
                     std::vector< std::shared_ptr< Extent > > GetExtents() const;
                     void                                     AddExtent( std::shared_ptr< Extent > extent );
                     
-                    friend void swap( Item & o1, Item & o2 );
+                    ISOBMFF_EXPORT friend void swap( Item & o1, Item & o2 );
                     
                 private:
                     
@@ -146,7 +146,7 @@ namespace ISOBMFF
             std::shared_ptr< Item >                GetItem( uint32_t itemID ) const;
             void                                   AddItem( std::shared_ptr< Item > item );
             
-            friend void swap( ILOC & o1, ILOC & o2 );
+            ISOBMFF_EXPORT friend void swap( ILOC & o1, ILOC & o2 );
             
         private:
             

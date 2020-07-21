@@ -49,7 +49,7 @@ namespace ISOBMFF
             
             URN & operator =( URN o );
             
-            friend void swap( URN & o1, URN & o2 );
+            ISOBMFF_EXPORT friend void swap( URN & o1, URN & o2 );
             
         private:
             

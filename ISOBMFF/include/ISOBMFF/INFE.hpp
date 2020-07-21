@@ -70,7 +70,7 @@ namespace ISOBMFF
             void SetContentEncoding( const std::string & value );
             void SetItemURIType( const std::string & value );
             
-            friend void swap( INFE & o1, INFE & o2 );
+            ISOBMFF_EXPORT friend void swap( INFE & o1, INFE & o2 );
             
         private:
             

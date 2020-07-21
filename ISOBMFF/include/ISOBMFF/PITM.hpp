@@ -57,7 +57,7 @@ namespace ISOBMFF
             
             void SetItemID( uint32_t value );
             
-            friend void swap( PITM & o1, PITM & o2 );
+            ISOBMFF_EXPORT friend void swap( PITM & o1, PITM & o2 );
             
         private:
             

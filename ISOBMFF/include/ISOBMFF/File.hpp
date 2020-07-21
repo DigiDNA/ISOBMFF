@@ -52,7 +52,7 @@ namespace ISOBMFF
             
             std::string GetName() const override;
             
-            friend void swap( File & o1, File & o2 );
+            ISOBMFF_EXPORT friend void swap( File & o1, File & o2 );
             
         private:
             

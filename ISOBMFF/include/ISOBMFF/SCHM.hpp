@@ -61,7 +61,7 @@ namespace ISOBMFF
             void SetSchemeVersion( uint32_t value );
             void SetSchemeURI( const std::string & value );
             
-            friend void swap( SCHM & o1, SCHM & o2 );
+            ISOBMFF_EXPORT friend void swap( SCHM & o1, SCHM & o2 );
             
         private:
             

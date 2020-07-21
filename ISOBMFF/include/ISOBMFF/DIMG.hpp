@@ -49,7 +49,7 @@ namespace ISOBMFF
             
             DIMG & operator =( DIMG o );
             
-            friend void swap( DIMG & o1, DIMG & o2 );
+            ISOBMFF_EXPORT friend void swap( DIMG & o1, DIMG & o2 );
             
         private:
             

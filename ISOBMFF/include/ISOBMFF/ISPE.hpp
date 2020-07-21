@@ -59,7 +59,7 @@ namespace ISOBMFF
             void SetDisplayWidth( uint32_t value );
             void SetDisplayHeight( uint32_t value );
             
-            friend void swap( ISPE & o1, ISPE & o2 );
+            ISOBMFF_EXPORT friend void swap( ISPE & o1, ISPE & o2 );
             
         private:
             

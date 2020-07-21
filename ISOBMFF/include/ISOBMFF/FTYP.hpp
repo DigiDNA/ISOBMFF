@@ -64,7 +64,7 @@ namespace ISOBMFF
             void SetCompatibleBrands( const std::vector< std::string > & value );
             void AddCompatibleBrand( const std::string & value );
             
-            friend void swap( FTYP & o1, FTYP & o2 );
+            ISOBMFF_EXPORT friend void swap( FTYP & o1, FTYP & o2 );
             
         private:
             

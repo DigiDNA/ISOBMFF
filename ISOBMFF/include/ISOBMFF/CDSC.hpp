@@ -49,7 +49,7 @@ namespace ISOBMFF
             
             CDSC & operator =( CDSC o );
             
-            friend void swap( CDSC & o1, CDSC & o2 );
+            ISOBMFF_EXPORT friend void swap( CDSC & o1, CDSC & o2 );
             
         private:
             

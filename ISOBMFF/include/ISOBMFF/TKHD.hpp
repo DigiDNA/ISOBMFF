@@ -76,7 +76,7 @@ namespace ISOBMFF
             void SetWidth( float value );
             void SetHeight( float value );
             
-            friend void swap( TKHD & o1, TKHD & o2 );
+            ISOBMFF_EXPORT friend void swap( TKHD & o1, TKHD & o2 );
             
         private:
             

@@ -49,7 +49,7 @@ namespace ISOBMFF
             
             URL & operator =( URL o );
             
-            friend void swap( URL & o1, URL & o2 );
+            ISOBMFF_EXPORT friend void swap( URL & o1, URL & o2 );
             
         private:
             

@@ -139,7 +139,7 @@ namespace ISOBMFF
                             
                             virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
                             
-                            friend void swap( NALUnit & o1, NALUnit & o2 );
+                            ISOBMFF_EXPORT friend void swap( NALUnit & o1, NALUnit & o2 );
                             
                         private:
                             
@@ -151,7 +151,7 @@ namespace ISOBMFF
                     std::vector< std::shared_ptr< NALUnit > > GetNALUnits() const;
                     void                                      AddNALUnit( std::shared_ptr< NALUnit > unit );
                     
-                    friend void swap( Array & o1, Array & o2 );
+                    ISOBMFF_EXPORT friend void swap( Array & o1, Array & o2 );
                     
                 private:
                     
@@ -163,7 +163,7 @@ namespace ISOBMFF
             std::vector< std::shared_ptr< Array > > GetArrays() const;
             void                                    AddArray( std::shared_ptr< Array > array );
             
-            friend void swap( HVCC & o1, HVCC & o2 );
+            ISOBMFF_EXPORT friend void swap( HVCC & o1, HVCC & o2 );
             
         private:
             

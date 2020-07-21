@@ -55,7 +55,7 @@ namespace ISOBMFF
             std::string GetDataFormat() const;
             void        SetDataFormat( const std::string & value );
             
-            friend void swap( FRMA & o1, FRMA & o2 );
+            ISOBMFF_EXPORT friend void swap( FRMA & o1, FRMA & o2 );
             
         private:
             

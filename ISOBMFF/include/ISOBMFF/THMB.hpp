@@ -49,7 +49,7 @@ namespace ISOBMFF
             
             THMB & operator =( THMB o );
             
-            friend void swap( THMB & o1, THMB & o2 );
+            ISOBMFF_EXPORT friend void swap( THMB & o1, THMB & o2 );
             
         private:
             

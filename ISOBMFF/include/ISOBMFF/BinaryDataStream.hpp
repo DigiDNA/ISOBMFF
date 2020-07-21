@@ -59,7 +59,7 @@ namespace ISOBMFF
             void   Seek( ssize_t offset, SeekDirection dir ) override;
             size_t Tell()                              const override;
             
-            friend void swap( BinaryDataStream & o1, BinaryDataStream & o2 );
+            ISOBMFF_EXPORT friend void swap( BinaryDataStream & o1, BinaryDataStream & o2 );
             
         private:
             

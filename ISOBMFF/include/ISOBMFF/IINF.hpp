@@ -62,7 +62,7 @@ namespace ISOBMFF
             void                                  AddBox( std::shared_ptr< Box > box ) override;
             std::vector< std::shared_ptr< Box > > GetBoxes() const override;
             
-            friend void swap( IINF & o1, IINF & o2 );
+            ISOBMFF_EXPORT friend void swap( IINF & o1, IINF & o2 );
             
         private:
             

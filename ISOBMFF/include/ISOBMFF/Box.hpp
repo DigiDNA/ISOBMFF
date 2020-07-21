@@ -124,7 +124,7 @@ namespace ISOBMFF
              * @param       o1  The first object to swap.
              * @param       o2  The second object to swap.
              */
-            friend void swap( Box & o1, Box & o2 );
+            ISOBMFF_EXPORT friend void swap( Box & o1, Box & o2 );
             
         private:
             

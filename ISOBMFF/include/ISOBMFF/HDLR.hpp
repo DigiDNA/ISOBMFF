@@ -59,7 +59,7 @@ namespace ISOBMFF
             void SetHandlerType( const std::string & value );
             void SetHandlerName( const std::string & value );
             
-            friend void swap( HDLR & o1, HDLR & o2 );
+            ISOBMFF_EXPORT friend void swap( HDLR & o1, HDLR & o2 );
             
         private:
             

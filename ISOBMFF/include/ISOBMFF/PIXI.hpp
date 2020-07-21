@@ -78,7 +78,7 @@ namespace ISOBMFF
                     
                     virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
                     
-                    friend void swap( Channel & o1, Channel & o2 );
+                    ISOBMFF_EXPORT friend void swap( Channel & o1, Channel & o2 );
                     
                 private:
                     
@@ -90,7 +90,7 @@ namespace ISOBMFF
             std::vector< std::shared_ptr< Channel > > GetChannels() const;
             void                                      AddChannel( std::shared_ptr< Channel > array );
             
-            friend void swap( PIXI & o1, PIXI & o2 );
+            ISOBMFF_EXPORT friend void swap( PIXI & o1, PIXI & o2 );
             
         private:
             

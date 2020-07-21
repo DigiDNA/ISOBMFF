@@ -59,7 +59,7 @@ namespace ISOBMFF
             void SetFromItemID( uint32_t value );
             void AddToItemID( uint32_t value );
             
-            friend void swap( SingleItemTypeReferenceBox & o1, SingleItemTypeReferenceBox & o2 );
+            ISOBMFF_EXPORT friend void swap( SingleItemTypeReferenceBox & o1, SingleItemTypeReferenceBox & o2 );
             
         private:
             

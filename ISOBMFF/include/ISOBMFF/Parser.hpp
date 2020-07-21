@@ -270,7 +270,7 @@ namespace ISOBMFF
              * @param       o1  The first object to swap.
              * @param       o2  The second object to swap.
              */
-            friend void swap( Parser & o1, Parser & o2 );
+            ISOBMFF_EXPORT friend void swap( Parser & o1, Parser & o2 );
             
         private:
             

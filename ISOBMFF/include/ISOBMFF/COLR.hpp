@@ -69,7 +69,7 @@ namespace ISOBMFF
             void SetFullRangeFlag( bool value );
             void SetICCProfile( const std::vector< uint8_t > & value );
             
-            friend void swap( COLR & o1, COLR & o2 );
+            ISOBMFF_EXPORT friend void swap( COLR & o1, COLR & o2 );
             
         private:
             
