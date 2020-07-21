@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF.hpp" />
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\BinaryDataStream.hpp" />
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\BinaryFileStream.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\BinaryStream.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\Box.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\CDSC.hpp" />
@@ -63,6 +65,8 @@
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\WIN32.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\ISOBMFF\source\BinaryDataStream.cpp" />
+    <ClCompile Include="..\ISOBMFF\source\BinaryFileStream.cpp" />
     <ClCompile Include="..\ISOBMFF\source\BinaryStream.cpp" />
     <ClCompile Include="..\ISOBMFF\source\Box.cpp" />
     <ClCompile Include="..\ISOBMFF\source\CDSC.cpp" />
