@@ -75,7 +75,7 @@ namespace ISOBMFF
                 this->Seek( numeric_cast< std::streamoff >( offset ), dir );
             }
             
-            void Get( uint8_t * buf, uint64_t pos, uint64_t length );
+            void Get( uint8_t * buf, uint64_t pos, size_t length );
             
             std::vector< uint8_t > Read( size_t size );
             std::vector< uint8_t > ReadAllData();

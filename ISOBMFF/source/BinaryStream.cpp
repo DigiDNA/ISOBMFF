@@ -58,7 +58,7 @@ namespace ISOBMFF
         this->Seek( offset, SeekDirection::Current );
     }
     
-    void BinaryStream::Get( uint8_t * buf, uint64_t pos, uint64_t length )
+    void BinaryStream::Get( uint8_t * buf, uint64_t pos, size_t length )
     {
         size_t cur = this->Tell();
         

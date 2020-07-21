@@ -40,7 +40,7 @@
 
 namespace ISOBMFF
 {
-    class BinaryFileStream: public BinaryStream
+    class ISOBMFF_EXPORT BinaryFileStream: public BinaryStream
     {
         public:
             
