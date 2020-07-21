@@ -99,15 +99,19 @@ namespace ISOBMFF
             
             if( length == 1 )
             {
-                length  = stream.ReadBigEndianUInt64();
+                length = stream.ReadBigEndianUInt64();
                 
-                if( name == "mdat" && parser.HasOption( Parser::Options::SkipMDATData ) )
+                if
+                (
+                       length > std::numeric_limits< size_t >::max()
+                    || ( name == "mdat" && parser.HasOption( Parser::Options::SkipMDATData ) )
+                )
                 {
                     stream.Seek( length - 16, BinaryStream::SeekDirection::Current );
                 }
                 else
                 {
-                    content = BinaryDataStream( stream.Read( length - 16 ) );
+                    content = BinaryDataStream( stream.Read( static_cast< size_t >( length ) - 16 ) );
                 }
             }
             else
@@ -118,7 +122,7 @@ namespace ISOBMFF
                 }
                 else
                 {
-                    content = BinaryDataStream( stream.Read( length - 8 ) );
+                    content = BinaryDataStream( stream.Read( static_cast< uint32_t >( length ) - 8 ) );
                 }
             }
             
