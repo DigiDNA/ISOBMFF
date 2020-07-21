@@ -40,8 +40,8 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
             
-            uint32_t                                                            _itemID;
-            std::vector< std::shared_ptr< ISOBMFF::IPMA::Entry::Association > > _associations;
+            uint32_t                                      _itemID;
+            std::vector< std::shared_ptr< Association > > _associations;
     };
     
     IPMA::Entry::Entry():

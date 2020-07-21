@@ -42,7 +42,7 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
             
-            std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
+            std::vector< std::shared_ptr< Box > > _boxes;
     };
     
     IREF::IREF():

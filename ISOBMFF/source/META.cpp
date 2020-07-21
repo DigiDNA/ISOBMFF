@@ -42,8 +42,8 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
             
-            bool                                           _isFullBox;
-            std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
+            bool                                  _isFullBox;
+            std::vector< std::shared_ptr< Box > > _boxes;
     };
     
     META::META():

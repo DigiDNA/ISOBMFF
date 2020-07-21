@@ -41,7 +41,7 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
             
-            std::vector< std::shared_ptr< ISOBMFF::INFE > > _entries;
+            std::vector< std::shared_ptr< INFE > > _entries;
     };
     
     IINF::IINF():

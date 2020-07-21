@@ -42,24 +42,24 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
             
-            uint8_t                                                _configurationVersion;
-            uint8_t                                                _generalProfileSpace;
-            uint8_t                                                _generalTierFlag;
-            uint8_t                                                _generalProfileIDC;
-            uint32_t                                               _generalProfileCompatibilityFlags;
-            uint64_t                                               _generalConstraintIndicatorFlags;
-            uint8_t                                                _generalLevelIDC;
-            uint16_t                                               _minSpatialSegmentationIDC;
-            uint8_t                                                _parallelismType;
-            uint8_t                                                _chromaFormat;
-            uint8_t                                                _bitDepthLumaMinus8;
-            uint8_t                                                _bitDepthChromaMinus8;
-            uint16_t                                               _avgFrameRate;
-            uint8_t                                                _constantFrameRate;
-            uint8_t                                                _numTemporalLayers;
-            uint8_t                                                _temporalIdNested;
-            uint8_t                                                _lengthSizeMinusOne;
-            std::vector< std::shared_ptr< ISOBMFF::HVCC::Array > > _arrays;
+            uint8_t                                 _configurationVersion;
+            uint8_t                                 _generalProfileSpace;
+            uint8_t                                 _generalTierFlag;
+            uint8_t                                 _generalProfileIDC;
+            uint32_t                                _generalProfileCompatibilityFlags;
+            uint64_t                                _generalConstraintIndicatorFlags;
+            uint8_t                                 _generalLevelIDC;
+            uint16_t                                _minSpatialSegmentationIDC;
+            uint8_t                                 _parallelismType;
+            uint8_t                                 _chromaFormat;
+            uint8_t                                 _bitDepthLumaMinus8;
+            uint8_t                                 _bitDepthChromaMinus8;
+            uint16_t                                _avgFrameRate;
+            uint8_t                                 _constantFrameRate;
+            uint8_t                                 _numTemporalLayers;
+            uint8_t                                 _temporalIdNested;
+            uint8_t                                 _lengthSizeMinusOne;
+            std::vector< std::shared_ptr< Array > > _arrays;
     };
     
     HVCC::HVCC():

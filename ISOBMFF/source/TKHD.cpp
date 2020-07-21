@@ -41,19 +41,19 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
             
-            uint64_t        _creationTime;
-            uint64_t        _modificationTime;
-            uint32_t        _trackID;
-            uint32_t        _reserved1;
-            uint64_t        _duration;
-            uint32_t        _reserved2[ 2 ];
-            uint16_t        _layer;
-            uint16_t        _alternateGroup;
-            uint16_t        _volume;
-            uint16_t        _reserved3;
-            ISOBMFF::Matrix _matrix;
-            float           _width;
-            float           _height;
+            uint64_t _creationTime;
+            uint64_t _modificationTime;
+            uint32_t _trackID;
+            uint32_t _reserved1;
+            uint64_t _duration;
+            uint32_t _reserved2[ 2 ];
+            uint16_t _layer;
+            uint16_t _alternateGroup;
+            uint16_t _volume;
+            uint16_t _reserved3;
+            Matrix   _matrix;
+            float    _width;
+            float    _height;
     };
     
     TKHD::TKHD():

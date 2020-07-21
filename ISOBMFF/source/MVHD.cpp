@@ -41,17 +41,17 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
             
-            uint64_t        _creationTime;
-            uint64_t        _modificationTime;
-            uint32_t        _timescale;
-            uint64_t        _duration;
-            uint32_t        _rate;
-            uint16_t        _volume;
-            uint16_t        _reserved1;
-            uint32_t        _reserved2[ 2 ];
-            ISOBMFF::Matrix _matrix;
-            uint32_t        _predefined[ 6 ];
-            uint32_t        _nextTrackID;
+            uint64_t _creationTime;
+            uint64_t _modificationTime;
+            uint32_t _timescale;
+            uint64_t _duration;
+            uint32_t _rate;
+            uint16_t _volume;
+            uint16_t _reserved1;
+            uint32_t _reserved2[ 2 ];
+            Matrix   _matrix;
+            uint32_t _predefined[ 6 ];
+            uint32_t _nextTrackID;
     };
     
     MVHD::MVHD():

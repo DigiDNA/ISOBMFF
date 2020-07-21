@@ -40,9 +40,9 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
             
-            bool                                                            _arrayCompleteness;
-            uint8_t                                                         _nalUnitType;
-            std::vector< std::shared_ptr< ISOBMFF::HVCC::Array::NALUnit > > _nalUnits;
+            bool                                             _arrayCompleteness;
+            uint8_t                                          _nalUnitType;
+            std::vector< std::shared_ptr< Array::NALUnit > > _nalUnits;
     };
     
     HVCC::Array::Array():

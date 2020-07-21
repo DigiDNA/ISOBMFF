@@ -40,11 +40,11 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
             
-            uint8_t                                               _offsetSize;
-            uint8_t                                               _lengthSize;
-            uint8_t                                               _baseOffsetSize;
-            uint8_t                                               _indexSize;
-            std::vector< std::shared_ptr< ISOBMFF::ILOC::Item > > _items;
+            uint8_t                                _offsetSize;
+            uint8_t                                _lengthSize;
+            uint8_t                                _baseOffsetSize;
+            uint8_t                                _indexSize;
+            std::vector< std::shared_ptr< Item > > _items;
     };
     
     ILOC::ILOC():

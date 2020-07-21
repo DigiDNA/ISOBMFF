@@ -40,7 +40,7 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
             
-            std::vector< std::shared_ptr< ISOBMFF::IPMA::Entry > > _entries;
+            std::vector< std::shared_ptr< Entry > > _entries;
     };
     
     IPMA::IPMA():

@@ -41,7 +41,7 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
             
-            std::vector< std::shared_ptr< ISOBMFF::PIXI::Channel > > _channels;
+            std::vector< std::shared_ptr< PIXI::Channel > > _channels;
     };
     
     PIXI::PIXI():

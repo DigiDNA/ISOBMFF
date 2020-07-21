@@ -42,7 +42,7 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
             
-            std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
+            std::vector< std::shared_ptr< Box > > _boxes;
     };
     
     ContainerBox::ContainerBox( const std::string & name ):
@@ -101,7 +101,7 @@ namespace ISOBMFF
             {
                 length  = stream.ReadBigEndianUInt64();
                 
-                if( name == "mdat" && parser.HasOption( ISOBMFF::Parser::Options::SkipMDATData ) )
+                if( name == "mdat" && parser.HasOption( Parser::Options::SkipMDATData ) )
                 {
                     stream.Seek( length - 16, BinaryStream::SeekDirection::Current );
                 }
@@ -112,7 +112,7 @@ namespace ISOBMFF
             }
             else
             {
-                if( name == "mdat" && parser.HasOption( ISOBMFF::Parser::Options::SkipMDATData ) )
+                if( name == "mdat" && parser.HasOption( Parser::Options::SkipMDATData ) )
                 {
                     stream.Seek( length - 8, BinaryStream::SeekDirection::Current );
                 }

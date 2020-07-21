@@ -40,11 +40,11 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
             
-            uint32_t                                                      _itemID;
-            uint8_t                                                       _constructionMethod;
-            uint16_t                                                      _dataReferenceIndex;
-            uint64_t                                                      _baseOffset;
-            std::vector< std::shared_ptr< ISOBMFF::ILOC::Item::Extent > > _extents;
+            uint32_t                                 _itemID;
+            uint8_t                                  _constructionMethod;
+            uint16_t                                 _dataReferenceIndex;
+            uint64_t                                 _baseOffset;
+            std::vector< std::shared_ptr< Extent > > _extents;
     };
     
     ILOC::Item::Item():
