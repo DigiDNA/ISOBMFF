@@ -44,7 +44,7 @@ namespace ISOBMFF
             
             FullBox( const std::string & name );
             FullBox( const FullBox & o );
-            FullBox( FullBox && o ) ISOBMFF_NOEXCEPT( true );
+            FullBox( FullBox && o ) noexcept;
             virtual ~FullBox() override;
             
             FullBox & operator =( FullBox o );

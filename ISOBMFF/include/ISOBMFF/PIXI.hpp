@@ -48,7 +48,7 @@ namespace ISOBMFF
             
             PIXI();
             PIXI( const PIXI & o );
-            PIXI( PIXI && o ) ISOBMFF_NOEXCEPT( true );
+            PIXI( PIXI && o ) noexcept;
             virtual ~PIXI() override;
             
             PIXI & operator =( PIXI o );
@@ -66,7 +66,7 @@ namespace ISOBMFF
                     Channel();
                     Channel( BinaryStream & stream );
                     Channel( const Channel & o );
-                    Channel( Channel && o ) ISOBMFF_NOEXCEPT( true );
+                    Channel( Channel && o ) noexcept;
                     virtual ~Channel() override;
                     
                     Channel & operator =( Channel o );

@@ -47,7 +47,7 @@ namespace ISOBMFF
             
             ILOC();
             ILOC( const ILOC & o );
-            ILOC( ILOC && o ) ISOBMFF_NOEXCEPT( true );
+            ILOC( ILOC && o ) noexcept;
             virtual ~ILOC() override;
             
             ILOC & operator =( ILOC o );
@@ -75,7 +75,7 @@ namespace ISOBMFF
                     Item();
                     Item( BinaryStream & stream, const ILOC & iloc );
                     Item( const Item & o );
-                    Item( Item && o ) ISOBMFF_NOEXCEPT( true );
+                    Item( Item && o ) noexcept;
                     virtual ~Item() override;
                     
                     Item & operator =( Item o );
@@ -104,7 +104,7 @@ namespace ISOBMFF
                             Extent();
                             Extent( BinaryStream & stream, const ILOC & iloc );
                             Extent( const Extent & o );
-                            Extent( Extent && o ) ISOBMFF_NOEXCEPT( true );
+                            Extent( Extent && o ) noexcept;
                             virtual ~Extent() override;
                             
                             Extent & operator =( Extent o );

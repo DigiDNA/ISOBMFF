@@ -44,7 +44,7 @@ namespace ISOBMFF
             
             THMB();
             THMB( const THMB & o );
-            THMB( THMB && o ) ISOBMFF_NOEXCEPT( true );
+            THMB( THMB && o ) noexcept;
             virtual ~THMB() override;
             
             THMB & operator =( THMB o );

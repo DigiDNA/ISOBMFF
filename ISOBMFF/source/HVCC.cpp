@@ -72,7 +72,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    HVCC::HVCC( HVCC && o ) ISOBMFF_NOEXCEPT( true ):
+    HVCC::HVCC( HVCC && o ) noexcept:
         Box( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

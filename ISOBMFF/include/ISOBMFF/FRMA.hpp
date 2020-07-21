@@ -44,7 +44,7 @@ namespace ISOBMFF
             
             FRMA();
             FRMA( const FRMA & o );
-            FRMA( FRMA && o ) ISOBMFF_NOEXCEPT( true );
+            FRMA( FRMA && o ) noexcept;
             virtual ~FRMA() override;
             
             FRMA & operator =( FRMA o );

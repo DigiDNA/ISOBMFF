@@ -46,7 +46,7 @@ namespace ISOBMFF
             
             TKHD();
             TKHD( const TKHD & o );
-            TKHD( TKHD && o ) ISOBMFF_NOEXCEPT( true );
+            TKHD( TKHD && o ) noexcept;
             virtual ~TKHD() override;
             
             TKHD & operator =( TKHD o );

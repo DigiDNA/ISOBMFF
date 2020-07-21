@@ -47,7 +47,7 @@ namespace ISOBMFF
             
             COLR();
             COLR( const COLR & o );
-            COLR( COLR && o ) ISOBMFF_NOEXCEPT( true );
+            COLR( COLR && o ) noexcept;
             virtual ~COLR() override;
             
             COLR & operator =( COLR o );

@@ -47,7 +47,7 @@ namespace ISOBMFF
             
             IINF();
             IINF( const IINF & o );
-            IINF( IINF && o ) ISOBMFF_NOEXCEPT( true );
+            IINF( IINF && o ) noexcept;
             virtual ~IINF() override;
             
             IINF & operator =( IINF o );

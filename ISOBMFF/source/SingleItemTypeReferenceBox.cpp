@@ -57,7 +57,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    SingleItemTypeReferenceBox::SingleItemTypeReferenceBox( SingleItemTypeReferenceBox && o ) ISOBMFF_NOEXCEPT( true ):
+    SingleItemTypeReferenceBox::SingleItemTypeReferenceBox( SingleItemTypeReferenceBox && o ) noexcept:
         Box( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

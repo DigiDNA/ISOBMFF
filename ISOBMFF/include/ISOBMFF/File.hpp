@@ -45,7 +45,7 @@ namespace ISOBMFF
             
             File();
             File( const File & o );
-            File( File && o ) ISOBMFF_NOEXCEPT( true );
+            File( File && o ) noexcept;
             virtual ~File() override;
             
             File & operator =( File o );

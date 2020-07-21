@@ -79,7 +79,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    IPMA::Entry::Association::Association( IPMA::Entry::Association && o ) ISOBMFF_NOEXCEPT( true ):
+    IPMA::Entry::Association::Association( IPMA::Entry::Association && o ) noexcept:
         impl( std::move( o.impl ) )
     {
         o.impl = nullptr;

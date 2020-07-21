@@ -73,7 +73,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    HVCC::Array::Array( HVCC::Array && o ) ISOBMFF_NOEXCEPT( true ):
+    HVCC::Array::Array( HVCC::Array && o ) noexcept:
         impl( std::move( o.impl ) )
     {
         o.impl = nullptr;

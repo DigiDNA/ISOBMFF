@@ -54,7 +54,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    IROT::IROT( IROT && o ) ISOBMFF_NOEXCEPT( true ):
+    IROT::IROT( IROT && o ) noexcept:
         Box( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

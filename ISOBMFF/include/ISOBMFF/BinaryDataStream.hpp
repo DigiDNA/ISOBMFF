@@ -47,7 +47,7 @@ namespace ISOBMFF
             BinaryDataStream();
             BinaryDataStream( const std::vector< uint8_t > & data );
             BinaryDataStream( const BinaryDataStream & o );
-            BinaryDataStream( BinaryDataStream && o ) ISOBMFF_NOEXCEPT( true );
+            BinaryDataStream( BinaryDataStream && o ) noexcept;
             
             virtual ~BinaryDataStream() override;
             

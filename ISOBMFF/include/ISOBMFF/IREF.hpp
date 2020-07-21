@@ -45,7 +45,7 @@ namespace ISOBMFF
             
             IREF();
             IREF( const IREF & o );
-            IREF( IREF && o ) ISOBMFF_NOEXCEPT( true );
+            IREF( IREF && o ) noexcept;
             virtual ~IREF() override;
             
             IREF & operator =( IREF o );

@@ -72,7 +72,7 @@ namespace ISOBMFF
              * @abstract    Move constructor.
              * @param       o   The object to move from.
              */
-            Box( Box && o ) ISOBMFF_NOEXCEPT( true );
+            Box( Box && o ) noexcept;
             
             /*!
              * @function    ~Box

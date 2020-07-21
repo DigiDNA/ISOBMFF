@@ -100,7 +100,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    ILOC::Item::Item( ILOC::Item && o ) ISOBMFF_NOEXCEPT( true ):
+    ILOC::Item::Item( ILOC::Item && o ) noexcept:
         impl( std::move( o.impl ) )
     {
         o.impl = nullptr;

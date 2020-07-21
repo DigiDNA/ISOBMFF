@@ -47,7 +47,7 @@ namespace ISOBMFF
             
             ContainerBox( const std::string & name );
             ContainerBox( const ContainerBox & o );
-            ContainerBox( ContainerBox && o ) ISOBMFF_NOEXCEPT( true );
+            ContainerBox( ContainerBox && o ) noexcept;
             virtual ~ContainerBox() override;
             
             ContainerBox & operator =( ContainerBox o );

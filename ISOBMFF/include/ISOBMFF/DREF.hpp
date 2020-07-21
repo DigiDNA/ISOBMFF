@@ -46,7 +46,7 @@ namespace ISOBMFF
             
             DREF();
             DREF( const DREF & o );
-            DREF( DREF && o ) ISOBMFF_NOEXCEPT( true );
+            DREF( DREF && o ) noexcept;
             virtual ~DREF() override;
             
             DREF & operator =( DREF o );

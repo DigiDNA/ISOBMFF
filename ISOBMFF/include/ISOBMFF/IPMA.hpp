@@ -48,7 +48,7 @@ namespace ISOBMFF
             
             IPMA();
             IPMA( const IPMA & o );
-            IPMA( IPMA && o ) ISOBMFF_NOEXCEPT( true );
+            IPMA( IPMA && o ) noexcept;
             virtual ~IPMA() override;
             
             IPMA & operator =( IPMA o );
@@ -66,7 +66,7 @@ namespace ISOBMFF
                     Entry();
                     Entry( BinaryStream & stream, const IPMA & ipma );
                     Entry( const Entry & o );
-                    Entry( Entry && o ) ISOBMFF_NOEXCEPT( true );
+                    Entry( Entry && o ) noexcept;
                     virtual ~Entry() override;
                     
                     Entry & operator =( Entry o );
@@ -88,7 +88,7 @@ namespace ISOBMFF
                             Association();
                             Association( BinaryStream & stream, const IPMA & ipma );
                             Association( const Association & o );
-                            Association( Association && o ) ISOBMFF_NOEXCEPT( true );
+                            Association( Association && o ) noexcept;
                             virtual ~Association() override;
                             
                             Association & operator =( Association o );

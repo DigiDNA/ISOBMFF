@@ -114,7 +114,7 @@ namespace ISOBMFF
              * @abstract    Move constructor.
              * @param       o   The object to move from.
              */
-            Parser( Parser && o ) ISOBMFF_NOEXCEPT( true );
+            Parser( Parser && o ) noexcept;
             
             /*!
              * @function    ~Parser
@@ -161,7 +161,7 @@ namespace ISOBMFF
              * @discussion  This will discard any previously parsed file.
              * @param       path    The file's path.
              */
-            void Parse( const std::string & path ) ISOBMFF_NOEXCEPT( false );
+            void Parse( const std::string & path ) noexcept( false );
             
             /*!
              * @function    Parse
@@ -169,7 +169,7 @@ namespace ISOBMFF
              * @discussion  This will discard any previously parsed file/data.
              * @param       data    The data bytes.
              */
-            void Parse( const std::vector< uint8_t > & data ) ISOBMFF_NOEXCEPT( false );
+            void Parse( const std::vector< uint8_t > & data ) noexcept( false );
             
             /*!
              * @function    Parse
@@ -177,7 +177,7 @@ namespace ISOBMFF
              * @discussion  This will discard any previously parsed file/data.
              * @param       stream  The stream object.
              */
-            void Parse( BinaryStream & stream ) ISOBMFF_NOEXCEPT( false );
+            void Parse( BinaryStream & stream ) noexcept( false );
             
             /*!
              * @function    GetFile

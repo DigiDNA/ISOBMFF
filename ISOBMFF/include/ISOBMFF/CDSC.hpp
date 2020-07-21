@@ -44,7 +44,7 @@ namespace ISOBMFF
             
             CDSC();
             CDSC( const CDSC & o );
-            CDSC( CDSC && o ) ISOBMFF_NOEXCEPT( true );
+            CDSC( CDSC && o ) noexcept;
             virtual ~CDSC() override;
             
             CDSC & operator =( CDSC o );

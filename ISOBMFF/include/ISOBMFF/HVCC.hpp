@@ -48,7 +48,7 @@ namespace ISOBMFF
             
             HVCC();
             HVCC( const HVCC & o );
-            HVCC( HVCC && o ) ISOBMFF_NOEXCEPT( true );
+            HVCC( HVCC && o ) noexcept;
             virtual ~HVCC() override;
             
             HVCC & operator =( HVCC o );
@@ -102,7 +102,7 @@ namespace ISOBMFF
                     Array();
                     Array( BinaryStream & stream );
                     Array( const Array & o );
-                    Array( Array && o ) ISOBMFF_NOEXCEPT( true );
+                    Array( Array && o ) noexcept;
                     virtual ~Array() override;
                     
                     Array & operator =( Array o );
@@ -127,7 +127,7 @@ namespace ISOBMFF
                             NALUnit();
                             NALUnit( BinaryStream & stream );
                             NALUnit( const NALUnit & o );
-                            NALUnit( NALUnit && o ) ISOBMFF_NOEXCEPT( true );
+                            NALUnit( NALUnit && o ) noexcept;
                             virtual ~NALUnit() override;
                             
                             NALUnit & operator =( NALUnit o );

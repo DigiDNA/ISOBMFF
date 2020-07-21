@@ -46,7 +46,7 @@ namespace ISOBMFF
             
             STSD();
             STSD( const STSD & o );
-            STSD( STSD && o ) ISOBMFF_NOEXCEPT( true );
+            STSD( STSD && o ) noexcept;
             virtual ~STSD() override;
             
             STSD & operator =( STSD o );

@@ -80,7 +80,7 @@ namespace ISOBMFF
              * @abstract    Move constructor.
              * @param       o   The object to move from.
              */
-            Matrix( Matrix && o ) ISOBMFF_NOEXCEPT( true );
+            Matrix( Matrix && o ) noexcept;
             
             /*!
              * @function    ~Matrix

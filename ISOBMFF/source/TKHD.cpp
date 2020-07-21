@@ -66,7 +66,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    TKHD::TKHD( TKHD && o ) ISOBMFF_NOEXCEPT( true ):
+    TKHD::TKHD( TKHD && o ) noexcept:
         FullBox( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

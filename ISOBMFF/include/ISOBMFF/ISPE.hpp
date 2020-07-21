@@ -45,7 +45,7 @@ namespace ISOBMFF
             
             ISPE();
             ISPE( const ISPE & o );
-            ISPE( ISPE && o ) ISOBMFF_NOEXCEPT( true );
+            ISPE( ISPE && o ) noexcept;
             virtual ~ISPE() override;
             
             ISPE & operator =( ISPE o );

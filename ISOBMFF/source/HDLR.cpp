@@ -59,7 +59,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    HDLR::HDLR( HDLR && o ) ISOBMFF_NOEXCEPT( true ):
+    HDLR::HDLR( HDLR && o ) noexcept:
         FullBox( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

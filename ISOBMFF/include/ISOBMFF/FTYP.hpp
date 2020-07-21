@@ -47,7 +47,7 @@ namespace ISOBMFF
             
             FTYP();
             FTYP( const FTYP & o );
-            FTYP( FTYP && o ) ISOBMFF_NOEXCEPT( true );
+            FTYP( FTYP && o ) noexcept;
             virtual ~FTYP() override;
             
             FTYP & operator =( FTYP o );

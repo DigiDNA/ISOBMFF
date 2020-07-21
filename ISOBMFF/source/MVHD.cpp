@@ -64,7 +64,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    MVHD::MVHD( MVHD && o ) ISOBMFF_NOEXCEPT( true ):
+    MVHD::MVHD( MVHD && o ) noexcept:
         FullBox( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

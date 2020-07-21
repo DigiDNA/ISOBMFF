@@ -45,7 +45,7 @@ namespace ISOBMFF
             
             SingleItemTypeReferenceBox( const std::string & name );
             SingleItemTypeReferenceBox( const SingleItemTypeReferenceBox & o );
-            SingleItemTypeReferenceBox( SingleItemTypeReferenceBox && o ) ISOBMFF_NOEXCEPT( true );
+            SingleItemTypeReferenceBox( SingleItemTypeReferenceBox && o ) noexcept;
             virtual ~SingleItemTypeReferenceBox() override;
             
             SingleItemTypeReferenceBox & operator =( SingleItemTypeReferenceBox o );

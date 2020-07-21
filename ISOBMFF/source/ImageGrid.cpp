@@ -90,7 +90,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    ImageGrid::ImageGrid( ImageGrid && o ) ISOBMFF_NOEXCEPT( true ):
+    ImageGrid::ImageGrid( ImageGrid && o ) noexcept:
         impl( std::move( o.impl ) )
     {
         o.impl = nullptr;

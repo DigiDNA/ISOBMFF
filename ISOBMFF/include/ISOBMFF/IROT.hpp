@@ -44,7 +44,7 @@ namespace ISOBMFF
             
             IROT();
             IROT( const IROT & o );
-            IROT( IROT && o ) ISOBMFF_NOEXCEPT( true );
+            IROT( IROT && o ) noexcept;
             virtual ~IROT() override;
             
             IROT & operator =( IROT o );

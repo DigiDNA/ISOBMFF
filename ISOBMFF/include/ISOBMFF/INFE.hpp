@@ -46,7 +46,7 @@ namespace ISOBMFF
             
             INFE();
             INFE( const INFE & o );
-            INFE( INFE && o ) ISOBMFF_NOEXCEPT( true );
+            INFE( INFE && o ) noexcept;
             virtual ~INFE() override;
             
             INFE & operator =( INFE o );

@@ -45,7 +45,7 @@ namespace ISOBMFF
             
             SCHM();
             SCHM( const SCHM & o );
-            SCHM( SCHM && o ) ISOBMFF_NOEXCEPT( true );
+            SCHM( SCHM && o ) noexcept;
             virtual ~SCHM() override;
             
             SCHM & operator =( SCHM o );

@@ -57,7 +57,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    FTYP::FTYP( FTYP && o ) ISOBMFF_NOEXCEPT( true ):
+    FTYP::FTYP( FTYP && o ) noexcept:
         Box( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

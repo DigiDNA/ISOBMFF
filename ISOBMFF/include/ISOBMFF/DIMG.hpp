@@ -44,7 +44,7 @@ namespace ISOBMFF
             
             DIMG();
             DIMG( const DIMG & o );
-            DIMG( DIMG && o ) ISOBMFF_NOEXCEPT( true );
+            DIMG( DIMG && o ) noexcept;
             virtual ~DIMG() override;
             
             DIMG & operator =( DIMG o );

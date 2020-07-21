@@ -48,7 +48,7 @@ namespace ISOBMFF
             ImageGrid();
             ImageGrid( BinaryStream & stream );
             ImageGrid( const ImageGrid & o );
-            ImageGrid( ImageGrid && o ) ISOBMFF_NOEXCEPT( true );
+            ImageGrid( ImageGrid && o ) noexcept;
             virtual ~ImageGrid() override;
             
             ImageGrid & operator =( ImageGrid o );

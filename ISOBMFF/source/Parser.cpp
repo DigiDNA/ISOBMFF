@@ -110,7 +110,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    Parser::Parser( Parser && o ) ISOBMFF_NOEXCEPT( true ):
+    Parser::Parser( Parser && o ) noexcept:
         impl( std::move( o.impl ) )
     {
         o.impl = nullptr;
@@ -156,7 +156,7 @@ namespace ISOBMFF
         return std::make_shared< Box >( type );
     }
     
-    void Parser::Parse( const std::string & path ) ISOBMFF_NOEXCEPT( false )
+    void Parser::Parse( const std::string & path ) noexcept( false )
     {
         BinaryFileStream stream( path );
         
@@ -165,14 +165,14 @@ namespace ISOBMFF
         this->impl->_path = path;
     }
     
-    void Parser::Parse( const std::vector< uint8_t > & data ) ISOBMFF_NOEXCEPT( false )
+    void Parser::Parse( const std::vector< uint8_t > & data ) noexcept( false )
     {
         BinaryDataStream stream( data );
         
         this->Parse( stream );
     }
     
-    void Parser::Parse( BinaryStream & stream ) ISOBMFF_NOEXCEPT( false )
+    void Parser::Parse( BinaryStream & stream ) noexcept( false )
     {
         char n[ 4 ] = { 0, 0, 0, 0 };
         

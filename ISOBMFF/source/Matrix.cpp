@@ -64,7 +64,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    Matrix::Matrix( Matrix && o ) ISOBMFF_NOEXCEPT( true ):
+    Matrix::Matrix( Matrix && o ) noexcept:
         impl( std::move( o.impl ) )
     {
         o.impl = nullptr;

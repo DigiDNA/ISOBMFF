@@ -51,7 +51,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    URL::URL( URL && o ) ISOBMFF_NOEXCEPT( true ):
+    URL::URL( URL && o ) noexcept:
         FullBox( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

@@ -53,7 +53,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    PITM::PITM( PITM && o ) ISOBMFF_NOEXCEPT( true ):
+    PITM::PITM( PITM && o ) noexcept:
         FullBox( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

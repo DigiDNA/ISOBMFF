@@ -51,7 +51,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    File::File( File && o ) ISOBMFF_NOEXCEPT( true ):
+    File::File( File && o ) noexcept:
         ContainerBox( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

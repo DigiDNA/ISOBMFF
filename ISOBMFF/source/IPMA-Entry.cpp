@@ -75,7 +75,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    IPMA::Entry::Entry( IPMA::Entry && o ) ISOBMFF_NOEXCEPT( true ):
+    IPMA::Entry::Entry( IPMA::Entry && o ) noexcept:
         impl( std::move( o.impl ) )
     {
         o.impl = nullptr;

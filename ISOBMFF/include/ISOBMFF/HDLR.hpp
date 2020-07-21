@@ -45,7 +45,7 @@ namespace ISOBMFF
             
             HDLR();
             HDLR( const HDLR & o );
-            HDLR( HDLR && o ) ISOBMFF_NOEXCEPT( true );
+            HDLR( HDLR && o ) noexcept;
             virtual ~HDLR() override;
             
             HDLR & operator =( HDLR o );

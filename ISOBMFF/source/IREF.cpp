@@ -55,7 +55,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    IREF::IREF( IREF && o ) ISOBMFF_NOEXCEPT( true ):
+    IREF::IREF( IREF && o ) noexcept:
         FullBox( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

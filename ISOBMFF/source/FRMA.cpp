@@ -55,7 +55,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    FRMA::FRMA( FRMA && o ) ISOBMFF_NOEXCEPT( true ):
+    FRMA::FRMA( FRMA && o ) noexcept:
         Box( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

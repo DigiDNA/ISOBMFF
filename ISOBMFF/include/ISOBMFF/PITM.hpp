@@ -45,7 +45,7 @@ namespace ISOBMFF
             
             PITM();
             PITM( const PITM & o );
-            PITM( PITM && o ) ISOBMFF_NOEXCEPT( true );
+            PITM( PITM && o ) noexcept;
             virtual ~PITM() override;
             
             PITM & operator =( PITM o );

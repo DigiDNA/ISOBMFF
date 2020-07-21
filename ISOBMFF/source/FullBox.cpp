@@ -56,7 +56,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    FullBox::FullBox( FullBox && o ) ISOBMFF_NOEXCEPT( true ):
+    FullBox::FullBox( FullBox && o ) noexcept:
         Box( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

@@ -99,7 +99,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    ILOC::Item::Extent::Extent( ILOC::Item::Extent && o ) ISOBMFF_NOEXCEPT( true ):
+    ILOC::Item::Extent::Extent( ILOC::Item::Extent && o ) noexcept:
         impl( std::move( o.impl ) )
     {
         o.impl = nullptr;

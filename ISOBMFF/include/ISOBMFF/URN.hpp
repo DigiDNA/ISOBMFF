@@ -44,7 +44,7 @@ namespace ISOBMFF
             
             URN();
             URN( const URN & o );
-            URN( URN && o ) ISOBMFF_NOEXCEPT( true );
+            URN( URN && o ) noexcept;
             virtual ~URN() override;
             
             URN & operator =( URN o );

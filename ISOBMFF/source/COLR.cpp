@@ -60,7 +60,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    COLR::COLR( COLR && o ) ISOBMFF_NOEXCEPT( true ):
+    COLR::COLR( COLR && o ) noexcept:
         Box( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

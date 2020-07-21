@@ -56,7 +56,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    META::META( META && o ) ISOBMFF_NOEXCEPT( true ):
+    META::META( META && o ) noexcept:
         FullBox( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

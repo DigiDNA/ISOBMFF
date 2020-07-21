@@ -44,7 +44,7 @@ namespace ISOBMFF
             
             URL();
             URL( const URL & o );
-            URL( URL && o ) ISOBMFF_NOEXCEPT( true );
+            URL( URL && o ) noexcept;
             virtual ~URL() override;
             
             URL & operator =( URL o );

@@ -45,7 +45,7 @@ namespace ISOBMFF
             
             MVHD();
             MVHD( const MVHD & o );
-            MVHD( MVHD && o ) ISOBMFF_NOEXCEPT( true );
+            MVHD( MVHD && o ) noexcept;
             virtual ~MVHD() override;
             
             MVHD & operator =( MVHD o );

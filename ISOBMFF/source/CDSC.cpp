@@ -51,7 +51,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    CDSC::CDSC( CDSC && o ) ISOBMFF_NOEXCEPT( true ):
+    CDSC::CDSC( CDSC && o ) noexcept:
         SingleItemTypeReferenceBox( std::move( o ) ),
         impl( std::move( o.impl ) )
     {

@@ -57,7 +57,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    PIXI::Channel::Channel( Channel && o ) ISOBMFF_NOEXCEPT( true ):
+    PIXI::Channel::Channel( Channel && o ) noexcept:
         impl( std::move( o.impl ) )
     {
         o.impl = nullptr;

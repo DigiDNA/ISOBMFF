@@ -46,7 +46,7 @@ namespace ISOBMFF
             
             META();
             META( const META & o );
-            META( META && o ) ISOBMFF_NOEXCEPT( true );
+            META( META && o ) noexcept;
             virtual ~META() override;
             
             META & operator =( META o );

@@ -61,7 +61,7 @@ namespace ISOBMFF
         impl( std::make_unique< IMPL >( *( o.impl ) ) )
     {}
     
-    BinaryDataStream::BinaryDataStream( BinaryDataStream && o ) ISOBMFF_NOEXCEPT( true ):
+    BinaryDataStream::BinaryDataStream( BinaryDataStream && o ) noexcept:
         impl( std::move( o.impl ) )
     {}
     
