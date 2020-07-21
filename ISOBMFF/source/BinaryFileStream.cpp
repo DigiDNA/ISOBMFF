@@ -34,6 +34,10 @@
 #include <ISOBMFF/BinaryFileStream.hpp>
 #include <ISOBMFF/Casts.hpp>
 
+#ifdef _WIN32
+#include <ISOBMFF/WIN32.hpp>
+#endif
+
 namespace ISOBMFF
 {
     class BinaryFileStream::IMPL
@@ -129,7 +133,11 @@ namespace ISOBMFF
         _size( 0 ),
         _pos(  0 )
     {
-        this->_stream.open( this->_path, std::ios::binary | std::ios::in );
+        #ifdef _WIN32
+        this->_stream.open( ISOBMFF::StringToWideString( path ), std::ios::binary );
+        #else
+        this->_stream.open( path, std::ios::binary );
+        #endif
         
         if( this->_stream.good() )
         {
