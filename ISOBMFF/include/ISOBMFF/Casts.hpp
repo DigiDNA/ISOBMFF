@@ -39,174 +39,174 @@ namespace ISOBMFF
 {
     template
     <
-        typename _T_,
-        typename _U_,
+        typename T,
+        typename U,
         typename std::enable_if
         <
-               std::is_integral< _T_ >::value
-            && std::is_integral< _U_ >::value
-            && std::is_unsigned< _T_ >::value
-            && std::is_unsigned< _U_ >::value
+               std::is_integral< T >::value
+            && std::is_integral< U >::value
+            && std::is_unsigned< T >::value
+            && std::is_unsigned< U >::value
         >
         ::type * = nullptr
     >
-    _T_ numeric_cast( _U_ v )
+    T numeric_cast( U v )
     {
-        if( std::numeric_limits< _T_ >::max() < std::numeric_limits< _U_ >::max() && v > std::numeric_limits< _T_ >::max() )
+        if( std::numeric_limits< T >::max() < std::numeric_limits< U >::max() && v > std::numeric_limits< T >::max() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        return static_cast< _T_ >( v );
+        return static_cast< T >( v );
     }
     
     template
     <
-        typename _T_,
-        typename _U_,
+        typename T,
+        typename U,
         typename std::enable_if
         <
-               std::is_integral< _T_ >::value
-            && std::is_integral< _U_ >::value
-            && std::is_signed< _T_ >::value
-            && std::is_signed< _U_ >::value
+               std::is_integral< T >::value
+            && std::is_integral< U >::value
+            && std::is_signed< T >::value
+            && std::is_signed< U >::value
         >
         ::type * = nullptr
     >
-    _T_ numeric_cast( _U_ v )
+    T numeric_cast( U v )
     {
-        if( std::numeric_limits< _T_ >::max() < std::numeric_limits< _U_ >::max() && v > std::numeric_limits< _T_ >::max() )
+        if( std::numeric_limits< T >::max() < std::numeric_limits< U >::max() && v > std::numeric_limits< T >::max() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        if( std::numeric_limits< _T_ >::min() > std::numeric_limits< _U_ >::min() && v < std::numeric_limits< _T_ >::min() )
+        if( std::numeric_limits< T >::min() > std::numeric_limits< U >::min() && v < std::numeric_limits< T >::min() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        return static_cast< _T_ >( v );
+        return static_cast< T >( v );
     }
     
     template
     <
-        typename _T_,
-        typename _U_,
+        typename T,
+        typename U,
         typename std::enable_if
         <
-               std::is_integral< _T_ >::value
-            && std::is_integral< _U_ >::value
-            && std::is_signed< _T_ >::value
-            && std::is_unsigned< _U_ >::value
+               std::is_integral< T >::value
+            && std::is_integral< U >::value
+            && std::is_signed< T >::value
+            && std::is_unsigned< U >::value
         >
         ::type * = nullptr
     >
-    _T_ numeric_cast( _U_ v )
+    T numeric_cast( U v )
     {
-        if( static_cast< std::make_unsigned< _T_ >::type >( std::numeric_limits< _T_ >::max() ) < std::numeric_limits< _U_ >::max() && v > static_cast< std::make_unsigned< _T_ >::type >( std::numeric_limits< _T_ >::max() ) )
+        if( static_cast< typename std::make_unsigned< T >::type >( std::numeric_limits< T >::max() ) < std::numeric_limits< U >::max() && v > static_cast< typename std::make_unsigned< T >::type >( std::numeric_limits< T >::max() ) )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        return static_cast< _T_ >( v );
+        return static_cast< T >( v );
     }
     
     template
     <
-        typename _T_,
-        typename _U_,
+        typename T,
+        typename U,
         typename std::enable_if
         <
-               std::is_integral< _T_ >::value
-            && std::is_integral< _U_ >::value
-            && std::is_unsigned< _T_ >::value
-            && std::is_signed< _U_ >::value
+               std::is_integral< T >::value
+            && std::is_integral< U >::value
+            && std::is_unsigned< T >::value
+            && std::is_signed< U >::value
         >
         ::type * = nullptr
     >
-    _T_ numeric_cast( _U_ v )
+    T numeric_cast( U v )
     {
         if( v < 0 )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        if( std::numeric_limits< _T_ >::max() < static_cast< std::make_unsigned< _U_ >::type >( std::numeric_limits< _U_ >::max() ) && static_cast< std::make_unsigned< _U_ >::type >( v ) > std::numeric_limits< _T_ >::max() )
+        if( std::numeric_limits< T >::max() < static_cast< typename std::make_unsigned< U >::type >( std::numeric_limits< U >::max() ) && static_cast< typename std::make_unsigned< U >::type >( v ) > std::numeric_limits< T >::max() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        return static_cast< _T_ >( v );
+        return static_cast< T >( v );
     }
     
     template
     <
-        typename _T_,
-        typename _U_,
+        typename T,
+        typename U,
         typename std::enable_if
         <
-               std::is_integral< _T_ >::value
-            && std::is_unsigned< _T_ >::value
-            && std::is_floating_point< _U_ >::value
+               std::is_integral< T >::value
+            && std::is_unsigned< T >::value
+            && std::is_floating_point< U >::value
         >
         ::type * = nullptr
     >
-    _T_ numeric_cast( _U_ v )
+    T numeric_cast( U v )
     {
         if( v < 0 )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        if( v > std::numeric_limits< _T_ >::max() )
+        if( v > std::numeric_limits< T >::max() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        return static_cast< _T_ >( v );
+        return static_cast< T >( v );
     }
     
     template
     <
-        typename _T_,
-        typename _U_,
+        typename T,
+        typename U,
         typename std::enable_if
         <
-               std::is_integral< _T_ >::value
-            && std::is_signed< _T_ >::value
-            && std::is_floating_point< _U_ >::value
+               std::is_integral< T >::value
+            && std::is_signed< T >::value
+            && std::is_floating_point< U >::value
         >
         ::type * = nullptr
     >
-    _T_ numeric_cast( _U_ v )
+    T numeric_cast( U v )
     {
-        if( v > std::numeric_limits< _T_ >::max() )
+        if( v > std::numeric_limits< T >::max() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        if( v < std::numeric_limits< _T_ >::min() )
+        if( v < std::numeric_limits< T >::min() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        return static_cast< _T_ >( v );
+        return static_cast< T >( v );
     }
     
     template
     <
-        typename _T_,
-        typename _U_,
+        typename T,
+        typename U,
         typename std::enable_if
         <
-               std::is_floating_point< _T_ >::value
-            && std::is_integral< _U_ >::value
+               std::is_floating_point< T >::value
+            && std::is_integral< U >::value
         >
         ::type * = nullptr
     >
-    _T_ numeric_cast( _U_ v )
+    T numeric_cast( U v )
     {
-        return static_cast< _T_ >( v );
+        return static_cast< T >( v );
     }
 }
 
