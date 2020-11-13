@@ -665,7 +665,7 @@
 		0515C8A71F2A71A8003B8594 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "XS-Labs";
 				TargetAttributes = {
 					0515C8AE1F2A71A8003B8594 = {
@@ -827,7 +827,7 @@
 					"$(SRCROOT)/Submodules/PIMPL/PIMPL/include",
 					"$(SRCROOT)/ISOBMFF/include",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 			};
 			name = Debug;
 		};
@@ -839,7 +839,7 @@
 					"$(SRCROOT)/Submodules/PIMPL/PIMPL/include",
 					"$(SRCROOT)/ISOBMFF/include",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 			};
 			name = Release;
 		};
