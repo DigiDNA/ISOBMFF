@@ -39,6 +39,13 @@ Source: [Wikipedia](https://en.wikipedia.org/wiki/ISO_base_media_file_format)
 Building
 --------
 
+### Fetch the submodules
+
+After you have cloned the ISOBMFF project, you will need to fetch the submodules that are defined in the .gitmodules file.
+
+`git submodule update --init --recursive`
+
+
 ### macOS
 
 An Xcode project is provided for convenience, containing the following targets:
