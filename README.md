@@ -1,9 +1,9 @@
 ISOBMFF
 =======
 
-[![Build Status](https://img.shields.io/github/workflow/status/macmade/ISOBMFF/ci-mac?label=macOS&logo=apple)](https://github.com/macmade/ISOBMFF/actions/workflows/ci-mac.yaml)
-[![Build Status](https://img.shields.io/github/workflow/status/macmade/ISOBMFF/ci-win?label=Windows&logo=windows)](https://github.com/macmade/ISOBMFF/actions/workflows/ci-win.yaml)
-[![Issues](http://img.shields.io/github/issues/macmade/ISOBMFF.svg?logo=github)](https://github.com/macmade/ISOBMFF/issues)
+[![Build Status](https://img.shields.io/github/workflow/status/DigiDNA/ISOBMFF/ci-mac?label=macOS&logo=apple)](https://github.com/DigiDNA/ISOBMFF/actions/workflows/ci-mac.yaml)
+[![Build Status](https://img.shields.io/github/workflow/status/DigiDNA/ISOBMFF/ci-win?label=Windows&logo=windows)](https://github.com/DigiDNA/ISOBMFF/actions/workflows/ci-win.yaml)
+[![Issues](http://img.shields.io/github/issues/DigiDNA/ISOBMFF.svg?logo=github)](https://github.com/DigiDNA/ISOBMFF/issues)
 ![Status](https://img.shields.io/badge/status-active-brightgreen.svg?logo=git)
 ![License](https://img.shields.io/badge/license-mit-brightgreen.svg?logo=open-source-initiative)  
 [![Contact](https://img.shields.io/badge/follow-@digidna-blue.svg?logo=twitter&style=social)](https://twitter.com/digidna)
