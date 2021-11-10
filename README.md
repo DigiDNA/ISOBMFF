@@ -1,12 +1,12 @@
 ISOBMFF
 =======
 
-[![Build Status](https://img.shields.io/travis/DigiDNA/ISOBMFF.svg?branch=master&style=flat)](https://travis-ci.org/DigiDNA/ISOBMFF)
-[![Coverage Status](https://img.shields.io/coveralls/DigiDNA/ISOBMFF.svg?branch=master&style=flat)](https://coveralls.io/r/DigiDNA/ISOBMFF?branch=master)
-[![Issues](http://img.shields.io/github/issues/DigiDNA/ISOBMFF.svg?style=flat)](https://github.com/DigiDNA/ISOBMFF/issues)
-![Status](https://img.shields.io/badge/status-active-brightgreen.svg?style=flat)
-![License](https://img.shields.io/badge/license-mit-brightgreen.svg?style=flat)
-[![Contact](https://img.shields.io/badge/contact-@DigiDNA-blue.svg?style=flat)](https://twitter.com/DigiDNA)  
+[![Build Status](https://img.shields.io/github/workflow/status/macmade/ISOBMFF/ci-mac?label=macOS&logo=apple)](https://github.com/macmade/ISOBMFF/actions/workflows/ci-mac.yaml)
+[![Build Status](https://img.shields.io/github/workflow/status/macmade/ISOBMFF/ci-win?label=Windows&logo=windows)](https://github.com/macmade/ISOBMFF/actions/workflows/ci-win.yaml)
+[![Issues](http://img.shields.io/github/issues/macmade/ISOBMFF.svg?logo=github)](https://github.com/macmade/ISOBMFF/issues)
+![Status](https://img.shields.io/badge/status-active-brightgreen.svg?logo=git)
+![License](https://img.shields.io/badge/license-mit-brightgreen.svg?logo=open-source-initiative)  
+[![Contact](https://img.shields.io/badge/follow-@digidna-blue.svg?logo=twitter&style=social)](https://twitter.com/digidna)
 
 C++ Library for ISO/IEC 14496-12 - ISO Base Media File Format (QuickTime, MPEG-4, HEIF, etc)
 --------------------------------------------------------------------------------------------
