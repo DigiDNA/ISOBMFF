@@ -683,7 +683,7 @@
 		0515C8A71F2A71A8003B8594 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "XS-Labs";
 				TargetAttributes = {
 					0515C8AE1F2A71A8003B8594 = {
@@ -843,11 +843,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 057224132011201F00DC0502 /* Debug - ccache.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				ENABLE_HARDENED_RUNTIME = NO;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/ISOBMFF/include";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/ISOBMFF/include",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 			};
 			name = Debug;
 		};
@@ -855,11 +854,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 057224112011201F00DC0502 /* Release - ccache.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				ENABLE_HARDENED_RUNTIME = NO;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/ISOBMFF/include";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/ISOBMFF/include",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 			};
 			name = Release;
 		};

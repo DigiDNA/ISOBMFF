@@ -1,12 +1,12 @@
 ISOBMFF
 =======
 
-[![Build Status](https://img.shields.io/travis/DigiDNA/ISOBMFF.svg?branch=master&style=flat)](https://travis-ci.org/DigiDNA/ISOBMFF)
-[![Coverage Status](https://img.shields.io/coveralls/DigiDNA/ISOBMFF.svg?branch=master&style=flat)](https://coveralls.io/r/DigiDNA/ISOBMFF?branch=master)
-[![Issues](http://img.shields.io/github/issues/DigiDNA/ISOBMFF.svg?style=flat)](https://github.com/DigiDNA/ISOBMFF/issues)
-![Status](https://img.shields.io/badge/status-active-brightgreen.svg?style=flat)
-![License](https://img.shields.io/badge/license-mit-brightgreen.svg?style=flat)
-[![Contact](https://img.shields.io/badge/contact-@DigiDNA-blue.svg?style=flat)](https://twitter.com/DigiDNA)  
+[![Build Status](https://img.shields.io/github/workflow/status/DigiDNA/ISOBMFF/ci-mac?label=macOS&logo=apple)](https://github.com/DigiDNA/ISOBMFF/actions/workflows/ci-mac.yaml)
+[![Build Status](https://img.shields.io/github/workflow/status/DigiDNA/ISOBMFF/ci-win?label=Windows&logo=windows)](https://github.com/DigiDNA/ISOBMFF/actions/workflows/ci-win.yaml)
+[![Issues](http://img.shields.io/github/issues/DigiDNA/ISOBMFF.svg?logo=github)](https://github.com/DigiDNA/ISOBMFF/issues)
+![Status](https://img.shields.io/badge/status-active-brightgreen.svg?logo=git)
+![License](https://img.shields.io/badge/license-mit-brightgreen.svg?logo=open-source-initiative)  
+[![Contact](https://img.shields.io/badge/follow-@digidna-blue.svg?logo=twitter&style=social)](https://twitter.com/digidna)
 
 C++ Library for ISO/IEC 14496-12 - ISO Base Media File Format (QuickTime, MPEG-4, HEIF, etc)
 --------------------------------------------------------------------------------------------
@@ -39,6 +39,13 @@ Source: [Wikipedia](https://en.wikipedia.org/wiki/ISO_base_media_file_format)
 Building
 --------
 
+### Fetch the submodules
+
+After you have cloned the ISOBMFF project, you will need to fetch the submodules that are defined in the .gitmodules file.
+
+`git submodule update --init --recursive`
+
+
 ### macOS
 
 An Xcode project is provided for convenience, containing the following targets:
@@ -52,12 +59,10 @@ Note that you can also build the library with `make`, on the command line.
 
 An VisualStudio solution is provided for convenience, containing the following targets:
 
- - `ISOBMFF Static v120xp`: A static library built with the V120XP toolset (VS 2013)
- - `ISOBMFF Static v140xp`: A static library built with the V140XP toolset (VS 2015)
- - `ISOBMFF Static v141xp`: A static library built with the V141XP toolset (VS 2017)
- - `ISOBMFF DLL v120xp`: A dynamic library (DLL) built with the V120XP toolset (VS 2013)
- - `ISOBMFF DLL v140xp`: A dynamic library (DLL) built with the V140XP toolset (VS 2015)
- - `ISOBMFF DLL v141xp`: A dynamic library (DLL) built with the V141XP toolset (VS 2017)
+ - `ISOBMFF Static v142`: A static library built with the V142 toolset (VS 2019)
+ - `ISOBMFF Static v143`: A static library built with the V143 toolset (VS 2022)
+ - `ISOBMFF DLL v142`: A dynamic library (DLL) built with the V142 toolset (VS 2019)
+ - `ISOBMFF DLL v143`: A dynamic library (DLL) built with the V143 toolset (VS 2022)
  - `ISOBMFF-Dump`: A cross-platform command-line utility for dumping files.
 
 ### Linux/Unix

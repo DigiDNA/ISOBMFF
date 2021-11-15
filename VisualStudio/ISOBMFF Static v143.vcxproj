@@ -119,33 +119,33 @@
     <ProjectGuid>{756EDB4D-E04C-4397-A7EF-FA62E8A45F39}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ISOBMFF</RootNamespace>
-    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
-    <ProjectName>ISOBMFF Static v141xp</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ISOBMFF Static v143</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -170,22 +170,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Build\$(Configuration)\Products\win32\</OutDir>
     <IntDir>$(SolutionDir)Build\$(Configuration)\Intermediates\win32\$(ProjectName)\</IntDir>
-    <TargetName>ISOBMFF_Static_v141xp</TargetName>
+    <TargetName>ISOBMFF_Static_v143</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Build\$(Configuration)\Products\win32\</OutDir>
     <IntDir>$(SolutionDir)Build\$(Configuration)\Intermediates\win32\$(ProjectName)\</IntDir>
-    <TargetName>ISOBMFF_Static_v141xp</TargetName>
+    <TargetName>ISOBMFF_Static_v143</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Build\$(Configuration)\Products\win64\</OutDir>
     <IntDir>$(SolutionDir)Build\$(Configuration)\Intermediates\win64\$(ProjectName)\</IntDir>
-    <TargetName>ISOBMFF_Static_v141xp</TargetName>
+    <TargetName>ISOBMFF_Static_v143</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Build\$(Configuration)\Products\win64\</OutDir>
     <IntDir>$(SolutionDir)Build\$(Configuration)\Intermediates\win64\$(ProjectName)\</IntDir>
-    <TargetName>ISOBMFF_Static_v141xp</TargetName>
+    <TargetName>ISOBMFF_Static_v143</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

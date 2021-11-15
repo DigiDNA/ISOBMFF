@@ -1,0 +1,28 @@
+name: ci-win
+on:   [push]
+jobs:
+    ci:
+        runs-on: windows-2022
+        strategy:
+            matrix:
+                run-config:
+                    - { platform: 'x64', toolset: 'x64', configuration: 'Debug',   solution: 'ISOBMFF.sln' }
+                    - { platform: 'x64', toolset: 'x64', configuration: 'Release', solution: 'ISOBMFF.sln' }
+                    - { platform: 'x86', toolset: 'x64', configuration: 'Debug',   solution: 'ISOBMFF.sln' }
+                    - { platform: 'x86', toolset: 'x64', configuration: 'Release', solution: 'ISOBMFF.sln' }
+        steps:
+            
+            - uses: actions/checkout@v1
+              with:
+                submodules: 'recursive'
+                
+            - uses: macmade/action-msbuild@v1.1.0
+            
+            - uses: macmade/action-slack@v1.0.0
+              if:   ${{ always() }}
+              env:
+                SLACK_WEBHOOK_URL:  ${{ secrets.SLACK_WEBHOOK_URL }}
+              with:
+                channel:    '#ci'
+                status:     ${{ job.status }}
+                title:      ${{ matrix.run-config[ 'solution' ] }} - ${{ matrix.run-config[ 'configuration' ] }} - ${{ matrix.run-config[ 'platform' ] }}
