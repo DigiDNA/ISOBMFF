@@ -181,7 +181,7 @@ namespace ISOBMFF
             
             /*!
              * @function    GetFile
-             * @abstract    Upon successfull parsing, gets the file object.
+             * @abstract    Upon successful parsing, gets the file object.
              * @result      The file object, or nullptr.
              */
             std::shared_ptr< File > GetFile() const;
