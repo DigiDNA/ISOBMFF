@@ -52,7 +52,7 @@ namespace ISOBMFF
     >
     T numeric_cast( U v )
     {
-        if( std::numeric_limits< T >::max() < std::numeric_limits< U >::max() && v > std::numeric_limits< T >::max() )
+        if( ( std::numeric_limits< T >::max )() < ( std::numeric_limits< U >::max )() && v > ( std::numeric_limits< T >::max )() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
@@ -75,12 +75,12 @@ namespace ISOBMFF
     >
     T numeric_cast( U v )
     {
-        if( std::numeric_limits< T >::max() < std::numeric_limits< U >::max() && v > std::numeric_limits< T >::max() )
+        if( ( std::numeric_limits< T >::max )() < ( std::numeric_limits< U >::max )() && v > ( std::numeric_limits< T >::max )() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        if( std::numeric_limits< T >::min() > std::numeric_limits< U >::min() && v < std::numeric_limits< T >::min() )
+        if( ( std::numeric_limits< T >::min )() > ( std::numeric_limits< U >::min )() && v < ( std::numeric_limits< T >::min )() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
@@ -103,7 +103,7 @@ namespace ISOBMFF
     >
     T numeric_cast( U v )
     {
-        if( static_cast< typename std::make_unsigned< T >::type >( std::numeric_limits< T >::max() ) < std::numeric_limits< U >::max() && v > static_cast< typename std::make_unsigned< T >::type >( std::numeric_limits< T >::max() ) )
+        if( static_cast< typename std::make_unsigned< T >::type >( ( std::numeric_limits< T >::max )() ) < ( std::numeric_limits< U >::max )() && v > static_cast< typename std::make_unsigned< T >::type >( ( std::numeric_limits< T >::max )() ) )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
@@ -131,7 +131,7 @@ namespace ISOBMFF
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        if( std::numeric_limits< T >::max() < static_cast< typename std::make_unsigned< U >::type >( std::numeric_limits< U >::max() ) && static_cast< typename std::make_unsigned< U >::type >( v ) > std::numeric_limits< T >::max() )
+        if( ( std::numeric_limits< T >::max )() < static_cast< typename std::make_unsigned< U >::type >( ( std::numeric_limits< U >::max )() ) && static_cast< typename std::make_unsigned< U >::type >( v ) > ( std::numeric_limits< T >::max )() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
@@ -158,7 +158,7 @@ namespace ISOBMFF
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        if( v > std::numeric_limits< T >::max() )
+        if( v > ( std::numeric_limits< T >::max )() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
@@ -180,12 +180,12 @@ namespace ISOBMFF
     >
     T numeric_cast( U v )
     {
-        if( v > std::numeric_limits< T >::max() )
+        if( v > ( std::numeric_limits< T >::max )() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
         
-        if( v < std::numeric_limits< T >::min() )
+        if( v < ( std::numeric_limits< T >::min )() )
         {
             throw std::runtime_error( "Bad numeric cast" );
         }
