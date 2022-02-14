@@ -26,6 +26,7 @@
  * @file        BinaryStream.cpp
  * @copyright   (c) 2017, DigiDNA - www.digidna.net
  * @author      Jean-David Gadina - www.digidna.net
+ * @author      Boris Conforty - www.digidna.net
  */
 
 #include <fstream>
@@ -71,7 +72,10 @@ namespace ISOBMFF
     {
         std::vector< uint8_t > data( size, 0 );
         
-        this->Read( &( data[ 0 ] ), size );
+        if( size > 0 )
+        {
+            this->Read( &( data[ 0 ] ), size );
+        }
         
         return data;
     }
