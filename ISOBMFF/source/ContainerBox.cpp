@@ -104,7 +104,7 @@ namespace ISOBMFF
                 
                 if
                 (
-                       length > std::numeric_limits< size_t >::max()
+                       length > ( std::numeric_limits< size_t >::max )()
                     || ( name == "mdat" && parser.HasOption( Parser::Options::SkipMDATData ) )
                 )
                 {
