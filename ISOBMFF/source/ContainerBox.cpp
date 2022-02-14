@@ -86,7 +86,7 @@ namespace ISOBMFF
         uint64_t               length;
         std::string            name;
         std::shared_ptr< Box > box;
-        BinaryDataStream       content;
+        BinaryDataStream     * content;
         
         this->impl->_boxes.clear();
         
@@ -96,6 +96,7 @@ namespace ISOBMFF
             
             length   = stream.ReadBigEndianUInt32();
             name     = stream.ReadFourCC();
+            content  = nullptr;
             
             if( length == 1 )
             {
@@ -111,7 +112,7 @@ namespace ISOBMFF
                 }
                 else
                 {
-                    content = BinaryDataStream( stream.Read( static_cast< size_t >( length ) - 16 ) );
+                    content = new BinaryDataStream( stream.Read( static_cast< size_t >( length ) - 16 ) );
                 }
             }
             else
@@ -122,7 +123,7 @@ namespace ISOBMFF
                 }
                 else
                 {
-                    content = BinaryDataStream( stream.Read( static_cast< uint32_t >( length ) - 8 ) );
+                    content = new BinaryDataStream( stream.Read( static_cast< uint32_t >( length ) - 8 ) );
                 }
             }
             
@@ -130,8 +131,16 @@ namespace ISOBMFF
             
             if( box != nullptr )
             {
-                box->ReadData( parser, content );
+                if( content )
+                {
+                    box->ReadData( parser, *content );
+                }
+                
                 this->AddBox( box );
+            }
+            if( content )
+            {
+                delete( content );
             }
         }
     }
