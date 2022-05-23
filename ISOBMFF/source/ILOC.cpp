@@ -30,29 +30,58 @@
 
 #include <ISOBMFF/ILOC.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        uint8_t                                               _offsetSize;
-        uint8_t                                               _lengthSize;
-        uint8_t                                               _baseOffsetSize;
-        uint8_t                                               _indexSize;
-        std::vector< std::shared_ptr< ISOBMFF::ILOC::Item > > _items;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::ILOC
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    ILOC::ILOC( void ): FullBox( "iloc" )
+    class ILOC::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint8_t                                _offsetSize;
+            uint8_t                                _lengthSize;
+            uint8_t                                _baseOffsetSize;
+            uint8_t                                _indexSize;
+            std::vector< std::shared_ptr< Item > > _items;
+    };
+    
+    ILOC::ILOC():
+        FullBox( "iloc" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    ILOC::ILOC( const ILOC & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    ILOC::ILOC( ILOC && o ) noexcept:
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    ILOC::~ILOC()
+    {}
+    
+    ILOC & ILOC::operator =( ILOC o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( ILOC & o1, ILOC & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void ILOC::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -95,14 +124,14 @@ namespace ISOBMFF
         DisplayableObjectContainer::WriteDescription( os, indentLevel );
     }
     
-    std::vector< std::shared_ptr< DisplayableObject > > ILOC::GetDisplayableObjects( void ) const
+    std::vector< std::shared_ptr< DisplayableObject > > ILOC::GetDisplayableObjects() const
     {
         auto v( this->GetItems() );
         
         return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
-    std::vector< std::pair< std::string, std::string > > ILOC::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > ILOC::GetDisplayableProperties() const
     {
         auto props( FullBox::GetDisplayableProperties() );
         
@@ -120,22 +149,22 @@ namespace ISOBMFF
         return props;
     }
     
-    uint8_t ILOC::GetOffsetSize( void ) const
+    uint8_t ILOC::GetOffsetSize() const
     {
         return this->impl->_offsetSize;
     }
     
-    uint8_t ILOC::GetLengthSize( void ) const
+    uint8_t ILOC::GetLengthSize() const
     {
         return this->impl->_lengthSize;
     }
     
-    uint8_t ILOC::GetBaseOffsetSize( void ) const
+    uint8_t ILOC::GetBaseOffsetSize() const
     {
         return this->impl->_baseOffsetSize;
     }
     
-    uint8_t ILOC::GetIndexSize( void ) const
+    uint8_t ILOC::GetIndexSize() const
     {
         return this->impl->_indexSize;
     }
@@ -160,7 +189,7 @@ namespace ISOBMFF
         this->impl->_indexSize = value;
     }
     
-    std::vector< std::shared_ptr< ILOC::Item > > ILOC::GetItems( void ) const
+    std::vector< std::shared_ptr< ILOC::Item > > ILOC::GetItems() const
     {
         return this->impl->_items;
     }
@@ -182,23 +211,22 @@ namespace ISOBMFF
     {
         this->impl->_items.push_back( item );
     }
+
+    ILOC::IMPL::IMPL():
+        _offsetSize( 0 ),
+        _lengthSize( 0 ),
+        _baseOffsetSize( 0 ),
+        _indexSize( 0 )
+    {}
+
+    ILOC::IMPL::IMPL( const IMPL & o ):
+        _offsetSize( o._offsetSize ),
+        _lengthSize( o._lengthSize ),
+        _baseOffsetSize( o._baseOffsetSize ),
+        _indexSize( o._indexSize ),
+        _items( o._items )
+    {}
+
+    ILOC::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL::IMPL( void ):
-    _offsetSize( 0 ),
-    _lengthSize( 0 ),
-    _baseOffsetSize( 0 ),
-    _indexSize( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL::IMPL( const IMPL & o ):
-    _offsetSize( o._offsetSize ),
-    _lengthSize( o._lengthSize ),
-    _baseOffsetSize( o._baseOffsetSize ),
-    _indexSize( o._indexSize ),
-    _items( o._items )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ILOC >::IMPL::~IMPL( void )
-{}
-

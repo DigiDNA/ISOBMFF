@@ -32,26 +32,55 @@
 #include <ISOBMFF/Utils.hpp>
 #include <ISOBMFF/Parser.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::FullBox >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        uint8_t  _version;
-        uint32_t _flags;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::FullBox
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    FullBox::FullBox( const std::string & name ): Box( name )
+    class FullBox::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint8_t  _version;
+            uint32_t _flags;
+    };
+
+    FullBox::FullBox( const std::string & name ):
+        Box( name ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    FullBox::FullBox( const FullBox & o ):
+        Box( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    FullBox::FullBox( FullBox && o ) noexcept:
+        Box( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    FullBox::~FullBox()
+    {}
+    
+    FullBox & FullBox::operator =( FullBox o )
+    {
+        Box::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( FullBox & o1, FullBox & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< Box & >( o1 ), static_cast< Box & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
 
     void FullBox::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -61,11 +90,11 @@ namespace ISOBMFF
         
         vf = stream.ReadBigEndianUInt32();
         
-        this->SetVersion( ( uint8_t )( vf >> 24 ) );
+        this->SetVersion( static_cast< uint8_t >( vf >> 24 ) );
         this->SetFlags( vf & 0x00FFFFFF );
     }
     
-    std::vector< std::pair< std::string, std::string > > FullBox::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > FullBox::GetDisplayableProperties() const
     {
         auto props( Box::GetDisplayableProperties() );
         
@@ -75,12 +104,12 @@ namespace ISOBMFF
         return props;
     }
     
-    uint8_t FullBox::GetVersion( void ) const
+    uint8_t FullBox::GetVersion() const
     {
         return this->impl->_version;
     }
     
-    uint32_t FullBox::GetFlags( void ) const
+    uint32_t FullBox::GetFlags() const
     {
         return this->impl->_flags;
     }
@@ -94,18 +123,17 @@ namespace ISOBMFF
     {
         this->impl->_flags = value;
     }
+
+    FullBox::IMPL::IMPL():
+        _version( 0 ),
+        _flags( 0 )
+    {}
+
+    FullBox::IMPL::IMPL( const IMPL & o ):
+        _version( o._version ),
+        _flags( o._flags )
+    {}
+
+    FullBox::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::FullBox >::IMPL::IMPL( void ):
-    _version( 0 ),
-    _flags( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::FullBox >::IMPL::IMPL( const IMPL & o ):
-    _version( o._version ),
-    _flags( o._flags )
-{}
-
-XS::PIMPL::Object< ISOBMFF::FullBox >::IMPL::~IMPL( void )
-{}
-

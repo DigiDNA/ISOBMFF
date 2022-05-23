@@ -31,25 +31,54 @@
 #include <ISOBMFF/PIXI.hpp>
 #include <ISOBMFF/Utils.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::PIXI >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        std::vector< std::shared_ptr< ISOBMFF::PIXI::Channel > > _channels;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::PIXI
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    PIXI::PIXI( void ): FullBox( "pixi" )
+    class PIXI::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::vector< std::shared_ptr< PIXI::Channel > > _channels;
+    };
+    
+    PIXI::PIXI():
+        FullBox( "pixi" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    PIXI::PIXI( const PIXI & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    PIXI::PIXI( PIXI && o ) noexcept:
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    PIXI::~PIXI()
+    {}
+    
+    PIXI & PIXI::operator =( PIXI o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( PIXI & o1, PIXI & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void PIXI::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -72,14 +101,14 @@ namespace ISOBMFF
         DisplayableObjectContainer::WriteDescription( os, indentLevel );
     }
     
-    std::vector< std::shared_ptr< DisplayableObject > > PIXI::GetDisplayableObjects( void ) const
+    std::vector< std::shared_ptr< DisplayableObject > > PIXI::GetDisplayableObjects() const
     {
         auto v( this->GetChannels() );
         
         return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
-    std::vector< std::pair< std::string, std::string > > PIXI::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > PIXI::GetDisplayableProperties() const
     {
         auto props( Box::GetDisplayableProperties() );
         
@@ -88,7 +117,7 @@ namespace ISOBMFF
         return props;
     }
     
-    std::vector< std::shared_ptr< PIXI::Channel > > PIXI::GetChannels( void ) const
+    std::vector< std::shared_ptr< PIXI::Channel > > PIXI::GetChannels() const
     {
         return this->impl->_channels;
     }
@@ -97,15 +126,14 @@ namespace ISOBMFF
     {
         this->impl->_channels.push_back( array );
     }
+    
+    PIXI::IMPL::IMPL()
+    {}
+
+    PIXI::IMPL::IMPL( const IMPL & o ):
+        _channels( o._channels )
+    {}
+
+    PIXI::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::PIXI >::IMPL::IMPL( void )
-{}
-
-XS::PIMPL::Object< ISOBMFF::PIXI >::IMPL::IMPL( const IMPL & o ):
-    _channels( o._channels )
-{}
-
-XS::PIMPL::Object< ISOBMFF::PIXI >::IMPL::~IMPL( void )
-{}
-

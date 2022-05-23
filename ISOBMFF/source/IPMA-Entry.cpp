@@ -30,28 +30,26 @@
 
 #include <ISOBMFF/IPMA.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        uint32_t                                                            _itemID;
-        std::vector< std::shared_ptr< ISOBMFF::IPMA::Entry::Association > > _associations;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::IPMA::Entry
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    IPMA::Entry::Entry( void )
+    class IPMA::Entry::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint32_t                                      _itemID;
+            std::vector< std::shared_ptr< Association > > _associations;
+    };
+    
+    IPMA::Entry::Entry():
+        impl( std::make_unique< IMPL >() )
     {}
     
-    IPMA::Entry::Entry( BinaryStream & stream, const IPMA & ipma )
+    IPMA::Entry::Entry( BinaryStream & stream, const IPMA & ipma ):
+        impl( std::make_unique< IMPL >() )
     {
         uint8_t count;
         uint8_t i;
@@ -73,7 +71,34 @@ namespace ISOBMFF
         }
     }
     
-    std::string IPMA::Entry::GetName( void ) const
+    IPMA::Entry::Entry( const IPMA::Entry & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    IPMA::Entry::Entry( IPMA::Entry && o ) noexcept:
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    IPMA::Entry::~Entry()
+    {}
+    
+    IPMA::Entry & IPMA::Entry::operator =( IPMA::Entry o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( IPMA::Entry & o1, IPMA::Entry & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
+    }
+    
+    std::string IPMA::Entry::GetName() const
     {
         return "Entry";
     }
@@ -84,7 +109,7 @@ namespace ISOBMFF
         DisplayableObjectContainer::WriteDescription( os, indentLevel );
     }
     
-    std::vector< std::pair< std::string, std::string > > IPMA::Entry::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > IPMA::Entry::GetDisplayableProperties() const
     {
         return
         {
@@ -93,14 +118,14 @@ namespace ISOBMFF
         };
     }
     
-    std::vector< std::shared_ptr< DisplayableObject > > IPMA::Entry::GetDisplayableObjects( void ) const
+    std::vector< std::shared_ptr< DisplayableObject > > IPMA::Entry::GetDisplayableObjects() const
     {
         auto v( this->GetAssociations() );
         
         return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
-    uint32_t IPMA::Entry::GetItemID( void ) const
+    uint32_t IPMA::Entry::GetItemID() const
     {
         return this->impl->_itemID;
     }
@@ -110,7 +135,7 @@ namespace ISOBMFF
         this->impl->_itemID = value;
     }
     
-    std::vector< std::shared_ptr< IPMA::Entry::Association > > IPMA::Entry::GetAssociations( void ) const
+    std::vector< std::shared_ptr< IPMA::Entry::Association > > IPMA::Entry::GetAssociations() const
     {
         return this->impl->_associations;
     }
@@ -119,17 +144,16 @@ namespace ISOBMFF
     {
         this->impl->_associations.push_back( association );
     }
+
+    IPMA::Entry::IMPL::IMPL():
+        _itemID( 0 )
+    {}
+
+    IPMA::Entry::IMPL::IMPL( const IMPL & o ):
+        _itemID( o._itemID ),
+        _associations( o._associations )
+    {}
+
+    IPMA::Entry::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::IMPL( void ):
-    _itemID( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::IMPL( const IMPL & o ):
-    _itemID( o._itemID ),
-    _associations( o._associations )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IPMA::Entry >::IMPL::~IMPL( void )
-{}
-

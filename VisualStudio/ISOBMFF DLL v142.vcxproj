@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF.hpp" />
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\BinaryDataStream.hpp" />
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\BinaryFileStream.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\BinaryStream.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\Box.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\CDSC.hpp" />
@@ -63,6 +65,8 @@
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\WIN32.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\ISOBMFF\source\BinaryDataStream.cpp" />
+    <ClCompile Include="..\ISOBMFF\source\BinaryFileStream.cpp" />
     <ClCompile Include="..\ISOBMFF\source\BinaryStream.cpp" />
     <ClCompile Include="..\ISOBMFF\source\Box.cpp" />
     <ClCompile Include="..\ISOBMFF\source\CDSC.cpp" />
@@ -190,7 +194,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>ISOBMFF_DLL_BUILD;XS_PIMPL_EXPORTS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Submodules\PIMPL\PIMPL\include;..\ISOBMFF\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ISOBMFF\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -206,7 +210,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>ISOBMFF_DLL_BUILD;XS_PIMPL_EXPORTS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Submodules\PIMPL\PIMPL\include;..\ISOBMFF\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ISOBMFF\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -223,7 +227,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>ISOBMFF_DLL_BUILD;XS_PIMPL_EXPORTS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Submodules\PIMPL\PIMPL\include;..\ISOBMFF\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ISOBMFF\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -242,7 +246,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>ISOBMFF_DLL_BUILD;XS_PIMPL_EXPORTS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Submodules\PIMPL\PIMPL\include;..\ISOBMFF\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ISOBMFF\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>

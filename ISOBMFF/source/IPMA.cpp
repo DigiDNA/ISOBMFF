@@ -30,25 +30,54 @@
 
 #include <ISOBMFF/IPMA.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        std::vector< std::shared_ptr< ISOBMFF::IPMA::Entry > > _entries;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::IPMA
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    IPMA::IPMA( void ): FullBox( "ipma" )
+    class IPMA::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::vector< std::shared_ptr< Entry > > _entries;
+    };
+    
+    IPMA::IPMA():
+        FullBox( "ipma" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    IPMA::IPMA( const IPMA & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    IPMA::IPMA( IPMA && o ) noexcept:
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    IPMA::~IPMA()
+    {}
+    
+    IPMA & IPMA::operator =( IPMA o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( IPMA & o1, IPMA & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void IPMA::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -71,7 +100,7 @@ namespace ISOBMFF
         DisplayableObjectContainer::WriteDescription( os, indentLevel );
     }
     
-    std::vector< std::pair< std::string, std::string > > IPMA::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > IPMA::GetDisplayableProperties() const
     {
         return
         {
@@ -79,14 +108,14 @@ namespace ISOBMFF
         };
     }
     
-    std::vector< std::shared_ptr< DisplayableObject > > IPMA::GetDisplayableObjects( void ) const
+    std::vector< std::shared_ptr< DisplayableObject > > IPMA::GetDisplayableObjects() const
     {
         auto v( this->GetEntries() );
         
         return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
-    std::vector< std::shared_ptr< IPMA::Entry > > IPMA::GetEntries( void ) const
+    std::vector< std::shared_ptr< IPMA::Entry > > IPMA::GetEntries() const
     {
         return this->impl->_entries;
     }
@@ -108,15 +137,14 @@ namespace ISOBMFF
     {
         this->impl->_entries.push_back( entry );
     }
+
+    IPMA::IMPL::IMPL()
+    {}
+
+    IPMA::IMPL::IMPL( const IMPL & o ):
+        _entries( o._entries )
+    {}
+
+    IPMA::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::IMPL( void )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::IMPL( const IMPL & o ):
-    _entries( o._entries )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IPMA >::IMPL::~IMPL( void )
-{}
-

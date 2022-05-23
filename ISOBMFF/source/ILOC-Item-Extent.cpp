@@ -30,31 +30,27 @@
 
 #include <ISOBMFF/ILOC.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        uint64_t _index;
-        uint64_t _offset;
-        uint64_t _length;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::ILOC::Item::Extent
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    ILOC::Item::Extent::Extent( void ):
-        XS::PIMPL::Object< Extent >()
+    class ILOC::Item::Extent::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint64_t _index;
+            uint64_t _offset;
+            uint64_t _length;
+    };
+    
+    ILOC::Item::Extent::Extent():
+        impl( std::make_unique< IMPL >() )
     {}
     
     ILOC::Item::Extent::Extent( BinaryStream & stream, const ILOC & iloc ):
-        XS::PIMPL::Object< Extent >()
+        impl( std::make_unique< IMPL >() )
     {
         if( ( iloc.GetVersion() == 1 || iloc.GetVersion() == 2 ) && iloc.GetIndexSize() > 0 )
         {
@@ -99,22 +95,49 @@ namespace ISOBMFF
         }
     }
     
-    std::string ILOC::Item::Extent::GetName( void ) const
+    ILOC::Item::Extent::Extent( const ILOC::Item::Extent & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    ILOC::Item::Extent::Extent( ILOC::Item::Extent && o ) noexcept:
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    ILOC::Item::Extent::~Extent()
+    {}
+    
+    ILOC::Item::Extent & ILOC::Item::Extent::operator =( ILOC::Item::Extent o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( ILOC::Item::Extent & o1, ILOC::Item::Extent & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
+    }
+    
+    std::string ILOC::Item::Extent::GetName() const
     {
         return "Extent";
     }
     
-    uint64_t ILOC::Item::Extent::GetIndex( void ) const
+    uint64_t ILOC::Item::Extent::GetIndex() const
     {
         return this->impl->_index;
     }
     
-    uint64_t ILOC::Item::Extent::GetOffset( void ) const
+    uint64_t ILOC::Item::Extent::GetOffset() const
     {
         return this->impl->_offset;
     }
     
-    uint64_t ILOC::Item::Extent::GetLength( void ) const
+    uint64_t ILOC::Item::Extent::GetLength() const
     {
         return this->impl->_length;
     }
@@ -134,7 +157,7 @@ namespace ISOBMFF
         this->impl->_length = value;
     }
     
-    std::vector< std::pair< std::string, std::string > > ILOC::Item::Extent::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > ILOC::Item::Extent::GetDisplayableProperties() const
     {
         return
         {
@@ -143,20 +166,19 @@ namespace ISOBMFF
             { "Length", std::to_string( this->GetLength() ) }
         };
     }
+
+    ILOC::Item::Extent::IMPL::IMPL():
+        _index( 0 ),
+        _offset( 0 ),
+        _length( 0 )
+    {}
+
+    ILOC::Item::Extent::IMPL::IMPL( const IMPL & o ):
+        _index( o._index ),
+        _offset( o._offset ),
+        _length( o._length )
+    {}
+
+    ILOC::Item::Extent::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL::IMPL( void ):
-    _index( 0 ),
-    _offset( 0 ),
-    _length( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL::IMPL( const IMPL & o ):
-    _index( o._index ),
-    _offset( o._offset ),
-    _length( o._length )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ILOC::Item::Extent >::IMPL::~IMPL( void )
-{}
-

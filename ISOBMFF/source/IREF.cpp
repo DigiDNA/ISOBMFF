@@ -32,25 +32,54 @@
 #include <ISOBMFF/ContainerBox.hpp>
 #include <ISOBMFF/Parser.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::IREF >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::IREF
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    IREF::IREF( void ): FullBox( "iref" )
+    class IREF::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::vector< std::shared_ptr< Box > > _boxes;
+    };
+    
+    IREF::IREF():
+        FullBox( "iref" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    IREF::IREF( const IREF & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    IREF::IREF( IREF && o ) noexcept:
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    IREF::~IREF()
+    {}
+    
+    IREF & IREF::operator =( IREF o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( IREF & o1, IREF & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void IREF::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -78,19 +107,18 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::shared_ptr< Box > > IREF::GetBoxes( void ) const
+    std::vector< std::shared_ptr< Box > > IREF::GetBoxes() const
     {
         return this->impl->_boxes;
     }
+    
+    IREF::IMPL::IMPL()
+    {}
+
+    IREF::IMPL::IMPL( const IMPL & o ):
+        _boxes( o._boxes )
+    {}
+
+    IREF::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::IREF >::IMPL::IMPL( void )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IREF >::IMPL::IMPL( const IMPL & o ):
-    _boxes( o._boxes )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IREF >::IMPL::~IMPL( void )
-{}
-

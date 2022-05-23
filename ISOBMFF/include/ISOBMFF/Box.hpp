@@ -31,7 +31,8 @@
 #ifndef ISOBMFF_BOX_HPP
 #define ISOBMFF_BOX_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/BinaryStream.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
@@ -48,11 +49,9 @@ namespace ISOBMFF
      * @class       Box
      * @abstract    Base interface for ISOBMFF boxes.
      */
-    class ISOBMFF_EXPORT Box: public XS::PIMPL::Object< Box >, public DisplayableObject
+    class ISOBMFF_EXPORT Box: public DisplayableObject
     {
         public:
-            
-            using XS::PIMPL::Object< Box >::impl;
             
             /*!
              * @function    Box
@@ -62,11 +61,38 @@ namespace ISOBMFF
             Box( const std::string & name );
             
             /*!
+             * @function    Box
+             * @abstract    Copy constructor.
+             * @param       o   The object to copy from.
+             */
+            Box( const Box & o );
+            
+            /*!
+             * @function    Box
+             * @abstract    Move constructor.
+             * @param       o   The object to move from.
+             */
+            Box( Box && o ) noexcept;
+            
+            /*!
+             * @function    ~Box
+             * @abstract    Destructor.
+             */
+            virtual ~Box() override;
+            
+            /*!
+             * @function    operator=
+             * @abstract    Assignment operator.
+             * @param       o   The object to assign from.
+             */
+            Box & operator =( Box o );
+            
+            /*!
              * @function    GetName
              * @abstract    Gets the box name.
              * @result      The box name.
              */
-            std::string GetName( void ) const override;
+            std::string GetName() const override;
             
             /*!
              * @function    GetDisplayableProperties
@@ -74,7 +100,7 @@ namespace ISOBMFF
              * @result      The box displayable properties.
              * @see         DisplayableObject
              */
-            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
             /*!
              * @function    ReadData
@@ -90,7 +116,21 @@ namespace ISOBMFF
              * @abstract    Gets the box data.
              * @result      The box data, as a vector of bytes.
              */
-            virtual std::vector< uint8_t > GetData( void ) const;
+            virtual std::vector< uint8_t > GetData() const;
+            
+            /*!
+             * @function    swap
+             * @abstract    Swap two objects.
+             * @param       o1  The first object to swap.
+             * @param       o2  The second object to swap.
+             */
+            ISOBMFF_EXPORT friend void swap( Box & o1, Box & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

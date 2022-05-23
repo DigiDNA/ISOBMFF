@@ -30,38 +30,66 @@
 
 #include <ISOBMFF/File.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::File >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::File
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    File::File( void ): ContainerBox( "????" )
+    class File::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+    };
+    
+    File::File():
+        ContainerBox( "????" ),
+        impl( std::make_unique< IMPL >() )
     {}
     
-    std::string File::GetName( void ) const
+    File::File( const File & o ):
+        ContainerBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    File::File( File && o ) noexcept:
+        ContainerBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    File::~File()
+    {}
+    
+    File & File::operator =( File o )
+    {
+        ContainerBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( File & o1, File & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< ContainerBox & >( o1 ), static_cast< ContainerBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
+    
+    std::string File::GetName() const
     {
         return "ISOBMFF::File";
     }
+    
+    File::IMPL::IMPL()
+    {}
+
+    File::IMPL::IMPL( const IMPL & o )
+    {
+        ( void )o;
+    }
+
+    File::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::File >::IMPL::IMPL( void )
-{}
-
-XS::PIMPL::Object< ISOBMFF::File >::IMPL::IMPL( const IMPL & o )
-{
-    ( void )o;
-}
-
-XS::PIMPL::Object< ISOBMFF::File >::IMPL::~IMPL( void )
-{}
-

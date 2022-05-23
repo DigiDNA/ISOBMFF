@@ -31,11 +31,11 @@
 #ifndef ISOBMFF_PARSER_HPP
 #define ISOBMFF_PARSER_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <string>
 #include <functional>
-#include <memory>
 #include <cstdint>
 #include <ISOBMFF/Box.hpp>
 #include <ISOBMFF/File.hpp>
@@ -46,11 +46,9 @@ namespace ISOBMFF
      * @class       Parser
      * @abstract    ISO media file parser.
      */
-    class ISOBMFF_EXPORT Parser: public XS::PIMPL::Object< Parser >
+    class ISOBMFF_EXPORT Parser
     {
         public:
-            
-            using XS::PIMPL::Object< Parser >::impl;
             
             /*!
              * @enum        StringType
@@ -81,7 +79,7 @@ namespace ISOBMFF
              * @function    Parser
              * @abstract    Default constructor.
              */
-            Parser( void );
+            Parser();
             
             /*!
              * @function    Parser
@@ -89,6 +87,47 @@ namespace ISOBMFF
              * @param       path    The file's path.
              */
             Parser( const std::string & path );
+            
+            /*!
+             * @function    Parser
+             * @abstract    Creates a parser for data.
+             * @param       data    The data bytes.
+             */
+            Parser( const std::vector< uint8_t > & data );
+            
+            /*!
+             * @function    Parser
+             * @abstract    Creates a parser for a stream.
+             * @param       stream  The stream object.
+             */
+            Parser( BinaryStream & stream );
+            
+            /*!
+             * @function    Parser
+             * @abstract    Copy constructor.
+             * @param       o   The object to copy from.
+             */
+            Parser( const Parser & o );
+            
+            /*!
+             * @function    Parser
+             * @abstract    Move constructor.
+             * @param       o   The object to move from.
+             */
+            Parser( Parser && o ) noexcept;
+            
+            /*!
+             * @function    ~Parser
+             * @abstract    Destructor.
+             */
+            virtual ~Parser();
+            
+            /*!
+             * @function    operator=
+             * @abstract    Assignment operator.
+             * @param       o   The object to assign from.
+             */
+            Parser & operator =( Parser o );
             
             /*!
              * @function    RegisterBox
@@ -99,7 +138,7 @@ namespace ISOBMFF
              *              the parser will invoke the lambda to create a new
              *              object of the correct type.
              */
-            void RegisterBox( const std::string & type, const std::function< std::shared_ptr< Box >( void ) > & createBox );
+            void RegisterBox( const std::string & type, const std::function< std::shared_ptr< Box >() > & createBox );
             
             /*!
              * @function    RegisterContainerBox
@@ -122,14 +161,30 @@ namespace ISOBMFF
              * @discussion  This will discard any previously parsed file.
              * @param       path    The file's path.
              */
-            void Parse( const std::string & path ) ISOBMFF_NOEXCEPT( false );
+            void Parse( const std::string & path ) noexcept( false );
+            
+            /*!
+             * @function    Parse
+             * @abstract    Parses data.
+             * @discussion  This will discard any previously parsed file/data.
+             * @param       data    The data bytes.
+             */
+            void Parse( const std::vector< uint8_t > & data ) noexcept( false );
+            
+            /*!
+             * @function    Parse
+             * @abstract    Parses data from a stream.
+             * @discussion  This will discard any previously parsed file/data.
+             * @param       stream  The stream object.
+             */
+            void Parse( BinaryStream & stream ) noexcept( false );
             
             /*!
              * @function    GetFile
-             * @abstract    Upon successfull parsing, gets the file object.
+             * @abstract    Upon successful parsing, gets the file object.
              * @result      The file object, or nullptr.
              */
-            std::shared_ptr< File > GetFile( void ) const;
+            std::shared_ptr< File > GetFile() const;
             
             /*!
              * @function    GetPreferredStringType
@@ -137,7 +192,7 @@ namespace ISOBMFF
              * @result      The preferred string type.
              * @see         StringType
              */
-            StringType GetPreferredStringType( void ) const;
+            StringType GetPreferredStringType() const;
             
             /*!
              * @function    SetPreferredStringType
@@ -153,7 +208,7 @@ namespace ISOBMFF
              * @result      The parser options.
              * @see         Options
              */
-            uint64_t GetOptions( void ) const;
+            uint64_t GetOptions() const;
             
             /*!
              * @function    SetOptions
@@ -208,6 +263,20 @@ namespace ISOBMFF
              * @see         GetInfo
              */
             void SetInfo( const std::string & key, void * value );
+            
+            /*!
+             * @function    swap
+             * @abstract    Swap two objects.
+             * @param       o1  The first object to swap.
+             * @param       o2  The second object to swap.
+             */
+            ISOBMFF_EXPORT friend void swap( Parser & o1, Parser & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

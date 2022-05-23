@@ -30,29 +30,27 @@
 
 #include <ISOBMFF/HVCC.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        bool                                                            _arrayCompleteness;
-        uint8_t                                                         _nalUnitType;
-        std::vector< std::shared_ptr< ISOBMFF::HVCC::Array::NALUnit > > _nalUnits;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::HVCC::Array
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    HVCC::Array::Array( void )
+    class HVCC::Array::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            bool                                             _arrayCompleteness;
+            uint8_t                                          _nalUnitType;
+            std::vector< std::shared_ptr< Array::NALUnit > > _nalUnits;
+    };
+    
+    HVCC::Array::Array():
+        impl( std::make_unique< IMPL >() )
     {}
     
-    HVCC::Array::Array( BinaryStream & stream )
+    HVCC::Array::Array( BinaryStream & stream ):
+        impl( std::make_unique< IMPL >() )
     {
         uint8_t  u8;
         uint16_t count;
@@ -71,17 +69,44 @@ namespace ISOBMFF
         }
     }
     
-    std::string HVCC::Array::GetName( void ) const
+    HVCC::Array::Array( const HVCC::Array & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    HVCC::Array::Array( HVCC::Array && o ) noexcept:
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    HVCC::Array::~Array()
+    {}
+    
+    HVCC::Array & HVCC::Array::operator =( HVCC::Array o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( HVCC::Array & o1, HVCC::Array & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
+    }
+    
+    std::string HVCC::Array::GetName() const
     {
         return "Array";
     }
     
-    bool HVCC::Array::GetArrayCompleteness( void ) const
+    bool HVCC::Array::GetArrayCompleteness() const
     {
         return this->impl->_arrayCompleteness;
     }
     
-    uint8_t HVCC::Array::GetNALUnitType( void ) const
+    uint8_t HVCC::Array::GetNALUnitType() const
     {
         return this->impl->_nalUnitType;
     }
@@ -102,7 +127,7 @@ namespace ISOBMFF
         DisplayableObjectContainer::WriteDescription( os, indentLevel );
     }
     
-    std::vector< std::shared_ptr< HVCC::Array::NALUnit > > HVCC::Array::GetNALUnits( void ) const
+    std::vector< std::shared_ptr< HVCC::Array::NALUnit > > HVCC::Array::GetNALUnits() const
     {
         return this->impl->_nalUnits;
     }
@@ -112,14 +137,14 @@ namespace ISOBMFF
         this->impl->_nalUnits.push_back( unit );
     }
     
-    std::vector< std::shared_ptr< DisplayableObject > > HVCC::Array::GetDisplayableObjects( void ) const
+    std::vector< std::shared_ptr< DisplayableObject > > HVCC::Array::GetDisplayableObjects() const
     {
         auto v( this->GetNALUnits() );
         
         return std::vector< std::shared_ptr< DisplayableObject > >( v.begin(), v.end() );
     }
     
-    std::vector< std::pair< std::string, std::string > > HVCC::Array::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > HVCC::Array::GetDisplayableProperties() const
     {
         return
         {
@@ -128,19 +153,18 @@ namespace ISOBMFF
             { "NAL units",          std::to_string( this->GetNALUnits().size() ) }
         };
     }
+    
+    HVCC::Array::IMPL::IMPL():
+        _arrayCompleteness( false ),
+        _nalUnitType( 0 )
+    {}
+
+    HVCC::Array::IMPL::IMPL( const IMPL & o ):
+        _arrayCompleteness( o._arrayCompleteness ),
+        _nalUnitType( o._nalUnitType ),
+        _nalUnits( o._nalUnits )
+    {}
+
+    HVCC::Array::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL::IMPL( void ):
-    _arrayCompleteness( false ),
-    _nalUnitType( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL::IMPL( const IMPL & o ):
-    _arrayCompleteness( o._arrayCompleteness ),
-    _nalUnitType( o._nalUnitType ),
-    _nalUnits( o._nalUnits )
-{}
-
-XS::PIMPL::Object< ISOBMFF::HVCC::Array >::IMPL::~IMPL( void )
-{}
-

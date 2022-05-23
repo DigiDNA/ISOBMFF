@@ -31,7 +31,8 @@
 #ifndef ISOBMFF_ILOC_HPP
 #define ISOBMFF_ILOC_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/DisplayableObjectContainer.hpp>
@@ -40,45 +41,51 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT ILOC: public FullBox, public DisplayableObjectContainer, public XS::PIMPL::Object< ILOC >
+    class ISOBMFF_EXPORT ILOC: public FullBox, public DisplayableObjectContainer
     {
         public:
             
-            using XS::PIMPL::Object< ILOC >::impl;
+            ILOC();
+            ILOC( const ILOC & o );
+            ILOC( ILOC && o ) noexcept;
+            virtual ~ILOC() override;
             
-            ILOC( void );
+            ILOC & operator =( ILOC o );
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
-            virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
-            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects()    const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            uint8_t GetOffsetSize( void )     const;
-            uint8_t GetLengthSize( void )     const;
-            uint8_t GetBaseOffsetSize( void ) const;
-            uint8_t GetIndexSize( void )      const;
+            uint8_t GetOffsetSize()     const;
+            uint8_t GetLengthSize()     const;
+            uint8_t GetBaseOffsetSize() const;
+            uint8_t GetIndexSize()      const;
             
             void SetOffsetSize( uint8_t value );
             void SetLengthSize( uint8_t value );
             void SetBaseOffsetSize( uint8_t value );
             void SetIndexSize( uint8_t value );
             
-            class ISOBMFF_EXPORT Item: public XS::PIMPL::Object< Item >, public DisplayableObject, public DisplayableObjectContainer
+            class ISOBMFF_EXPORT Item: public DisplayableObject, public DisplayableObjectContainer
             {
                 public:
                     
-                    using XS::PIMPL::Object< Item >::impl;
-                    
-                    Item( void );
+                    Item();
                     Item( BinaryStream & stream, const ILOC & iloc );
+                    Item( const Item & o );
+                    Item( Item && o ) noexcept;
+                    virtual ~Item() override;
                     
-                    std::string GetName( void ) const override;
+                    Item & operator =( Item o );
                     
-                    uint32_t GetItemID( void )             const;
-                    uint8_t  GetConstructionMethod( void ) const;
-                    uint16_t GetDataReferenceIndex( void ) const;
-                    uint64_t GetBaseOffset( void )         const;
+                    std::string GetName() const override;
+                    
+                    uint32_t GetItemID()             const;
+                    uint8_t  GetConstructionMethod() const;
+                    uint16_t GetDataReferenceIndex() const;
+                    uint64_t GetBaseOffset()         const;
                     
                     void SetItemID( uint32_t value );
                     void SetConstructionMethod( uint8_t value );
@@ -87,38 +94,65 @@ namespace ISOBMFF
                     
                     void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
                     
-                    std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
-                    std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+                    std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects()    const override;
+                    std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
                     
-                    class ISOBMFF_EXPORT Extent: public XS::PIMPL::Object< Extent >, public DisplayableObject
+                    class ISOBMFF_EXPORT Extent: public DisplayableObject
                     {
                         public:
                             
-                            using XS::PIMPL::Object< Extent >::impl;
-                            
-                            Extent( void );
+                            Extent();
                             Extent( BinaryStream & stream, const ILOC & iloc );
+                            Extent( const Extent & o );
+                            Extent( Extent && o ) noexcept;
+                            virtual ~Extent() override;
                             
-                            std::string GetName( void ) const override;
+                            Extent & operator =( Extent o );
                             
-                            uint64_t GetIndex( void )  const;
-                            uint64_t GetOffset( void ) const;
-                            uint64_t GetLength( void ) const;
+                            std::string GetName() const override;
+                            
+                            uint64_t GetIndex()  const;
+                            uint64_t GetOffset() const;
+                            uint64_t GetLength() const;
                             
                             void SetIndex( uint64_t value );
                             void SetOffset( uint64_t value );
                             void SetLength( uint64_t value );
                             
-                            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+                            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+                            
+                            ISOBMFF_EXPORT friend void swap( Extent & o1, Extent & o2 );
+                            
+                        private:
+                            
+                            class IMPL;
+                            
+                            std::unique_ptr< IMPL > impl;
                     };
                     
-                    std::vector< std::shared_ptr< Extent > > GetExtents( void ) const;
+                    std::vector< std::shared_ptr< Extent > > GetExtents() const;
                     void                                     AddExtent( std::shared_ptr< Extent > extent );
+                    
+                    ISOBMFF_EXPORT friend void swap( Item & o1, Item & o2 );
+                    
+                private:
+                    
+                    class IMPL;
+                    
+                    std::unique_ptr< IMPL > impl;
             };
             
-            std::vector< std::shared_ptr< Item > > GetItems( void )           const;
+            std::vector< std::shared_ptr< Item > > GetItems()                 const;
             std::shared_ptr< Item >                GetItem( uint32_t itemID ) const;
             void                                   AddItem( std::shared_ptr< Item > item );
+            
+            ISOBMFF_EXPORT friend void swap( ILOC & o1, ILOC & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

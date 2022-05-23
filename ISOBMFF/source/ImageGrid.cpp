@@ -30,32 +30,30 @@
 
 #include <ISOBMFF/ImageGrid.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        uint8_t  _version;
-        uint8_t  _flags;
-        uint8_t  _rows;
-        uint8_t  _columns;
-        uint64_t _outputWidth;
-        uint64_t _outputHeight;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::ImageGrid
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    ImageGrid::ImageGrid( void )
+    class ImageGrid::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint8_t  _version;
+            uint8_t  _flags;
+            uint8_t  _rows;
+            uint8_t  _columns;
+            uint64_t _outputWidth;
+            uint64_t _outputHeight;
+    };
+    
+    ImageGrid::ImageGrid():
+        impl( std::make_unique< IMPL >() )
     {}
     
-    ImageGrid::ImageGrid( BinaryStream & stream )
+    ImageGrid::ImageGrid( BinaryStream & stream ):
+        impl( std::make_unique< IMPL >() )
     {
         uint8_t s;
         
@@ -88,37 +86,64 @@ namespace ISOBMFF
         }
     }
     
-    std::string ImageGrid::GetName( void ) const
+    ImageGrid::ImageGrid( const ImageGrid & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    ImageGrid::ImageGrid( ImageGrid && o ) noexcept:
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    ImageGrid::~ImageGrid()
+    {}
+    
+    ImageGrid & ImageGrid::operator =( ImageGrid o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( ImageGrid & o1, ImageGrid & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
+    }
+    
+    std::string ImageGrid::GetName() const
     {
         return "ImageGrid";
     }
     
-    uint8_t ImageGrid::GetVersion( void ) const
+    uint8_t ImageGrid::GetVersion() const
     {
         return this->impl->_version;
     }
     
-    uint8_t ImageGrid::GetFlags( void ) const
+    uint8_t ImageGrid::GetFlags() const
     {
         return this->impl->_flags;
     }
     
-    uint8_t ImageGrid::GetRows( void ) const
+    uint8_t ImageGrid::GetRows() const
     {
         return this->impl->_rows;
     }
     
-    uint8_t ImageGrid::GetColumns( void ) const
+    uint8_t ImageGrid::GetColumns() const
     {
         return this->impl->_columns;
     }
     
-    uint64_t ImageGrid::GetOutputWidth( void ) const
+    uint64_t ImageGrid::GetOutputWidth() const
     {
         return this->impl->_outputWidth;
     }
     
-    uint64_t ImageGrid::GetOutputHeight( void ) const
+    uint64_t ImageGrid::GetOutputHeight() const
     {
         return this->impl->_outputHeight;
     }
@@ -153,7 +178,7 @@ namespace ISOBMFF
         this->impl->_outputHeight = value;
     }
     
-    std::vector< std::pair< std::string, std::string > > ImageGrid::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > ImageGrid::GetDisplayableProperties() const
     {
         return
         {
@@ -165,26 +190,25 @@ namespace ISOBMFF
             { "Output height", std::to_string( this->GetOutputHeight() ) },
         };
     }
+
+    ImageGrid::IMPL::IMPL():
+        _version( 0 ),
+        _flags( 0 ),
+        _rows( 0 ),
+        _columns( 0 ),
+        _outputWidth( 0 ),
+        _outputHeight( 0 )
+    {}
+
+    ImageGrid::IMPL::IMPL( const IMPL & o ):
+        _version( o._version ),
+        _flags( o._flags ),
+        _rows( o._rows ),
+        _columns( o._columns ),
+        _outputWidth( o._outputWidth ),
+        _outputHeight( o._outputHeight )
+    {}
+
+    ImageGrid::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL::IMPL( void ):
-    _version( 0 ),
-    _flags( 0 ),
-    _rows( 0 ),
-    _columns( 0 ),
-    _outputWidth( 0 ),
-    _outputHeight( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL::IMPL( const IMPL & o ):
-    _version( o._version ),
-    _flags( o._flags ),
-    _rows( o._rows ),
-    _columns( o._columns ),
-    _outputWidth( o._outputWidth ),
-    _outputHeight( o._outputHeight )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ImageGrid >::IMPL::~IMPL( void )
-{}
-

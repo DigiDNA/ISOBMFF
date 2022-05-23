@@ -31,29 +31,41 @@
 #ifndef ISOBMFF_HDLR_HPP
 #define ISOBMFF_HDLR_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <string>
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT HDLR: public FullBox, public XS::PIMPL::Object< HDLR >
+    class ISOBMFF_EXPORT HDLR: public FullBox
     {
         public:
             
-            using XS::PIMPL::Object< HDLR >::impl;
+            HDLR();
+            HDLR( const HDLR & o );
+            HDLR( HDLR && o ) noexcept;
+            virtual ~HDLR() override;
             
-            HDLR( void );
+            HDLR & operator =( HDLR o );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            std::string GetHandlerType( void ) const;
-            std::string GetHandlerName( void ) const;
+            std::string GetHandlerType() const;
+            std::string GetHandlerName() const;
             
             void SetHandlerType( const std::string & value );
             void SetHandlerName( const std::string & value );
+            
+            ISOBMFF_EXPORT friend void swap( HDLR & o1, HDLR & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

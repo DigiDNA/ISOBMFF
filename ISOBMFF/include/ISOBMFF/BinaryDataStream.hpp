@@ -23,54 +23,43 @@
  ******************************************************************************/
 
 /*!
- * @header      INFE.hpp
+ * @header      BinaryDataStream.hpp
  * @copyright   (c) 2017, DigiDNA - www.digidna.net
  * @author      Jean-David Gadina - www.digidna.net
  */
 
-#ifndef ISOBMFF_INFE_HPP
-#define ISOBMFF_INFE_HPP
+#ifndef ISOBMFF_BINARY_DATA_STREAM_HPP
+#define ISOBMFF_BINARY_DATA_STREAM_HPP
 
+#include <ISOBMFF/BinaryStream.hpp>
+#include <string>
+#include <iostream>
+#include <cstdint>
 #include <memory>
 #include <algorithm>
-#include <ISOBMFF/Macros.hpp>
-#include <ISOBMFF/FullBox.hpp>
-#include <string>
-#include <cstdint>
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT INFE: public FullBox
+    class ISOBMFF_EXPORT BinaryDataStream: public BinaryStream
     {
         public:
             
-            INFE();
-            INFE( const INFE & o );
-            INFE( INFE && o ) noexcept;
-            virtual ~INFE() override;
+            BinaryDataStream();
+            BinaryDataStream( const std::vector< uint8_t > & data );
+            BinaryDataStream( const BinaryDataStream & o );
+            BinaryDataStream( BinaryDataStream && o ) noexcept;
             
-            INFE & operator =( INFE o );
+            virtual ~BinaryDataStream() override;
             
-            void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+            BinaryDataStream & operator =( BinaryDataStream o );
             
-            uint32_t    GetItemID()              const;
-            uint16_t    GetItemProtectionIndex() const;
-            std::string GetItemType()            const;
-            std::string GetItemName()            const;
-            std::string GetContentType()         const;
-            std::string GetContentEncoding()     const;
-            std::string GetItemURIType()         const;
+            using BinaryStream::Read;
             
-            void SetItemID( uint32_t value );
-            void SetItemProtectionIndex( uint16_t value );
-            void SetItemType( const std::string & value );
-            void SetItemName( const std::string & value );
-            void SetContentType( const std::string & value );
-            void SetContentEncoding( const std::string & value );
-            void SetItemURIType( const std::string & value );
+            void   Read( uint8_t * buf, size_t size )               override;
+            void   Seek( std::streamoff offset, SeekDirection dir ) override;
+            size_t Tell()                                     const override;
             
-            ISOBMFF_EXPORT friend void swap( INFE & o1, INFE & o2 );
+            ISOBMFF_EXPORT friend void swap( BinaryDataStream & o1, BinaryDataStream & o2 );
             
         private:
             
@@ -80,4 +69,4 @@ namespace ISOBMFF
     };
 }
 
-#endif /* ISOBMFF_INFE_HPP */
+#endif /* ISOBMFF_BINARY_DATA_STREAM_HPP */

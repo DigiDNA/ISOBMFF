@@ -30,28 +30,26 @@
 
 #include <ISOBMFF/IPMA.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::IPMA::Entry::Association >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        bool     _essential;
-        uint16_t _propertyIndex;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::IPMA::Entry::Association
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    IPMA::Entry::Association::Association( void )
+    class IPMA::Entry::Association::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            bool     _essential;
+            uint16_t _propertyIndex;
+    };
+    
+    IPMA::Entry::Association::Association():
+        impl( std::make_unique< IMPL >() )
     {}
     
-    IPMA::Entry::Association::Association( BinaryStream & stream, const IPMA & ipma )
+    IPMA::Entry::Association::Association( BinaryStream & stream, const IPMA & ipma ):
+        impl( std::make_unique< IMPL >() )
     {
         if( ipma.GetFlags() & 0x01 )
         {
@@ -77,12 +75,39 @@ namespace ISOBMFF
         }
     }
     
-    std::string IPMA::Entry::Association::GetName( void ) const
+    IPMA::Entry::Association::Association( const IPMA::Entry::Association & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    IPMA::Entry::Association::Association( IPMA::Entry::Association && o ) noexcept:
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    IPMA::Entry::Association::~Association()
+    {}
+    
+    IPMA::Entry::Association & IPMA::Entry::Association::operator =( IPMA::Entry::Association o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( IPMA::Entry::Association & o1, IPMA::Entry::Association & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
+    }
+    
+    std::string IPMA::Entry::Association::GetName() const
     {
         return "Association";
     }
     
-    std::vector< std::pair< std::string, std::string > > IPMA::Entry::Association::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > IPMA::Entry::Association::GetDisplayableProperties() const
     {
         return
         {
@@ -91,12 +116,12 @@ namespace ISOBMFF
         };
     }
     
-    bool IPMA::Entry::Association::GetEssential( void ) const
+    bool IPMA::Entry::Association::GetEssential() const
     {
         return this->impl->_essential;
     }
     
-    uint16_t IPMA::Entry::Association::GetPropertyIndex( void ) const
+    uint16_t IPMA::Entry::Association::GetPropertyIndex() const
     {
         return this->impl->_propertyIndex;
     }
@@ -110,18 +135,17 @@ namespace ISOBMFF
     {
         this->impl->_propertyIndex = value;
     }
+    
+    IPMA::Entry::Association::IMPL::IMPL():
+        _essential( false ),
+        _propertyIndex( 0 )
+    {}
+
+    IPMA::Entry::Association::IMPL::IMPL( const IMPL & o ):
+        _essential( o._essential ),
+        _propertyIndex( o._propertyIndex )
+    {}
+
+    IPMA::Entry::Association::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::IPMA::Entry::Association >::IMPL::IMPL( void ):
-    _essential( false ),
-    _propertyIndex( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IPMA::Entry::Association >::IMPL::IMPL( const IMPL & o ):
-    _essential( o._essential ),
-    _propertyIndex( o._propertyIndex )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IPMA::Entry::Association >::IMPL::~IMPL( void )
-{}
-

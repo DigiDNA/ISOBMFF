@@ -30,7 +30,8 @@
 
 #include <ISOBMFF/Parser.hpp>
 #include <ISOBMFF/ContainerBox.hpp>
-#include <ISOBMFF/BinaryStream.hpp>
+#include <ISOBMFF/BinaryFileStream.hpp>
+#include <ISOBMFF/BinaryDataStream.hpp>
 #include <ISOBMFF/FTYP.hpp>
 #include <ISOBMFF/MVHD.hpp>
 #include <ISOBMFF/TKHD.hpp>
@@ -61,38 +62,75 @@
 #include <stdexcept>
 #include <cstring>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::Parser >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        void RegisterBox( const std::string & type, const std::function< std::shared_ptr< ISOBMFF::Box >( void ) > & createBox );
-        void RegisterContainerBox( const std::string & type );
-        void RegisterDefaultBoxes( void );
-        
-        std::shared_ptr< ISOBMFF::File >                                                  _file;
-        std::string                                                                       _path;
-        std::map< std::string, std::function< std::shared_ptr< ISOBMFF::Box >( void ) > > _types;
-        ISOBMFF::Parser::StringType                                                       _stringType;
-        uint64_t                                                                          _options;
-        std::map< std::string, void * >                                                   _info;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::Parser
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    Parser::Parser( void ): XS::PIMPL::Object< Parser >()
+    class Parser::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            void RegisterBox( const std::string & type, const std::function< std::shared_ptr< Box >() > & createBox );
+            void RegisterContainerBox( const std::string & type );
+            void RegisterDefaultBoxes();
+            
+            std::shared_ptr< File >                                            _file;
+            std::string                                                        _path;
+            std::map< std::string, std::function< std::shared_ptr< Box >() > > _types;
+            Parser::StringType                                                 _stringType;
+            uint64_t                                                           _options;
+            std::map< std::string, void * >                                    _info;
+    };
+    
+    Parser::Parser():
+        impl( std::make_unique< IMPL >() )
     {}
     
-    Parser::Parser( const std::string & path ): XS::PIMPL::Object< Parser >()
+    Parser::Parser( const std::string & path ):
+        impl( std::make_unique< IMPL >() )
     {
         this->Parse( path );
+    }
+    
+    Parser::Parser( const std::vector< uint8_t > & data ):
+        impl( std::make_unique< IMPL >() )
+    {
+        this->Parse( data );
+    }
+    
+    Parser::Parser( BinaryStream & stream ):
+        impl( std::make_unique< IMPL >() )
+    {
+        this->Parse( stream );
+    }
+    
+    Parser::Parser( const Parser & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    Parser::Parser( Parser && o ) noexcept:
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    Parser::~Parser()
+    {}
+    
+    Parser & Parser::operator =( Parser o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( Parser & o1, Parser & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
     }
     
     void Parser::RegisterContainerBox( const std::string & type )
@@ -100,7 +138,7 @@ namespace ISOBMFF
         this->impl->RegisterContainerBox( type );
     }
     
-    void Parser::RegisterBox( const std::string & type, const std::function< std::shared_ptr< Box >( void ) > & createBox )
+    void Parser::RegisterBox( const std::string & type, const std::function< std::shared_ptr< Box >() > & createBox )
     {
         this->impl->RegisterBox( type, createBox );
     }
@@ -118,14 +156,29 @@ namespace ISOBMFF
         return std::make_shared< Box >( type );
     }
     
-    void Parser::Parse( const std::string & path ) ISOBMFF_NOEXCEPT( false )
+    void Parser::Parse( const std::string & path ) noexcept( false )
     {
-        char         n[ 4 ] = { 0, 0, 0, 0 };
-        BinaryStream stream( path );
+        BinaryFileStream stream( path );
+        
+        this->Parse( stream );
+        
+        this->impl->_path = path;
+    }
+    
+    void Parser::Parse( const std::vector< uint8_t > & data ) noexcept( false )
+    {
+        BinaryDataStream stream( data );
+        
+        this->Parse( stream );
+    }
+    
+    void Parser::Parse( BinaryStream & stream ) noexcept( false )
+    {
+        char n[ 4 ] = { 0, 0, 0, 0 };
         
         if( stream.HasBytesAvailable() == false )
         {
-            throw std::runtime_error( std::string( "Cannot read file: " ) + path );
+            throw std::runtime_error( std::string( "Cannot read file" ) );
         }
         
         try
@@ -147,10 +200,10 @@ namespace ISOBMFF
             && memcmp( n, "pnot", 4 ) != 0
         )
         {
-            throw std::runtime_error( std::string( "File is not an ISO media file: " ) + path );
+            throw std::runtime_error( std::string( "Data is not an ISO media file" ) );
         }
         
-        this->impl->_path = path;
+        this->impl->_path = "";
         this->impl->_file = std::make_shared< File >();
         
         if( stream.HasBytesAvailable() )
@@ -159,12 +212,12 @@ namespace ISOBMFF
         }
     }
     
-    std::shared_ptr< File > Parser::GetFile( void ) const
+    std::shared_ptr< File > Parser::GetFile() const
     {
         return this->impl->_file;
     }
     
-    Parser::StringType Parser::GetPreferredStringType( void ) const
+    Parser::StringType Parser::GetPreferredStringType() const
     {
         return this->impl->_stringType;
     }
@@ -174,7 +227,7 @@ namespace ISOBMFF
         this->impl->_stringType = value;
     }
     
-    uint64_t Parser::GetOptions( void ) const
+    uint64_t Parser::GetOptions() const
     {
         return this->impl->_options;
     }
@@ -220,99 +273,99 @@ namespace ISOBMFF
             this->impl->_info[ key ] = value;
         }
     }
-}
-
-XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::IMPL( void ):
-    _stringType( ISOBMFF::Parser::StringType::NULLTerminated ),
-    _options( 0 )
-{
-    this->RegisterDefaultBoxes();
-}
-
-XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::IMPL( const IMPL & o ):
-    _file( o._file ),
-    _path( o._path ),
-    _types( o._types ),
-    _stringType( o._stringType ),
-    _options( o._options ),
-    _info( o._info )
-{
-    this->RegisterDefaultBoxes();
-}
-
-XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::~IMPL( void )
-{}
-
-void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterBox( const std::string & type, const std::function< std::shared_ptr< ISOBMFF::Box >( void ) > & createBox )
-{
-    if( type.size() != 4 )
+    
+    Parser::IMPL::IMPL():
+        _stringType( Parser::StringType::NULLTerminated ),
+        _options( 0 )
     {
-        throw std::runtime_error( "Box name should be 4 characters long" );
+        this->RegisterDefaultBoxes();
     }
-    
-    this->_types[ type ] = createBox;
-}
 
-void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterContainerBox( const std::string & type )
-{
-    return this->RegisterBox
-    (
-        type,
-        [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box >
+    Parser::IMPL::IMPL( const IMPL & o ):
+        _file( o._file ),
+        _path( o._path ),
+        _types( o._types ),
+        _stringType( o._stringType ),
+        _options( o._options ),
+        _info( o._info )
+    {
+        this->RegisterDefaultBoxes();
+    }
+
+    Parser::IMPL::~IMPL()
+    {}
+
+    void Parser::IMPL::RegisterBox( const std::string & type, const std::function< std::shared_ptr< Box >() > & createBox )
+    {
+        if( type.size() != 4 )
         {
-            return std::make_shared< ISOBMFF::ContainerBox >( type );
+            throw std::runtime_error( "Box name should be 4 characters long" );
         }
-    );
-}
+        
+        this->_types[ type ] = createBox;
+    }
 
-void XS::PIMPL::Object< ISOBMFF::Parser >::IMPL::RegisterDefaultBoxes( void )
-{
-    this->RegisterContainerBox( "moov" );
-    this->RegisterContainerBox( "trak" );
-    this->RegisterContainerBox( "edts" );
-    this->RegisterContainerBox( "mdia" );
-    this->RegisterContainerBox( "minf" );
-    this->RegisterContainerBox( "stbl" );
-    this->RegisterContainerBox( "mvex" );
-    this->RegisterContainerBox( "moof" );
-    this->RegisterContainerBox( "traf" );
-    this->RegisterContainerBox( "mfra" );
-    this->RegisterContainerBox( "meco" );
-    this->RegisterContainerBox( "mere" );
-    this->RegisterContainerBox( "dinf" );
-    this->RegisterContainerBox( "ipro" );
-    this->RegisterContainerBox( "sinf" );
-    this->RegisterContainerBox( "iprp" );
-    this->RegisterContainerBox( "fiin" );
-    this->RegisterContainerBox( "paen" );
-    this->RegisterContainerBox( "strk" );
-    this->RegisterContainerBox( "tapt" );
-    this->RegisterContainerBox( "schi" );
-    
-    this->RegisterBox( "ftyp", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::FTYP >(); } );
-    this->RegisterBox( "mvhd", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::MVHD >(); } );
-    this->RegisterBox( "tkhd", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::TKHD >(); } );
-    this->RegisterBox( "meta", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::META >(); } );
-    this->RegisterBox( "hdlr", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::HDLR >(); } );
-    this->RegisterBox( "pitm", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::PITM >(); } );
-    this->RegisterBox( "iinf", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IINF >(); } );
-    this->RegisterBox( "dref", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::DREF >(); } );
-    this->RegisterBox( "url ", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::URL >(); } );
-    this->RegisterBox( "urn ", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::URN >(); } );
-    this->RegisterBox( "iloc", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::ILOC >(); } );
-    this->RegisterBox( "iref", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IREF >(); } );
-    this->RegisterBox( "infe", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::INFE >(); } );
-    this->RegisterBox( "irot", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IROT >(); } );
-    this->RegisterBox( "hvcC", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::HVCC >(); } );
-    this->RegisterBox( "dimg", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::DIMG >(); } );
-    this->RegisterBox( "thmb", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::THMB >(); } );
-    this->RegisterBox( "cdsc", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::CDSC >(); } );
-    this->RegisterBox( "colr", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::COLR >(); } );
-    this->RegisterBox( "ispe", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::ISPE >(); } );
-    this->RegisterBox( "ipma", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IPMA >(); } );
-    this->RegisterBox( "pixi", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::PIXI >(); } );
-    this->RegisterBox( "ipco", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::IPCO >(); } );
-    this->RegisterBox( "stsd", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::STSD >(); } );
-    this->RegisterBox( "frma", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::FRMA >(); } );
-    this->RegisterBox( "schm", [ = ]( void ) -> std::shared_ptr< ISOBMFF::Box > { return std::make_shared< ISOBMFF::SCHM >(); } );
+    void Parser::IMPL::RegisterContainerBox( const std::string & type )
+    {
+        return this->RegisterBox
+        (
+            type,
+            [ = ]() -> std::shared_ptr< Box >
+            {
+                return std::make_shared< ContainerBox >( type );
+            }
+        );
+    }
+
+    void Parser::IMPL::RegisterDefaultBoxes()
+    {
+        this->RegisterContainerBox( "moov" );
+        this->RegisterContainerBox( "trak" );
+        this->RegisterContainerBox( "edts" );
+        this->RegisterContainerBox( "mdia" );
+        this->RegisterContainerBox( "minf" );
+        this->RegisterContainerBox( "stbl" );
+        this->RegisterContainerBox( "mvex" );
+        this->RegisterContainerBox( "moof" );
+        this->RegisterContainerBox( "traf" );
+        this->RegisterContainerBox( "mfra" );
+        this->RegisterContainerBox( "meco" );
+        this->RegisterContainerBox( "mere" );
+        this->RegisterContainerBox( "dinf" );
+        this->RegisterContainerBox( "ipro" );
+        this->RegisterContainerBox( "sinf" );
+        this->RegisterContainerBox( "iprp" );
+        this->RegisterContainerBox( "fiin" );
+        this->RegisterContainerBox( "paen" );
+        this->RegisterContainerBox( "strk" );
+        this->RegisterContainerBox( "tapt" );
+        this->RegisterContainerBox( "schi" );
+        
+        this->RegisterBox( "ftyp", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< FTYP >(); } );
+        this->RegisterBox( "mvhd", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< MVHD >(); } );
+        this->RegisterBox( "tkhd", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< TKHD >(); } );
+        this->RegisterBox( "meta", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< META >(); } );
+        this->RegisterBox( "hdlr", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< HDLR >(); } );
+        this->RegisterBox( "pitm", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< PITM >(); } );
+        this->RegisterBox( "iinf", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< IINF >(); } );
+        this->RegisterBox( "dref", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< DREF >(); } );
+        this->RegisterBox( "url ", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< URL  >(); } );
+        this->RegisterBox( "urn ", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< URN  >(); } );
+        this->RegisterBox( "iloc", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< ILOC >(); } );
+        this->RegisterBox( "iref", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< IREF >(); } );
+        this->RegisterBox( "infe", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< INFE >(); } );
+        this->RegisterBox( "irot", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< IROT >(); } );
+        this->RegisterBox( "hvcC", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< HVCC >(); } );
+        this->RegisterBox( "dimg", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< DIMG >(); } );
+        this->RegisterBox( "thmb", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< THMB >(); } );
+        this->RegisterBox( "cdsc", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< CDSC >(); } );
+        this->RegisterBox( "colr", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< COLR >(); } );
+        this->RegisterBox( "ispe", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< ISPE >(); } );
+        this->RegisterBox( "ipma", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< IPMA >(); } );
+        this->RegisterBox( "pixi", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< PIXI >(); } );
+        this->RegisterBox( "ipco", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< IPCO >(); } );
+        this->RegisterBox( "stsd", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< STSD >(); } );
+        this->RegisterBox( "frma", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< FRMA >(); } );
+        this->RegisterBox( "schm", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< SCHM >(); } );
+    }
 }

@@ -31,33 +31,44 @@
 #ifndef ISOBMFF_IINF_HPP
 #define ISOBMFF_IINF_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Container.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/INFE.hpp>
 #include <vector>
-#include <memory>
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT IINF: public FullBox, public Container, public XS::PIMPL::Object< IINF >
+    class ISOBMFF_EXPORT IINF: public FullBox, public Container
     {
         public:
             
-            using XS::PIMPL::Object< IINF >::impl;
+            IINF();
+            IINF( const IINF & o );
+            IINF( IINF && o ) noexcept;
+            virtual ~IINF() override;
             
-            IINF( void );
+            IINF & operator =( IINF o );
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
             void                                   AddEntry( std::shared_ptr< INFE > entry );
-            std::vector< std::shared_ptr< INFE > > GetEntries( void )             const;
+            std::vector< std::shared_ptr< INFE > > GetEntries()                   const;
             std::shared_ptr< INFE >                GetItemInfo( uint32_t itemID ) const;
             
             void                                  AddBox( std::shared_ptr< Box > box ) override;
-            std::vector< std::shared_ptr< Box > > GetBoxes( void ) const override;
+            std::vector< std::shared_ptr< Box > > GetBoxes() const override;
+            
+            ISOBMFF_EXPORT friend void swap( IINF & o1, IINF & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

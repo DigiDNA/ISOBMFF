@@ -30,33 +30,63 @@
 
 #include <ISOBMFF/ContainerBox.hpp>
 #include <ISOBMFF/Parser.hpp>
-
-template<>
-class XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::ContainerBox
-#include <XS/PIMPL/Object-IMPL.hpp>
+#include <ISOBMFF/BinaryDataStream.hpp>
 
 namespace ISOBMFF
 {
-    ContainerBox::ContainerBox( const std::string & name ): Box( name )
+    class ContainerBox::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::vector< std::shared_ptr< Box > > _boxes;
+    };
+    
+    ContainerBox::ContainerBox( const std::string & name ):
+        Box( name ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    ContainerBox::ContainerBox( const ContainerBox & o ):
+        Box( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    ContainerBox::ContainerBox( ContainerBox && o ) noexcept:
+        Box( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    ContainerBox::~ContainerBox()
+    {}
+    
+    ContainerBox & ContainerBox::operator =( ContainerBox o )
+    {
+        Box::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( ContainerBox & o1, ContainerBox & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< Box & >( o1 ), static_cast< Box & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
 
     void ContainerBox::ReadData( Parser & parser, BinaryStream & stream )
     {
         uint64_t               length;
         std::string            name;
         std::shared_ptr< Box > box;
-        BinaryStream           content;
+        BinaryDataStream     * content;
         
         this->impl->_boxes.clear();
         
@@ -66,29 +96,34 @@ namespace ISOBMFF
             
             length   = stream.ReadBigEndianUInt32();
             name     = stream.ReadFourCC();
+            content  = nullptr;
             
             if( length == 1 )
             {
-                length  = stream.ReadBigEndianUInt64();
+                length = stream.ReadBigEndianUInt64();
                 
-                if( name == "mdat" && parser.HasOption( ISOBMFF::Parser::Options::SkipMDATData ) )
+                if
+                (
+                       length > ( std::numeric_limits< size_t >::max )()
+                    || ( name == "mdat" && parser.HasOption( Parser::Options::SkipMDATData ) )
+                )
                 {
-                    stream.DeleteBytes( length - 16 );
+                    stream.Seek( length - 16, BinaryStream::SeekDirection::Current );
                 }
                 else
                 {
-                    content = BinaryStream( stream, length - 16 );
+                    content = new BinaryDataStream( stream.Read( static_cast< size_t >( length ) - 16 ) );
                 }
             }
             else
             {
-                if( name == "mdat" && parser.HasOption( ISOBMFF::Parser::Options::SkipMDATData ) )
+                if( name == "mdat" && parser.HasOption( Parser::Options::SkipMDATData ) )
                 {
-                    stream.DeleteBytes( length - 8 );
+                    stream.Seek( length - 8, BinaryStream::SeekDirection::Current );
                 }
                 else
                 {
-                    content = BinaryStream( stream, length - 8 );
+                    content = new BinaryDataStream( stream.Read( static_cast< uint32_t >( length ) - 8 ) );
                 }
             }
             
@@ -96,8 +131,16 @@ namespace ISOBMFF
             
             if( box != nullptr )
             {
-                box->ReadData( parser, content );
+                if( content )
+                {
+                    box->ReadData( parser, *content );
+                }
+                
                 this->AddBox( box );
+            }
+            if( content )
+            {
+                delete( content );
             }
         }
     }
@@ -110,7 +153,7 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::shared_ptr< Box > > ContainerBox::GetBoxes( void ) const
+    std::vector< std::shared_ptr< Box > > ContainerBox::GetBoxes() const
     {
         return this->impl->_boxes;
     }
@@ -120,15 +163,14 @@ namespace ISOBMFF
         Box::WriteDescription( os, indentLevel );
         Container::WriteBoxes( os, indentLevel );
     }
+    
+    ContainerBox::IMPL::IMPL()
+    {}
+
+    ContainerBox::IMPL::IMPL( const IMPL & o ):
+        _boxes( o._boxes )
+    {}
+
+    ContainerBox::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL::IMPL( void )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL::IMPL( const IMPL & o ):
-    _boxes( o._boxes )
-{}
-
-XS::PIMPL::Object< ISOBMFF::ContainerBox >::IMPL::~IMPL( void )
-{}
-

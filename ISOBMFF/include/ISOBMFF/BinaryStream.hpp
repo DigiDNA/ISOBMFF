@@ -32,261 +32,78 @@
 #define ISOBMFF_BINARY_STREAM_HPP
 
 #include <string>
-#include <iostream>
 #include <cstdint>
 #include <vector>
-#include <XS/PIMPL/Object.hpp>
+#include <type_traits>
+#include <ISOBMFF/Casts.hpp>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Matrix.hpp>
 
 namespace ISOBMFF
 {
-    /*!
-     * @class       BinaryStream
-     * @abstract    Represents a stream of bytes, allowing reading/writing operations.
-     * @discussion  Streams can either be backed by a standard C++ file stream,
-     *              or by plain data.
-     */
-    class ISOBMFF_EXPORT BinaryStream: public XS::PIMPL::Object< BinaryStream >
+    class ISOBMFF_EXPORT BinaryStream
     {
         public:
             
-            using XS::PIMPL::Object< BinaryStream >::impl;
+            enum class SeekDirection
+            {
+                Current,
+                Begin,
+                End
+            };
             
-            /*!
-             * @function    BinaryStream
-             * @abstract    Default constructor - Creates an empty stream.
-             */
-            BinaryStream( void );
+            virtual ~BinaryStream() = default;
             
-            /*!
-             * @function    BinaryStream
-             * @abstract    Creates a stream representing an existing file.
-             */
-            BinaryStream( const std::string & path );
+            virtual void   Read( uint8_t * buf, size_t size )               = 0;
+            virtual size_t Tell()                                     const = 0;
+            virtual void   Seek( std::streamoff offset, SeekDirection dir ) = 0;
             
-            /*!
-             * @function    BinaryStream
-             * @abstract    Creates a stream from data bytes.
-             * @param       bytes   The data bytes from which to create the stream.
-             */
-            BinaryStream( const std::vector< uint8_t > & bytes );
+            bool   HasBytesAvailable();
+            size_t AvailableBytes();
             
-            /*!
-             * @function    BinaryStream
-             * @abstract    Creates a stream with data bytes from another stream.
-             * @param       stream  The source stream.
-             * @param       length  The number of bytes to read from the source stream.
-             * @discussion  Bytes from the source-stream will be consumed.
-             */
-            BinaryStream( BinaryStream & stream, uint64_t length );
+            void Seek( std::streamoff offset );
             
-            /*!
-             * @function    HasBytesAvailable
-             * @abstract    Tests whether the stream has bytes available to read.
-             * @result      True if the stream has bytes available, otherwise false.
-             */
-            bool HasBytesAvailable( void ) const;
+            template< typename T, typename std::enable_if< std::is_integral< T >::value && std::is_unsigned< T >::value >::type * = nullptr >
+            void Seek( T offset )
+            {
+                this->Seek( numeric_cast< std::streamoff >( offset ) );
+            }
             
-            /*!
-             * @function    ReadUInt8
-             * @abstract    Reads an 8-bits unsigned integer value from the stream.
-             * @result      An 8-bits unsigned integer value.
-             */
-            uint8_t ReadUInt8( void );
+            template< typename T, typename std::enable_if< std::is_integral< T >::value && std::is_unsigned< T >::value >::type * = nullptr >
+            void Seek( T offset, SeekDirection dir )
+            {
+                this->Seek( numeric_cast< std::streamoff >( offset ), dir );
+            }
             
-            /*!
-             * @function    ReadInt8
-             * @abstract    Reads an 8-bits signed integer value from the stream.
-             * @result      An 8-bits signed integer value.
-             */
-            int8_t ReadInt8( void );
+            void Get( uint8_t * buf, uint64_t pos, size_t length );
             
-            /*!
-             * @function    ReadUInt16
-             * @abstract    Reads a 16-bits unsigned integer value from the stream.
-             * @result      A 16-bits unsigned integer value.
-             * @discussion  Byte order is platform-specific.
-             * @see         ReadBigEndianUInt16
-             * @see         ReadLittleEndianUInt16
-             */
-            uint16_t ReadUInt16( void );
+            std::vector< uint8_t > Read( size_t size );
+            std::vector< uint8_t > ReadAllData();
             
-            /*!
-             * @function    ReadInt16
-             * @abstract    Reads a 16-bits signed integer value from the stream.
-             * @result      A 16-bits signed integer value.
-             * @discussion  Byte order is platform-specific.
-             */
-            int16_t ReadInt16( void );
+            uint8_t ReadUInt8();
+            int8_t  ReadInt8();
             
-            /*!
-             * @function    ReadBigEndianUInt16
-             * @abstract    Reads a 16-bits big-endian signed integer value from the stream.
-             * @result      A 16-bits signed big-endian integer value.
-             " @see         ReadLittleEndianUInt16
-             */
-            uint16_t ReadBigEndianUInt16( void );
+            uint16_t ReadUInt16();
+            uint16_t ReadBigEndianUInt16();
+            uint16_t ReadLittleEndianUInt16();
             
-            /*!
-             * @function    ReadLittleEndianUInt16
-             * @abstract    Reads a 16-bits little-endian signed integer value from the stream.
-             * @result      A 16-bits signed little-endian integer value.
-             " @see         ReadBigEndianUInt16
-             */
-            uint16_t ReadLittleEndianUInt16( void );
+            uint32_t ReadUInt32();
+            uint32_t ReadBigEndianUInt32();
+            uint32_t ReadLittleEndianUInt32();
             
-            /*!
-             * @function    ReadUInt32
-             * @abstract    Reads a 32-bits unsigned integer value from the stream.
-             * @result      A 32-bits unsigned integer value.
-             * @discussion  Byte order is platform-specific.
-             * @see         ReadBigEndianUInt32
-             * @see         ReadLittleEndianUInt32
-             */
-            uint32_t ReadUInt32( void );
+            uint64_t ReadUInt64();
+            uint64_t ReadBigEndianUInt64();
+            uint64_t ReadLittleEndianUInt64();
             
-            /*!
-             * @function    ReadInt32
-             * @abstract    Reads a 32-bits signed integer value from the stream.
-             * @result      A 32-bits signed integer value.
-             * @discussion  Byte order is platform-specific.
-             */
-            int32_t ReadInt32( void );
-            
-            /*!
-             * @function    ReadBigEndianUInt32
-             * @abstract    Reads a 32-bits big-endian unsigned integer value from the stream.
-             * @result      A 32-bits unsigned integer value.
-             * @see         ReadLittleEndianUInt32
-             */
-            uint32_t ReadBigEndianUInt32( void );
-            
-            /*!
-             * @function    ReadLittleEndianUInt32
-             * @abstract    Reads a 32-bits little-endian unsigned integer value from the stream.
-             * @result      A 32-bits unsigned integer value.
-             * @see         ReadBigEndianUInt32
-             */
-            uint32_t ReadLittleEndianUInt32( void );
-            
-            /*!
-             * @function    ReadUInt64
-             * @abstract    Reads a 64-bits unsigned integer value from the stream.
-             * @result      A 64-bits unsigned integer value.
-             * @discussion  Byte order is platform-specific.
-             * @see         ReadBigEndianUInt64
-             * @see         ReadLittleEndianUInt64
-             */
-            uint64_t ReadUInt64( void );
-            
-            /*!
-             * @function    ReadInt64
-             * @abstract    Reads a 64-bits signed integer value from the stream.
-             * @result      A 64-bits signed integer value.
-             * @discussion  Byte order is platform-specific
-             */
-            int64_t ReadInt64( void );
-            
-            /*!
-             * @function    ReadBigEndianUInt64
-             * @abstract    Reads a 64-bits big-endian unsigned integer value from the stream.
-             * @result      A 64-bits unsigned integer value.
-             * @see         ReadLittleEndianUInt64
-             */
-            uint64_t ReadBigEndianUInt64( void );
-            
-            /*!
-             * @function    ReadLittleEndianUInt64
-             * @abstract    Reads a 64-bits little-endian unsigned integer value from the stream.
-             * @result      A 64-bits unsigned integer value.
-             * @see         ReadBigEndianUInt64
-             */
-            uint64_t ReadLittleEndianUInt64( void );
-            
-            /*!
-             * @function    ReadBigEndianFixedPoint
-             * @abstract    Reads a big-endian fixed-point value from the stream.
-             * @param       integerLength       The length of the integral part.
-             * @param       fractionalLength    The length of the fractional part.
-             * @result      The number as a floating-point value.
-             */
             float ReadBigEndianFixedPoint( unsigned int integerLength, unsigned int fractionalLength );
-            
-            /*!
-             * @function    ReadLittleEndianFixedPoint
-             * @abstract    Reads a little-endian fixed-point value from the stream.
-             * @param       integerLength       The length of the integral part.
-             * @param       fractionalLength    The length of the fractional part.
-             * @result      The number as a floating-point value.
-             */
             float ReadLittleEndianFixedPoint( unsigned int integerLength, unsigned int fractionalLength );
             
-            /*!
-             * @function    ReadFourCC
-             * @abstract    Reads a four-character code from the stream.
-             * @result      The four-character code as a string.
-             * @discussion  Four-character codes are 32-bits.
-             */
-            std::string ReadFourCC( void );
+            std::string ReadFourCC();
+            std::string ReadPascalString();
+            std::string ReadString( size_t length );
+            std::string ReadNULLTerminatedString();
             
-            /*!
-             * @function    ReadNULLTerminatedString
-             * @abstract    Reads a NULL-terminated string from the stream.
-             * @result      The string value.
-             */
-            std::string ReadNULLTerminatedString( void );
-            
-            /*!
-             * @function    ReadPascalString
-             * @abstract    Reads a pascal string (length-prefixed) from the stream.
-             * @result      The string value.
-             */
-            std::string ReadPascalString( void );
-            
-            /*!
-             * @function    ReadMatrix
-             * @abstract    Reads a Matrix object from the stream.
-             * @result      The Matrix object.
-             * @see         Matrix
-             */
-            Matrix ReadMatrix( void );
-            
-            /*!
-             * @function    ReadAllData
-             * @abstract    Reads all the data available in the stream.
-             * @result      A vector of bytes remaining in the stream.
-             */
-            std::vector< uint8_t > ReadAllData( void );
-            
-            /*!
-             * @function    Read
-             * @abstract    Reads bytes from the stream.
-             * @param       buf     The byte buffer to fill.
-             * @param       length  The number of bytes to read from the stream.
-             */
-            void Read( uint8_t * buf, uint64_t length );
-            
-            /*!
-             * @function    Get
-             * @abstract    Gets bytes from the stream.
-             * @param       buf     The byte buffer to fill.
-             * @param       length  The number of bytes to get from the stream.
-             * @discussion  When using this method, bytes won't be consumed.
-             *              If the stream is backed by a file stream, this
-             *              will seek back to the stream position before the
-             *              call.
-             */
-            void Get( uint8_t * buf, uint64_t pos, uint64_t length );
-            
-            /*!
-             * @function    DeleteBytes
-             * @abstract    Removes bytes from the stream.
-             * @param       length  The number of bytes to remove.
-             * @discussion  If the stream is backed by a file stream, this
-             *              will seek from the current positio.
-             */
-            void DeleteBytes( uint64_t length );
+            Matrix ReadMatrix();
     };
 }
 

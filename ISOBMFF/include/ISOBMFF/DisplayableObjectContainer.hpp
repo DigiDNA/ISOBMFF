@@ -42,9 +42,9 @@ namespace ISOBMFF
     {
         public:
             
-            virtual ~DisplayableObjectContainer( void );
+            virtual ~DisplayableObjectContainer();
             
-            virtual std::vector< std::shared_ptr< DisplayableObject > > GetDisplayableObjects( void ) const = 0;
+            virtual std::vector< std::shared_ptr< DisplayableObject > > GetDisplayableObjects() const = 0;
             
             virtual void WriteDescription( std::ostream & os, std::size_t indentLevel ) const;
     };

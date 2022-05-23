@@ -31,7 +31,8 @@
 #ifndef ISOBMFF_MATRIX_HPP
 #define ISOBMFF_MATRIX_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
 #include <cstdint>
@@ -42,17 +43,15 @@ namespace ISOBMFF
      * @class       Matrix
      * @abstract    Represents a transformation of video images for presentation.
      */
-    class ISOBMFF_EXPORT Matrix: public XS::PIMPL::Object< Matrix >, public DisplayableObject
+    class ISOBMFF_EXPORT Matrix: public DisplayableObject
     {
         public:
-            
-            using XS::PIMPL::Object< Matrix >::impl;
             
             /*!
              * @function    Matrix
              * @abstract    Default constructor.
              */
-            Matrix( void );
+            Matrix();
             
             /*!
              * @function    Matrix
@@ -70,75 +69,102 @@ namespace ISOBMFF
             Matrix( uint32_t a, uint32_t b, uint32_t u, uint32_t c, uint32_t d, uint32_t v, uint32_t x, uint32_t y, uint32_t w );
             
             /*!
+             * @function    Matrix
+             * @abstract    Copy constructor.
+             * @param       o   The object to copy from.
+             */
+            Matrix( const Matrix & o );
+            
+            /*!
+             * @function    Matrix
+             * @abstract    Move constructor.
+             * @param       o   The object to move from.
+             */
+            Matrix( Matrix && o ) noexcept;
+            
+            /*!
+             * @function    ~Matrix
+             * @abstract    Destructor.
+             */
+            virtual ~Matrix() override;
+            
+            /*!
+             * @function    operator=
+             * @abstract    Assignment operator.
+             * @param       o   The object to assign from.
+             */
+            Matrix & operator =( Matrix o );
+            
+            /*!
              * @function    GetName
              * @abstract    Gets the object's name.
              * @result      The object's name
              * @see         DisplayableObject
              */
-            std::string GetName( void ) const override;
+            std::string GetName() const override;
             
             /*!
              * @function    GetA
              * @abstract    Gets the matrix A coordinate.
              * @result      The matrix A coordinate.
              */
-            uint32_t GetA( void ) const;
+            uint32_t GetA() const;
             
             /*!
              * @function    GetB
              * @abstract    Gets the matrix B coordinate.
              * @result      The matrix B coordinate.
              */
-            uint32_t GetB( void ) const;
+            uint32_t GetB() const;
             
             /*!
              * @function    GetU
              * @abstract    Gets the matrix U coordinate.
              * @result      The matrix U coordinate.
              */
-            uint32_t GetU( void ) const;
+            uint32_t GetU() const;
             
             /*!
              * @function    GetC
              * @abstract    Gets the matrix C coordinate.
              * @result      The matrix C coordinate.
              */
-            uint32_t GetC( void ) const;
+            uint32_t GetC() const;
             
             /*!
              * @function    GetD
              * @abstract    Gets the matrix D coordinate.
              * @result      The matrix D coordinate.
              */
-            uint32_t GetD( void ) const;
+            uint32_t GetD() const;
             
             /*!
              * @function    GetV
              * @abstract    Gets the matrix V coordinate.
              * @result      The matrix V coordinate.
              */
-            uint32_t GetV( void ) const;
+            uint32_t GetV() const;
             
             /*!
              * @function    GetX
              * @abstract    Gets the matrix X coordinate.
              * @result      The matrix X coordinate.
              */
-            uint32_t GetX( void ) const;
+            uint32_t GetX() const;
             
             /*!
              * @function    GetY
              * @abstract    Gets the matrix Y coordinate.
              * @result      The matrix Y coordinate.
              */
-            uint32_t GetY( void ) const;
+            uint32_t GetY() const;
             
             /*!
              * @function    GetW
              * @abstract    Gets the matrix W coordinate.
              * @result      The matrix W coordinate.
              */
-            uint32_t GetW( void ) const;
+            uint32_t GetW() const;
             
             /*!
              * @function    SetA
@@ -218,7 +244,21 @@ namespace ISOBMFF
              * @result      The matrix displayable properties.
              * @see         DisplayableObject
              */
-            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+            
+            /*!
+             * @function    swap
+             * @abstract    Swap two objects.
+             * @param       o1  The first object to swap.
+             * @param       o2  The second object to swap.
+             */
+            ISOBMFF_EXPORT friend void swap( Matrix & o1, Matrix & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

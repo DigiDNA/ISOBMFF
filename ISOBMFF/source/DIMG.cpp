@@ -30,33 +30,61 @@
 
 #include <ISOBMFF/DIMG.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::DIMG >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::DIMG
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    DIMG::DIMG( void ): SingleItemTypeReferenceBox( "dimg" )
+    class DIMG::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+    };
+    
+    DIMG::DIMG():
+        SingleItemTypeReferenceBox( "dimg" ),
+        impl( std::make_unique< IMPL >() )
+    {}
+    
+    DIMG::DIMG( const DIMG & o ):
+        SingleItemTypeReferenceBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    DIMG::DIMG( DIMG && o ) noexcept:
+        SingleItemTypeReferenceBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    DIMG::~DIMG()
+    {}
+    
+    DIMG & DIMG::operator =( DIMG o )
+    {
+        SingleItemTypeReferenceBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( DIMG & o1, DIMG & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< SingleItemTypeReferenceBox & >( o1 ), static_cast< SingleItemTypeReferenceBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
+    
+    DIMG::IMPL::IMPL()
+    {}
+
+    DIMG::IMPL::IMPL( const IMPL & o )
+    {
+        ( void )o;
+    }
+
+    DIMG::IMPL::~IMPL()
     {}
 }
-
-XS::PIMPL::Object< ISOBMFF::DIMG >::IMPL::IMPL( void )
-{}
-
-XS::PIMPL::Object< ISOBMFF::DIMG >::IMPL::IMPL( const IMPL & o )
-{
-    ( void )o;
-}
-
-XS::PIMPL::Object< ISOBMFF::DIMG >::IMPL::~IMPL( void )
-{}
-

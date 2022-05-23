@@ -41,12 +41,13 @@ namespace ISOBMFF
     {
         public:
             
-            IPCO( void );
+            IPCO();
+            
+            using ContainerBox::ContainerBox;
             
             std::shared_ptr< Box >                GetPropertyAtIndex( size_t index ) const;
             std::shared_ptr< Box >                GetProperty( const IPMA::Entry::Association & association ) const;
             std::vector< std::shared_ptr< Box > > GetProperties( const IPMA::Entry & entry ) const;
-            
     };
 }
 

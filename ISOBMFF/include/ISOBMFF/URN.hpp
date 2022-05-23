@@ -31,19 +31,31 @@
 #ifndef ISOBMFF_URN_HPP
 #define ISOBMFF_URN_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT URN: public FullBox, public XS::PIMPL::Object< URN >
+    class ISOBMFF_EXPORT URN: public FullBox
     {
         public:
             
-            using XS::PIMPL::Object< URN >::impl;
-
-            URN( void );
+            URN();
+            URN( const URN & o );
+            URN( URN && o ) noexcept;
+            virtual ~URN() override;
+            
+            URN & operator =( URN o );
+            
+            ISOBMFF_EXPORT friend void swap( URN & o1, URN & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

@@ -31,29 +31,41 @@
 #ifndef ISOBMFF_SINGLE_ITEM_TYPE_REFERENCE_BOX_HPP
 #define ISOBMFF_SINGLE_ITEM_TYPE_REFERENCE_BOX_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Box.hpp>
 #include <cstdint>
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT SingleItemTypeReferenceBox: public Box, public XS::PIMPL::Object< SingleItemTypeReferenceBox >
+    class ISOBMFF_EXPORT SingleItemTypeReferenceBox: public Box
     {
         public:
             
-            using XS::PIMPL::Object< SingleItemTypeReferenceBox >::impl;
-
             SingleItemTypeReferenceBox( const std::string & name );
+            SingleItemTypeReferenceBox( const SingleItemTypeReferenceBox & o );
+            SingleItemTypeReferenceBox( SingleItemTypeReferenceBox && o ) noexcept;
+            virtual ~SingleItemTypeReferenceBox() override;
+            
+            SingleItemTypeReferenceBox & operator =( SingleItemTypeReferenceBox o );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            uint32_t                GetFromItemID( void ) const;
-            std::vector< uint32_t > GetToItemIDs( void )  const;
+            uint32_t                GetFromItemID() const;
+            std::vector< uint32_t > GetToItemIDs()  const;
             
             void SetFromItemID( uint32_t value );
             void AddToItemID( uint32_t value );
+            
+            ISOBMFF_EXPORT friend void swap( SingleItemTypeReferenceBox & o1, SingleItemTypeReferenceBox & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

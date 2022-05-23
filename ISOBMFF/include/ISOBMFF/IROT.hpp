@@ -31,25 +31,37 @@
 #ifndef ISOBMFF_IROT_HPP
 #define ISOBMFF_IROT_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT IROT: public Box, public XS::PIMPL::Object< IROT >
+    class ISOBMFF_EXPORT IROT: public Box
     {
         public:
             
-            using XS::PIMPL::Object< IROT >::impl;
+            IROT();
+            IROT( const IROT & o );
+            IROT( IROT && o ) noexcept;
+            virtual ~IROT() override;
             
-            IROT( void );
+            IROT & operator =( IROT o );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            uint8_t GetAngle( void ) const;
-            void    SetAngle( uint8_t value ) const;
+            uint8_t GetAngle() const;
+            void    SetAngle( uint8_t value );
+            
+            ISOBMFF_EXPORT friend void swap( IROT & o1, IROT & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

@@ -31,25 +31,54 @@
 #include <ISOBMFF/IROT.hpp>
 #include <ISOBMFF/Parser.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::IROT >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        uint8_t _angle;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::IROT
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    IROT::IROT( void ): Box( "irot" )
+    class IROT::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint8_t _angle;
+    };
+    
+    IROT::IROT():
+        Box( "irot" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    IROT::IROT( const IROT & o ):
+        Box( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    IROT::IROT( IROT && o ) noexcept:
+        Box( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    IROT::~IROT()
+    {}
+    
+    IROT & IROT::operator =( IROT o )
+    {
+        Box::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( IROT & o1, IROT & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< Box & >( o1 ), static_cast< Box & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void IROT::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -62,7 +91,7 @@ namespace ISOBMFF
         this->SetAngle( u8 & 0x3 );
     }
     
-	std::vector< std::pair< std::string, std::string > > IROT::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > IROT::GetDisplayableProperties() const
     {
         auto props( Box::GetDisplayableProperties() );
         
@@ -71,25 +100,24 @@ namespace ISOBMFF
         return props;
     }
     
-    uint8_t IROT::GetAngle( void ) const
+    uint8_t IROT::GetAngle() const
     {
         return this->impl->_angle;
     }
     
-    void IROT::SetAngle( uint8_t value ) const
+    void IROT::SetAngle( uint8_t value )
     {
         this->impl->_angle = value;
     }
+    
+    IROT::IMPL::IMPL():
+        _angle( 0 )
+    {}
+
+    IROT::IMPL::IMPL( const IMPL & o ):
+        _angle( o._angle )
+    {}
+
+    IROT::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::IROT >::IMPL::IMPL( void ):
-    _angle( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IROT >::IMPL::IMPL( const IMPL & o ):
-    _angle( o._angle )
-{}
-
-XS::PIMPL::Object< ISOBMFF::IROT >::IMPL::~IMPL( void )
-{}
-

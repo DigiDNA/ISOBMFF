@@ -33,29 +33,53 @@
 #include <ISOBMFF/DisplayableObjectContainer.hpp>
 #include <ISOBMFF/Parser.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::Box >::IMPL
-{
-    public:
-        
-        IMPL( const std::string & name = "????" );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        std::string            _name;
-        std::vector< uint8_t > _data;
-        bool                   _hasData;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::Box
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    Box::Box( const std::string & name ): XS::PIMPL::Object< Box >( name )
+    class Box::IMPL
+    {
+        public:
+            
+            IMPL( const std::string & name = "????" );
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            std::string            _name;
+            std::vector< uint8_t > _data;
+            bool                   _hasData;
+    };
+    
+    Box::Box( const std::string & name ):
+        impl( std::make_unique< IMPL >( name ) )
     {}
     
-    std::string Box::GetName( void ) const
+    Box::Box( const Box & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    Box::Box( Box && o ) noexcept:
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    Box::~Box()
+    {}
+    
+    Box & Box::operator =( Box o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( Box & o1, Box & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
+    }
+    
+    std::string Box::GetName() const
     {
         return this->impl->_name;
     }
@@ -68,27 +92,27 @@ namespace ISOBMFF
         this->impl->_hasData = true;
     }
     
-    std::vector< uint8_t > Box::GetData( void ) const
+    std::vector< uint8_t > Box::GetData() const
     {
         return this->impl->_data;
     }
     
-    std::vector< std::pair< std::string, std::string > > Box::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > Box::GetDisplayableProperties() const
     {
         return {};
     }
+    
+    Box::IMPL::IMPL( const std::string & name ):
+        _name( name ),
+        _hasData( false )
+    {}
+
+    Box::IMPL::IMPL( const IMPL & o ):
+        _name( o._name ),
+        _data( o._data ),
+        _hasData( o._hasData )
+    {}
+
+    Box::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::Box >::IMPL::IMPL( const std::string & name ):
-    _name( name ),
-    _hasData( false )
-{}
-
-XS::PIMPL::Object< ISOBMFF::Box >::IMPL::IMPL( const IMPL & o ):
-    _name( o._name ),
-    _data( o._data ),
-    _hasData( o._hasData )
-{}
-
-XS::PIMPL::Object< ISOBMFF::Box >::IMPL::~IMPL( void )
-{}

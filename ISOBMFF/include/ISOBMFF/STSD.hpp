@@ -31,7 +31,8 @@
 #ifndef ISOBMFF_STSD_HPP
 #define ISOBMFF_STSD_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/Container.hpp>
@@ -39,19 +40,30 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT STSD: public FullBox, public Container, public XS::PIMPL::Object< STSD >
+    class ISOBMFF_EXPORT STSD: public FullBox, public Container
     {
         public:
             
-            using XS::PIMPL::Object< STSD >::impl;
+            STSD();
+            STSD( const STSD & o );
+            STSD( STSD && o ) noexcept;
+            virtual ~STSD() override;
             
-            STSD( void );
+            STSD & operator =( STSD o );
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
             void                                  AddBox( std::shared_ptr< Box > box ) override;
-            std::vector< std::shared_ptr< Box > > GetBoxes( void ) const override;
+            std::vector< std::shared_ptr< Box > > GetBoxes() const override;
+            
+            ISOBMFF_EXPORT friend void swap( STSD & o1, STSD & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

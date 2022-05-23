@@ -31,22 +31,34 @@
 #ifndef ISOBMFF_FILE_HPP
 #define ISOBMFF_FILE_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/ContainerBox.hpp>
 #include <ostream>
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT File: public ContainerBox, public XS::PIMPL::Object< File >
+    class ISOBMFF_EXPORT File: public ContainerBox
     {
         public:
             
-            using XS::PIMPL::Object< File >::impl;
+            File();
+            File( const File & o );
+            File( File && o ) noexcept;
+            virtual ~File() override;
             
-            File( void );
+            File & operator =( File o );
             
-            std::string GetName( void ) const override;
+            std::string GetName() const override;
+            
+            ISOBMFF_EXPORT friend void swap( File & o1, File & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

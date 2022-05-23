@@ -54,15 +54,4 @@
 #define ISOBMFF_EXPORT 
 #endif
 
-/*!
- * @define      ISOBMFF_NOEXCEPT
- * @abstract    Replacement for the C++ `noexcept` keyword, not supported by all compilers.
- * @param       _a_ If `_a_` evaluates to true, the function is declared to not throw any exceptions.
- */
-#ifndef _MSC_VER
-#define ISOBMFF_NOEXCEPT( _a_ ) noexcept( _a_ )
-#else
-#define ISOBMFF_NOEXCEPT( _a_ ) 
-#endif
-
 #endif /* ISOBMFF_MACROS_HPP */

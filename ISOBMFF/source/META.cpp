@@ -30,29 +30,57 @@
 
 #include <ISOBMFF/META.hpp>
 #include <ISOBMFF/ContainerBox.hpp>
-
 #include <cstring>
-
-template<>
-class XS::PIMPL::Object< ISOBMFF::META >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        bool                                           _isFullBox;
-        std::vector< std::shared_ptr< ISOBMFF::Box > > _boxes;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::META
-#include <XS/PIMPL/Object-IMPL.hpp>
 
 namespace ISOBMFF
 {
-    META::META( void ): FullBox( "meta" )
+    class META::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            bool                                  _isFullBox;
+            std::vector< std::shared_ptr< Box > > _boxes;
+    };
+    
+    META::META():
+        FullBox( "meta" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    META::META( const META & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    META::META( META && o ) noexcept:
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    META::~META()
+    {}
+    
+    META & META::operator =( META o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( META & o1, META & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void META::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -95,21 +123,20 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::shared_ptr< Box > > META::GetBoxes( void ) const
+    std::vector< std::shared_ptr< Box > > META::GetBoxes() const
     {
         return this->impl->_boxes;
     }
+    
+    META::IMPL::IMPL():
+        _isFullBox( true )
+    {}
+
+    META::IMPL::IMPL( const IMPL & o ):
+        _isFullBox( o._isFullBox ),
+        _boxes( o._boxes )
+    {}
+
+    META::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::META >::IMPL::IMPL( void ):
-    _isFullBox( true )
-{}
-
-XS::PIMPL::Object< ISOBMFF::META >::IMPL::IMPL( const IMPL & o ):
-    _isFullBox( o._isFullBox ),
-    _boxes( o._boxes )
-{}
-
-XS::PIMPL::Object< ISOBMFF::META >::IMPL::~IMPL( void )
-{}
-

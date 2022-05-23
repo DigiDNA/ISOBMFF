@@ -32,7 +32,7 @@
 
 namespace ISOBMFF
 {
-    Container::~Container( void )
+    Container::~Container()
     {}
     
     void Container::WriteBoxes( const std::vector< std::shared_ptr< Box > > & boxes, std::ostream & os, std::size_t indentLevel )

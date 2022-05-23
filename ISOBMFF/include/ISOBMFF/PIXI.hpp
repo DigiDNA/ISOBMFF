@@ -31,50 +31,72 @@
 #ifndef ISOBMFF_PIXI_HPP
 #define ISOBMFF_PIXI_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/FullBox.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
 #include <ISOBMFF/DisplayableObjectContainer.hpp>
 #include <vector>
 #include <cstdint>
-#include <memory>
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT PIXI: public FullBox, public XS::PIMPL::Object< PIXI >, public DisplayableObjectContainer
+    class ISOBMFF_EXPORT PIXI: public FullBox, public DisplayableObjectContainer
     {
         public:
             
-            using XS::PIMPL::Object< PIXI >::impl;
+            PIXI();
+            PIXI( const PIXI & o );
+            PIXI( PIXI && o ) noexcept;
+            virtual ~PIXI() override;
             
-            PIXI( void );
+            PIXI & operator =( PIXI o );
             
             void ReadData( Parser & parser, BinaryStream & stream ) override;
             void WriteDescription( std::ostream & os, std::size_t indentLevel ) const override;
             
-            virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects( void )    const override;
-            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            virtual std::vector< std::shared_ptr< DisplayableObject > >  GetDisplayableObjects()    const override;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            class ISOBMFF_EXPORT Channel: public XS::PIMPL::Object< Channel >, public DisplayableObject
+            class ISOBMFF_EXPORT Channel: public DisplayableObject
             {
                 public:
                     
-                    using XS::PIMPL::Object< Channel >::impl;
-                    
-                    Channel( void );
+                    Channel();
                     Channel( BinaryStream & stream );
+                    Channel( const Channel & o );
+                    Channel( Channel && o ) noexcept;
+                    virtual ~Channel() override;
                     
-                    std::string GetName( void ) const override;
+                    Channel & operator =( Channel o );
                     
-                    uint8_t GetBitsPerChannel( void ) const;
+                    std::string GetName() const override;
+                    
+                    uint8_t GetBitsPerChannel() const;
                     void    SetBitsPerChannel( uint8_t value );
                     
-                    virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+                    virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
+                    
+                    ISOBMFF_EXPORT friend void swap( Channel & o1, Channel & o2 );
+                    
+                private:
+                    
+                    class IMPL;
+                    
+                    std::unique_ptr< IMPL > impl;
             };
             
-            std::vector< std::shared_ptr< Channel > > GetChannels( void ) const;
+            std::vector< std::shared_ptr< Channel > > GetChannels() const;
             void                                      AddChannel( std::shared_ptr< Channel > array );
+            
+            ISOBMFF_EXPORT friend void swap( PIXI & o1, PIXI & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

@@ -33,28 +33,57 @@
 #include <cstdint>
 #include <cstring>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::HDLR >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        uint32_t    _predefined;
-        std::string _handlerType;
-        uint32_t    _reserved[ 3 ];
-        std::string _handlerName;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::HDLR
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    HDLR::HDLR( void ): FullBox( "hdlr" )
+    class HDLR::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint32_t    _predefined;
+            std::string _handlerType;
+            uint32_t    _reserved[ 3 ];
+            std::string _handlerName;
+    };
+    
+    HDLR::HDLR():
+        FullBox( "hdlr" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    HDLR::HDLR( const HDLR & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    HDLR::HDLR( HDLR && o ) noexcept:
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    HDLR::~HDLR()
+    {}
+    
+    HDLR & HDLR::operator =( HDLR o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( HDLR & o1, HDLR & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void HDLR::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -90,7 +119,7 @@ namespace ISOBMFF
         }
     }
     
-    std::vector< std::pair< std::string, std::string > > HDLR::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > HDLR::GetDisplayableProperties() const
     {
         auto props( FullBox::GetDisplayableProperties() );
         
@@ -100,12 +129,12 @@ namespace ISOBMFF
         return props;
     }
     
-    std::string HDLR::GetHandlerType( void ) const
+    std::string HDLR::GetHandlerType() const
     {
         return this->impl->_handlerType;
     }
     
-    std::string HDLR::GetHandlerName( void ) const
+    std::string HDLR::GetHandlerName() const
     {
         return this->impl->_handlerName;
     }
@@ -119,21 +148,21 @@ namespace ISOBMFF
     {
         this->impl->_handlerName = value;
     }
-}
 
-XS::PIMPL::Object< ISOBMFF::HDLR >::IMPL::IMPL( void ):
-    _predefined( 0 )
-{
-    memset( this->_reserved, 0, sizeof( this->_reserved ) );
-}
+    HDLR::IMPL::IMPL():
+        _predefined( 0 )
+    {
+        memset( this->_reserved, 0, sizeof( this->_reserved ) );
+    }
 
-XS::PIMPL::Object< ISOBMFF::HDLR >::IMPL::IMPL( const IMPL & o ):
-    _predefined( o._predefined ),
-    _handlerType( o._handlerType ),
-    _handlerName( o._handlerName )
-{
-    memcpy( this->_reserved, o._reserved, sizeof( this->_reserved ) );
-}
+    HDLR::IMPL::IMPL( const IMPL & o ):
+        _predefined( o._predefined ),
+        _handlerType( o._handlerType ),
+        _handlerName( o._handlerName )
+    {
+        memcpy( this->_reserved, o._reserved, sizeof( this->_reserved ) );
+    }
 
-XS::PIMPL::Object< ISOBMFF::HDLR >::IMPL::~IMPL( void )
-{}
+    HDLR::IMPL::~IMPL()
+    {}
+}

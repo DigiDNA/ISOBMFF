@@ -29,40 +29,68 @@
  */
 
 #include <ISOBMFF/TKHD.hpp>
-
 #include <cstring>
-
-template<>
-class XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        uint64_t        _creationTime;
-        uint64_t        _modificationTime;
-        uint32_t        _trackID;
-        uint32_t        _reserved1;
-        uint64_t        _duration;
-        uint32_t        _reserved2[ 2 ];
-        uint16_t        _layer;
-        uint16_t        _alternateGroup;
-        uint16_t        _volume;
-        uint16_t        _reserved3;
-        ISOBMFF::Matrix _matrix;
-        float           _width;
-        float           _height;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::TKHD
-#include <XS/PIMPL/Object-IMPL.hpp>
 
 namespace ISOBMFF
 {
-    TKHD::TKHD( void ): FullBox( "tkhd" )
+    class TKHD::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint64_t _creationTime;
+            uint64_t _modificationTime;
+            uint32_t _trackID;
+            uint32_t _reserved1;
+            uint64_t _duration;
+            uint32_t _reserved2[ 2 ];
+            uint16_t _layer;
+            uint16_t _alternateGroup;
+            uint16_t _volume;
+            uint16_t _reserved3;
+            Matrix   _matrix;
+            float    _width;
+            float    _height;
+    };
+    
+    TKHD::TKHD():
+        FullBox( "tkhd" ),
+        impl( std::make_unique< IMPL >() )
     {}
+    
+    TKHD::TKHD( const TKHD & o ):
+        FullBox( o ),
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    TKHD::TKHD( TKHD && o ) noexcept:
+        FullBox( std::move( o ) ),
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    TKHD::~TKHD()
+    {}
+    
+    TKHD & TKHD::operator =( TKHD o )
+    {
+        FullBox::operator=( o );
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( TKHD & o1, TKHD & o2 )
+    {
+        using std::swap;
+        
+        swap( static_cast< FullBox & >( o1 ), static_cast< FullBox & >( o2 ) );
+        swap( o1.impl, o2.impl );
+    }
     
     void TKHD::ReadData( Parser & parser, BinaryStream & stream )
     {
@@ -103,7 +131,7 @@ namespace ISOBMFF
         this->SetHeight( stream.ReadBigEndianFixedPoint( 16, 16 ) );
     }
     
-    std::vector< std::pair< std::string, std::string > > TKHD::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > TKHD::GetDisplayableProperties() const
     {
         auto props( FullBox::GetDisplayableProperties() );
         
@@ -121,52 +149,52 @@ namespace ISOBMFF
         return props;
     }
     
-    uint64_t TKHD::GetCreationTime( void ) const
+    uint64_t TKHD::GetCreationTime() const
     {
         return this->impl->_creationTime;
     }
     
-    uint64_t TKHD::GetModificationTime( void ) const
+    uint64_t TKHD::GetModificationTime() const
     {
         return this->impl->_modificationTime;
     }
     
-    uint32_t TKHD::GetTrackID( void ) const
+    uint32_t TKHD::GetTrackID() const
     {
         return this->impl->_trackID;
     }
     
-    uint64_t TKHD::GetDuration( void ) const
+    uint64_t TKHD::GetDuration() const
     {
         return this->impl->_duration;
     }
     
-    uint16_t TKHD::GetLayer( void ) const
+    uint16_t TKHD::GetLayer() const
     {
         return this->impl->_layer;
     }
     
-    uint16_t TKHD::GetAlternateGroup( void ) const
+    uint16_t TKHD::GetAlternateGroup() const
     {
         return this->impl->_alternateGroup;
     }
     
-    uint16_t TKHD::GetVolume( void ) const
+    uint16_t TKHD::GetVolume() const
     {
         return this->impl->_volume;
     }
     
-    Matrix TKHD::GetMatrix( void ) const
+    Matrix TKHD::GetMatrix() const
     {
         return this->impl->_matrix;
     }
     
-    float TKHD::GetWidth( void ) const
+    float TKHD::GetWidth() const
     {
         return this->impl->_width;
     }
     
-    float TKHD::GetHeight( void ) const
+    float TKHD::GetHeight() const
     {
         return this->impl->_height;
     }
@@ -220,40 +248,40 @@ namespace ISOBMFF
     {
         this->impl->_height = value;
     }
-}
+    
+    TKHD::IMPL::IMPL():
+        _creationTime( 0 ),
+        _modificationTime( 0 ),
+        _trackID( 0 ),
+        _reserved1( 0 ),
+        _duration( 0 ),
+        _layer( 0 ),
+        _alternateGroup( 0 ),
+        _volume( 0 ),
+        _reserved3( 0 ),
+        _width( 0 ),
+        _height( 0 )
+    {
+        memset( this->_reserved2, 0, sizeof( this->_reserved2 ) );
+    }
 
-XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL::IMPL( void ):
-    _creationTime( 0 ),
-    _modificationTime( 0 ),
-    _trackID( 0 ),
-    _reserved1( 0 ),
-    _duration( 0 ),
-    _layer( 0 ),
-    _alternateGroup( 0 ),
-    _volume( 0 ),
-    _reserved3( 0 ),
-    _width( 0 ),
-    _height( 0 )
-{
-    memset( this->_reserved2, 0, sizeof( this->_reserved2 ) );
-}
+    TKHD::IMPL::IMPL( const IMPL & o ):
+        _creationTime( o._creationTime ),
+        _modificationTime( o._modificationTime ),
+        _trackID( o._trackID ),
+        _reserved1( o._reserved1 ),
+        _duration( o._duration ),
+        _layer( o._layer ),
+        _alternateGroup( o._alternateGroup ),
+        _volume( o._volume ),
+        _reserved3( o._reserved3 ),
+        _matrix( o._matrix ),
+        _width( o._width ),
+        _height( o._height )
+    {
+        memcpy( this->_reserved2, o._reserved2, sizeof( this->_reserved2 ) );
+    }
 
-XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL::IMPL( const IMPL & o ):
-    _creationTime( o._creationTime ),
-    _modificationTime( o._modificationTime ),
-    _trackID( o._trackID ),
-    _reserved1( o._reserved1 ),
-    _duration( o._duration ),
-    _layer( o._layer ),
-    _alternateGroup( o._alternateGroup ),
-    _volume( o._volume ),
-    _reserved3( o._reserved3 ),
-    _matrix( o._matrix ),
-    _width( o._width ),
-    _height( o._height )
-{
-    memcpy( this->_reserved2, o._reserved2, sizeof( this->_reserved2 ) );
+    TKHD::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::TKHD >::IMPL::~IMPL( void )
-{}

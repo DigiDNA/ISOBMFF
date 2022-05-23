@@ -49,25 +49,29 @@ namespace ISOBMFF
     {
         public:
             
+            DisplayableObject()                                         = default;
+            DisplayableObject( const DisplayableObject & )              = default;
+            DisplayableObject & operator =( const DisplayableObject & ) = default;
+            
             /*! 
              * @function    ~DisplayableObject
              * @abstarct    Destructor.
              */
-            virtual ~DisplayableObject( void );
+            virtual ~DisplayableObject();
             
             /*!
              * @function    GetDisplayableProperties
              * @abstract    Returns the object's displayable properties and values.
              * @result      The object's properties/values.
              */
-            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const = 0;
+            virtual std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const = 0;
             
             /*!
              * @function    GetName
              * @abstract    Returns the object's displayable name.
              * @result      The object's name.
              */
-            virtual std::string GetName( void ) const = 0;
+            virtual std::string GetName() const = 0;
             
             /*!
              * @function    WriteDescription
@@ -87,7 +91,7 @@ namespace ISOBMFF
              * @result      A string representation of the object.
              * @see         WriteDescription
              */
-            virtual std::string ToString( void ) const;
+            virtual std::string ToString() const;
             
             /*!
              * @function    operator <<

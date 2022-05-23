@@ -35,6 +35,8 @@
 #include <ISOBMFF/Utils.hpp>
 #include <ISOBMFF/Parser.hpp>
 #include <ISOBMFF/BinaryStream.hpp>
+#include <ISOBMFF/BinaryDataStream.hpp>
+#include <ISOBMFF/BinaryFileStream.hpp>
 #include <ISOBMFF/DisplayableObject.hpp>
 #include <ISOBMFF/DisplayableObjectContainer.hpp>
 #include <ISOBMFF/Box.hpp>

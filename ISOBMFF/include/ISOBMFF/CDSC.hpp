@@ -31,19 +31,31 @@
 #ifndef ISOBMFF_CDSC_HPP
 #define ISOBMFF_CDSC_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT CDSC: public SingleItemTypeReferenceBox, public XS::PIMPL::Object< CDSC >
+    class ISOBMFF_EXPORT CDSC: public SingleItemTypeReferenceBox
     {
         public:
             
-            using XS::PIMPL::Object< CDSC >::impl;
+            CDSC();
+            CDSC( const CDSC & o );
+            CDSC( CDSC && o ) noexcept;
+            virtual ~CDSC() override;
             
-            CDSC( void );
+            CDSC & operator =( CDSC o );
+            
+            ISOBMFF_EXPORT friend void swap( CDSC & o1, CDSC & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

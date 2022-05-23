@@ -30,37 +30,62 @@
 
 #include <ISOBMFF/PIXI.hpp>
 
-template<>
-class XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL
-{
-    public:
-        
-        IMPL( void );
-        IMPL( const IMPL & o );
-        ~IMPL( void );
-        
-        uint8_t _bitsPerChannel;
-};
-
-#define XS_PIMPL_CLASS ISOBMFF::PIXI::Channel
-#include <XS/PIMPL/Object-IMPL.hpp>
-
 namespace ISOBMFF
 {
-    PIXI::Channel::Channel( void )
+    class PIXI::Channel::IMPL
+    {
+        public:
+            
+            IMPL();
+            IMPL( const IMPL & o );
+            ~IMPL();
+            
+            uint8_t _bitsPerChannel;
+    };
+    
+    PIXI::Channel::Channel():
+        impl( std::make_unique< IMPL >() )
     {}
     
-    PIXI::Channel::Channel( BinaryStream & stream )
+    PIXI::Channel::Channel( BinaryStream & stream ):
+        impl( std::make_unique< IMPL >() )
     {
         this->SetBitsPerChannel( stream.ReadUInt8() );
     }
     
-    std::string PIXI::Channel::GetName( void ) const
+    PIXI::Channel::Channel( const Channel & o ):
+        impl( std::make_unique< IMPL >( *( o.impl ) ) )
+    {}
+    
+    PIXI::Channel::Channel( Channel && o ) noexcept:
+        impl( std::move( o.impl ) )
+    {
+        o.impl = nullptr;
+    }
+    
+    PIXI::Channel::~Channel()
+    {}
+    
+    PIXI::Channel & PIXI::Channel::operator =( PIXI::Channel o )
+    {
+        swap( *( this ), o );
+        
+        return *( this );
+    }
+    
+    void swap( PIXI::Channel & o1, PIXI::Channel & o2 )
+    {
+        using std::swap;
+        
+        swap( o1.impl, o2.impl );
+    }
+    
+    std::string PIXI::Channel::GetName() const
     {
         return "Channel";
     }
     
-    uint8_t PIXI::Channel::GetBitsPerChannel( void ) const
+    uint8_t PIXI::Channel::GetBitsPerChannel() const
     {
         return this->impl->_bitsPerChannel;
     }
@@ -70,23 +95,23 @@ namespace ISOBMFF
         this->impl->_bitsPerChannel = value;
     }
     
-    std::vector< std::pair< std::string, std::string > > PIXI::Channel::GetDisplayableProperties( void ) const
+    std::vector< std::pair< std::string, std::string > > PIXI::Channel::GetDisplayableProperties() const
     {
         return
         {
             { "Bits per channel", std::to_string( this->GetBitsPerChannel() ) },
         };
     }
+    
+    PIXI::Channel::IMPL::IMPL():
+        _bitsPerChannel( 0 )
+    {}
+
+    PIXI::Channel::IMPL::IMPL( const IMPL & o ):
+        _bitsPerChannel( o._bitsPerChannel )
+    {}
+
+    PIXI::Channel::IMPL::~IMPL()
+    {}
 }
-
-XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL::IMPL( void ):
-    _bitsPerChannel( 0 )
-{}
-
-XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL::IMPL( const IMPL & o ):
-    _bitsPerChannel( o._bitsPerChannel )
-{}
-
-XS::PIMPL::Object< ISOBMFF::PIXI::Channel >::IMPL::~IMPL( void )
-{}
 

@@ -31,7 +31,8 @@
 #ifndef ISOBMFF_COLR_HPP
 #define ISOBMFF_COLR_HPP
 
-#include <XS/PIMPL/Object.hpp>
+#include <memory>
+#include <algorithm>
 #include <ISOBMFF/Macros.hpp>
 #include <ISOBMFF/Box.hpp>
 #include <string>
@@ -40,23 +41,26 @@
 
 namespace ISOBMFF
 {
-    class ISOBMFF_EXPORT COLR: public Box, public XS::PIMPL::Object< COLR >
+    class ISOBMFF_EXPORT COLR: public Box
     {
         public:
             
-            using XS::PIMPL::Object< COLR >::impl;
+            COLR();
+            COLR( const COLR & o );
+            COLR( COLR && o ) noexcept;
+            virtual ~COLR() override;
             
-            COLR( void );
+            COLR & operator =( COLR o );
             
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
-            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties( void ) const override;
+            std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
             
-            std::string            GetColourType( void )              const;
-            uint16_t               GetColourPrimaries( void )         const;
-            uint16_t               GetTransferCharacteristics( void ) const;
-            uint16_t               GetMatrixCoefficients( void )      const;
-            bool                   GetFullRangeFlag( void )           const;
-            std::vector< uint8_t > GetICCProfile( void )              const;
+            std::string            GetColourType()              const;
+            uint16_t               GetColourPrimaries()         const;
+            uint16_t               GetTransferCharacteristics() const;
+            uint16_t               GetMatrixCoefficients()      const;
+            bool                   GetFullRangeFlag()           const;
+            std::vector< uint8_t > GetICCProfile()              const;
             
             void SetColourType( const std::string & value );
             void SetColourPrimaries( uint16_t value );
@@ -64,6 +68,14 @@ namespace ISOBMFF
             void SetMatrixCoefficients( uint16_t value );
             void SetFullRangeFlag( bool value );
             void SetICCProfile( const std::vector< uint8_t > & value );
+            
+            ISOBMFF_EXPORT friend void swap( COLR & o1, COLR & o2 );
+            
+        private:
+            
+            class IMPL;
+            
+            std::unique_ptr< IMPL > impl;
     };
 }
 

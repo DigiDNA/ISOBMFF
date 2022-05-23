@@ -32,7 +32,7 @@
 
 namespace ISOBMFF
 {
-    DisplayableObjectContainer::~DisplayableObjectContainer( void )
+    DisplayableObjectContainer::~DisplayableObjectContainer()
     {}
     
     void DisplayableObjectContainer::WriteDescription( std::ostream & os, std::size_t indentLevel ) const
