@@ -28,6 +28,8 @@
  * @author      Jean-David Gadina - www.digidna.net
  */
 
+#include <string.h>
+
 #include <fstream>
 #include <cmath>
 #include <vector>
