@@ -50,6 +50,7 @@
 #include <ISOBMFF/TKHD.hpp>
 #include <ISOBMFF/META.hpp>
 #include <ISOBMFF/HDLR.hpp>
+#include <ISOBMFF/MDHD.hpp>
 #include <ISOBMFF/PITM.hpp>
 #include <ISOBMFF/IINF.hpp>
 #include <ISOBMFF/DREF.hpp>

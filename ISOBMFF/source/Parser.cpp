@@ -37,6 +37,7 @@
 #include <ISOBMFF/TKHD.hpp>
 #include <ISOBMFF/META.hpp>
 #include <ISOBMFF/HDLR.hpp>
+#include <ISOBMFF/MDHD.hpp>
 #include <ISOBMFF/PITM.hpp>
 #include <ISOBMFF/IINF.hpp>
 #include <ISOBMFF/DREF.hpp>
@@ -346,6 +347,7 @@ namespace ISOBMFF
         this->RegisterBox( "tkhd", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< TKHD >(); } );
         this->RegisterBox( "meta", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< META >(); } );
         this->RegisterBox( "hdlr", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< HDLR >(); } );
+        this->RegisterBox( "mdhd", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< MDHD >(); } );
         this->RegisterBox( "pitm", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< PITM >(); } );
         this->RegisterBox( "iinf", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< IINF >(); } );
         this->RegisterBox( "dref", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< DREF >(); } );
