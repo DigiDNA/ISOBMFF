@@ -43,8 +43,8 @@ namespace ISOBMFF
             IMPL( const IMPL & o );
             ~IMPL();
 
-            std::vector<uint32_t>    _sample_count;
-            std::vector<uint32_t>    _sample_offset;
+            std::vector< uint32_t > _sample_count;
+            std::vector< uint32_t > _sample_offset;
     };
 
     STTS::STTS():
@@ -88,18 +88,22 @@ namespace ISOBMFF
         FullBox::ReadData( parser, stream );
 
         uint32_t entry_count = stream.ReadBigEndianUInt32();
-        for (uint32_t i = 0; i < entry_count; i++) {
-            this->impl->_sample_count.push_back(stream.ReadBigEndianUInt32());
-            this->impl->_sample_offset.push_back(stream.ReadBigEndianUInt32());
+
+        for( uint32_t i = 0; i < entry_count; i++ )
+        {
+            this->impl->_sample_count.push_back(  stream.ReadBigEndianUInt32() );
+            this->impl->_sample_offset.push_back( stream.ReadBigEndianUInt32() );
         }
     }
 
     std::vector< std::pair< std::string, std::string > > STTS::GetDisplayableProperties() const
     {
         auto props( FullBox::GetDisplayableProperties() );
-        for (unsigned int index = 0; index < this->GetEntryCount(); index++) {
-            props.push_back( { "Sample Count", std::to_string( this->GetSampleCount(index) ) } );
-            props.push_back( { "Sample Offset", std::to_string( this->GetSampleOffset(index) ) } );
+
+        for( unsigned int index = 0; index < this->GetEntryCount(); index++ )
+        {
+            props.push_back( { "Sample Count",  std::to_string( this->GetSampleCount(  index) ) } );
+            props.push_back( { "Sample Offset", std::to_string( this->GetSampleOffset( index) ) } );
         }
 
         return props;
@@ -110,23 +114,22 @@ namespace ISOBMFF
         return this->impl->_sample_count.size();
     }
 
-    uint32_t STTS::GetSampleCount(size_t index) const
+    uint32_t STTS::GetSampleCount( size_t index ) const
     {
-        return this->impl->_sample_count[index];
+        return this->impl->_sample_count[ index ];
     }
 
-    uint32_t STTS::GetSampleOffset(size_t index) const
+    uint32_t STTS::GetSampleOffset( size_t index ) const
     {
-        return this->impl->_sample_offset[index];
+        return this->impl->_sample_offset[ index ];
     }
 
     STTS::IMPL::IMPL()
-    {
-    }
+    {}
 
     STTS::IMPL::IMPL( const IMPL & o )
     {
-        this->_sample_count = o._sample_count;
+        this->_sample_count  = o._sample_count;
         this->_sample_offset = o._sample_offset;
     }
 

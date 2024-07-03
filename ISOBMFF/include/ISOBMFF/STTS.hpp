@@ -53,9 +53,9 @@ namespace ISOBMFF
             void                                                 ReadData( Parser & parser, BinaryStream & stream ) override;
             std::vector< std::pair< std::string, std::string > > GetDisplayableProperties() const override;
 
-            size_t GetEntryCount() const;
-            uint32_t GetSampleCount(size_t index) const;
-            uint32_t GetSampleOffset(size_t index) const;
+            size_t   GetEntryCount()                 const;
+            uint32_t GetSampleCount(  size_t index ) const;
+            uint32_t GetSampleOffset( size_t index ) const;
 
             ISOBMFF_EXPORT friend void swap( STTS & o1, STTS & o2 );
 

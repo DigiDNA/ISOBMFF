@@ -62,10 +62,10 @@ namespace ISOBMFF
             uint64_t GetModificationTime() const;
             uint32_t GetTimescale()        const;
             uint64_t GetDuration()         const;
-            uint8_t GetPad()               const;
-            uint8_t GetLanguage0()         const;
-            uint8_t GetLanguage1()         const;
-            uint8_t GetLanguage2()         const;
+            uint8_t  GetPad()              const;
+            uint8_t  GetLanguage0()        const;
+            uint8_t  GetLanguage1()        const;
+            uint8_t  GetLanguage2()        const;
             uint16_t GetPredefined()       const;
 
             void SetCreationTime( uint64_t value );

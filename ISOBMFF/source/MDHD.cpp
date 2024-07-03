@@ -44,10 +44,10 @@ namespace ISOBMFF
             uint64_t _modificationTime;
             uint32_t _timescale;
             uint64_t _duration;
-            uint8_t _pad;
-            uint8_t _language0;
-            uint8_t _language1;
-            uint8_t _language2;
+            uint8_t  _pad;
+            uint8_t  _language0;
+            uint8_t  _language1;
+            uint8_t  _language2;
             uint16_t _predefined;
     };
 
@@ -103,6 +103,7 @@ namespace ISOBMFF
         {
             u64 = stream.ReadBigEndianUInt32();
         }
+
         this->SetCreationTime( u64 );
 
         if( this->GetVersion() == 1 )
@@ -113,9 +114,11 @@ namespace ISOBMFF
         {
             u64 = stream.ReadBigEndianUInt32();
         }
+
         this->SetModificationTime( u64 );
 
         u32 = stream.ReadBigEndianUInt32();
+
         this->SetTimescale( u32 );
 
         if( this->GetVersion() == 1 )
@@ -126,15 +129,18 @@ namespace ISOBMFF
         {
             u64 = stream.ReadBigEndianUInt32();
         }
+
         this->SetDuration( u64 );
 
        u16 = stream.ReadBigEndianUInt16();
+
        this->SetPad( u16 >> 15 );
-       this->SetLanguage0( (u16 >> 10) & 0b11111 );
-       this->SetLanguage1( (u16 >> 5) & 0b11111 );
-       this->SetLanguage2( (u16 >> 0) & 0b11111 );
+       this->SetLanguage0( ( u16 >> 10 ) & 0b11111 );
+       this->SetLanguage1( ( u16 >>  5 ) & 0b11111 );
+       this->SetLanguage2( ( u16 >>  0 ) & 0b11111 );
 
        u16 = stream.ReadBigEndianUInt16();
+
        this->SetPredefined( u16 );
     }
 
@@ -154,14 +160,14 @@ namespace ISOBMFF
         auto props( FullBox::GetDisplayableProperties() );
 
          props.push_back( { "Creation time",      std::to_string( this->GetCreationTime() ) } );
-         props.push_back( { "Modification time",      std::to_string( this->GetModificationTime() ) } );
-         props.push_back( { "Timescale",      std::to_string( this->GetTimescale() ) } );
-         props.push_back( { "Duration",      std::to_string( this->GetDuration() ) } );
-         props.push_back( { "Pad",      std::to_string( this->GetPad() ) } );
-         props.push_back( { "Language0",      std::to_string( this->GetLanguage0() ) } );
-         props.push_back( { "Language1",      std::to_string( this->GetLanguage1() ) } );
-         props.push_back( { "Language2",      std::to_string( this->GetLanguage2() ) } );
-         props.push_back( { "Predefined",      std::to_string( this->GetPredefined() ) } );
+         props.push_back( { "Modification time",  std::to_string( this->GetModificationTime() ) } );
+         props.push_back( { "Timescale",          std::to_string( this->GetTimescale() ) } );
+         props.push_back( { "Duration",           std::to_string( this->GetDuration() ) } );
+         props.push_back( { "Pad",                std::to_string( this->GetPad() ) } );
+         props.push_back( { "Language0",          std::to_string( this->GetLanguage0() ) } );
+         props.push_back( { "Language1",          std::to_string( this->GetLanguage1() ) } );
+         props.push_back( { "Language2",          std::to_string( this->GetLanguage2() ) } );
+         props.push_back( { "Predefined",         std::to_string( this->GetPredefined() ) } );
 
         return props;
     }
