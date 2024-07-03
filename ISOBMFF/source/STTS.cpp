@@ -105,17 +105,17 @@ namespace ISOBMFF
         return props;
     }
 
-    uint32_t STTS::GetEntryCount() const
+    size_t STTS::GetEntryCount() const
     {
         return this->impl->_sample_count.size();
     }
 
-    uint32_t STTS::GetSampleCount(unsigned int index) const
+    uint32_t STTS::GetSampleCount(size_t index) const
     {
         return this->impl->_sample_count[index];
     }
 
-    uint32_t STTS::GetSampleOffset(unsigned int index) const
+    uint32_t STTS::GetSampleOffset(size_t index) const
     {
         return this->impl->_sample_offset[index];
     }
