@@ -49,6 +49,7 @@
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\ISPE.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\Macros.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\Matrix.hpp" />
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\MDHD.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\META.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\MVHD.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\Parser.hpp" />
@@ -57,6 +58,7 @@
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\SCHM.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\SingleItemTypeReferenceBox.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\STSD.hpp" />
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\STTS.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\THMB.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\TKHD.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\URL.hpp" />
@@ -99,6 +101,7 @@
     <ClCompile Include="..\ISOBMFF\source\IROT.cpp" />
     <ClCompile Include="..\ISOBMFF\source\ISPE.cpp" />
     <ClCompile Include="..\ISOBMFF\source\Matrix.cpp" />
+    <ClCompile Include="..\ISOBMFF\source\MDHD.cpp" />
     <ClCompile Include="..\ISOBMFF\source\META.cpp" />
     <ClCompile Include="..\ISOBMFF\source\MVHD.cpp" />
     <ClCompile Include="..\ISOBMFF\source\Parser.cpp" />
@@ -108,6 +111,7 @@
     <ClCompile Include="..\ISOBMFF\source\SCHM.cpp" />
     <ClCompile Include="..\ISOBMFF\source\SingleItemTypeReferenceBox.cpp" />
     <ClCompile Include="..\ISOBMFF\source\STSD.cpp" />
+    <ClCompile Include="..\ISOBMFF\source\STTS.cpp" />
     <ClCompile Include="..\ISOBMFF\source\THMB.cpp" />
     <ClCompile Include="..\ISOBMFF\source\TKHD.cpp" />
     <ClCompile Include="..\ISOBMFF\source\URL.cpp" />
