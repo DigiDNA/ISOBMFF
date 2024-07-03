@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0515C8C31F2A7807003B8594 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0515C8C11F2A7807003B8594 /* File.cpp */; };
+		05195A8A2C3541470075F109 /* STTS.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05195A882C3541470075F109 /* STTS.hpp */; };
+		05195A8B2C3541470075F109 /* MDHD.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05195A892C3541470075F109 /* MDHD.hpp */; };
+		05195A8E2C3541530075F109 /* STTS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05195A8C2C3541530075F109 /* STTS.cpp */; };
+		05195A8F2C3541530075F109 /* MDHD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05195A8D2C3541530075F109 /* MDHD.cpp */; };
 		051F4D3B1F5DDCFE00E6E12C /* BinaryStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D3A1F5DDCFE00E6E12C /* BinaryStream.cpp */; };
 		051F4D431F5E01C200E6E12C /* FTYP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D421F5E01C200E6E12C /* FTYP.cpp */; };
 		051F4D491F5E0AD500E6E12C /* MVHD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 051F4D481F5E0AD500E6E12C /* MVHD.cpp */; };
@@ -122,6 +126,10 @@
 		0515C8AF1F2A71A8003B8594 /* libISOBMFF.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libISOBMFF.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0515C8C11F2A7807003B8594 /* File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = File.cpp; sourceTree = "<group>"; };
 		0515C8C21F2A7807003B8594 /* File.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = File.hpp; sourceTree = "<group>"; };
+		05195A882C3541470075F109 /* STTS.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STTS.hpp; sourceTree = "<group>"; };
+		05195A892C3541470075F109 /* MDHD.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MDHD.hpp; sourceTree = "<group>"; };
+		05195A8C2C3541530075F109 /* STTS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STTS.cpp; sourceTree = "<group>"; };
+		05195A8D2C3541530075F109 /* MDHD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MDHD.cpp; sourceTree = "<group>"; };
 		051F4D1A1F5DD03700E6E12C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		051F4D381F5DDCF800E6E12C /* BinaryStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BinaryStream.hpp; sourceTree = "<group>"; };
 		051F4D3A1F5DDCFE00E6E12C /* BinaryStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryStream.cpp; sourceTree = "<group>"; };
@@ -380,6 +388,7 @@
 				057280AC1F5F44A000F02C27 /* IROT.cpp */,
 				05BFED0A1F637E8500A6909E /* ISPE.cpp */,
 				051F4D4B1F5E0DD800E6E12C /* Matrix.cpp */,
+				05195A8D2C3541530075F109 /* MDHD.cpp */,
 				05A5A76B1F5EAFAE00D16AD9 /* META.cpp */,
 				051F4D481F5E0AD500E6E12C /* MVHD.cpp */,
 				05F471E51F2B5CEE00738744 /* Parser.cpp */,
@@ -389,6 +398,7 @@
 				05812A4E1FA0BEA6003B88DF /* SCHM.cpp */,
 				05BFECD41F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp */,
 				0594C5D51F71541000456FF5 /* STSD.cpp */,
+				05195A8C2C3541530075F109 /* STTS.cpp */,
 				05BFECE41F62F04D00A6909E /* THMB.cpp */,
 				05EAD3AC1F65FEFE003CCB9B /* TKHD.cpp */,
 				05BFED001F62F7F200A6909E /* URL.cpp */,
@@ -432,6 +442,7 @@
 				05BFED081F637E7E00A6909E /* ISPE.hpp */,
 				0583F5A21F6CEB7400D5D49E /* Macros.hpp */,
 				051F4D4A1F5E0DCB00E6E12C /* Matrix.hpp */,
+				05195A892C3541470075F109 /* MDHD.hpp */,
 				05A5A7651F5EAF9A00D16AD9 /* META.hpp */,
 				051F4D461F5E0AC400E6E12C /* MVHD.hpp */,
 				05F471DC1F2B5CE500738744 /* Parser.hpp */,
@@ -440,6 +451,7 @@
 				05812A4D1FA0BE9B003B88DF /* SCHM.hpp */,
 				05BFECD91F62EE2F00A6909E /* SingleItemTypeReferenceBox.hpp */,
 				0594C5DA1F71542100456FF5 /* STSD.hpp */,
+				05195A882C3541470075F109 /* STTS.hpp */,
 				05BFECDB1F62EFDB00A6909E /* THMB.hpp */,
 				05EAD3AB1F65FE15003CCB9B /* TKHD.hpp */,
 				05BFECE81F62F7E200A6909E /* URL.hpp */,
@@ -616,7 +628,9 @@
 				05DADE8924C634C90070FE4A /* Casts.hpp in Headers */,
 				05B8BB8B1FA4BFB200C67878 /* WIN32.hpp in Headers */,
 				057759001F67BFA300987694 /* ISOBMFF.hpp in Headers */,
+				05195A8A2C3541470075F109 /* STTS.hpp in Headers */,
 				05DADE8724C634520070FE4A /* BinaryFileStream.hpp in Headers */,
+				05195A8B2C3541470075F109 /* MDHD.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,19 +697,19 @@
 		0515C8A71F2A71A8003B8594 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1310;
+				LastUpgradeCheck = 1540;
 				ORGANIZATIONNAME = "XS-Labs";
 				TargetAttributes = {
 					0515C8AE1F2A71A8003B8594 = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					05BFED141F63952E00A6909E = {
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					05DA96001F2A7D5B005F46DB = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -769,6 +783,7 @@
 				051F4D4C1F5E0DD800E6E12C /* Matrix.cpp in Sources */,
 				05A5A76C1F5EAFAE00D16AD9 /* META.cpp in Sources */,
 				05BFED0B1F637E8500A6909E /* ISPE.cpp in Sources */,
+				05195A8E2C3541530075F109 /* STTS.cpp in Sources */,
 				055D9AF81F666B880056DE16 /* PIXI.cpp in Sources */,
 				05BFECE61F62F04D00A6909E /* DIMG.cpp in Sources */,
 				05BFED041F62F88700A6909E /* URN.cpp in Sources */,
@@ -788,6 +803,7 @@
 				0594C5D91F71541100456FF5 /* STSD.cpp in Sources */,
 				05F471EA1F2B5CEF00738744 /* Box.cpp in Sources */,
 				051F4D431F5E01C200E6E12C /* FTYP.cpp in Sources */,
+				05195A8F2C3541530075F109 /* MDHD.cpp in Sources */,
 				05BFECE51F62F04D00A6909E /* CDSC.cpp in Sources */,
 				05BFECE71F62F04D00A6909E /* THMB.cpp in Sources */,
 				051F4D3B1F5DDCFE00E6E12C /* BinaryStream.cpp in Sources */,
@@ -843,9 +859,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 057224132011201F00DC0502 /* Debug - ccache.xcconfig */;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/ISOBMFF/include",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/ISOBMFF/include";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 			};
 			name = Debug;
@@ -854,9 +868,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 057224112011201F00DC0502 /* Release - ccache.xcconfig */;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/ISOBMFF/include",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/ISOBMFF/include";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 			};
 			name = Release;
