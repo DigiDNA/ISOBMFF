@@ -37,6 +37,7 @@
 #include <ISOBMFF/TKHD.hpp>
 #include <ISOBMFF/META.hpp>
 #include <ISOBMFF/HDLR.hpp>
+#include <ISOBMFF/MDHD.hpp>
 #include <ISOBMFF/PITM.hpp>
 #include <ISOBMFF/IINF.hpp>
 #include <ISOBMFF/DREF.hpp>
@@ -56,6 +57,7 @@
 #include <ISOBMFF/PIXI.hpp>
 #include <ISOBMFF/IPCO.hpp>
 #include <ISOBMFF/STSD.hpp>
+#include <ISOBMFF/STTS.hpp>
 #include <ISOBMFF/FRMA.hpp>
 #include <ISOBMFF/SCHM.hpp>
 #include <map>
@@ -346,6 +348,7 @@ namespace ISOBMFF
         this->RegisterBox( "tkhd", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< TKHD >(); } );
         this->RegisterBox( "meta", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< META >(); } );
         this->RegisterBox( "hdlr", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< HDLR >(); } );
+        this->RegisterBox( "mdhd", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< MDHD >(); } );
         this->RegisterBox( "pitm", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< PITM >(); } );
         this->RegisterBox( "iinf", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< IINF >(); } );
         this->RegisterBox( "dref", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< DREF >(); } );
@@ -365,6 +368,7 @@ namespace ISOBMFF
         this->RegisterBox( "pixi", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< PIXI >(); } );
         this->RegisterBox( "ipco", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< IPCO >(); } );
         this->RegisterBox( "stsd", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< STSD >(); } );
+        this->RegisterBox( "stts", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< STTS >(); } );
         this->RegisterBox( "frma", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< FRMA >(); } );
         this->RegisterBox( "schm", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< SCHM >(); } );
     }
