@@ -57,6 +57,7 @@
 #include <ISOBMFF/PIXI.hpp>
 #include <ISOBMFF/IPCO.hpp>
 #include <ISOBMFF/STSD.hpp>
+#include <ISOBMFF/STSS.hpp>
 #include <ISOBMFF/STTS.hpp>
 #include <ISOBMFF/FRMA.hpp>
 #include <ISOBMFF/SCHM.hpp>
@@ -368,6 +369,7 @@ namespace ISOBMFF
         this->RegisterBox( "pixi", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< PIXI >(); } );
         this->RegisterBox( "ipco", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< IPCO >(); } );
         this->RegisterBox( "stsd", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< STSD >(); } );
+        this->RegisterBox( "stss", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< STSS >(); } );
         this->RegisterBox( "stts", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< STTS >(); } );
         this->RegisterBox( "frma", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< FRMA >(); } );
         this->RegisterBox( "schm", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< SCHM >(); } );
