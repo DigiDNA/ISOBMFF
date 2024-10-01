@@ -135,6 +135,9 @@
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\STSD.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\STSS.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\STTS.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -288,6 +291,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\ISOBMFF\source\STSD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISOBMFF\source\STSS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\ISOBMFF\source\STTS.cpp">

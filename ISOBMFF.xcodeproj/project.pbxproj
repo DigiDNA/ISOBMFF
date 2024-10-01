@@ -63,6 +63,8 @@
 		05BFED251F6397D400A6909E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED241F63956C00A6909E /* main.cpp */; };
 		05DA96061F2A7D5B005F46DB /* libISOBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libISOBMFF.a */; };
 		05DA96141F2A7DD4005F46DB /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DA96131F2A7DD4005F46DB /* Parser.cpp */; };
+		05DACC242CAC048C00A0EF13 /* STSS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DACC232CAC048C00A0EF13 /* STSS.cpp */; };
+		05DACC262CAC049700A0EF13 /* STSS.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05DACC252CAC049700A0EF13 /* STSS.hpp */; };
 		05DADE8624C634520070FE4A /* BinaryDataStream.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05DADE8424C634510070FE4A /* BinaryDataStream.hpp */; };
 		05DADE8724C634520070FE4A /* BinaryFileStream.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05DADE8524C634520070FE4A /* BinaryFileStream.hpp */; };
 		05DADE8924C634C90070FE4A /* Casts.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05DADE8824C634C90070FE4A /* Casts.hpp */; };
@@ -259,6 +261,8 @@
 		05DA96011F2A7D5B005F46DB /* ISOBMFF-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ISOBMFF-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DA96051F2A7D5B005F46DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05DA96131F2A7DD4005F46DB /* Parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
+		05DACC232CAC048C00A0EF13 /* STSS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STSS.cpp; sourceTree = "<group>"; };
+		05DACC252CAC049700A0EF13 /* STSS.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STSS.hpp; sourceTree = "<group>"; };
 		05DADE8024C634480070FE4A /* BinaryFileStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryFileStream.cpp; sourceTree = "<group>"; };
 		05DADE8124C634480070FE4A /* BinaryDataStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryDataStream.cpp; sourceTree = "<group>"; };
 		05DADE8424C634510070FE4A /* BinaryDataStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BinaryDataStream.hpp; sourceTree = "<group>"; };
@@ -398,6 +402,7 @@
 				05812A4E1FA0BEA6003B88DF /* SCHM.cpp */,
 				05BFECD41F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp */,
 				0594C5D51F71541000456FF5 /* STSD.cpp */,
+				05DACC232CAC048C00A0EF13 /* STSS.cpp */,
 				05195A8C2C3541530075F109 /* STTS.cpp */,
 				05BFECE41F62F04D00A6909E /* THMB.cpp */,
 				05EAD3AC1F65FEFE003CCB9B /* TKHD.cpp */,
@@ -451,6 +456,7 @@
 				05812A4D1FA0BE9B003B88DF /* SCHM.hpp */,
 				05BFECD91F62EE2F00A6909E /* SingleItemTypeReferenceBox.hpp */,
 				0594C5DA1F71542100456FF5 /* STSD.hpp */,
+				05DACC252CAC049700A0EF13 /* STSS.hpp */,
 				05195A882C3541470075F109 /* STTS.hpp */,
 				05BFECDB1F62EFDB00A6909E /* THMB.hpp */,
 				05EAD3AB1F65FE15003CCB9B /* TKHD.hpp */,
@@ -627,6 +633,7 @@
 				05DADE8624C634520070FE4A /* BinaryDataStream.hpp in Headers */,
 				05DADE8924C634C90070FE4A /* Casts.hpp in Headers */,
 				05B8BB8B1FA4BFB200C67878 /* WIN32.hpp in Headers */,
+				05DACC262CAC049700A0EF13 /* STSS.hpp in Headers */,
 				057759001F67BFA300987694 /* ISOBMFF.hpp in Headers */,
 				05195A8A2C3541470075F109 /* STTS.hpp in Headers */,
 				05DADE8724C634520070FE4A /* BinaryFileStream.hpp in Headers */,
@@ -790,6 +797,7 @@
 				05A50AB51F604C3000EE8C08 /* ImageGrid.cpp in Sources */,
 				05EAD3941F65CD84003CCB9B /* DisplayableObject.cpp in Sources */,
 				05BFED061F63192000A6909E /* COLR.cpp in Sources */,
+				05DACC242CAC048C00A0EF13 /* STSS.cpp in Sources */,
 				057280A41F5F038A00F02C27 /* ILOC-Item-Extent.cpp in Sources */,
 				057280A01F5EE19400F02C27 /* INFE.cpp in Sources */,
 				05EAD3901F65B346003CCB9B /* Utils.cpp in Sources */,

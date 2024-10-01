@@ -58,6 +58,7 @@
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\SCHM.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\SingleItemTypeReferenceBox.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\STSD.hpp" />
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\STSS.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\STTS.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\THMB.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\TKHD.hpp" />
@@ -111,6 +112,7 @@
     <ClCompile Include="..\ISOBMFF\source\SCHM.cpp" />
     <ClCompile Include="..\ISOBMFF\source\SingleItemTypeReferenceBox.cpp" />
     <ClCompile Include="..\ISOBMFF\source\STSD.cpp" />
+    <ClCompile Include="..\ISOBMFF\source\STSS.cpp" />
     <ClCompile Include="..\ISOBMFF\source\STTS.cpp" />
     <ClCompile Include="..\ISOBMFF\source\THMB.cpp" />
     <ClCompile Include="..\ISOBMFF\source\TKHD.cpp" />
