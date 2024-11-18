@@ -38,6 +38,7 @@
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\FullBox.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\HDLR.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\HVCC.hpp" />
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\HVC1.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\IINF.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\ILOC.hpp" />
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\ImageGrid.hpp" />
@@ -88,6 +89,7 @@
     <ClCompile Include="..\ISOBMFF\source\HVCC-Array-NALUnit.cpp" />
     <ClCompile Include="..\ISOBMFF\source\HVCC-Array.cpp" />
     <ClCompile Include="..\ISOBMFF\source\HVCC.cpp" />
+    <ClCompile Include="..\ISOBMFF\source\HVC1.cpp" />
     <ClCompile Include="..\ISOBMFF\source\IINF.cpp" />
     <ClCompile Include="..\ISOBMFF\source\ILOC-Item-Extent.cpp" />
     <ClCompile Include="..\ISOBMFF\source\ILOC-Item.cpp" />

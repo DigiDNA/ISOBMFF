@@ -61,6 +61,7 @@
 		05BFED1D1F63952E00A6909E /* IMG2.HEIC in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C61F5F5B4E00F02C27 /* IMG2.HEIC */; };
 		05BFED1E1F63952E00A6909E /* MOV1.MOV in CopyFiles */ = {isa = PBXBuildFile; fileRef = 057280C51F5F5B4E00F02C27 /* MOV1.MOV */; };
 		05BFED251F6397D400A6909E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05BFED241F63956C00A6909E /* main.cpp */; };
+		05C2D8AF2CEBA5490022A06E /* HVC1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05C2D8AE2CEBA5490022A06E /* HVC1.cpp */; };
 		05DA96061F2A7D5B005F46DB /* libISOBMFF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515C8AF1F2A71A8003B8594 /* libISOBMFF.a */; };
 		05DA96141F2A7DD4005F46DB /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DA96131F2A7DD4005F46DB /* Parser.cpp */; };
 		05DACC242CAC048C00A0EF13 /* STSS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05DACC232CAC048C00A0EF13 /* STSS.cpp */; };
@@ -258,6 +259,8 @@
 		05BFED121F638E4A00A6909E /* IPMA-Entry-Association.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "IPMA-Entry-Association.cpp"; sourceTree = "<group>"; };
 		05BFED221F63952E00A6909E /* ISOBMFF-Dump */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "ISOBMFF-Dump"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05BFED241F63956C00A6909E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		05C2D8AE2CEBA5490022A06E /* HVC1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HVC1.cpp; sourceTree = "<group>"; };
+		05C2D8B02CEBA5590022A06E /* HVC1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HVC1.hpp; sourceTree = "<group>"; };
 		05DA96011F2A7D5B005F46DB /* ISOBMFF-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ISOBMFF-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DA96051F2A7D5B005F46DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05DA96131F2A7DD4005F46DB /* Parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
@@ -375,19 +378,20 @@
 				051F4D421F5E01C200E6E12C /* FTYP.cpp */,
 				0596059D1F5DC4D50005F8C9 /* FullBox.cpp */,
 				059DBACE1F5EBC1000B7A940 /* HDLR.cpp */,
-				054480771F601749008CCDBA /* HVCC-Array-NALUnit.cpp */,
-				054480501F6006B1008CCDBA /* HVCC-Array.cpp */,
+				05C2D8AE2CEBA5490022A06E /* HVC1.cpp */,
 				0531FB091F5FF45700BCD30D /* HVCC.cpp */,
+				054480501F6006B1008CCDBA /* HVCC-Array.cpp */,
+				054480771F601749008CCDBA /* HVCC-Array-NALUnit.cpp */,
 				057280791F5ED9FE00F02C27 /* IINF.cpp */,
-				057280A31F5F038A00F02C27 /* ILOC-Item-Extent.cpp */,
-				057280A11F5EFC9600F02C27 /* ILOC-Item.cpp */,
 				057280841F5EDBCE00F02C27 /* ILOC.cpp */,
+				057280A11F5EFC9600F02C27 /* ILOC-Item.cpp */,
+				057280A31F5F038A00F02C27 /* ILOC-Item-Extent.cpp */,
 				05A50AB41F604C2F00EE8C08 /* ImageGrid.cpp */,
 				0572809F1F5EE19400F02C27 /* INFE.cpp */,
 				055D9AFC1F66700A0056DE16 /* IPCO.cpp */,
-				05BFED121F638E4A00A6909E /* IPMA-Entry-Association.cpp */,
-				05BFED101F63894100A6909E /* IPMA-Entry.cpp */,
 				05BFED0C1F63870300A6909E /* IPMA.cpp */,
+				05BFED101F63894100A6909E /* IPMA-Entry.cpp */,
+				05BFED121F638E4A00A6909E /* IPMA-Entry-Association.cpp */,
 				057280851F5EDBCF00F02C27 /* IREF.cpp */,
 				057280AC1F5F44A000F02C27 /* IROT.cpp */,
 				05BFED0A1F637E8500A6909E /* ISPE.cpp */,
@@ -397,8 +401,8 @@
 				051F4D481F5E0AD500E6E12C /* MVHD.cpp */,
 				05F471E51F2B5CEE00738744 /* Parser.cpp */,
 				057280751F5ED7CE00F02C27 /* PITM.cpp */,
-				055D9AF71F666B880056DE16 /* PIXI-Channel.cpp */,
 				055D9AF61F666B880056DE16 /* PIXI.cpp */,
+				055D9AF71F666B880056DE16 /* PIXI-Channel.cpp */,
 				05812A4E1FA0BEA6003B88DF /* SCHM.cpp */,
 				05BFECD41F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp */,
 				0594C5D51F71541000456FF5 /* STSD.cpp */,
@@ -435,6 +439,7 @@
 				051F4D441F5E01C800E6E12C /* FTYP.hpp */,
 				059605971F5DC4300005F8C9 /* FullBox.hpp */,
 				059DBAD31F5EBC2000B7A940 /* HDLR.hpp */,
+				05C2D8B02CEBA5590022A06E /* HVC1.hpp */,
 				0531FB021F5FF41B00BCD30D /* HVCC.hpp */,
 				057280771F5ED9E500F02C27 /* IINF.hpp */,
 				0572807C1F5EDBC700F02C27 /* ILOC.hpp */,
@@ -816,6 +821,7 @@
 				05BFECE71F62F04D00A6909E /* THMB.cpp in Sources */,
 				051F4D3B1F5DDCFE00E6E12C /* BinaryStream.cpp in Sources */,
 				05812A4F1FA0BEA7003B88DF /* SCHM.cpp in Sources */,
+				05C2D8AF2CEBA5490022A06E /* HVC1.cpp in Sources */,
 				05BFECD81F62EE2700A6909E /* SingleItemTypeReferenceBox.cpp in Sources */,
 				0531FB0A1F5FF45700BCD30D /* HVCC.cpp in Sources */,
 				05BFED131F638E4B00A6909E /* IPMA-Entry-Association.cpp in Sources */,
