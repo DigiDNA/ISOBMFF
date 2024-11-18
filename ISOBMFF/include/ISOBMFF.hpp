@@ -76,6 +76,7 @@
 #include <ISOBMFF/STTS.hpp>
 #include <ISOBMFF/FRMA.hpp>
 #include <ISOBMFF/SCHM.hpp>
+#include <ISOBMFF/HVC1.hpp>
 
 #ifdef _WIN32
 #include <ISOBMFF/WIN32.hpp>
