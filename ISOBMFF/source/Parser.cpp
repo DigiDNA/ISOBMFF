@@ -48,6 +48,7 @@
 #include <ISOBMFF/INFE.hpp>
 #include <ISOBMFF/IROT.hpp>
 #include <ISOBMFF/HVCC.hpp>
+#include <ISOBMFF/AVCC.hpp>
 #include <ISOBMFF/DIMG.hpp>
 #include <ISOBMFF/THMB.hpp>
 #include <ISOBMFF/CDSC.hpp>
@@ -362,6 +363,7 @@ namespace ISOBMFF
         this->RegisterBox( "infe", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< INFE >(); } );
         this->RegisterBox( "irot", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< IROT >(); } );
         this->RegisterBox( "hvcC", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< HVCC >(); } );
+        this->RegisterBox( "avcC", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< AVCC >(); } );
         this->RegisterBox( "dimg", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< DIMG >(); } );
         this->RegisterBox( "thmb", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< THMB >(); } );
         this->RegisterBox( "cdsc", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< CDSC >(); } );
