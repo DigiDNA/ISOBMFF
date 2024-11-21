@@ -61,6 +61,7 @@
 #include <ISOBMFF/INFE.hpp>
 #include <ISOBMFF/IROT.hpp>
 #include <ISOBMFF/HVCC.hpp>
+#include <ISOBMFF/AVCC.hpp>
 #include <ISOBMFF/SingleItemTypeReferenceBox.hpp>
 #include <ISOBMFF/DIMG.hpp>
 #include <ISOBMFF/THMB.hpp>
@@ -77,6 +78,7 @@
 #include <ISOBMFF/FRMA.hpp>
 #include <ISOBMFF/SCHM.hpp>
 #include <ISOBMFF/HVC1.hpp>
+#include <ISOBMFF/AVC1.hpp>
 
 #ifdef _WIN32
 #include <ISOBMFF/WIN32.hpp>
