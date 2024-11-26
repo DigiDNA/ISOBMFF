@@ -95,6 +95,12 @@ namespace ISOBMFF
             ( void )parser;
             
             length   = stream.ReadBigEndianUInt32();
+            if( length == 0 && !stream.HasBytesAvailable() )
+            {
+                // some ISOBMFF multiplexers end a box list with a length=0
+                // entry
+                break;
+            }
             name     = stream.ReadFourCC();
             content  = nullptr;
             
