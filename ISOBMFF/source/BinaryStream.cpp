@@ -199,7 +199,23 @@ namespace ISOBMFF
         
         return n;
     }
-    
+
+    int32_t BinaryStream::ReadBigEndianInt32()
+    {
+        // read the value as uint
+        uint32_t uint_value = ReadBigEndianUInt32();
+        // cast it to int
+        // extract the sign bit
+        int32_t sign_bit = (uint_value & 0x80000000) ? -1 : 0;
+        // Convert the uint32_t to int32_t
+        int32_t int_value = (int32_t)(uint_value & 0x7FFFFFFF);
+        // Apply the sign bit
+        if (sign_bit == -1) {
+            int_value = -int_value;
+        }
+        return int_value;
+    }
+
     uint32_t BinaryStream::ReadLittleEndianUInt32()
     {
         uint8_t  c[ 4 ];
