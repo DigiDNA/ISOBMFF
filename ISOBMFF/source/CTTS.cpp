@@ -44,7 +44,7 @@ namespace ISOBMFF
             ~IMPL();
 
             std::vector< uint32_t > _sample_count;
-            std::vector< uint32_t > _sample_offset;
+            std::vector< int32_t > _sample_offset;
     };
 
     CTTS::CTTS():
@@ -119,7 +119,7 @@ namespace ISOBMFF
         return this->impl->_sample_count[ index ];
     }
 
-    uint32_t CTTS::GetSampleOffset( size_t index ) const
+    int32_t CTTS::GetSampleOffset( size_t index ) const
     {
         return this->impl->_sample_offset[ index ];
     }

@@ -55,7 +55,7 @@ namespace ISOBMFF
 
             size_t   GetEntryCount()                 const;
             uint32_t GetSampleCount(  size_t index ) const;
-            uint32_t GetSampleOffset( size_t index ) const;
+            int32_t  GetSampleOffset( size_t index ) const;
 
             ISOBMFF_EXPORT friend void swap( CTTS & o1, CTTS & o2 );
 
