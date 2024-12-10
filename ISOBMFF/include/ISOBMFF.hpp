@@ -75,10 +75,12 @@
 #include <ISOBMFF/STSD.hpp>
 #include <ISOBMFF/STSS.hpp>
 #include <ISOBMFF/STTS.hpp>
+#include <ISOBMFF/CTTS.hpp>
 #include <ISOBMFF/FRMA.hpp>
 #include <ISOBMFF/SCHM.hpp>
 #include <ISOBMFF/HVC1.hpp>
 #include <ISOBMFF/AVC1.hpp>
+#include <ISOBMFF/AV01.hpp>
 
 #ifdef _WIN32
 #include <ISOBMFF/WIN32.hpp>
