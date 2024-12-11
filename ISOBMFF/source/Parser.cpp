@@ -60,10 +60,12 @@
 #include <ISOBMFF/STSD.hpp>
 #include <ISOBMFF/STSS.hpp>
 #include <ISOBMFF/STTS.hpp>
+#include <ISOBMFF/CTTS.hpp>
 #include <ISOBMFF/FRMA.hpp>
 #include <ISOBMFF/SCHM.hpp>
 #include <ISOBMFF/HVC1.hpp>
 #include <ISOBMFF/AVC1.hpp>
+#include <ISOBMFF/AV01.hpp>
 #include <map>
 #include <stdexcept>
 #include <cstring>
@@ -375,9 +377,11 @@ namespace ISOBMFF
         this->RegisterBox( "stsd", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< STSD >(); } );
         this->RegisterBox( "stss", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< STSS >(); } );
         this->RegisterBox( "stts", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< STTS >(); } );
+        this->RegisterBox( "ctts", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< CTTS >(); } );
         this->RegisterBox( "frma", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< FRMA >(); } );
         this->RegisterBox( "schm", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< SCHM >(); } );
         this->RegisterBox( "hvc1", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< HVC1 >(); } );
         this->RegisterBox( "avc1", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< AVC1 >(); } );
+        this->RegisterBox( "av01", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< AV01 >(); } );
     }
 }

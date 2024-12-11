@@ -90,6 +90,7 @@ namespace ISOBMFF
             uint32_t ReadUInt32();
             uint32_t ReadBigEndianUInt32();
             uint32_t ReadLittleEndianUInt32();
+            int32_t ReadBigEndianInt32();
             
             uint64_t ReadUInt64();
             uint64_t ReadBigEndianUInt64();
