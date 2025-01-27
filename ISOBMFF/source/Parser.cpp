@@ -66,6 +66,7 @@
 #include <ISOBMFF/HVC1.hpp>
 #include <ISOBMFF/AVC1.hpp>
 #include <ISOBMFF/AV01.hpp>
+#include <ISOBMFF/MP4A.hpp>
 #include <map>
 #include <stdexcept>
 #include <cstring>
@@ -383,5 +384,6 @@ namespace ISOBMFF
         this->RegisterBox( "hvc1", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< HVC1 >(); } );
         this->RegisterBox( "avc1", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< AVC1 >(); } );
         this->RegisterBox( "av01", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< AV01 >(); } );
+        this->RegisterBox( "mp4a", [ = ]() -> std::shared_ptr< Box > { return std::make_shared< MP4A >(); } );
     }
 }

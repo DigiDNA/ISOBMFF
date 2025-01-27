@@ -81,6 +81,7 @@
 #include <ISOBMFF/HVC1.hpp>
 #include <ISOBMFF/AVC1.hpp>
 #include <ISOBMFF/AV01.hpp>
+#include <ISOBMFF/MP4A.hpp>
 
 #ifdef _WIN32
 #include <ISOBMFF/WIN32.hpp>
