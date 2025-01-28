@@ -112,8 +112,9 @@ namespace ISOBMFF
 
         // template unsigned int(32) samplerate = { default samplerate of media } << 16;
         SetSampleRateRaw( stream.ReadBigEndianUInt32() );
-
-        container.ReadData( parser, stream );
+	
+	// stoping reading here
+        // container.ReadData( parser, stream ); 
         this->impl->_boxes = container.GetBoxes();
     }
     
