@@ -58,11 +58,12 @@ namespace ISOBMFF
             
             uint16_t GetChannelCount() const;
             uint16_t GetSampleSize() const;
-            uint32_t GetSampleRate() const;
+            uint32_t GetSampleRateRaw() const;
+            float GetSampleRate() const;
 
             void SetChannelCount( uint16_t value );
             void SetSampleSize( uint16_t value );
-            void SetSampleRate( uint32_t value );
+            void SetSampleRateRaw( uint32_t value );
             
             void                                  AddBox( std::shared_ptr< Box > box ) override;
             std::vector< std::shared_ptr< Box > > GetBoxes() const override;
