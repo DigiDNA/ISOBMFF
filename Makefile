@@ -79,3 +79,28 @@ FILES               := $(filter-out $(FILES_C_EXCLUDE),$(FILES_C))      \
 FILES_TESTS         := $(call GET_CPP_FILES, $(DIR_TESTS))
 
 include Submodules/makelib/Targets.mk
+
+# Directory for test executables
+DIR_BUILD_TESTS     := Build/Tests/
+
+# Custom target for unit tests
+unittest: $(patsubst $(DIR_TESTS)%.cpp,$(DIR_BUILD_TESTS)%,$(FILES_TESTS))
+	@echo "All unit tests built successfully."
+	@echo "Run tests with: ./$(DIR_BUILD_TESTS)<test_name>"
+
+# Rule to build each test file
+$(DIR_BUILD_TESTS)%: $(DIR_TESTS)%.cpp
+	@echo "Building unit test: $<"
+	@mkdir -p $(DIR_BUILD_TESTS)
+	@g++ -std=$(FLAGS_STD_CPP) -Wall -I$(DIR_INC) \
+		$< \
+		$(DIR_BUILD_PRODUCTS)x86_64/libISOBMFF.a \
+		-L/usr/local/lib \
+		-lgtest -lgtest_main -lpthread \
+		-o $@
+	@echo "Unit test built successfully: $@"
+
+# Override the all target to include unittest
+all: release debug unittest
+
+.PHONY: unittest
