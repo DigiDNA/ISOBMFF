@@ -14,7 +14,11 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
   const std::vector<uint8_t> buffer_vector = {data, data + size};
   {
     ISOBMFF::Parser parser;
-    parser.Parse(buffer_vector);
+    try {
+      parser.Parse(buffer_vector);
+    } catch (std::exception &e) {
+      fprintf(stderr, "Caught exception: %s\n", e.what());
+    }
   }
   return 0;
 }
