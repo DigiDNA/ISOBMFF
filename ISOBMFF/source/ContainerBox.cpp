@@ -139,7 +139,15 @@ namespace ISOBMFF
             {
                 if( content )
                 {
-                    box->ReadData( parser, *content );
+                    try{
+                        box->ReadData( parser, *content );
+                    }
+                    catch( std::exception & e )
+                    {
+                        delete( content );
+                        std::cerr << "Exception while reading box " << name << ": " << e.what() << std::endl;
+                        throw;
+                    }
                 }
                 
                 this->AddBox( box );
