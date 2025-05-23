@@ -6,6 +6,10 @@ Icon?
 # Thumbnails
 ._*
 
+# Build stuff
+Build/Tests/*
+tags
+
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
