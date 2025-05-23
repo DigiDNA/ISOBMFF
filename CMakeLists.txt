@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 
 # https://cmake.org/cmake/help/v3.0/command/project.html
-project(ISOBMFF VERSION 0.0 LANGUAGES CXX)
+project(ISOBMFF VERSION 0.1 LANGUAGES CXX)
 
 # Options
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
