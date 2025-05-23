@@ -108,11 +108,11 @@ namespace ISOBMFF
                 throw std::runtime_error( "Invalid seek offset" );
             }
             
-            pos = this->impl->_data.size() - numeric_cast< size_t >( abs( offset ) );
+            pos = this->impl->_data.size() - numeric_cast< size_t >( std::abs( offset ) );
         }
         else if( offset < 0 )
         {
-            pos = this->impl->_pos - numeric_cast< size_t >( abs( offset ) );
+            pos = this->impl->_pos - numeric_cast< size_t >( std::abs( offset ) );
         }
         else
         {
