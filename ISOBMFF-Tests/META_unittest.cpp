@@ -10,13 +10,13 @@
 
 namespace ISOBMFF {
 
-class ISOBMFMetaTest : public ::testing::Test {
+class ISOBMFFMetaTest : public ::testing::Test {
 public:
-  ISOBMFMetaTest() {}
-  ~ISOBMFMetaTest() override {}
+  ISOBMFFMetaTest() {}
+  ~ISOBMFFMetaTest() override {}
 };
 
-TEST_F(ISOBMFMetaTest, TestMetaParser) {
+TEST_F(ISOBMFFMetaTest, TestMetaParser) {
   // fuzzer::conv: data
   const std::vector<uint8_t> &buffer = {
       // following example input is from a sample .mp4 video file
