@@ -21,7 +21,7 @@ TEST_F(ISOBMFFMVHDTest, TestMVHDParser) {
   // fuzzer::conv: data
   const std::vector<uint8_t> &buffer = {
       // following example input is from a sample .mp4 video file
-      // mvhd size: 24 bytes
+      // mvhd size: 108 bytes
       // 0x00, 0x00, 0x00, 0x6c,
       // // mvdh
       // 0x66, 0x74, 0x79, 0x70,
