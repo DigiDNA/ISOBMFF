@@ -16,7 +16,7 @@ CXXFLAGS := -std=c++14 -I$(DIR_INC) -I$(DIR_SRC) -fsanitize=address,fuzzer,undef
 LDFLAGS := -fsanitize=address,fuzzer,undefined $(DIR_BUILD_PRODUCTS)/libISOBMFF.so -lstdc++ -lpthread
 
 # Fuzzer targets
-FUZZERS := Parser_fuzzer META_fuzzer FTYP_fuzzer MVHD_fuzzer HDLR_fuzzer
+FUZZERS := Parser_fuzzer META_fuzzer FTYP_fuzzer MVHD_fuzzer HDLR_fuzzer TKHD_fuzzer
 FUZZ_TARGETS := $(patsubst %,$(DIR_BUILD_FUZZ)%,$(FUZZERS))
 
 # Default target
