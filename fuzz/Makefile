@@ -6,14 +6,14 @@ include ../Submodules/makelib/Common.mk
 # Fuzzing specific configuration
 DIR_SRC := ../ISOBMFF/source/
 DIR_INC := ../ISOBMFF/include/
-DIR_BUILD_PRODUCTS := ../Build/Release/Products/
+DIR_BUILD_PRODUCTS := ../build/
 DIR_BUILD_FUZZ := ../Build/fuzz/
 
 # Compiler and flags
 CC := clang
 CXX := clang++
-CXXFLAGS := -std=c++14 -I$(DIR_INC) -I$(DIR_SRC) -fsanitize=address,fuzzer,undefined -g -O1
-LDFLAGS := -fsanitize=address,fuzzer,undefined $(DIR_BUILD_PRODUCTS)x86_64/libISOBMFF.a -lstdc++ -lpthread
+CXXFLAGS := -std=c++14 -I$(DIR_INC) -I$(DIR_SRC) -fsanitize=address,fuzzer,undefined -g -O0
+LDFLAGS := -fsanitize=address,fuzzer,undefined $(DIR_BUILD_PRODUCTS)/libISOBMFF.so -lstdc++ -lpthread
 
 # Fuzzer targets
 FUZZERS := Parser_fuzzer META_fuzzer FTYP_fuzzer MVHD_fuzzer HDLR_fuzzer
