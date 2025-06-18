@@ -70,6 +70,11 @@ namespace ISOBMFF
     
     std::vector< uint8_t > BinaryStream::Read( size_t size )
     {
+        if (size > AvailableBytes())
+        {
+            throw std::runtime_error("Insufficient data available for read");
+        }
+
         std::vector< uint8_t > data( size, 0 );
         
         if( size > 0 )
