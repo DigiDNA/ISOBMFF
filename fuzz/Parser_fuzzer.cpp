@@ -7,7 +7,7 @@
 // Do not edit directly.
 
 #include <ISOBMFF.hpp>        // for various
-#include <ISOBMFF/Parser.hpp> // for Parser
+#include <Parser.hpp> // for Parser
 
 // libfuzzer infra to test the fuzz target
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {

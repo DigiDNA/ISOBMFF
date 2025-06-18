@@ -1,29 +1,58 @@
 cmake_minimum_required(VERSION 3.12)
 
-# https://cmake.org/cmake/help/v3.0/command/project.html
-project(ISOBMFF VERSION 0.1 LANGUAGES CXX)
+# Define the project name and version
+project(ISOBMFF VERSION 0.1)
 
-# Options
-option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+# Set the C++ standard
+set(CMAKE_CXX_STANDARD 14)
 
-# Source files
-file(GLOB_RECURSE ISOBMFF_SRC CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/ISOBMFF/source/*.cpp)
+# Compiler selection
+if(APPLE)
+    message(STATUS "Using default Apple Clang on macOS.")
+elseif(UNIX AND NOT APPLE)
+    # Check for Clang first
+    find_program(CLANG_C_COMPILER clang)
+    find_program(CLANG_CXX_COMPILER clang++)
+    if(CLANG_C_COMPILER AND CLANG_CXX_COMPILER)
+        set(CMAKE_C_COMPILER ${CLANG_C_COMPILER})
+        set(CMAKE_CXX_COMPILER ${CLANG_CXX_COMPILER})
+        message(STATUS "Using Clang on Linux.")
+    else()
+        # Fallback to GNU if Clang is not found
+        find_program(GNU_C_COMPILER gcc)
+        find_program(GNU_CXX_COMPILER g++)
+        if(GNU_C_COMPILER AND GNU_CXX_COMPILER)
+            set(CMAKE_C_COMPILER ${GNU_C_COMPILER})
+            set(CMAKE_CXX_COMPILER ${GNU_CXX_COMPILER})
+            message(STATUS "Using GNU on Linux.")
+        else()
+            message(FATAL_ERROR "Neither Clang nor GNU compilers were found.")
+        endif()
+    endif()
+endif()
 
+# Verify the compiler
+if(APPLE)
+    if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
+        message(FATAL_ERROR "Apple Clang is required on macOS.")
+    endif()
+elseif(UNIX AND NOT APPLE)
+    if (NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        message(FATAL_ERROR "This project requires either Clang or GNU as the C++ compiler on Linux.")
+    endif()
+endif()
 
-# Include directory
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ISOBMFF/include)
+# Add subdirectories for tests and fuzzers if enabled
+add_subdirectory(src)
+add_subdirectory(tools)
 
-# Create the library
-add_library(ISOBMFF ${ISOBMFF_SRC})
+option(BUILD_TESTS "Build ISOBMFF tests" ON)
+if(BUILD_TESTS)
+  enable_testing()
+  add_subdirectory(test)
+endif()
 
-# https://cmake.org/cmake/help/latest/guide/tutorial/index.html#adding-a-version-number-and-configured-header-file
-configure_file(ISOBMFF/source/config.h.in ISOBMFF/source/config.h)
-
-# Specify include directories for consumers
-target_include_directories(ISOBMFF PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/ISOBMFF/include>
-    $<INSTALL_INTERFACE:include>
-)
-
-# Optional compiler flags
-target_compile_features(ISOBMFF PUBLIC cxx_std_14)
+option(BUILD_CLANG_FUZZER "Build clang fuzzer sanitizer targets" ON)
+if(BUILD_CLANG_FUZZER)
+  add_subdirectory(fuzz)
+endif()

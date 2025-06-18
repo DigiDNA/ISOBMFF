@@ -1,44 +1,24 @@
-# Copyright (c) Meta Platforms, Inc. and its affiliates.
+# Variables
+SRC_DIR = ../test
+BUILD_DIR = ../build/fuzz
+CORPUS_DIR = corpus
+CONVERTER = ./converter.py
+RUNS ?= 100
 
-# Include the main project's Makefile configuration
-include ../Submodules/makelib/Common.mk
-
-# Fuzzing specific configuration
-DIR_SRC := ../ISOBMFF/source/
-DIR_INC := ../ISOBMFF/include/
-DIR_BUILD_PRODUCTS := ../build/
-DIR_BUILD_FUZZ := ../Build/fuzz/
-
-# Compiler and flags
-CC := clang
-CXX := clang++
-CXXFLAGS := -std=c++14 -I$(DIR_INC) -I$(DIR_SRC) -fsanitize=address,fuzzer,undefined -g -O0
-LDFLAGS := -fsanitize=address,fuzzer,undefined $(DIR_BUILD_PRODUCTS)/libISOBMFF.so -lstdc++ -lpthread
-
-# Fuzzer targets
-FUZZERS := Parser_fuzzer META_fuzzer FTYP_fuzzer MVHD_fuzzer HDLR_fuzzer TKHD_fuzzer
-FUZZ_TARGETS := $(patsubst %,$(DIR_BUILD_FUZZ)%,$(FUZZERS))
+# List of fuzzers
+FUZZERS = Parser META FTYP MVHD HDLR TKHD
 
 # Default target
-all: $(FUZZ_TARGETS)
+all: $(addsuffix _fuzzer.cpp, $(FUZZERS))
+	@echo "run: RUNS=$(RUNS) make -j -Oline fuzz"
 
-# Create build directory
-$(DIR_BUILD_FUZZ):
-	@mkdir -p $(DIR_BUILD_FUZZ)
+# Pattern rule for generating fuzzer source files
+%_fuzzer.cpp: $(SRC_DIR)/%_unittest.cpp
+	$(CONVERTER) $< ./
 
-# Rule to build fuzzers
-$(DIR_BUILD_FUZZ)%_fuzzer: %_fuzzer.cpp | $(DIR_BUILD_FUZZ)
-	@echo "Building fuzzer: $<"
-	$(CXX) $(CXXFLAGS) $< $(LDFLAGS) -o $@
-	@echo "Fuzzer built successfully: $@"
+# Fuzz target
+fuzz: $(addsuffix _fuzzer, $(FUZZERS))
 
-# Rule to run fuzzers
-RUNS?=100
-fuzz: $(FUZZ_TARGETS)
-	@echo "Running fuzzers..."
-	@for fuzzer in $(FUZZERS); do \
-		mkdir -p $(DIR_BUILD_FUZZ)corpus/$$fuzzer; \
-		$(DIR_BUILD_FUZZ)$$fuzzer -artifact_prefix=corpus/$$fuzzer/ corpus/$$fuzzer -runs=$(RUNS); \
-	done
-
-.PHONY: all fuzz
+# Pattern rule for running fuzzers
+%_fuzzer: %_fuzzer.cpp
+	-$(BUILD_DIR)/$*_fuzzer -artifact_prefix=$(CORPUS_DIR)/$*_fuzzer/ $(CORPUS_DIR)/$*_fuzzer/ -runs=$(RUNS)

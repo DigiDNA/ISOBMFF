@@ -7,8 +7,8 @@
 // Do not edit directly.
 
 #include <ISOBMFF.hpp>                  // for various
-#include <ISOBMFF/BinaryDataStream.hpp> // for BinaryDataStream
-#include <ISOBMFF/Parser.hpp>           // for Parser
+#include <BinaryDataStream.hpp> // for BinaryDataStream
+#include <Parser.hpp>           // for Parser
 
 
 // libfuzzer infra to test the fuzz target

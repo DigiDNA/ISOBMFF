@@ -7,8 +7,7 @@ Icon?
 ._*
 
 # Build stuff
-Build/fuzz/*
-Build/Tests/*
+build
 tags
 
 # Files that might appear on external disk
