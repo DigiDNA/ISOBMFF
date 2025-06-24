@@ -1,9 +1,0 @@
-[submodule "Submodules/makelib"]
-	path = Submodules/makelib
-	url = https://github.com/macmade/makelib.git
-[submodule "Submodules/xcconfig"]
-	path = Submodules/xcconfig
-	url = https://github.com/macmade/xcconfig.git
-[submodule "Submodules/XSTest"]
-	path = Submodules/XSTest
-	url = https://github.com/macmade/XSTest.git
