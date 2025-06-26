@@ -23,6 +23,7 @@ set(TEST_NAMES
     MVHD_unittest
     HDLR_unittest
     TKHD_unittest
+    MDHD_unittest
 )
 # Add tests
 foreach(test_name IN LISTS TEST_NAMES)
