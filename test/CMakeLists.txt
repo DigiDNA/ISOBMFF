@@ -15,17 +15,11 @@ function(add_isobmff_test test_name)
   target_link_libraries(${test_name} PUBLIC isobmff GTest::gtest GTest::gtest_main)
 endfunction()
 
-# List of test names
-set(TEST_NAMES
-    Parser_unittest
-    META_unittest
-    FTYP_unittest
-    MVHD_unittest
-    HDLR_unittest
-    TKHD_unittest
-    MDHD_unittest
-)
-# Add tests
-foreach(test_name IN LISTS TEST_NAMES)
+# Find all test files in the current directory
+file(GLOB TEST_FILES "*_unittest.cpp")
+
+# Extract test names from file names
+foreach(test_file IN LISTS TEST_FILES)
+  get_filename_component(test_name ${test_file} NAME_WE)
   add_isobmff_test(${test_name})
 endforeach()
