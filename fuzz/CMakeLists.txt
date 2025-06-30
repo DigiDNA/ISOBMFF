@@ -18,11 +18,10 @@ function(add_fuzzer TARGET SOURCE)
   endif()
 endfunction()
 
-# Add fuzzers
-add_fuzzer(Parser_fuzzer Parser_fuzzer.cpp)
-add_fuzzer(META_fuzzer META_fuzzer.cpp)
-add_fuzzer(FTYP_fuzzer FTYP_fuzzer.cpp)
-add_fuzzer(MVHD_fuzzer MVHD_fuzzer.cpp)
-add_fuzzer(HDLR_fuzzer HDLR_fuzzer.cpp)
-add_fuzzer(TKHD_fuzzer TKHD_fuzzer.cpp)
-add_fuzzer(MDHD_fuzzer MDHD_fuzzer.cpp)
+# Find all fuzzer files in the current directory
+file(GLOB FUZZER_FILES "*_fuzzer.cpp")
+# Extract fuzzer names from file names and add them
+foreach(fuzzer_file IN LISTS FUZZER_FILES)
+  get_filename_component(fuzzer_name ${fuzzer_file} NAME_WE)
+  add_fuzzer(${fuzzer_name} ${fuzzer_file})
+endforeach()
