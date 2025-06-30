@@ -30,6 +30,7 @@
 
 #include <DREF.hpp>
 #include <ContainerBox.hpp>
+#include <iostream>
 
 namespace ISOBMFF
 {
@@ -80,14 +81,16 @@ namespace ISOBMFF
         swap( o1.impl, o2.impl );
     }
 
-    void DREF::ReadData( Parser & parser, BinaryStream & stream )
+    void DREF::ReadData(Parser &parser, BinaryStream &stream)
     {
-        ContainerBox container( "????" );
+        ContainerBox container("????");
 
-        FullBox::ReadData( parser, stream );
+        FullBox::ReadData(parser, stream);
+
+        stream.Seek(8); // Move to the position after the 'dref' header
         stream.ReadBigEndianUInt32();
-        container.ReadData( parser, stream );
-
+        container.ReadData(parser, stream);
+        
         this->impl->_boxes = container.GetBoxes();
     }
 
