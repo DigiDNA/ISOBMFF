@@ -68,11 +68,11 @@ namespace ISOBMFF
             /*!
              * @enum        Options
              * @abstract    Parser options.
-             * @constant    SkipMDATData    Do not keep data found in MDAT boxes.
+             * @constant    DoNotSkipMDATData Keep data found in MDAT boxes.
              */
             enum class Options: uint64_t
             {
-                SkipMDATData = 1 << 0
+                DoNotSkipMDATData = 1 << 0
             };
 
             /*!

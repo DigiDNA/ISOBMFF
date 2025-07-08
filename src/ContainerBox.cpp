@@ -111,7 +111,7 @@ namespace ISOBMFF
                 if
                 (
                        length > ( std::numeric_limits< size_t >::max )()
-                    || ( name == "mdat" && parser.HasOption( Parser::Options::SkipMDATData ) )
+                    || ( name == "mdat" && !parser.HasOption( Parser::Options::DoNotSkipMDATData ) )
                 )
                 {
                     stream.Seek( length - 16, BinaryStream::SeekDirection::Current );
@@ -123,7 +123,7 @@ namespace ISOBMFF
             }
             else
             {
-                if( name == "mdat" && parser.HasOption( Parser::Options::SkipMDATData ) )
+                if( name == "mdat" && !parser.HasOption( Parser::Options::DoNotSkipMDATData ) )
                 {
                     stream.Seek( length - 8, BinaryStream::SeekDirection::Current );
                 }
