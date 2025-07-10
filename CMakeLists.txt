@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 
 # Define the project name and version
-project(ISOBMFF VERSION 0.2)
+project(ISOBMFF VERSION 0.3)
 
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 14)
