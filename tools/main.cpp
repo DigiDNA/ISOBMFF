@@ -80,7 +80,6 @@ enum {
 
 arg_options *parse_args(int argc, char *const *argv) {
     int c;
-    char *endptr;
     static arg_options options;
 
     // set default option values
@@ -188,7 +187,6 @@ int main( int argc, char *const * argv )
     // parse the input files
     ISOBMFF::Parser parser;
     std::string     path;
-    int             i;
     std::ifstream   stream;
     
     if( options->infiles.size() == 0 )
