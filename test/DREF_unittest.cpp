@@ -22,9 +22,9 @@ public:
   const std::vector<uint8_t> &buffer = {
       // following example input is from a sample .mp4 video file
       // dref size: 28 bytes
-      0x00, 0x00, 0x00, 0x1c,
+      // 0x00, 0x00, 0x00, 0x1c,
       // dref
-      0x64, 0x72, 0x65, 0x66,
+      // 0x64, 0x72, 0x65, 0x66,
       // dref content:
       0x00, 0x00, 0x00, 0x00,
       0x00, 0x00, 0x00, 0x01,
@@ -52,7 +52,7 @@ public:
   ASSERT_NE(dref, nullptr) << "Failed to cast to DREF";
 
   EXPECT_EQ(dref->GetVersion(), 0) << "Unexpected DREF version";
-  EXPECT_EQ(dref->GetFlags(), 28) << "Unexpected DREF flags";
+  EXPECT_EQ(dref->GetFlags(), 0) << "Unexpected DREF flags";
 
   // Validate sub-boxes inside DREF
   std::vector<std::shared_ptr<Box>> boxes = dref->GetBoxes();

@@ -87,7 +87,7 @@ namespace ISOBMFF
 
         FullBox::ReadData(parser, stream);
 
-        stream.Seek(8); // Move to the position after the 'dref' header
+        // auto entry_count =
         stream.ReadBigEndianUInt32();
         container.ReadData(parser, stream);
         
