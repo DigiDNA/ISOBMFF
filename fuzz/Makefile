@@ -6,7 +6,7 @@ CONVERTER = ./converter.py
 RUNS ?= 100
 
 # List of fuzzers
-FUZZERS = Parser META FTYP MVHD HDLR TKHD MDHD DREF
+FUZZERS = Parser META FTYP MVHD HDLR TKHD MDHD DREF STSD
 
 # Default target
 all: $(addsuffix _fuzzer.cpp, $(FUZZERS))
