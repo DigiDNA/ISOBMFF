@@ -15,6 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\AVC1.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISOBMFF\include\ISOBMFF\AVCC.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\ISOBMFF\include\ISOBMFF\BinaryStream.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -161,6 +167,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\ISOBMFF\source\AVC1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISOBMFF\source\AVCC-NALUnit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISOBMFF\source\AVCC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\ISOBMFF\source\BinaryStream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
