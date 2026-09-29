@@ -41,7 +41,7 @@ namespace ISOBMFF
             ~IMPL();
             
             uint32_t                                 _itemID;
-            uint8_t                                  _constructionMethod;
+            ConstructionMethod                       _constructionMethod;
             uint16_t                                 _dataReferenceIndex;
             uint64_t                                 _baseOffset;
             std::vector< std::shared_ptr< Extent > > _extents;
@@ -68,7 +68,7 @@ namespace ISOBMFF
         
         if( iloc.GetVersion() == 1 || iloc.GetVersion() == 2 )
         {
-            this->SetConstructionMethod( static_cast< uint8_t >( stream.ReadBigEndianUInt16() & 0xF ) );
+            this->SetConstructionMethod( static_cast< ConstructionMethod >( stream.ReadBigEndianUInt16() & 0xF ) );
         }
         
         this->SetDataReferenceIndex( stream.ReadBigEndianUInt16() );
@@ -133,7 +133,7 @@ namespace ISOBMFF
         return this->impl->_itemID;
     }
     
-    uint8_t ILOC::Item::GetConstructionMethod() const
+    ILOC::ConstructionMethod ILOC::Item::GetConstructionMethod() const
     {
         return this->impl->_constructionMethod;
     }
@@ -153,7 +153,7 @@ namespace ISOBMFF
         this->impl->_itemID = value;
     }
     
-    void ILOC::Item::SetConstructionMethod( uint8_t value )
+    void ILOC::Item::SetConstructionMethod( ConstructionMethod value )
     {
         this->impl->_constructionMethod = value;
     }
@@ -196,7 +196,7 @@ namespace ISOBMFF
         return
         {
             { "Item ID",              std::to_string( this->GetItemID() ) },
-            { "Construction method",  std::to_string( this->GetConstructionMethod() ) },
+            { "Construction method",  std::to_string( static_cast< uint8_t >( this->GetConstructionMethod() ) ) },
             { "Data reference index", std::to_string( this->GetDataReferenceIndex() ) },
             { "Base offset",          std::to_string( this->GetBaseOffset() ) },
             { "Extent count",         std::to_string( this->GetExtents().size() ) }
@@ -205,7 +205,7 @@ namespace ISOBMFF
     
     ILOC::Item::IMPL::IMPL():
         _itemID( 0 ),
-        _constructionMethod( 0 ),
+        _constructionMethod( ILOC::ConstructionMethod::FileOffset ),
         _dataReferenceIndex( 0 ),
         _baseOffset( 0 )
     {}

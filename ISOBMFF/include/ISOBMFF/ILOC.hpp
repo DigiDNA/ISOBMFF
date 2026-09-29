@@ -45,6 +45,13 @@ namespace ISOBMFF
     {
         public:
             
+            enum class ConstructionMethod: uint8_t
+            {
+              FileOffset = 0,
+              IdatOffset = 1,
+              ItemOffset = 2,
+            };
+
             ILOC();
             ILOC( const ILOC & o );
             ILOC( ILOC && o ) noexcept;
@@ -82,13 +89,13 @@ namespace ISOBMFF
                     
                     std::string GetName() const override;
                     
-                    uint32_t GetItemID()             const;
-                    uint8_t  GetConstructionMethod() const;
-                    uint16_t GetDataReferenceIndex() const;
-                    uint64_t GetBaseOffset()         const;
+                    uint32_t            GetItemID()             const;
+                    ConstructionMethod  GetConstructionMethod() const;
+                    uint16_t            GetDataReferenceIndex() const;
+                    uint64_t            GetBaseOffset()         const;
                     
                     void SetItemID( uint32_t value );
-                    void SetConstructionMethod( uint8_t value );
+                    void SetConstructionMethod( ConstructionMethod value );
                     void SetDataReferenceIndex( uint16_t value );
                     void SetBaseOffset( uint64_t value );
                     
